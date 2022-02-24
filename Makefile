@@ -1,5 +1,5 @@
-STUID = ysyx_22040237
-STUNAME = 吴岳峰
+STUID = ysyx_22040237 #ysyx number
+STUNAME = 吴岳峰      #ysyx name
 
 # DO NOT modify the following code!!!
 
