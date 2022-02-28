@@ -1,9 +1,6 @@
-TOPNAME = mux2_4to1
+TOPNAME = top
 NXDC_FILES = constr/top.nxdc
 INC_PATH ?=
-
-#git trace
-include /home/yfwu/ysyx-workbench/Makefile
 
 VERILATOR = verilator
 VERILATOR_CFLAGS += -MMD --build -cc  \
@@ -43,7 +40,6 @@ $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
 		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
 
 run: $(BIN)
-	@$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!
 	@$^
 
 clean:

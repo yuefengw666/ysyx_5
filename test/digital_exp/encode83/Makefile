@@ -1,9 +1,6 @@
-TOPNAME = encode83  #Please change the name of the top-level design;
+TOPNAME = encode83
 NXDC_FILES = constr/top.nxdc
 INC_PATH ?=
-
-#git trace
-include /home/yfwu/ysyx-workbench/Makefile
 
 VERILATOR = verilator
 VERILATOR_CFLAGS += -MMD --build -cc  \
@@ -34,10 +31,8 @@ include $(NVBOARD_HOME)/scripts/nvboard.mk
 INCFLAGS = $(addprefix -I, $(INC_PATH))
 CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
 LDFLAGS += -lSDL2 -lSDL2_image
-#@$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 
 $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
-	@$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@rm -rf $(OBJ_DIR)
 	$(VERILATOR) $(VERILATOR_CFLAGS) \
 		-top $(TOPNAME) $^ \
