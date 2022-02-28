@@ -1,4 +1,4 @@
-TOPNAME = mux2_4to1  #Please change the name of the top-level design;
+TOPNAME = encode83  #Please change the name of the top-level design;
 NXDC_FILES = constr/top.nxdc
 INC_PATH ?=
 
@@ -37,6 +37,7 @@ LDFLAGS += -lSDL2 -lSDL2_image
 #@$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 
 $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
+	@$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@rm -rf $(OBJ_DIR)
 	$(VERILATOR) $(VERILATOR_CFLAGS) \
 		-top $(TOPNAME) $^ \
