@@ -1,81 +1,52 @@
-######################################################################
-#DESCRIPTION: Verilator Example: Small Makefile
+TOPNAME = count100
+NXDC_FILES = constr/top.nxdc
+INC_PATH ?=
 
-
-######################################################################
-# Check for sanity to avoid later confusion
- 
-ifneq ($(words $(CURDIR)),1)
-  $(error Unsupported: GNU Make cannot build in directories containing spaces, build elsewhere: '$(CURDIR)')
-endif
-
-######################################################################
-#set input file name
-DESIGN_NAME = count100
-SIM_NAME = cwave
-
-######################################################################
-# Set up variables
+#git trace
+include /home/yfwu/ysyx-workbench/Makefile
 
 VERILATOR = verilator
-VERILATOR_COVERAGE = verilator_coverage
+VERILATOR_CFLAGS += -MMD --build -cc  \
+				-O3 --x-assign fast --x-initial fast --noassert
 
-# Warn abount lint issues; may not want this on less solid designs
-VERILATOR_FLAGS += -Wall
-# Generate C++ in executable form
-VERILATOR_FLAGS += -cc --exe
-# Make waveforms
-VERILATOR_FLAGS += --trace
-# The option calls GNU Make or CMake to build the model.
-VERILATOR_FLAGS += --build
-# Check SystemVerilog assertions
-VERILATOR_FLAGS += --assert
-#timescale
-#VERILATOR_FLAGS += --timescale-override 1ns/1ps
-# Generate coverage analysis
-# VERILATOR_FLAGS += --coverage
-# Run Verilator in debug mode
-#VERILATOR_FLAGS += --debug
-# Add this trace to get a backtrace in gdb
-#VERILATOR_FLAGS += --gdbbt
+BUILD_DIR = ./build
+OBJ_DIR = $(BUILD_DIR)/obj_dir
+BIN = $(BUILD_DIR)/$(TOPNAME)
 
-# Input files for Verilator
-VERILATOR_INPUT = $(DESIGN_NAME).v $(SIM_NAME).cpp
+default: $(BIN)
 
-######################################################################
-default: run
+$(shell mkdir -p $(BUILD_DIR))
 
-run:
-	@echo
-	@echo "-- Verilator design "
+# constraint file
+SRC_AUTO_BIND = $(abspath $(BUILD_DIR)/auto_bind.cpp)
+$(SRC_AUTO_BIND): $(NXDC_FILES)
+	python3 $(NVBOARD_HOME)/scripts/auto_pin_bind.py $^ $@
 
-	@echo
-	@echo "-- VERILATE ----------------"
-	$(VERILATOR) $(VERILATOR_FLAGS) $(VERILATOR_INPUT)
+# project source
+VSRCS = $(shell find $(abspath ./vsrc) -name "*.v")
+CSRCS = $(shell find $(abspath ./csrc) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
+CSRCS += $(SRC_AUTO_BIND)
 
-	#@echo
-	#@echo "-- BUILD -------------------"
+# rules for NVBoard
+include $(NVBOARD_HOME)/scripts/nvboard.mk
 
-	@echo
-	@echo "-- RUN ---------------------"
-	@rm -rf logs
-	@mkdir -p logs
-	obj_dir/V$(DESIGN_NAME) +trace
+# rules for verilator
+INCFLAGS = $(addprefix -I, $(INC_PATH))
+CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
+LDFLAGS += -lSDL2 -lSDL2_image
 
-	#@echo
-	#@echo "-- COVERAGE ----------------"
-	#@rm -rf logs/annotated
-	#$(VERILATOR_COVERAGE) --annotate logs/annotated logs/coverage.dat
+$(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
+	@rm -rf $(OBJ_DIR)
+	$(VERILATOR) $(VERILATOR_CFLAGS) \
+		-top $(TOPNAME) $^ \
+		$(addprefix -CFLAGS , $(CFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
+		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
 
-	@echo
-	@echo "-- DONE --------------------"
-	@echo "To see waveforms, open wave.vcd in a waveform viewer"
-	@echo
-
-##*.dmp #*.vpd #coverage.dat #core
-
-gtk:
-	gtkwave ./logs/wave.vcd &
+run: $(BIN)
+	@$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!
+	@$^
 
 clean:
-	rm -rf obj_dir logs *.log
+	rm -rf $(BUILD_DIR)
+
+.PHONY: clean run
