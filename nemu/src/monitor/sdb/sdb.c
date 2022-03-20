@@ -92,7 +92,7 @@ static int cmd_x(char *args){
     printf("0x%08x\t",addr);
       for(int j=3; j>=0; j--){
         word_t val = vaddr_read(addr + j,1);
-        printf("%02lx",val);
+        printf("%02lx  ",val);
       }
       printf("\n");
   }
