@@ -91,7 +91,7 @@ static int cmd_x(char *args){
     int addr = i*4 + expr;
     //for(int j=0; j<4; j++){
       word_t val = vaddr_read(addr,4);
-      printf("0x%x\t%lx\n",addr,val);
+      printf("0x%x\t%08lx\n",addr,val);
     //}
   }
   return 0;
