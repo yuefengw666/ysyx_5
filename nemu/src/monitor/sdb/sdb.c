@@ -3,6 +3,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
+#include <memory/vaddr.h>
 
 static int is_batch_mode = false;
 
@@ -78,6 +79,24 @@ static int cmd_info(char *args){
   return 0;
 }
 
+static int cmd_x(char *args){
+  char *arg1 = strtok(NULL, " ");
+  char *arg2 = strtok(NULL, " ");
+
+  int n = atoi(arg1);
+  int expr;
+  sscanf(arg2,"%x",&expr);
+
+  for(int i=0; i<n; i++){
+    int addr = i*4 + expr;
+    //for(int j=0; j<4; j++){
+      word_t val = vaddr_read(addr,4);
+      printf("0x%x\t%lx\n",addr,val);
+    //}
+  }
+  return 0;
+}
+
 static struct {
   const char *name;
   const char *description;
@@ -88,6 +107,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Single step", cmd_si},
   { "info", "Info status", cmd_info},
+  { "x", "Scan memory", cmd_x}
   /* TODO: Add more commands */
 
 };
