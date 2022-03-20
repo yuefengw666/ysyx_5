@@ -60,6 +60,24 @@ static int cmd_si(char *args){
   }
 }
 
+static int cmd_info(char *args){
+  char *arg = strtok(NULL, " ");
+
+  if(arg == NULL){
+    printf("Please check the argument\n");
+    return 0;
+  }
+  else {
+    char *reg = "r";
+    //char *watch = "w";
+    if (strcmp(arg,reg) == 0){
+      isa_reg_display();
+      return 0;
+    }
+  }
+  return 0;
+}
+
 static struct {
   const char *name;
   const char *description;
@@ -68,7 +86,8 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  { "si", "single step", cmd_si},
+  { "si", "Single step", cmd_si},
+  { "info", "Info status", cmd_info},
   /* TODO: Add more commands */
 
 };
