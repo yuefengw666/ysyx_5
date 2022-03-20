@@ -90,7 +90,7 @@ static int cmd_x(char *args){
   for(int i=0; i<n; i++){
     int addr = i*4 + expr;
       for(int j=3; j>0; j--){
-        word_t val = vaddr_read(addr + 1,1);
+        word_t val = vaddr_read(addr + j,1);
         printf("0x%08x\t%08lx\n",addr,val);
       }
   }
