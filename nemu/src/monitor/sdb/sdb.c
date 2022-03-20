@@ -41,15 +41,14 @@ static int cmd_q(char *args) {
 static int cmd_help(char *args);
 
 static int cmd_si(char *args){
-  char *arg = strtok(NULL," ");
-
-  int num = atoi(arg);
+  char *arg = strtok(NULL, " ");
   
   if(arg == NULL){
     cpu_exec(1);
     return 0;
   }
   else {
+    int num = atoi(arg);
     if(num <= 0) {
       printf("Arguments error!");
       return 0;
