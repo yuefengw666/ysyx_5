@@ -34,6 +34,7 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
+  nemu_state.state = NEMU_QUIT;
   return -1;
 }
 
@@ -111,7 +112,7 @@ void sdb_mainloop() {
     for (i = 0; i < NR_CMD; i ++) {
       if (strcmp(cmd, cmd_table[i].name) == 0) {
         if (cmd_table[i].handler(args) < 0) { 
-          nemu_state.state = NEMU_QUIT;
+          //nemu_state.state = NEMU_QUIT;
           return; 
         }
         break;
