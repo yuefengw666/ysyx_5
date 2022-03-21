@@ -103,7 +103,7 @@ static bool make_token(char *e) {
                           strncpy(tokens[nr_token].str, substr_start, substr_len);
                           break;
                          }
-          default: break;//TODO();
+          default: assert(0);//TODO();
         }
 
         break;
