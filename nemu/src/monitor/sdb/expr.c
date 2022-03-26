@@ -6,9 +6,10 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_NUM,TK_L_PRTS, TK_R_PRTS, 
-  TK_MUL=260, TK_DIV, 
-  TK_ADD=262, TK_SUB
+  TK_NOTYPE = 256, TK_EQ, TK_NUM,TK_L_PRTS, TK_R_PRTS,
+  TK_NEG,
+  TK_MUL, TK_DIV, 
+  TK_ADD, TK_SUB
   
   /* TODO: Add more token types */
 
@@ -23,16 +24,16 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-
-  {" +", TK_NOTYPE, 0},// spaces
-  {"==", TK_EQ,     1},        // equal
-  {"\\(",TK_L_PRTS, 2},          // (
-  {"\\)",TK_R_PRTS, 2},          // )
-  {"[0-9]+",TK_NUM, 3},    //decimal number
-  {"\\*",TK_MUL,    4},          //mul
-  {"\\/",TK_DIV,    4},          //div
-  {"\\+", TK_ADD,   5},         // plus
-  {"-", TK_SUB,     5},           //sub
+//the priority of TK_NEG and TK_DEREF is 3
+  {" +", TK_NOTYPE, 0},      // spaces
+  {"[0-9]+",TK_NUM, 1},      //decimal number
+  {"\\(",TK_L_PRTS, 2},      // (
+  {"\\)",TK_R_PRTS, 2},      // )
+  {"\\*",TK_MUL,    4},      //mul
+  {"\\/",TK_DIV,    4},      //div
+  {"\\+", TK_ADD,   5},      // plus
+  {"-", TK_SUB,     5},      //sub
+  {"==", TK_EQ,     6},      // equal
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -127,7 +128,22 @@ word_t expr(char *e, bool *success) {
   printf("1\n");
   /* TODO: Insert codes to evaluate the expression. */
   *success = true;
+
+  /*Judge the negedge sign and the deref.
+    -1  (-1+1) 
+  */
+  for(int i=0; i <= nr_token; i++){
+    if((tokens[i].type == TK_SUB) && 
+        ( (i==0) ||
+          ( (tokens[i-1].priority > 2) && (tokens[i-1].type != TK_R_PRTS) )
+        )
+      ){
+      tokens[i].type = TK_NEG;
+      tokens[i].priority = 3; 
+    }
+  }
   
+  //" !!! \0"
   return eval(0,nr_token-1,success);
 }
 
@@ -193,17 +209,21 @@ word_t eval(int p, int q, bool *success){
     word_t val1=0,val2=0,val=0;
     int op_pos = get_main_op(p,q,success);
     printf("op_pos:%d\n",op_pos);
-    printf("3\n");
     printf("p:%d\n",p);
     printf("q:%d\n",q);
-    val1 = eval(p, op_pos-1,success);
+    
+    if(tokens[p].type != TK_NEG){
+      val1 = eval(p, op_pos-1,success);
+    }
     val2 = eval(op_pos+1,q,success);
+    
     printf("vla1:%lu vla2:%lu\n",val1,val2);
     switch(tokens[op_pos].type){
       case TK_ADD:val = val1 + val2;break;
       case TK_SUB:val = val1 - val2;break;
       case TK_MUL:val = val1 * val2;break;
       case TK_DIV:val = val1 / val2;break;
+      case TK_NEG:val = -val2; break;
       default:printf("Unknow token type\n");*success = false; return 0;
     }
     //*success = true;
