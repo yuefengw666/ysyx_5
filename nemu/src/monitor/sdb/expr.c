@@ -145,7 +145,7 @@ bool check_parentheses(int p, int q){
 int get_main_op(int p, int q){
   int op_pos = q;
   int i;
-  printf("2");
+  printf("2\n");
   for(i=q; i>=p; i++){
     if(tokens[i].type > 260){
       op_pos = i;
@@ -176,14 +176,16 @@ word_t eval(int p, int q, bool *success){
   else {
     word_t val1=0,val2=0,val=0;
     int op_pos = get_main_op(p,q);
-    printf("3");
+    printf("op_pos:%d\n",op_pos);
+    printf("3\n");
     val1 = eval(p, op_pos-1,success);
     val2 = eval(op_pos+1,q,success);
+    printf("vla1:%lu vla2:%lu\n",val1,val2);
     switch(tokens[op_pos].type){
-      case '+':val = val1 + val2;break;
-      case '-':val = val1 - val2;break;
-      case '*':val = val1 * val2;break;
-      case '/':val = val1 / val2;break;
+      case TK_ADD:val = val1 + val2;break;
+      case TK_SUB:val = val1 - val2;break;
+      case TK_MUL:val = val1 * val2;break;
+      case TK_DIV:val = val1 / val2;break;
       default:printf("Unknow token type");return -1;
     }
     *success = true;
