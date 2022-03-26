@@ -106,7 +106,7 @@ static int cmd_p(char *args){
     printf("%lu\n",val);
   }
   else {
-  printf("expr rerurn false");
+  printf("expr return false\n");
   return 0;
   }
   return 0;
