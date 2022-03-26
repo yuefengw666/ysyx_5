@@ -103,7 +103,7 @@ static int cmd_p(char *args){
   bool success;
   word_t val = expr(args,&success);
   if(success){
-    printf("%lu",val);
+    printf("%lu\n",val);
   }
   else {
   printf("expr rerurn false");
