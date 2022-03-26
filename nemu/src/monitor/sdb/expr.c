@@ -119,7 +119,7 @@ word_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-  
+  printf("1");
   /* TODO: Insert codes to evaluate the expression. */
   *success = true;
 
@@ -145,6 +145,7 @@ bool check_parentheses(int p, int q){
 int get_main_op(int p, int q){
   int op_pos = q;
   int i;
+  printf("2");
   for(i=q; i>=p; i++){
     if(tokens[i].type > 260){
       op_pos = i;
@@ -175,7 +176,7 @@ word_t eval(int p, int q, bool *success){
   else {
     word_t val1=0,val2=0,val=0;
     int op_pos = get_main_op(p,q);
-    
+    printf("3");
     val1 = eval(p, op_pos-1,success);
     val2 = eval(op_pos+1,q,success);
     switch(tokens[op_pos].type){
