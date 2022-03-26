@@ -146,7 +146,7 @@ int get_main_op(int p, int q){
   int op_pos = 0;
   int i;
   printf("2\n");
-  for(i=q; i>=p; i++){
+  for(i=q; i>=p; i--){
     if(tokens[i].type > 260){
       op_pos = i;
       break;
