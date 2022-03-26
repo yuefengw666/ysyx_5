@@ -138,7 +138,7 @@ bool check_parentheses(int p, int q, bool *success){
   for(i=p+1; i<q; i++){
     if(tokens[i].type == TK_L_PRTS)     cnt_prts++;
     else if(tokens[i].type == TK_R_PRTS) cnt_prts--;
-    if(cnt_prts < 0){
+    if(cnt_prts > 0){
       *success = false;
       return false;
       break;
