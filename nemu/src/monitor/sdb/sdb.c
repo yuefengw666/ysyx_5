@@ -107,6 +107,7 @@ static int cmd_p(char *args){
   }
   else {
   printf("expr rerurn false");
+  return -1;
   }
   return 0;
 }
