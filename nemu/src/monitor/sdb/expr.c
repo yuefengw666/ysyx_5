@@ -161,9 +161,9 @@ int get_main_op(int p, int q){
 
 word_t eval(int p, int q, bool *success){
   if(p > q){
-    printf("Bad expression");
-    return 0;
+    printf("Bad expression\n");
     *success = false;
+    return -1;
   }
   else if(p == q){
     word_t val_temp = 0;
@@ -178,6 +178,8 @@ word_t eval(int p, int q, bool *success){
     int op_pos = get_main_op(p,q);
     printf("op_pos:%d\n",op_pos);
     printf("3\n");
+    printf("p:%d\n",p);
+    printf("q:%d\n",q);
     val1 = eval(p, op_pos-1,success);
     val2 = eval(op_pos+1,q,success);
     printf("vla1:%lu vla2:%lu\n",val1,val2);
