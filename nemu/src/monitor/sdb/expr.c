@@ -122,8 +122,8 @@ word_t expr(char *e, bool *success) {
   printf("1");
   /* TODO: Insert codes to evaluate the expression. */
   *success = true;
-
-  return eval(0,nr_token,success);
+  
+  return eval(0,nr_token-1,success);
 }
 
 bool check_parentheses(int p, int q){
