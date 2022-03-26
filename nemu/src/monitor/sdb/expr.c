@@ -6,9 +6,10 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_MUL, TK_DIV, TK_ADD, TK_SUB, TK_L_PRTS,
-  TK_R_PRTS
-
+  TK_NOTYPE = 256, TK_EQ, TK_NUM,TK_L_PRTS, TK_R_PRTS, 
+  TK_MUL=260, TK_DIV, 
+  TK_ADD=262, TK_SUB
+  
   /* TODO: Add more token types */
 
 };
@@ -146,7 +147,7 @@ bool check_parentheses(int p, int q, bool *success){
   }
 
   if(cnt_prts == 0) return true;
-  return false;
+  else {*success = false; return false;}
 }
 
 int get_main_op(int p, int q,bool *success){
@@ -154,15 +155,15 @@ int get_main_op(int p, int q,bool *success){
   int op_pos = q;
   int i;
   int inprts = 0;
+  int max_prior = 256;
   printf("2\n");
   for(i=q; i>=p; i--){
-    if(!inprts && (tokens[i].type > 260 && tokens[i].type < 263) ){
-      op_pos = i;
-      break;
-    }
-    else if (!inprts && (tokens[i].type > 258 && tokens[i].type < 261) ){
-      op_pos = i;
-      continue;
+    if(!inprts && (tokens[i].type > 259 && tokens[i].type < 264) ){
+      if(tokens[i].type >= max_prior){
+        op_pos = i;
+        max_prior = tokens[i].type;
+      //;break;
+      }
     }
     else if (tokens[i].type == TK_R_PRTS) inprts++;
     else if (tokens[i].type == TK_L_PRTS) inprts--;
