@@ -162,7 +162,7 @@ int get_main_op(int p, int q,bool *success){
   printf("2\n");
   for(i=q; i>=p; i--){
     if(!inprts && (tokens[i].priority > 3 && tokens[i].priority < 6) ){
-      if(tokens[i].type > max_priority){
+      if(tokens[i].priority > max_priority){
         op_pos = i;
         max_priority = tokens[i].type;
       //;break;
