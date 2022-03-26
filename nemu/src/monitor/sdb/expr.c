@@ -141,6 +141,7 @@ bool check_parentheses(int p, int q, bool *success){
     if(cnt_prts < 0){
       *success = false;
       return false;
+      break;
     }
   }
 
@@ -197,7 +198,7 @@ word_t eval(int p, int q, bool *success){
       case TK_SUB:val = val1 - val2;break;
       case TK_MUL:val = val1 * val2;break;
       case TK_DIV:val = val1 / val2;break;
-      default:printf("Unknow token type");return 0;
+      default:printf("Unknow token type\n");return 0;
     }
     *success = true;
     return val;
