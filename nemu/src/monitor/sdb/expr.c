@@ -109,7 +109,7 @@ static bool make_token(char *e) {
   return true;
 }
 
-bool check_parentheses(int p, int q);
+bool check_parentheses(int p, int q, bool *success);
 
 int get_main_op(int p, int q);
 
@@ -127,16 +127,21 @@ word_t expr(char *e, bool *success) {
   return eval(0,nr_token-1,success);
 }
 
-bool check_parentheses(int p, int q){
+bool check_parentheses(int p, int q, bool *success){
   int i; 
   int cnt_prts = 0;
-  
-  if( tokens[p].type != TK_L_PRTS || tokens[q].type != TK_R_PRTS ) return false;
+  *success = true;
+  if( tokens[p].type != TK_L_PRTS || tokens[q].type != TK_R_PRTS ){ 
+    return false;
+  }
   
   for(i=p+1; i<q; i++){
     if(tokens[i].type == TK_L_PRTS)     cnt_prts++;
     else if(tokens[i].type == TK_R_PRTS) cnt_prts--;
-    if(cnt_prts < 0) return false;
+    if(cnt_prts < 0){
+      *success = false;
+      return false;
+    }
   }
 
   if(cnt_prts == 0) return true;
@@ -167,14 +172,14 @@ word_t eval(int p, int q, bool *success){
   if(p > q){
     printf("Bad expression\n");
     *success = false;
-    return -1;
+    return 0;
   }
   else if(p == q){
     word_t val_temp = 0;
     sscanf(tokens[p].str,"%lu",&val_temp);
     return val_temp;
   }
-  else if(check_parentheses(p,q) == true){
+  else if(check_parentheses(p,q,success) == true){
     return eval(p+1,q-1,success);
   }
   else {
@@ -192,7 +197,7 @@ word_t eval(int p, int q, bool *success){
       case TK_SUB:val = val1 - val2;break;
       case TK_MUL:val = val1 * val2;break;
       case TK_DIV:val = val1 / val2;break;
-      default:printf("Unknow token type");return -1;
+      default:printf("Unknow token type");return 0;
     }
     *success = true;
     return val;
