@@ -6,7 +6,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_NUM
+  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_MUL, TK_DIV, TK_ADD, TK_SUB,
 
   /* TODO: Add more token types */
 
@@ -22,11 +22,11 @@ static struct rule {
    */
 
   {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
+  {"\\+", TK_ADD},         // plus
   {"==", TK_EQ},        // equal
-  {"-", '-'},           //sub
-  {"\\*",'*'},          //mul
-  {"\\/",'/'},          //div
+  {"-", TK_SUB},           //sub
+  {"\\*",TK_MUL},          //mul
+  {"\\/",TK_DIV},          //div
   {"\\(",'('},          // (
   {"\\)",')'},          // )
   {"[0-9]+",TK_NUM},    //decimal number
@@ -87,23 +87,12 @@ static bool make_token(char *e) {
 
         switch (rules[i].token_type) {
           case TK_NOTYPE: break;
-          case '+':tokens[nr_token].type = '+';break;
-          case '-':tokens[nr_token].type = '-';break;
-          case '*':tokens[nr_token].type = '*';break;
-          case '/':tokens[nr_token].type = '/';break;
-          case TK_EQ:{
-                       tokens[nr_token].type = TK_EQ;
-                       strncpy(tokens[nr_token].str, substr_start, substr_len);
-                       break;
-                     }
-          case '(':tokens[nr_token].type = '(';break;
-          case ')':tokens[nr_token].type = ')';break;
-          case TK_NUM:{
-                          tokens[nr_token].type = TK_NUM;
-                          strncpy(tokens[nr_token].str, substr_start, substr_len);
-                          break;
-                         }
-          default: assert(0);//TODO();
+
+          default: 
+                   tokens[nr_token].type = rules[i].token_type;//TODO();
+                   strncpy(tokens[nr_token].str, substr_start, substr_len);
+                   nr_token++;
+                   break;
         }
 
         break;
@@ -119,15 +108,84 @@ static bool make_token(char *e) {
   return true;
 }
 
+bool check_parentheses(int p, int q);
+
+int get_main_op(int p, int q);
+
+word_t eval(int p, int q, bool *success);
 
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
   }
-
+  
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
+  *success = true;
 
-  return 0;
+  return eval(0,nr_token,success);
+}
+
+bool check_parentheses(int p, int q){
+  int i; 
+  int cnt_prts = 0;
+  
+  if( tokens[p].type != '(' || tokens[q].type != ')' ) return false;
+  
+  for(i=p+1; i<q; i++){
+    if(tokens[i].type == '(')     cnt_prts++;
+    else if(tokens[i].type == ')') cnt_prts--;
+    if(cnt_prts < 0) return false;
+  }
+
+  if(cnt_prts == 0) return true;
+  return false;
+}
+
+int get_main_op(int p, int q){
+  int op_pos = q;
+  int i;
+  for(i=q; i>=p; i++){
+    if(tokens[i].type > 260){
+      op_pos = i;
+      break;
+    }
+    else if (tokens[i].type > 258 && tokens[i].type < 261){
+      op_pos = i;
+      continue;
+    }
+  }
+  return op_pos;
+}
+
+word_t eval(int p, int q, bool *success){
+  if(p > q){
+    printf("Bad expression");
+    return 0;
+    *success = false;
+  }
+  else if(p == q){
+    word_t val_temp = 0;
+    sscanf(tokens[p].str,"%lu",&val_temp);
+    return val_temp;
+  }
+  else if(check_parentheses(p,q) == true){
+    return eval(p+1,q-1,success);
+  }
+  else {
+    word_t val1=0,val2=0,val=0;
+    int op_pos = get_main_op(p,q);
+    
+    val1 = eval(p, op_pos-1,success);
+    val2 = eval(op_pos+1,q,success);
+    switch(tokens[op_pos].type){
+      case '+':val = val1 + val2;break;
+      case '-':val = val1 - val2;break;
+      case '*':val = val1 * val2;break;
+      case '/':val = val1 / val2;break;
+      default:printf("Unknow token type");return -1;
+    }
+    *success = true;
+    return val;
+  }
 }
