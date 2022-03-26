@@ -17,21 +17,22 @@ enum {
 static struct rule {
   const char *regex;
   int token_type;
+  int priority;
 } rules[] = {
 
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
 
-  {" +", TK_NOTYPE},    // spaces
-  {"\\+", TK_ADD},         // plus
-  {"==", TK_EQ},        // equal
-  {"-", TK_SUB},           //sub
-  {"\\*",TK_MUL},          //mul
-  {"\\/",TK_DIV},          //div
-  {"\\(",TK_L_PRTS},          // (
-  {"\\)",TK_R_PRTS},          // )
-  {"[0-9]+",TK_NUM},    //decimal number
+  {" +", TK_NOTYPE, 0},// spaces
+  {"==", TK_EQ,     1},        // equal
+  {"\\(",TK_L_PRTS, 2},          // (
+  {"\\)",TK_R_PRTS, 2},          // )
+  {"[0-9]+",TK_NUM, 3},    //decimal number
+  {"\\*",TK_MUL,    4},          //mul
+  {"\\/",TK_DIV,    4},          //div
+  {"\\+", TK_ADD,   5},         // plus
+  {"-", TK_SUB,     5},           //sub
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -58,6 +59,7 @@ void init_regex() {
 typedef struct token {
   int type;
   char str[32];
+  int priority;
 } Token;
 
 static Token tokens[32] __attribute__((used)) = {};
@@ -90,8 +92,9 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
           case TK_NOTYPE: break;
 
-          default: 
-                   tokens[nr_token].type = rules[i].token_type;//TODO();
+          default: //TODO();
+                   tokens[nr_token].type = rules[i].token_type;
+                   tokens[nr_token].priority = rules[i].priority;
                    strncpy(tokens[nr_token].str, substr_start, substr_len);
                    nr_token++;
                    break;
@@ -155,13 +158,13 @@ int get_main_op(int p, int q,bool *success){
   int op_pos = q;
   int i;
   int inprts = 0;
-  int max_prior = 256;
+  int max_priority = 0;
   printf("2\n");
   for(i=q; i>=p; i--){
-    if(!inprts && (tokens[i].type > 259 && tokens[i].type < 264) ){
-      if(tokens[i].type >= max_prior){
+    if(!inprts && (tokens[i].priority > 3 && tokens[i].priority < 6) ){
+      if(tokens[i].type > max_priority){
         op_pos = i;
-        max_prior = tokens[i].type;
+        max_priority = tokens[i].type;
       //;break;
       }
     }
