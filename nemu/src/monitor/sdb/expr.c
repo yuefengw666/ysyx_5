@@ -6,7 +6,8 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_MUL, TK_DIV, TK_ADD, TK_SUB,
+  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_MUL, TK_DIV, TK_ADD, TK_SUB, TK_L_PRTS,
+  TK_R_PRTS
 
   /* TODO: Add more token types */
 
@@ -27,8 +28,8 @@ static struct rule {
   {"-", TK_SUB},           //sub
   {"\\*",TK_MUL},          //mul
   {"\\/",TK_DIV},          //div
-  {"\\(",'('},          // (
-  {"\\)",')'},          // )
+  {"\\(",TK_L_PRTS},          // (
+  {"\\)",TK_R_PRTS},          // )
   {"[0-9]+",TK_NUM},    //decimal number
 };
 
@@ -130,11 +131,11 @@ bool check_parentheses(int p, int q){
   int i; 
   int cnt_prts = 0;
   
-  if( tokens[p].type != '(' || tokens[q].type != ')' ) return false;
+  if( tokens[p].type != TK_L_PRTS || tokens[q].type != TK_R_PRTS ) return false;
   
   for(i=p+1; i<q; i++){
-    if(tokens[i].type == '(')     cnt_prts++;
-    else if(tokens[i].type == ')') cnt_prts--;
+    if(tokens[i].type == TK_L_PRTS)     cnt_prts++;
+    else if(tokens[i].type == TK_R_PRTS) cnt_prts--;
     if(cnt_prts < 0) return false;
   }
 
@@ -143,18 +144,21 @@ bool check_parentheses(int p, int q){
 }
 
 int get_main_op(int p, int q){
-  int op_pos = 0;
+  int op_pos = q;
   int i;
+  int inprts = 0;
   printf("2\n");
   for(i=q; i>=p; i--){
-    if(tokens[i].type > 260){
+    if(!inprts && (tokens[i].type > 260 && tokens[i].type < 263) ){
       op_pos = i;
       break;
     }
-    else if (tokens[i].type > 258 && tokens[i].type < 261){
+    else if (!inprts && (tokens[i].type > 258 && tokens[i].type < 261) ){
       op_pos = i;
       continue;
     }
+    else if (tokens[i].type == TK_R_PRTS) inprts++;
+    else if (tokens[i].type == TK_L_PRTS) inprts--;
   }
   return op_pos;
 }
