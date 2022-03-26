@@ -111,7 +111,7 @@ static bool make_token(char *e) {
 
 bool check_parentheses(int p, int q, bool *success);
 
-int get_main_op(int p, int q);
+int get_main_op(int p, int q,bool *success);
 
 word_t eval(int p, int q, bool *success);
 
@@ -149,7 +149,8 @@ bool check_parentheses(int p, int q, bool *success){
   return false;
 }
 
-int get_main_op(int p, int q){
+int get_main_op(int p, int q,bool *success){
+  *success = true;
   int op_pos = q;
   int i;
   int inprts = 0;
@@ -166,6 +167,7 @@ int get_main_op(int p, int q){
     else if (tokens[i].type == TK_R_PRTS) inprts++;
     else if (tokens[i].type == TK_L_PRTS) inprts--;
   }
+  if(inprts != 0) *success = false;
   return op_pos;
 }
 
@@ -185,7 +187,7 @@ word_t eval(int p, int q, bool *success){
   }
   else {
     word_t val1=0,val2=0,val=0;
-    int op_pos = get_main_op(p,q);
+    int op_pos = get_main_op(p,q,success);
     printf("op_pos:%d\n",op_pos);
     printf("3\n");
     printf("p:%d\n",p);
