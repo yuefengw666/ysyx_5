@@ -179,6 +179,7 @@ int get_main_op(int p, int q,bool *success){
       if(tokens[i].priority <= max_priority){
         op_pos = i;
         printf("in get main op_pos:%d\n",op_pos);
+        printf("tho op_pos prior: %d\n",tokens[i].priority);
         max_priority = tokens[i].priority;
       //;break;
       }
