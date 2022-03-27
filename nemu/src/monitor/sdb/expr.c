@@ -194,7 +194,7 @@ uint64_t eval(int p, int q, bool *success){
   if(p > q){
     printf("Bad expression\n");
     printf("p:%d,q:%d \n",p,q);
-    *success = true;
+    *success = false;
     return 0;
   }
   else if(p == q){
@@ -212,10 +212,13 @@ uint64_t eval(int p, int q, bool *success){
     printf("p:%d\n",p);
     printf("q:%d\n",q);
     
-    if(tokens[op_pos].type != TK_NEG){
+    if(tokens[op_pos].type == TK_NEG){
+      val2 = eval(op_pos+1,q,success);
+    }
+    else {
+      val2 = eval(op_pos+1,q,success);
       val1 = eval(p, op_pos-1,success);
     }
-    val2 = eval(op_pos+1,q,success);
     
     printf("vla1:%lu vla2:%lu\n",val1,val2);
     switch(tokens[op_pos].type){
