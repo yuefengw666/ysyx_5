@@ -103,7 +103,7 @@ static int cmd_p(char *args){
   bool success;
   uint64_t val = expr(args,&success);
   if(success){
-    printf("%lu\n",val);
+    printf("%ld\n",val);
   }
   else {
   printf("expr return false\n");
