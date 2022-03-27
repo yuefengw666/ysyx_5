@@ -125,12 +125,11 @@ uint64_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-  printf("1\n");
   /* TODO: Insert codes to evaluate the expression. */
   *success = true;
 
   /*Judge the negedge sign and the deref.
-    -1  (-1+1) 
+    -1  ! 1-(1+1) 
   */
   for(int i=0; i <= nr_token; i++){
     if((tokens[i].type == TK_SUB) && 
@@ -175,7 +174,6 @@ int get_main_op(int p, int q,bool *success){
   int i;
   int inprts = 0;
   int max_priority = 7;
-  printf("2\n");
   for(i=q; i>=p; i--){
     if(!inprts && (tokens[i].priority > 3 && tokens[i].priority < 6) ){
       if(tokens[i].priority < max_priority){
@@ -194,6 +192,7 @@ int get_main_op(int p, int q,bool *success){
 uint64_t eval(int p, int q, bool *success){
   if(p > q){
     printf("Bad expression\n");
+    printf("p:%d,q:%d \n",p,q);
     *success = false;
     return 0;
   }
