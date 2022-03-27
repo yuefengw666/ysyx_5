@@ -25,14 +25,14 @@ static struct rule {
    * Pay attention to the precedence level of different rules.
    */
 //the priority of TK_NEG and TK_DEREF is 3
-  {" +", TK_NOTYPE, 0},      // spaces
-  {"[0-9]+",TK_NUM, 1},      //decimal number
-  {"\\(",TK_L_PRTS, 2},      // (
-  {"\\)",TK_R_PRTS, 2},      // )
-  {"\\*",TK_MUL,    4},      //mul
-  {"\\/",TK_DIV,    4},      //div
-  {"\\+", TK_ADD,   5},      // plus
-  {"-", TK_SUB,     5},      //sub
+  {" +", TK_NOTYPE, 7},      // spaces
+  {"[0-9]+",TK_NUM, 7},      //decimal number
+  {"\\(",TK_L_PRTS, 7},      // (
+  {"\\)",TK_R_PRTS, 7},      // )
+  {"\\+", TK_ADD,   1},      // plus
+  {"-", TK_SUB,     1},      //sub
+  {"\\*",TK_MUL,    2},      //mul
+  {"\\/",TK_DIV,    2},      //div
   {"==", TK_EQ,     6},      // equal
 };
 
@@ -134,7 +134,7 @@ uint64_t expr(char *e, bool *success) {
   for(int i=0; i <= nr_token; i++){
     if((tokens[i].type == TK_SUB) && 
         ( (i==0) ||
-          ( (tokens[i-1].priority > 2) && (tokens[i-1].type != TK_R_PRTS) )
+          ( (tokens[i-1].priority < 7) && (tokens[i-1].type != TK_R_PRTS) )
         )
       ){
       tokens[i].type = TK_NEG;
@@ -175,7 +175,7 @@ int get_main_op(int p, int q,bool *success){
   int inprts = 0;
   int max_priority = 7;
   for(i=q; i>=p; i--){
-    if(!inprts && (tokens[i].priority > 3 && tokens[i].priority < 6) ){
+    if(!inprts && (tokens[i].priority < 7) ){
       if(tokens[i].priority < max_priority){
         op_pos = i;
         max_priority = tokens[i].priority;
