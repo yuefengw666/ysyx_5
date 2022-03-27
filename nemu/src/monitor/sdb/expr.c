@@ -170,7 +170,7 @@ bool check_parentheses(int p, int q, bool *success){
 
 int get_main_op(int p, int q,bool *success){
   *success = true;
-  int op_pos = 0;
+  int op_pos = p;
   int i;
   int inprts = 0;
   int max_priority = 7;
@@ -178,7 +178,7 @@ int get_main_op(int p, int q,bool *success){
     if( (inprts == 0) && (tokens[i].priority < 7) ){
       if(tokens[i].priority <= max_priority){
         op_pos = i;
-        printf("in get main op_pos:%d",op_pos);
+        printf("in get main op_pos:%d\n",op_pos);
         max_priority = tokens[i].priority;
       //;break;
       }
