@@ -153,7 +153,7 @@ bool check_parentheses(int p, int q, bool *success){
   if( tokens[p].type != TK_L_PRTS || tokens[q].type != TK_R_PRTS ){ 
     return false;
   }
-  
+  printf("check prts \n");
   for(i=p+1; i<q; i++){
     if(tokens[i].type == TK_L_PRTS)     cnt_prts++;
     else if(tokens[i].type == TK_R_PRTS) cnt_prts--;
