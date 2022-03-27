@@ -27,8 +27,8 @@ static struct rule {
 //the priority of TK_NEG and TK_DEREF is 3
   {" +", TK_NOTYPE, 7},      // spaces
   {"[0-9]+",TK_NUM, 7},      //decimal number
-  {"\\(",TK_L_PRTS, 7},      // (
-  {"\\)",TK_R_PRTS, 7},      // )
+  {"\\(",TK_L_PRTS, 8},      // (
+  {"\\)",TK_R_PRTS, 8},      // )
   {"\\+", TK_ADD,   1},      // plus
   {"-", TK_SUB,     1},      //sub
   {"\\*",TK_MUL,    2},      //mul
@@ -134,7 +134,7 @@ uint64_t expr(char *e, bool *success) {
   for(int i=0; i < nr_token; i++){
     if((tokens[i].type == TK_SUB) && 
         ( (i==0) ||
-          ( (tokens[i-1].priority < 7) && (tokens[i-1].type != TK_R_PRTS) )
+          ( (tokens[i-1].priority != 7) && (tokens[i-1].type != TK_R_PRTS) )
         )
       ){
       tokens[i].type = TK_NEG;
