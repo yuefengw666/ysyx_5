@@ -232,7 +232,13 @@ uint64_t eval(int p, int q, bool *success){
       case TK_ADD:val = val1 + val2;break;
       case TK_SUB:val = val1 - val2;break;
       case TK_MUL:val = val1 * val2;break;
-      case TK_DIV:val = val1 / val2;break;
+      case TK_DIV:
+                  if(val2==0){
+                    *success = false;
+                    Log("Warning: the divisor is 0 at %d\n",q);
+                    return 0;
+                  }
+                  val = val1 / val2;break;
       case TK_NEG:val = -val2; break;
       default:printf("Unknow token type\n");*success = false; return 0;
     }
