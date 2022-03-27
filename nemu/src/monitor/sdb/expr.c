@@ -118,9 +118,9 @@ bool check_parentheses(int p, int q, bool *success);
 
 int get_main_op(int p, int q,bool *success);
 
-word_t eval(int p, int q, bool *success);
+uint64_t eval(int p, int q, bool *success);
 
-word_t expr(char *e, bool *success) {
+uint64_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
@@ -174,11 +174,11 @@ int get_main_op(int p, int q,bool *success){
   int op_pos = q;
   int i;
   int inprts = 0;
-  int max_priority = 0;
+  int max_priority = 7;
   printf("2\n");
   for(i=q; i>=p; i--){
     if(!inprts && (tokens[i].priority > 3 && tokens[i].priority < 6) ){
-      if(tokens[i].priority > max_priority){
+      if(tokens[i].priority < max_priority){
         op_pos = i;
         max_priority = tokens[i].type;
       //;break;
@@ -191,14 +191,14 @@ int get_main_op(int p, int q,bool *success){
   return op_pos;
 }
 
-word_t eval(int p, int q, bool *success){
+uint64_t eval(int p, int q, bool *success){
   if(p > q){
     printf("Bad expression\n");
     *success = false;
     return 0;
   }
   else if(p == q){
-    word_t val_temp = 0;
+    uint64_t val_temp = 0;
     sscanf(tokens[p].str,"%lu",&val_temp);
     return val_temp;
   }
@@ -206,7 +206,7 @@ word_t eval(int p, int q, bool *success){
     return eval(p+1,q-1,success);
   }
   else {
-    word_t val1=0,val2=0,val=0;
+    uint64_t val1=0,val2=0,val=0;
     int op_pos = get_main_op(p,q,success);
     printf("op_pos:%d\n",op_pos);
     printf("p:%d\n",p);

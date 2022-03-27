@@ -101,7 +101,7 @@ static int cmd_x(char *args){
 
 static int cmd_p(char *args){
   bool success;
-  word_t val = expr(args,&success);
+  uint64_t val = expr(args,&success);
   if(success){
     printf("%lu\n",val);
   }
