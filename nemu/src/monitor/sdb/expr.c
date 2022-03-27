@@ -211,7 +211,7 @@ uint64_t eval(int p, int q, bool *success){
     printf("p:%d\n",p);
     printf("q:%d\n",q);
     
-    if(tokens[p].type != TK_NEG){
+    if(tokens[op_pos].type != TK_NEG){
       val1 = eval(p, op_pos-1,success);
     }
     val2 = eval(op_pos+1,q,success);
