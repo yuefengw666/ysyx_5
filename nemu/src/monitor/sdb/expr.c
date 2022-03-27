@@ -131,7 +131,7 @@ uint64_t expr(char *e, bool *success) {
   /*Judge the negedge sign and the deref.
     -1  ! 1-(1+1) 
   */
-  for(int i=0; i <= nr_token; i++){
+  for(int i=0; i < nr_token; i++){
     if((tokens[i].type == TK_SUB) && 
         ( (i==0) ||
           ( (tokens[i-1].priority < 7) && (tokens[i-1].type != TK_R_PRTS) )
@@ -194,7 +194,7 @@ uint64_t eval(int p, int q, bool *success){
   if(p > q){
     printf("Bad expression\n");
     printf("p:%d,q:%d \n",p,q);
-    *success = false;
+    *success = true;
     return 0;
   }
   else if(p == q){
