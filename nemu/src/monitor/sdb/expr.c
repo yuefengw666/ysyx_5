@@ -180,7 +180,7 @@ int get_main_op(int p, int q,bool *success){
     if(!inprts && (tokens[i].priority > 3 && tokens[i].priority < 6) ){
       if(tokens[i].priority < max_priority){
         op_pos = i;
-        max_priority = tokens[i].type;
+        max_priority = tokens[i].priority;
       //;break;
       }
     }
