@@ -175,7 +175,7 @@ int get_main_op(int p, int q,bool *success){
   int inprts = 0;
   int max_priority = 7;
   for(i=q; i>=p; i--){
-    if( (inprts!=0) && (tokens[i].priority < 7) ){
+    if( (inprts == 0) && (tokens[i].priority < 7) ){
       if(tokens[i].priority < max_priority){
         op_pos = i;
         max_priority = tokens[i].priority;
