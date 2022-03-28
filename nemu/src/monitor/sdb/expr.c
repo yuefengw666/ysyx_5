@@ -206,7 +206,7 @@ uint64_t eval(int p, int q, bool *success){
   }
   else if(p == q){
     uint64_t val_temp = 0;
-    sscanf(tokens[p].str,"%ld",&val_temp);
+    sscanf(tokens[p].str,"%lu",&val_temp);
     return val_temp;
   }
   else if(check_parentheses(p,q,success) == true){
