@@ -206,7 +206,7 @@ uint64_t eval(int p, int q, bool *success){
   }
   else if(p == q){
     uint64_t val_temp = 0;
-    sscanf(tokens[p].str,"%lu",&val_temp);
+    sscanf(tokens[p].str,"%ld",&val_temp);
     return val_temp;
   }
   else if(check_parentheses(p,q,success) == true){
@@ -227,7 +227,7 @@ uint64_t eval(int p, int q, bool *success){
       val1 = eval(p, op_pos-1,success);
     }
     
-    printf("vla1:%lu vla2:%lu\n",val1,val2);
+    printf("vla1:%lu vla2:%ld\n",val1,val2);
     switch(tokens[op_pos].type){
       case TK_ADD:val = val1 + val2;break;
       case TK_SUB:val = val1 - val2;break;
