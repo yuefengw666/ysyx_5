@@ -149,7 +149,7 @@ uint64_t expr(char *e, bool *success) {
 bool check_parentheses(int p, int q, bool *success){
   int i; 
   int cnt_prts = 0;
-  *success = true;
+  //*success = true;
   if( tokens[p].type != TK_L_PRTS || tokens[q].type != TK_R_PRTS ){ 
     return false;
   }
@@ -169,7 +169,7 @@ bool check_parentheses(int p, int q, bool *success){
 }
 
 int get_main_op(int p, int q,bool *success){
-  *success = true;
+  //*success = true;
   int op_pos = p;
   int i;
   int inprts = 0;
