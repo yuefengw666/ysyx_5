@@ -227,7 +227,7 @@ uint64_t eval(int p, int q, bool *success){
       val1 = eval(p, op_pos-1,success);
     }
     
-    printf("vla1:%lu vla2:%ld\n",val1,val2);
+    printf("vla1:%ld vla2:%ld\n",val1,val2);
     switch(tokens[op_pos].type){
       case TK_ADD:val = val1 + val2;break;
       case TK_SUB:val = val1 - val2;break;
