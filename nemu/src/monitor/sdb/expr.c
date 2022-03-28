@@ -165,7 +165,7 @@ bool check_parentheses(int p, int q, bool *success){
   }
 
   if(cnt_prts == 0) return true;
-  else {*success = false; return false;}
+  else return false;
 }
 
 int get_main_op(int p, int q,bool *success){
