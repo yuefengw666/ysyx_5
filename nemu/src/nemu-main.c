@@ -37,7 +37,7 @@ void test_expr(){
     
     expression[0]='\0';
     s_temp = fgets(expression,70000,fp);
-    uint64_t answer=0,ans;
+    uint64_t answer=0,ans=0;
     str = strtok(expression," ");
     sscanf(expression,"%lu",&answer);
     str=expression+strlen(expression)+1;
