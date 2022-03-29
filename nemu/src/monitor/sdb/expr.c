@@ -211,9 +211,9 @@ uint64_t eval(int p, int q, bool *success){
   else {
     uint64_t val1=0,val2=0,val=0;
     int op_pos = get_main_op(p,q,success);
-    //printf("op_pos:%d\n",op_pos);
-    //printf("p:%d\n",p);
-    //printf("q:%d\n",q);
+    printf("op_pos:%d\n",op_pos);
+    printf("p:%d\n",p);
+    printf("q:%d\n",q);
     
     if(tokens[op_pos].type == TK_NEG){
       val2 = eval(op_pos+1,q,success);
@@ -223,7 +223,7 @@ uint64_t eval(int p, int q, bool *success){
       val1 = eval(p, op_pos-1,success);
     }
     
-    //printf("vla1:%ld vla2:%ld\n",val1,val2);
+    printf("vla1:%ld vla2:%ld\n",val1,val2);
     switch(tokens[op_pos].type){
       case TK_ADD:val = val1 + val2;break;
       case TK_SUB:val = val1 - val2;break;
