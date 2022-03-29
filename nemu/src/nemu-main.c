@@ -31,7 +31,7 @@ void test_expr(){
   char *s_temp;
   char *str;
   int cnt=0;
-  for(int i = 0;i < 1000;i++)
+  for(int i = 0;i < 949;i++)
   {
     bool flag=true;
     
