@@ -40,7 +40,7 @@ void test_expr(){
     uint64_t answer=0,ans;
     str = strtok(expression," ");
     sscanf(expression,"%lu",&answer);
-    str=expression+strlen(expression);
+    str=expression+strlen(expression)+1;
     ans=expr(str,&flag);
     if(answer!=ans)
       printf("!!!%d Wrong, expr:%s=%ld, ans_expr:%ld\n",i,str,answer,ans);
