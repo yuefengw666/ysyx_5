@@ -43,13 +43,13 @@ void test_expr(){
     str=expression+strlen(expression)+1;
     ans=expr(str,&flag);
     if(answer!=ans)
-      printf("%d Wrong\n",i);
+      printf("%d Wrong, expr:%s, ans_expr:%d\n",i,str,ans);
     else {
       cnt++;
-      printf("correct %d\n",i);
+      printf("%d correct,expr:%s, ans_expr:%d\n",i,str,ans);
     }
   
   }
-  printf("%s,\n",s_temp);
+  printf("expression:%s,\n",s_temp);
   printf("correct number: %d\n",cnt);
 }

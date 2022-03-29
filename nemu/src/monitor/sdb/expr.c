@@ -80,8 +80,8 @@ static bool make_token(char *e) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
-            i, rules[i].regex, position, substr_len, substr_len, substr_start);
+        //Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
+        //    i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
 
@@ -153,7 +153,6 @@ bool check_parentheses(int p, int q, bool *success){
   if( tokens[p].type != TK_L_PRTS || tokens[q].type != TK_R_PRTS ){ 
     return false;
   }
-  printf("check prts \n");
   for(i=p+1; i<q; i++){
     if(tokens[i].type == TK_L_PRTS)     cnt_prts++;
     else if(tokens[i].type == TK_R_PRTS) cnt_prts--;
@@ -184,10 +183,7 @@ int get_main_op(int p, int q,bool *success){
       }
       else if(tokens[i].priority <= max_priority){
         op_pos = i;
-        printf("in get main op_pos:%d\n",op_pos);
-        printf("tho op_pos prior: %d\n",tokens[i].priority);
         max_priority = tokens[i].priority;
-      //;break;
       }
     }
     else if (tokens[i].type == TK_R_PRTS) inprts++;
