@@ -41,7 +41,7 @@ void test_expr(){
     str = strtok(expression," ");
     sscanf(expression,"%lu",&answer);
     str=expression+strlen(expression)+1;
-    str[strlen(str)] = '\0';
+    str[strlen(str)-1] = '\0';
     ans=expr(str,&flag);
     if(answer!=ans)
       printf("!!!%d Wrong, expr:%s=%ld, ans_expr:%ld\n",i,str,answer,ans);
