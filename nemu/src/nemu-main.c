@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
   /* Start engine. */
   //engine_start();
 
-  return 0;//is_exit_status_bad();
+  return is_exit_status_bad();
 }
 
 void test_expr(){
@@ -37,16 +37,16 @@ void test_expr(){
     
     expression[0]='\0';
     s_temp = fgets(expression,70000,fp);
-    unsigned answer=0,ans;
+    uint64_t answer=0,ans;
     str = strtok(expression," ");
-    sscanf(expression,"%u",&answer);
+    sscanf(expression,"%lu",&answer);
     str=expression+strlen(expression)+1;
     ans=expr(str,&flag);
     if(answer!=ans)
-      printf("%d Wrong, expr:%s, ans_expr:%d\n",i,str,ans);
+      printf("!!!%d Wrong, expr:%s=%ld, ans_expr:%ld\n",i,str,answer,ans);
     else {
       cnt++;
-      printf("%d correct,expr:%s, ans_expr:%d\n",i,str,ans);
+      printf("%d correct,expr:%s=%ld, ans_expr:%ld\n",i,str,answer,ans);
     }
   
   }
