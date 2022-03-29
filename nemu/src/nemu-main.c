@@ -16,12 +16,12 @@ int main(int argc, char *argv[]) {
   init_monitor(argc, argv);
 #endif
 
-  test_expr();
+  //test_expr();
 
   /* Start engine. */
-  //engine_start();
+  engine_start();
 
-  return 0;//is_exit_status_bad();
+  return is_exit_status_bad();
 }
 
 void test_expr(){
