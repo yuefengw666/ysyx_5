@@ -1,12 +1,12 @@
 #include <common.h>
-#include "./monitor/sdb/sdb.h"
-#include <stdio.h>
+//#include "./monitor/sdb/sdb.h"
+//#include <stdio.h>
 void init_monitor(int, char *[]);
 void am_init_monitor();
 void engine_start();
 int is_exit_status_bad();
 
-void test_expr();
+//void test_expr();
 
 int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 
   return is_exit_status_bad();
 }
-
+/*
 void test_expr(){
   
   FILE * fp=fopen("../tools/gen-expr/input","r");
@@ -53,4 +53,4 @@ void test_expr(){
   }
   printf("expression:%s,\n",s_temp);
   printf("correct number: %d\n",cnt);
-}
+}*/

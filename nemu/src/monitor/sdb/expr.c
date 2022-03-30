@@ -6,10 +6,15 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_NUM,TK_L_PRTS, TK_R_PRTS,
-  TK_NEG,
-  TK_MUL, TK_DIV, 
-  TK_ADD, TK_SUB
+  TK_NOTYPE = 256, 
+  TK_L_PRTS, TK_R_PRTS,
+  TK_DEC,TK_HEX,TK_REG,
+  TK_ADD, TK_SUB,TK_MUL, TK_DIV, 
+  TK_NEG,TK_INV, TK_DEREF,
+  TK_EQ, TK_UNEQ,
+  TK_AND, TK_OR,
+  
+
   
   /* TODO: Add more token types */
 
@@ -24,16 +29,24 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-//the priority of TK_NEG and TK_DEREF is 3
-  {" +", TK_NOTYPE, 7},      // spaces
-  {"[0-9]+",TK_NUM, 7},      //decimal number
-  {"\\(",TK_L_PRTS, 8},      // (
-  {"\\)",TK_R_PRTS, 8},      // )
-  {"\\+", TK_ADD,   1},      // plus
-  {"-", TK_SUB,     1},      //sub
-  {"\\*",TK_MUL,    2},      //mul
-  {"\\/",TK_DIV,    2},      //div
-  {"==", TK_EQ,     6},      // equal
+//the bigger value of priority, the greater priority.
+//the priority of TK_NEG and TK_DEREF is 6
+  {" +",                  TK_NOTYPE,      8},       // spaces
+  {"[0-9]+",              TK_DEC,         7},       //decimal number
+  {"0[Xx][0-9a-fA-F]+",   TK_HEX,         7},       //hexadecimal number
+  {"\\$[0-9a-z]+",        TK_REG,         7},       //register
+  {"\\(",                 TK_L_PRTS,      8},       // (
+  {"\\)",                 TK_R_PRTS,      8},       // )
+  {"!",                   TK_INV,         6},       //invert
+  {"\\*",                 TK_MUL,         5},       //mul  or  derefrence
+  {"\\/",                 TK_DIV,         5},       //div
+  {"\\+",                 TK_ADD,         4},       // plus
+  {"-",                   TK_SUB,         4},       //sub
+  {"==",                  TK_EQ,          3},       // equal
+  {"!=",                  TK_UNEQ,        3},       //unequal
+  {"&&",                 TK_AND,         2},       //and
+  {"\\|\\|",             TK_OR,          1},       //or
+
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -92,7 +105,9 @@ static bool make_token(char *e) {
 
         switch (rules[i].token_type) {
           case TK_NOTYPE: break;
-          case TK_NUM:
+          case TK_DEC:
+          case TK_HEX:
+          case TK_REG:
                       strncpy(tokens[nr_token].str, substr_start, substr_len);
                       tokens[nr_token].str[substr_len] = '\0';
           default: //TODO();
@@ -134,13 +149,13 @@ uint64_t expr(char *e, bool *success) {
     -1  ! 1-(1+1) 
   */
   for(int i=0; i < nr_token; i++){
-    if((tokens[i].type == TK_SUB) && 
-        ( (i==0) ||
-          ( (tokens[i-1].priority != 7) && (tokens[i-1].type != TK_R_PRTS) )
-        )
-      ){
+    if((tokens[i].type == TK_SUB) && ( (i==0) ||( (tokens[i-1].priority != 7) && (tokens[i-1].type != TK_R_PRTS) ))){
       tokens[i].type = TK_NEG;
-      tokens[i].priority = 3; 
+      tokens[i].priority = 6; 
+    }
+    else if((tokens[i].type == TK_MUL) && ((i==0)||( (tokens[i-1].priority!=7)&&(tokens[i-1].type != TK_R_PRTS)))){
+      tokens[i].type = TK_DEREF;
+      tokens[i].priority = 6;
     }
   }
   
@@ -198,13 +213,18 @@ int get_main_op(int p, int q,bool *success){
 uint64_t eval(int p, int q, bool *success){
   if(p > q){
     printf("Bad expression\n");
-    printf("p:%d,q:%d \n",p,q);
+    //printf("p:%d,q:%d \n",p,q);
     *success = false;
     return 0;
   }
   else if(p == q){
     uint64_t val_temp = 0;
-    sscanf(tokens[p].str,"%ld",&val_temp);
+    switch(tokens[p].type){
+    case TK_DEC: sscanf(tokens[p].str,"%ld",&val_temp); break;
+    case TK_HEX: sscanf(tokens[p].str,"%lx",&val_temp); break;
+    case TK_REG: val_temp = isa_reg_str2val(tokens[p].str,success);break;
+    default:printf("value:%s error\n",tokens[p].str);
+    }
     return val_temp;
   }
   else if(check_parentheses(p,q,success) == true){
@@ -213,19 +233,19 @@ uint64_t eval(int p, int q, bool *success){
   else {
     uint64_t val1=0,val2=0,val=0;
     int op_pos = get_main_op(p,q,success);
-    printf("op_pos:%d\n",op_pos);
-    printf("p:%d\n",p);
-    printf("q:%d\n",q);
+    //printf("op_pos:%d\n",op_pos);
+    //printf("p:%d\n",p);
+    //printf("q:%d\n",q);
     
-    if(tokens[op_pos].type == TK_NEG){
+    if(tokens[op_pos].type == TK_NEG || tokens[op_pos].type == TK_DEREF || tokens[op_pos].type == TK_INV){
       val2 = eval(op_pos+1,q,success);
     }
     else {
-      val2 = eval(op_pos+1,q,success);
       val1 = eval(p, op_pos-1,success);
+      val2 = eval(op_pos+1,q,success);
     }
     
-    printf("vla1:%ld vla2:%ld\n",val1,val2);
+    //printf("val1:%ld val2:%ld\n",val1,val2);
     switch(tokens[op_pos].type){
       case TK_ADD:val = val1 + val2;break;
       case TK_SUB:val = val1 - val2;break;
@@ -236,8 +256,13 @@ uint64_t eval(int p, int q, bool *success){
                     Log("Warning: the divisor is 0 at position %d\n",q);
                     return 0;
                   }
-                  val = val1 / val2;break;
-      case TK_NEG:val = -val2; break;
+                  val = val1 / val2;  break;
+      case TK_NEG:val = -val2;break;
+      case TK_EQ: val = val1 == val2; break;
+      case TK_UNEQ: val = val1 != val2; break;
+      case TK_AND: val = val1 && val2; break;
+      case TK_OR: val = val1 || val2;break;
+      case TK_INV: val = !val2; break;
       default:printf("Unknow token type\n");*success = false; return 0;
     }
     //*success = true;
