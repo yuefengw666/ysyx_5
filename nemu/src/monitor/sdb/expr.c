@@ -37,13 +37,16 @@ static struct rule {
   {"\\$[0-9a-z]+",        TK_REG,         7},       //register
   {"\\(",                 TK_L_PRTS,      8},       // (
   {"\\)",                 TK_R_PRTS,      8},       // )
+  
+  {"!=",                  TK_UNEQ,        3},       //unequal
+
   {"!",                   TK_INV,         6},       //invert
   {"\\*",                 TK_MUL,         5},       //mul  or  derefrence
   {"\\/",                 TK_DIV,         5},       //div
   {"\\+",                 TK_ADD,         4},       // plus
   {"-",                   TK_SUB,         4},       //sub
   {"==",                  TK_EQ,          3},       // equal
-  {"!=",                  TK_UNEQ,        3},       //unequal
+  //{"!=",                  TK_UNEQ,        3},       //unequal
   {"&&",                 TK_AND,         2},       //and
   {"\\|\\|",             TK_OR,          1},       //or
 
