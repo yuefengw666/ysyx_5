@@ -1,5 +1,5 @@
 #include <isa.h>
-
+#include <memory/vaddr.h>
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
@@ -266,6 +266,7 @@ uint64_t eval(int p, int q, bool *success){
       case TK_AND: val = val1 && val2; break;
       case TK_OR: val = val1 || val2;break;
       case TK_INV: val = !val2; break;
+      case TK_DEREF: val = vaddr_read(val2,4);
       default:printf("Unknow token type\n");*success = false; return 0;
     }
     //*success = true;
