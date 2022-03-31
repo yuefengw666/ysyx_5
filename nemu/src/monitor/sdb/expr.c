@@ -32,8 +32,8 @@ static struct rule {
 //the bigger value of priority, the greater priority.
 //the priority of TK_NEG and TK_DEREF is 6
   {" +",                  TK_NOTYPE,      8},       // spaces
-  {"[0-9]+",              TK_DEC,         7},       //decimal number
   {"0[Xx][0-9a-fA-F]+",   TK_HEX,         7},       //hexadecimal number
+  {"[0-9]+",              TK_DEC,         7},       //decimal number
   {"\\$[0-9a-z]+",        TK_REG,         7},       //register
   {"\\(",                 TK_L_PRTS,      8},       // (
   {"\\)",                 TK_R_PRTS,      8},       // )
