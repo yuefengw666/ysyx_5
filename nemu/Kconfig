@@ -216,3 +216,13 @@ config RT_CHECK
   default y
 
 endmenu
+
+choice
+  prompt "Watchpoint on-off"
+  default WATCHPOINT
+
+config WATCHPOINT
+  bool "ON"
+  help
+    sdb watchpoint on-off, (X)ON can use watchpoint.
+endchoice
