@@ -154,7 +154,7 @@ config ITRACE_COND
 
 config WATCHPOINT
   bool "Enable sdb watchpoint"
-  default n
+  default y
 
 config DIFFTEST
   depends on TARGET_NATIVE_ELF
