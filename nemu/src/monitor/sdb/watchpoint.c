@@ -74,7 +74,7 @@ void free_wp(WP *wp){
 //Info wp
 void info_wp(){
   if(head == NULL){
-    printf("There is no wp\n");
+    printf("There is no wp.\n");
     return;
   }
   

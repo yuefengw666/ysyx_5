@@ -115,7 +115,7 @@ static int cmd_w(char *args){
   }
   else {
     WP *p = new_wp(arg);
-    printf("WP->NO:%d, WP->expr:%s\n",p->NO,p->expr);
+    printf("NO:%d, expr:%s\n",p->NO,p->expr);
   }
   return 0;
 }
