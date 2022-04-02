@@ -152,6 +152,9 @@ config ITRACE_COND
   string "Only trace instructions when the condition is true"
   default "true"
 
+config WATCHPOINT
+  bool "Enable sdb watchpoint"
+  default n
 
 config DIFFTEST
   depends on TARGET_NATIVE_ELF
@@ -216,13 +219,3 @@ config RT_CHECK
   default y
 
 endmenu
-
-choice
-  prompt "Watchpoint on-off"
-  default WATCHPOINT
-
-config WATCHPOINT
-  bool "ON"
-  help
-    sdb watchpoint on-off, (X)ON can use watchpoint.
-endchoice
