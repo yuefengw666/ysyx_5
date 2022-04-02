@@ -65,16 +65,12 @@ static int cmd_info(char *args){
   char *arg = strtok(NULL, " ");
 
   if(arg == NULL){
-    printf("Please check the argument\n");
+    printf("No argument given\n");
     return 0;
   }
   else {
-    char *reg = "r";
-    //char *watch = "w";
-    if (strcmp(arg,reg) == 0){
-      isa_reg_display();
-      return 0;
-    }
+    if (strcmp(arg,"r") == 0) isa_reg_display();
+    else if(strcmp(arg,"w")==0) info_wp();
   }
   return 0;
 }
@@ -112,6 +108,34 @@ static int cmd_p(char *args){
   return 0;
 }
 
+static int cmd_w(char *args){
+  char *arg = strtok(NULL," ");
+  if(arg == NULL){
+    printf("No argument given.\n");
+  }
+  else {
+    WP *p = new_wp(arg);
+    printf("WP->NO:%d, WP->expr:%s\n",p->NO,p->expr);
+  }
+  return 0;
+}
+
+static int cmd_d(char *args){
+  char *arg = strtok(NULL," ");
+  int n = atoi(arg);
+  
+  if(arg == NULL)printf("No argument given.\n");
+  else {
+    if ((n < 0) || (n > 31)){
+      printf("Argument error,shoule be [0,31].\n");
+    }
+    else {
+      del_wp(n);
+    }
+  }
+  return 0;
+}
+
 static struct {
   const char *name;
   const char *description;
@@ -123,7 +147,9 @@ static struct {
   { "si", "Single step", cmd_si},
   { "info", "Info status", cmd_info},
   { "x", "Scan memory", cmd_x},
-  { "p", "Expression evaluation",cmd_p}
+  { "p", "Expression evaluation",cmd_p},
+  { "w", "Add express watchpoint",cmd_w},
+  { "d", "Delete watchpoint",cmd_d}
   /* TODO: Add more commands */
 
 };
