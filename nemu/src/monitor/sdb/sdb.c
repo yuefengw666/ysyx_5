@@ -69,12 +69,12 @@ static int cmd_x(char *args){
   char *arg2 = strtok(NULL, " ");
 
   int n = atoi(arg1);
-  int expr;
-  sscanf(arg2,"%x",&expr);
+  word_t expr;
+  sscanf(arg2,"%lx",&expr);
 
   for(int i=0; i<n; i++){
-    int addr = i*4 + expr;
-    printf("0x%08x\t",addr);
+    word_t addr = i*4 + expr;
+    printf("0x%08lx\t",addr);
       for(int j=3; j>=0; j--){
         word_t val = vaddr_read(addr + j,1);
         printf("%02lx  ",val);
