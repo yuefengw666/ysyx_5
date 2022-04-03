@@ -77,12 +77,12 @@ static int cmd_x(char *args){
   }
   bool success;
   int n = atoi(arg1);
-  int expr_t = expr(arg2,&success);
+  word_t val_expr = expr(arg2,&success);
   if(success){
     //int expr_t;
     //sscanf(expr,"%lx",expr);
     for(int i=0; i<n; i++){
-      int addr = i*4 + expr_t;
+      int addr = i*4 + val_expr;
       printf("0x%08x\t",addr);
         for(int j=3; j>=0; j--){
           word_t val = vaddr_read(addr + j,1);
