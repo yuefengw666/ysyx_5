@@ -96,9 +96,9 @@ static bool make_token(char *e) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
+        /*Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
-
+        */
         position += substr_len;
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
@@ -134,13 +134,13 @@ static bool make_token(char *e) {
   return true;
 }
 
-bool check_parentheses(int p, int q, bool *success);
+bool check_parentheses(int p, int q);
 
 int get_main_op(int p, int q,bool *success);
 
-uint64_t eval(int p, int q, bool *success);
+word_t eval(int p, int q, bool *success);
 
-uint64_t expr(char *e, bool *success) {
+word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
@@ -148,9 +148,7 @@ uint64_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   *success = true;
 
-  /*Judge the negedge sign and the deref.
-    -1  ! 1-(1+1) 
-  */
+  //Judge the negedge sign and the deref.
   for(int i=0; i < nr_token; i++){
     if((tokens[i].type == TK_SUB) && ( (i==0) ||( (tokens[i-1].priority != 7) && (tokens[i-1].type != TK_R_PRTS) ))){
       tokens[i].type = TK_NEG;
@@ -166,10 +164,9 @@ uint64_t expr(char *e, bool *success) {
   return eval(0,nr_token-1,success);
 }
 
-bool check_parentheses(int p, int q, bool *success){
+bool check_parentheses(int p, int q){
   int i; 
   int cnt_prts = 0;
-  //*success = true;
   if( tokens[p].type != TK_L_PRTS || tokens[q].type != TK_R_PRTS ){ 
     return false;
   }
@@ -177,8 +174,7 @@ bool check_parentheses(int p, int q, bool *success){
     if(tokens[i].type == TK_L_PRTS)     cnt_prts++;
     else if(tokens[i].type == TK_R_PRTS) cnt_prts--;
     if(cnt_prts < 0){
-      //*success = false;
-      return false;
+      return false; //( )+( )
       break;
     }
   }
@@ -213,7 +209,7 @@ int get_main_op(int p, int q,bool *success){
   return op_pos;
 }
 
-uint64_t eval(int p, int q, bool *success){
+word_t eval(int p, int q, bool *success){
   if(p > q){
     printf("Bad expression\n");
     //printf("p:%d,q:%d \n",p,q);
@@ -221,7 +217,7 @@ uint64_t eval(int p, int q, bool *success){
     return 0;
   }
   else if(p == q){
-    uint64_t val_temp = 0;
+    word_t val_temp = 0;
     switch(tokens[p].type){
     case TK_DEC: sscanf(tokens[p].str,"%ld",&val_temp); break;
     case TK_HEX: sscanf(tokens[p].str,"%lx",&val_temp); break;
@@ -237,11 +233,11 @@ uint64_t eval(int p, int q, bool *success){
     }
     return val_temp;
   }
-  else if(check_parentheses(p,q,success) == true){
+  else if(check_parentheses(p,q) == true){
     return eval(p+1,q-1,success);
   }
   else {
-    uint64_t val1=0,val2=0,val=0;
+    word_t val1=0,val2=0,val=0;
     int op_pos = get_main_op(p,q,success);
     //printf("op_pos:%d\n",op_pos);
     //printf("p:%d\n",p);
