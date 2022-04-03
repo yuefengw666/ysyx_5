@@ -149,15 +149,15 @@ static struct {
   const char *description;
   int (*handler) (char *);
 } cmd_table [] = {
-  { "help\t", "Format: help\t--Display informations about all supported commands.", cmd_help },
-  { "c\t", "Format: c\t--Continue the execution of the program", cmd_c },
-  { "q\t", "Format: q\t--Exit NEMU", cmd_q },
-  { "si\t", "Format: si [N]\t--Single step.", cmd_si},
-  { "info\t", "Format: info <r>/<w>\t--Info register or watchpoint status.", cmd_info},
-  { "x\t", "Format: x N EXPR\t--Scan memory.", cmd_x},
-  { "p\t", "Format: p EXPR\t--Expression evaluation.",cmd_p},
-  { "w\t", "Format: w EXPR\t--Add express watchpoint.",cmd_w},
-  { "d\t", "Format: d N\tDelete watchpoint",cmd_d}
+  { "help", "Format: help\t--Display informations about all supported commands.", cmd_help },
+  { "c", "Format: c\t--Continue the execution of the program", cmd_c },
+  { "q", "Format: q\t--Exit NEMU", cmd_q },
+  { "si", "Format: si [N]\t--Single step.", cmd_si},
+  { "info", "Format: info <r>/<w>\t--Info register or watchpoint status.", cmd_info},
+  { "x", "Format: x N EXPR\t--Scan memory.", cmd_x},
+  { "p", "Format: p EXPR\t--Expression evaluation.",cmd_p},
+  { "w", "Format: w EXPR\t--Add express watchpoint.",cmd_w},
+  { "d", "Format: d N\tDelete watchpoint",cmd_d}
   /* TODO: Add more commands */
 
 };
