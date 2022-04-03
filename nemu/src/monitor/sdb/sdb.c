@@ -56,7 +56,10 @@ static int cmd_si(char *args){
 static int cmd_info(char *args){
   char *arg = strtok(NULL, " ");
 
-  if(arg == NULL) printf("No argument given,should be <r>/<w>\n");
+  if(arg == NULL) {
+    printf("No argument given,EX info <r>/<w>\n");
+    return 0;
+  }
   else {
     if (strcmp(arg,"r") == 0) isa_reg_display();
     else if(strcmp(arg,"w")==0) info_wp();
@@ -68,18 +71,25 @@ static int cmd_x(char *args){
   char *arg1 = strtok(NULL, " ");
   char *arg2 = strtok(NULL, " ");
 
+  if(arg1 == NULL || arg2 == NULL){
+    printf("Argument error, EX: x 10 $esp");
+    return 0;
+  }
+  bool success;
   int n = atoi(arg1);
-  word_t expr;
-  sscanf(arg2,"%lx",&expr);
-
-  for(int i=0; i<n; i++){
-    word_t addr = i*4 + expr;
-    printf("0x%08lx\t",addr);
-      for(int j=3; j>=0; j--){
-        word_t val = vaddr_read(addr + j,1);
-        printf("%02lx  ",val);
-      }
-      printf("\n");
+  int expr_t = expr(arg2,&success);
+  if(success){
+    //int expr_t;
+    //sscanf(expr,"%lx",expr);
+    for(int i=0; i<n; i++){
+      int addr = i*4 + expr_t;
+      printf("0x%08x\t",addr);
+        for(int j=3; j>=0; j--){
+          word_t val = vaddr_read(addr + j,1);
+          printf("0x%02lx  ",val);
+        }
+        printf("\n");
+    }
   }
   return 0;
 }
