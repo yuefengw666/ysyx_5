@@ -51,7 +51,7 @@ static int cmd_si(char *args){
   else {
     int num = atoi(arg);
     if(num <= 0) {
-      printf("Arguments error!\n");
+      printf("Arguments error,should >= 1\n");
       return 0;
     }
     else{
