@@ -225,7 +225,14 @@ uint64_t eval(int p, int q, bool *success){
     switch(tokens[p].type){
     case TK_DEC: sscanf(tokens[p].str,"%ld",&val_temp); break;
     case TK_HEX: sscanf(tokens[p].str,"%lx",&val_temp); break;
-    case TK_REG: val_temp = isa_reg_str2val(tokens[p].str,success);break;
+    case TK_REG: 
+                if(strcmp(tokens[p].str,"$pc")==0){
+                  val_temp = cpu.pc;
+                }
+                else {
+                  val_temp = isa_reg_str2val(tokens[p].str,success);
+                }
+                break;
     default:printf("value:%s error\n",tokens[p].str);
     }
     return val_temp;
