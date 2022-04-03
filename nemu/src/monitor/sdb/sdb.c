@@ -44,30 +44,19 @@ static int cmd_help(char *args);
 static int cmd_si(char *args){
   char *arg = strtok(NULL, " ");
   
-  if(arg == NULL){
-    cpu_exec(1);
-    return 0;
-  }
+  if(arg == NULL) cpu_exec(1);
   else {
     int num = atoi(arg);
-    if(num <= 0) {
-      printf("Arguments error,should >= 1\n");
-      return 0;
-    }
-    else{
-      cpu_exec(num); 
-      return 0;
-    }
+    if(num <= 0) printf("Arguments error,should >= 1\n");
+    else cpu_exec(num); 
   }
+  return 0;
 }
 
 static int cmd_info(char *args){
   char *arg = strtok(NULL, " ");
 
-  if(arg == NULL){
-    printf("No argument given\n");
-    return 0;
-  }
+  if(arg == NULL) printf("No argument given,should be <r>/<w>\n");
   else {
     if (strcmp(arg,"r") == 0) isa_reg_display();
     else if(strcmp(arg,"w")==0) info_wp();
