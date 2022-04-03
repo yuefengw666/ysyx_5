@@ -57,13 +57,13 @@ static int cmd_info(char *args){
   char *arg = strtok(NULL, " ");
 
   if(arg == NULL) {
-    printf("No argument given,EX info <r>/<w>\n");
+    printf("No argument given,EX: info <r>/<w>\n");
     return 0;
   }
-  else {
-    if (strcmp(arg,"r") == 0) isa_reg_display();
-    else if(strcmp(arg,"w")==0) info_wp();
-  }
+  
+  if (strcmp(arg,"r") == 0) isa_reg_display();
+  else if(strcmp(arg,"w")==0) info_wp();
+  
   return 0;
 }
 
@@ -77,10 +77,9 @@ static int cmd_x(char *args){
   }
   bool success;
   int n = atoi(arg1);
-  word_t val_expr = expr(arg2,&success);
+  paddr_t val_expr = 0x80000000;
+  val_expr = expr(arg2,&success);
   if(success){
-    //int expr_t;
-    //sscanf(expr,"%lx",expr);
     for(int i=0; i<n; i++){
       int addr = i*4 + val_expr;
       printf("0x%08x\t",addr);
@@ -91,18 +90,27 @@ static int cmd_x(char *args){
         printf("\n");
     }
   }
+  else {
+    printf("Bad expression.\n");
+  }
   return 0;
 }
 
 static int cmd_p(char *args){
+  char *arg = strtok(NULL," ");
+  if(arg == NULL){
+    printf("No expression given.\n");
+    return 0;
+  }
+
   bool success;
-  uint64_t val = expr(args,&success);
+  word_t val = expr(args,&success);
   if(success){
-    printf("%ld\n",val);
+    printf("DEC:%ld\nHEX:0x%08lx\n",val,val);
   }
   else {
-  printf("expr return false\n");
-  return 0;
+    printf("expr return false\n");
+    return 0;
   }
   return 0;
 }
@@ -111,26 +119,27 @@ static int cmd_w(char *args){
   char *arg = strtok(NULL," ");
   if(arg == NULL){
     printf("No argument given.\n");
+    return 0;
   }
-  else {
-    WP *p = new_wp(arg);
-    printf("NO:%d, expr:%s\n",p->NO,p->expr);
-  }
+
+  WP *p = new_wp(arg);
+  printf("NO:%d, expr:%s\n",p->NO,p->expr);
   return 0;
 }
 
 static int cmd_d(char *args){
   char *arg = strtok(NULL," ");
+  if(arg == NULL){
+    printf("No argument given.\n");
+    return 0;
+  }
+
   int n = atoi(arg);
-  
-  if(arg == NULL)printf("No argument given.\n");
+  if ((n < 0) || (n > 31)){
+    printf("Argument error,shoule be [0,31].\n");
+  }
   else {
-    if ((n < 0) || (n > 31)){
-      printf("Argument error,shoule be [0,31].\n");
-    }
-    else {
-      del_wp(n);
-    }
+    del_wp(n);
   }
   return 0;
 }
@@ -140,15 +149,15 @@ static struct {
   const char *description;
   int (*handler) (char *);
 } cmd_table [] = {
-  { "help", "Display informations about all supported commands", cmd_help },
-  { "c", "Continue the execution of the program", cmd_c },
-  { "q", "Exit NEMU", cmd_q },
-  { "si", "Single step", cmd_si},
-  { "info", "Info status", cmd_info},
-  { "x", "Scan memory", cmd_x},
-  { "p", "Expression evaluation",cmd_p},
-  { "w", "Add express watchpoint",cmd_w},
-  { "d", "Delete watchpoint",cmd_d}
+  { "help", "Format: help\t--Display informations about all supported commands.", cmd_help },
+  { "c", "Format: c\t--Continue the execution of the program", cmd_c },
+  { "q", "Format: q\t--Exit NEMU", cmd_q },
+  { "si", "Format: si [N]\t--Single step.", cmd_si},
+  { "info", "Format: info <r>/<w>\t--Info register or watchpoint status.", cmd_info},
+  { "x", "Format: x N EXPR\t--Scan memory.", cmd_x},
+  { "p", "Format: p EXPR\t--Expression evaluation.",cmd_p},
+  { "w", "Format: w EXPR\t--Add express watchpoint.",cmd_w},
+  { "d", "Format: d N\tDelete watchpoint",cmd_d}
   /* TODO: Add more commands */
 
 };
