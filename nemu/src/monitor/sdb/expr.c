@@ -272,7 +272,6 @@ word_t eval(int p, int q, bool *success){
       case TK_DEREF: val = vaddr_read(val2,4);
       default:printf("Unknow token type\n");*success = false; return 0;
     }
-    //*success = true;
     return val;
   }
 }
