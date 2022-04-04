@@ -75,6 +75,7 @@ static int cmd_x(char *args){
     printf("Argument error, EX: x 10 $esp");
     return 0;
   }
+
   bool success;
   int n = atoi(arg1);
   paddr_t val_expr = 0x80000000;
