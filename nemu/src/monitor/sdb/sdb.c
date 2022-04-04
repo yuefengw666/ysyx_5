@@ -158,7 +158,7 @@ static struct {
   { "x", "Format: x N EXPR\t--Scan memory.", cmd_x},
   { "p", "Format: p EXPR\t--Expression evaluation.",cmd_p},
   { "w", "Format: w EXPR\t--Add express watchpoint.",cmd_w},
-  { "d", "Format: d N\tDelete watchpoint",cmd_d}
+  { "d", "Format: d N\t--Delete watchpoint",cmd_d}
   /* TODO: Add more commands */
 
 };
@@ -179,7 +179,7 @@ static int cmd_help(char *args) {
   else {
     for (i = 0; i < NR_CMD; i ++) {
       if (strcmp(arg, cmd_table[i].name) == 0) {
-        printf("%s - %s\n", cmd_table[i].name, cmd_table[i].description);
+        printf("%s \t- %s\n", cmd_table[i].name, cmd_table[i].description);
         return 0;
       }
     }
