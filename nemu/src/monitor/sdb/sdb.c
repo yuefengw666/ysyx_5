@@ -107,7 +107,7 @@ static int cmd_p(char *args){
   bool success;
   word_t val = expr(args,&success);
   if(success){
-    printf("DEC:%ld\nHEX:0x%8lx\n",val,val);
+    printf("DEC:%ld\nHEX:0x%04lx\n",val,val);
   }
   else {
     printf("expr return false\n");
