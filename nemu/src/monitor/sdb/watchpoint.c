@@ -113,8 +113,8 @@ bool scan_wp(){
     else{
       if(val_new != temp->val){
         printf("Watchpoint NO%d:%s\n",temp->NO,temp->expr);
-        printf("Old value:%ld\n",temp->val);
-        printf("New value:%ld\n",val_new);
+        printf("Old value:%ld\tHEX:%08lx\n",temp->val,temp->val);
+        printf("New value:%ld\tHEX:%08lx\n",val_new,val_new);
         changed = true;
         temp->val = val_new;
       }
