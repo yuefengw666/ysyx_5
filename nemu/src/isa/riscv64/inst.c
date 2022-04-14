@@ -101,8 +101,8 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000000 ????? ????? 110 ????? 01100 11", or     , R, R(dest) = src1 | src2 );
   //div
   INSTPAT("0000001 ????? ????? 100 ????? 01110 11", divw   , R, R(dest) = SEXT(((signed)BITS(src1,31,0))/((signed)BITS(src2,31,0)),32)) ;
-
-
+  //goldbach
+  INSTPAT("0000001 ????? ????? 110 ????? 01110 11", remw   , R, R(dest) = SEXT(((signed)BITS(src1,31,0))%((signed)BITS(src2,31,0)),32)) ;
 
   /*--------------------------------------------------------------------------------------------*/
   INSTPAT("0000000 00001 00000 000 00000 11100 11", ebreak , N, NEMUTRAP(s->pc, R(10))); // R(10) is $a0
