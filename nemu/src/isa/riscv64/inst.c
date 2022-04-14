@@ -105,6 +105,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000001 ????? ????? 110 ????? 01110 11", remw   , R, R(dest) = SEXT(((signed)BITS(src1,31,0))%((signed)BITS(src2,31,0)),32)) ;
   //if-else
   INSTPAT("??????? ????? ????? 100 ????? 11000 11", blt    , B, if((signed)src1 < (signed)src2) s->dnpc = s->pc + offset);
+  INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, R(dest) = ((signed)src1 < (signed)src2) ? 1 : 0 );
 
   /*--------------------------------------------------------------------------------------------*/
   INSTPAT("0000000 00001 00000 000 00000 11100 11", ebreak , N, NEMUTRAP(s->pc, R(10))); // R(10) is $a0
