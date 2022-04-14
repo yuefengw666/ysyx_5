@@ -106,6 +106,10 @@ static int decode_exec(Decode *s) {
   //if-else
   INSTPAT("??????? ????? ????? 100 ????? 11000 11", blt    , B, if((signed)src1 < (signed)src2) s->dnpc = s->pc + offset);
   INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt    , R, R(dest) = ((signed)src1 < (signed)src2) ? 1 : 0 );
+  //load-store
+  INSTPAT("??????? ????? ????? 001 ????? 00000 11", lh     , I, R(dest) = SEXT(Mr(src1+src2,2),16) );//
+
+
 
   /*--------------------------------------------------------------------------------------------*/
   INSTPAT("0000000 00001 00000 000 00000 11100 11", ebreak , N, NEMUTRAP(s->pc, R(10))); // R(10) is $a0
