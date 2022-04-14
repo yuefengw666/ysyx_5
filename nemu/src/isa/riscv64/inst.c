@@ -84,6 +84,7 @@ static int decode_exec(Decode *s) {
   //bubble-sort
   INSTPAT("000000? ????? ????? 001 ????? 00100 11", slli   , I, R(dest) = src1 << BITS(src2,5,0));
   INSTPAT("000000? ????? ????? 101 ????? 00100 11", srli   , I, R(dest) = src1 >> (unsigned)BITS(src2,5,0));
+  INSTPAT("0000000 ????? ????? 000 ????? 01100 11", add    , R, R(dest) = src1 + src2 );
   
 
   /*--------------------------------------------------------------------------------------------*/
