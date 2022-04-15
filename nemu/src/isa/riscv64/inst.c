@@ -121,6 +121,7 @@ static int decode_exec(Decode *s) {
   //shift
   INSTPAT("0000000 ????? ????? 101 ????? 00110 11", srliw  , I, if(BITS(src2,5,5)==0) R(dest) = SEXT(BITS((unsigned)src1 >> BITS(src2,5,0),31,0),32) );
   INSTPAT("0100000 ????? ????? 101 ????? 01110 11", sraw   , R, R(dest) = SEXT(((signed)BITS(src1,31,0) >> BITS(src2,4,0)),32) );
+  INSTPAT("0000000 ????? ????? 101 ????? 01110 11", srlw   , R, R(dest) = SEXT(((unsigned)BITS(src1,31,0) >> BITS(src2,4,0)),32) );
   
 
 
