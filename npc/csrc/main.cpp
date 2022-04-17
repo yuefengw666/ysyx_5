@@ -2,14 +2,14 @@
 #include "verilated_vcd_c.h"
 #include "Vtop.h"
 
-#define CONFIG_MSIZE = 0x0006000
-#define CONFIG_MBASE = 0x80000000
+#define CONFIG_MSIZE  0x0006000
+#define CONFIG_MBASE  0x80000000
 
-#define imm = 0
-#define rs1 = 0
-#define funt3 = 0 //addi 0
-#define rd = 1
-#define opcode = 19//addi 0010011
+#define imm  0
+#define rs1  0
+#define funt3  0 //addi 0
+#define rd  1
+#define opcode  19//addi 0010011
 
 static uint8_t mem[CONFIG_MSIZE];
 
