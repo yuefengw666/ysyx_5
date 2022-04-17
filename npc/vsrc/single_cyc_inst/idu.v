@@ -17,7 +17,7 @@ wire [11:0] imm;//31:20
 assign opcode = inst[6:0];
 assign {imm,rs1,funct3,rd,opcode} = inst;
 
-assign addi = ({funct3,opcode}==000_0010011)? 1'b1 : 1'b0;
+assign addi = ({funct3,opcode}==10'b000_0010011)? 1'b1 : 1'b0;
 assign reg_wr = addi;
 
 assign imm_I = {{52{imm[11]}},imm};
