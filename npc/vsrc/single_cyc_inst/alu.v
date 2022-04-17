@@ -1,6 +1,6 @@
 module alu(
   //input clk,
-  input rstn,
+  //input rstn,
   input [63:0] src1,
   input [63:0] imm_I,
   input addi,
