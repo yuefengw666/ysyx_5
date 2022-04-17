@@ -8,7 +8,7 @@ module alu(
   output wire [63:0] result
 );
 
-assign result = addi ? (src1 + imm_I) : result;
+assign result = addi ? (src1 + imm_I) : 0;
 /*
 always@(posedge clk)begin
   if(!rstn)begin
