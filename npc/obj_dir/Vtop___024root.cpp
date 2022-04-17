@@ -19,20 +19,33 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     // Body
     __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v0 = 0U;
     __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v1 = 0U;
-    vlSelf->pc = ((IData)(vlSelf->rstn) ? ((IData)(4U) 
-                                           + vlSelf->pc)
-                   : 0x80000000U);
+    if (vlSelf->rstn) {
+        vlSelf->pc = ((IData)(4U) + vlSelf->pc);
+        vlSelf->top__DOT__rs1 = ((IData)(vlSelf->top__DOT__addi)
+                                  ? (0x1fU & (vlSelf->inst 
+                                              >> 0xfU))
+                                  : 0U);
+        vlSelf->top__DOT__imm_I = ((IData)(vlSelf->top__DOT__addi)
+                                    ? (((- (QData)((IData)(
+                                                           (vlSelf->inst 
+                                                            >> 0x1fU)))) 
+                                        << 0xcU) | (QData)((IData)(
+                                                                   (vlSelf->inst 
+                                                                    >> 0x14U))))
+                                    : 0ULL);
+    } else {
+        vlSelf->pc = 0x80000000U;
+        vlSelf->top__DOT__rs1 = 0U;
+        vlSelf->top__DOT__imm_I = 0ULL;
+    }
     if (vlSelf->rstn) {
         if (((IData)(vlSelf->top__DOT__reg_wr) & (0U 
-                                                  != 
-                                                  (0x1fU 
-                                                   & (vlSelf->inst 
-                                                      >> 7U))))) {
+                                                  != (IData)(vlSelf->top__DOT__rd)))) {
             __Vdlyvval__top__DOT__u_reg_file__DOT__regs__v0 
                 = vlSelf->result;
             __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v0 = 1U;
             __Vdlyvdim0__top__DOT__u_reg_file__DOT__regs__v0 
-                = (0x1fU & (vlSelf->inst >> 7U));
+                = vlSelf->top__DOT__rd;
         }
     } else {
         __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v1 = 1U;
@@ -77,6 +90,11 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     }
     vlSelf->top__DOT__reg_wr = ((IData)(vlSelf->rstn) 
                                 & (IData)(vlSelf->top__DOT__addi));
+    vlSelf->top__DOT__rd = ((IData)(vlSelf->rstn) ? 
+                            ((IData)(vlSelf->top__DOT__addi)
+                              ? (0x1fU & (vlSelf->inst 
+                                          >> 7U)) : 0U)
+                             : 0U);
 }
 
 VL_INLINE_OPT void Vtop___024root___combo__TOP__2(Vtop___024root* vlSelf) {
@@ -90,12 +108,7 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__2(Vtop___024root* vlSelf) {
                                         | (IData)(vlSelf->top__DOT__u_idu__DOT__opcode)));
     vlSelf->result = ((IData)(vlSelf->top__DOT__addi)
                        ? (vlSelf->top__DOT__u_reg_file__DOT__regs
-                          [(0x1fU & (vlSelf->inst >> 0xfU))] 
-                          + (((- (QData)((IData)((vlSelf->inst 
-                                                  >> 0x1fU)))) 
-                              << 0xcU) | (QData)((IData)(
-                                                         (vlSelf->inst 
-                                                          >> 0x14U)))))
+                          [vlSelf->top__DOT__rs1] + vlSelf->top__DOT__imm_I)
                        : 0ULL);
 }
 
