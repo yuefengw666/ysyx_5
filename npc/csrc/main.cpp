@@ -77,7 +77,7 @@ int main() {
     top->inst = mread(top->pc);
   }
 	//rst
-	if(top->clk){
+	if(!top->clk){
 		if(contextp->time() < 2){
 			top->rstn = 0;
 	  }
