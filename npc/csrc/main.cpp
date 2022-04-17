@@ -68,11 +68,13 @@ int main() {
   //if(false && argc && argv && env){}
   //contextp->commandArgs(argc, argv);
   while (contextp->time() < 16  && !contextp->gotFinish()){
-  printf("top->pc: %d\n",top->pc);
   top->inst = mread(top->pc);
 	step_and_dump_wave();
   contextp->timeInc(1);
 	top->clk = !top->clk;
+  top->inst = mread(top->pc);
+  printf("top->pc: %d\n",top->pc);
+
 	//rst
 	if(!top->clk){
 		if(contextp->time() < 4){
