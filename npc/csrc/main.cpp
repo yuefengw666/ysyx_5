@@ -60,7 +60,7 @@ int main() {
 
   //if(false && argc && argv && env){}
   //contextp->commandArgs(argc, argv);
-  while (top->pc <= 8 && !contextp->gotFinish()){
+  while (contextp->time() < 60 && !contextp->gotFinish()){
   mread(top->pc);
 	step_and_dump_wave();
   contextp->timeInc(1);
