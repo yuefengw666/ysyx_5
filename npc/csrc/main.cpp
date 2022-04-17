@@ -62,20 +62,17 @@ int main() {
 
   //if(false && argc && argv && env){}
   //contextp->commandArgs(argc, argv);
-  while (contextp->time() < 10  && !contextp->gotFinish()){
+  while (contextp->time() < 16  && !contextp->gotFinish()){
   top->inst = mread(top->pc);
 	step_and_dump_wave();
   contextp->timeInc(1);
 	top->clk = !top->clk;
 	//rst
 	if(!top->clk){
-		if(contextp->time() > 1 && contextp->time() < 20 ){
+		if(contextp->time() < 4){
 			top->rstn = 0;
 	  }
-	    else if(contextp->time() > 450){
-			top->rstn = 0;
-		}	
-	    else {
+	  else {
 			top->rstn = 1;
 		}
 	}
