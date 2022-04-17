@@ -18,7 +18,7 @@ uint32_t mread(uint32_t raddr){
 }
 
 void mwrite(uint32_t waddr,uint32_t wdata){
-  *((int32_t *)&mem[waddr]) = wdata;
+  *((uint32_t *)&mem[waddr]) = wdata;
 }
 
 VerilatedContext* contextp = NULL;
@@ -60,7 +60,7 @@ int main() {
 
   //if(false && argc && argv && env){}
   //contextp->commandArgs(argc, argv);
-  while (contextp->time() < 60 && !contextp->gotFinish()){
+  while (contextp->time() < 100 && !contextp->gotFinish()){
   top->inst = mread(top->pc);
 	step_and_dump_wave();
   contextp->timeInc(1);
