@@ -31,6 +31,8 @@ pc_reg u_pc_reg(
 
 //idu
 idu u_idu(
+  .clk  (clk),
+  .rstn (rstn),
   .inst (inst),
   .rs1 (rs1),
   .rd (rd),
