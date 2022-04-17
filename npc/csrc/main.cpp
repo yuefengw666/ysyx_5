@@ -77,7 +77,7 @@ int main() {
   }
 	//rst
 	if(top->clk){
-		if(contextp->time() < 4){
+		if(contextp->time() < 2){
 			top->rstn = 0;
 	  }
 	  else {
