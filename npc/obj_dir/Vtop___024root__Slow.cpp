@@ -42,6 +42,7 @@ void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_initial\n"); );
     // Body
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
+    vlSelf->__Vclklast__TOP__rstn = vlSelf->rstn;
 }
 
 void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
