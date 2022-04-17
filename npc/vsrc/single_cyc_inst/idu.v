@@ -34,7 +34,7 @@ always@(posedge clk)begin
     rs1 <= rs1_t;
     rd <= rd_t;
     imm_I <= {{52{imm[11]}},imm};
-    add <= 1'b1
+    add <= 1'b1;
   end
   else begin
     reg_wr <= 1'b0;
