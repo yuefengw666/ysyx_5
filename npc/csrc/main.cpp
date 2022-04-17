@@ -2,7 +2,7 @@
 #include "verilated_vcd_c.h"
 #include "Vtop.h"
 
-#define CONFIG_MSIZE  256
+#define CONFIG_MSIZE  0x00600000
 #define CONFIG_MBASE  0x80000000
 
 #define imm  0
