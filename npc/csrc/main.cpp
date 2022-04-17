@@ -11,7 +11,7 @@
 #define rd  1
 #define opcode  19//addi 0010011
 
-static uint8_t mem[CONFIG_MSIZE];
+char mem[CONFIG_MSIZE];
 
 uint32_t mread(uint32_t raddr){
   return *((uint32_t *)&mem[raddr-CONFIG_MSIZE]);
@@ -69,7 +69,7 @@ int main() {
 	if(!top->clk){
 		if(contextp->time() > 1 && contextp->time() < 20 ){
 			top->rstn = 0;
-	    }
+	  }
 	    else if(contextp->time() > 450){
 			top->rstn = 0;
 		}	
