@@ -23,11 +23,11 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
                                            + vlSelf->pc)
                    : 0x80000000U);
     if (vlSelf->rstn) {
-        if (((IData)(vlSelf->top__DOT__addi) & (0U 
-                                                != 
-                                                (0x1fU 
-                                                 & (vlSelf->inst 
-                                                    >> 7U))))) {
+        if (((IData)(vlSelf->top__DOT__reg_wr) & (0U 
+                                                  != 
+                                                  (0x1fU 
+                                                   & (vlSelf->inst 
+                                                      >> 7U))))) {
             __Vdlyvval__top__DOT__u_reg_file__DOT__regs__v0 
                 = vlSelf->result;
             __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v0 = 1U;
@@ -75,6 +75,8 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__u_reg_file__DOT__regs[0x1eU] = 0ULL;
         vlSelf->top__DOT__u_reg_file__DOT__regs[0x1fU] = 0ULL;
     }
+    vlSelf->top__DOT__reg_wr = ((IData)(vlSelf->rstn) 
+                                & (IData)(vlSelf->top__DOT__addi));
 }
 
 VL_INLINE_OPT void Vtop___024root___combo__TOP__2(Vtop___024root* vlSelf) {

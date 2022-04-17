@@ -26,6 +26,7 @@ VL_MODULE(Vtop___024root) {
     VL_OUT64(result,63,0);
 
     // LOCAL SIGNALS
+    CData/*0:0*/ top__DOT__reg_wr;
     CData/*0:0*/ top__DOT__addi;
     CData/*6:0*/ top__DOT__u_idu__DOT__opcode;
     VlUnpacked<QData/*63:0*/, 32> top__DOT__u_reg_file__DOT__regs;
