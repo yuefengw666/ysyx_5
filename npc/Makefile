@@ -51,7 +51,7 @@ run: $(VSRC) $(CSRC)
 
 	@echo
 	@echo "-- VERILATE ----------------"
-	$(VERILATOR) $(VERILATOR_FLAGS) $^
+	$(VERILATOR) $(VERILATOR_FLAGS) -top $(TOP_DESIGN_NAME) -f $^
 
 	#@echo
 	#@echo "-- BUILD -------------------"

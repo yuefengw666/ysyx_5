@@ -29,7 +29,7 @@ class Vreg_file VL_NOT_FINAL {
     // propagate new values into/out from the Verilated model.
     VL_IN8(&clk,0,0);
     VL_IN8(&rstn,0,0);
-    VL_IN64(&inst,32,0);
+    VL_IN(&inst,31,0);
     VL_OUT(&pc,31,0);
     VL_OUT64(&result,63,0);
 

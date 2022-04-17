@@ -12,7 +12,7 @@ VL_INLINE_OPT void Vreg_file___024root___combo__TOP__1(Vreg_file___024root* vlSe
     Vreg_file__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vreg_file___024root___combo__TOP__1\n"); );
     // Body
-    vlSelf->top__DOT__u_idu__DOT__opcode = (0x7fU & (IData)(vlSelf->inst));
+    vlSelf->top__DOT__u_idu__DOT__opcode = (0x7fU & vlSelf->inst);
 }
 
 VL_INLINE_OPT void Vreg_file___024root___sequent__TOP__3(Vreg_file___024root* vlSelf) {
@@ -20,19 +20,51 @@ VL_INLINE_OPT void Vreg_file___024root___sequent__TOP__3(Vreg_file___024root* vl
     Vreg_file__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vreg_file___024root___sequent__TOP__3\n"); );
     // Variables
+    CData/*4:0*/ __Vdlyvdim0__top__DOT__u_reg_file__DOT__regs__v0;
     CData/*0:0*/ __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v0;
+    CData/*0:0*/ __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v1;
+    QData/*63:0*/ __Vdlyvval__top__DOT__u_reg_file__DOT__regs__v0;
     // Body
     __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v0 = 0U;
-    if ((1U & (~ (IData)(vlSelf->rstn)))) {
-        __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v0 = 1U;
-    }
-    if ((1U & (~ (IData)(vlSelf->rstn)))) {
-        vlSelf->result = 0ULL;
-    }
+    __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v1 = 0U;
     vlSelf->pc = ((IData)(vlSelf->rstn) ? ((IData)(4U) 
                                            + vlSelf->pc)
                    : 0x80000000U);
+    if (vlSelf->rstn) {
+        if (((IData)(vlSelf->top__DOT__addi) & (0U 
+                                                != 
+                                                (0x1fU 
+                                                 & (vlSelf->inst 
+                                                    >> 7U))))) {
+            __Vdlyvval__top__DOT__u_reg_file__DOT__regs__v0 
+                = vlSelf->result;
+            __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v0 = 1U;
+            __Vdlyvdim0__top__DOT__u_reg_file__DOT__regs__v0 
+                = (0x1fU & (vlSelf->inst >> 7U));
+        }
+    } else {
+        __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v1 = 1U;
+    }
+    if (vlSelf->rstn) {
+        if (vlSelf->top__DOT__addi) {
+            vlSelf->result = (vlSelf->top__DOT__u_reg_file__DOT__regs
+                              [(0x1fU & (vlSelf->inst 
+                                         >> 0xfU))] 
+                              + (((- (QData)((IData)(
+                                                     (vlSelf->inst 
+                                                      >> 0x1fU)))) 
+                                  << 0xcU) | (QData)((IData)(
+                                                             (vlSelf->inst 
+                                                              >> 0x14U)))));
+        }
+    } else {
+        vlSelf->result = 0ULL;
+    }
     if (__Vdlyvset__top__DOT__u_reg_file__DOT__regs__v0) {
+        vlSelf->top__DOT__u_reg_file__DOT__regs[__Vdlyvdim0__top__DOT__u_reg_file__DOT__regs__v0] 
+            = __Vdlyvval__top__DOT__u_reg_file__DOT__regs__v0;
+    }
+    if (__Vdlyvset__top__DOT__u_reg_file__DOT__regs__v1) {
         vlSelf->top__DOT__u_reg_file__DOT__regs[0U] = 0ULL;
         vlSelf->top__DOT__u_reg_file__DOT__regs[1U] = 0ULL;
         vlSelf->top__DOT__u_reg_file__DOT__regs[2U] = 0ULL;
@@ -68,6 +100,16 @@ VL_INLINE_OPT void Vreg_file___024root___sequent__TOP__3(Vreg_file___024root* vl
     }
 }
 
+VL_INLINE_OPT void Vreg_file___024root___combo__TOP__4(Vreg_file___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vreg_file__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vreg_file___024root___combo__TOP__4\n"); );
+    // Body
+    vlSelf->top__DOT__addi = (0x13U == ((0x380U & (vlSelf->inst 
+                                                   >> 5U)) 
+                                        | (IData)(vlSelf->top__DOT__u_idu__DOT__opcode)));
+}
+
 void Vreg_file___024root___eval(Vreg_file___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vreg_file__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -78,6 +120,7 @@ void Vreg_file___024root___eval(Vreg_file___024root* vlSelf) {
         Vreg_file___024root___sequent__TOP__3(vlSelf);
         vlSelf->__Vm_traceActivity[1U] = 1U;
     }
+    Vreg_file___024root___combo__TOP__4(vlSelf);
     // Final
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
 }
@@ -112,7 +155,5 @@ void Vreg_file___024root___eval_debug_assertions(Vreg_file___024root* vlSelf) {
         Verilated::overWidthError("clk");}
     if (VL_UNLIKELY((vlSelf->rstn & 0xfeU))) {
         Verilated::overWidthError("rstn");}
-    if (VL_UNLIKELY((vlSelf->inst & 0ULL))) {
-        Verilated::overWidthError("inst");}
 }
 #endif  // VL_DEBUG

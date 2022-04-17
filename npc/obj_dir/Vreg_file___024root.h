@@ -21,11 +21,12 @@ VL_MODULE(Vreg_file___024root) {
     // PORTS
     VL_IN8(clk,0,0);
     VL_IN8(rstn,0,0);
+    VL_IN(inst,31,0);
     VL_OUT(pc,31,0);
-    VL_IN64(inst,32,0);
     VL_OUT64(result,63,0);
 
     // LOCAL SIGNALS
+    CData/*0:0*/ top__DOT__addi;
     CData/*6:0*/ top__DOT__u_idu__DOT__opcode;
     VlUnpacked<QData/*63:0*/, 32> top__DOT__u_reg_file__DOT__regs;
 
