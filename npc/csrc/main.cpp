@@ -15,7 +15,7 @@ char mem[CONFIG_MSIZE];
 
 int32_t mread(uint32_t raddr){
   uint32_t ra = raddr - CONFIG_MBASE;
-  printf("read mem address : %x",ra);
+  printf("read mem address : %x\n",ra);
   return *((int32_t *)&mem[rd]);
 }
 
