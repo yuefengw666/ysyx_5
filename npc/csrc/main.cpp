@@ -11,10 +11,10 @@
 #define rd  1
 #define opcode  19//addi 0010011
 
-int mem[CONFIG_MSIZE];
+char mem[CONFIG_MSIZE];
 
 uint32_t mread(uint32_t raddr){
-  return *((uint32_t *)&mem[raddr-CONFIG_MSIZE]);
+  return *((uint32_t *)&mem[raddr-CONFIG_MBASE]);
 }
 
 void mwrite(uint32_t waddr,uint32_t wdata){
