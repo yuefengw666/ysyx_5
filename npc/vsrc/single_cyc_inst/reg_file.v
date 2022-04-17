@@ -3,11 +3,11 @@ module reg_file(
   input rstn,
   input [4:0] r1_rd_addr,//r1 read address
   
-  input reg_wr;
+  input reg_wr,
   input [4:0] wr_addr,//write address
   input [63:0] wr_data,//write data
 
-  output reg [63:0] r1_rd_data
+  output [63:0] r1_rd_data
 );
 
 parameter REGS_INIT = 64'h0000_0000_0000_0000;
