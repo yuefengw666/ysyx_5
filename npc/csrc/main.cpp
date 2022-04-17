@@ -2,7 +2,7 @@
 #include "verilated_vcd_c.h"
 #include "Vtop.h"
 
-#define CONFIG_MSIZE  0x0006000
+#define CONFIG_MSIZE  256
 #define CONFIG_MBASE  0x80000000
 
 #define imm  0
@@ -11,7 +11,7 @@
 #define rd  1
 #define opcode  19//addi 0010011
 
-char mem[CONFIG_MSIZE]={};
+char mem[CONFIG_MSIZE];
 
 uint32_t mread(uint32_t raddr){
   return *((uint32_t *)&mem[raddr-CONFIG_MSIZE]);
