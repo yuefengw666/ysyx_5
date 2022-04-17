@@ -14,11 +14,11 @@
 static uint8_t mem[CONFIG_MSIZE];
 
 uint32_t mread(uint32_t raddr){
-  return *((uint32_t *)&M[raddr-CONFIG_MSIZE]);
+  return *((uint32_t *)&mem[raddr-CONFIG_MSIZE]);
 }
 
 void mwrite(uint32_t waddr,uint32_t wdata){
-  *((int32_t *)&M[waddr]) = wdata;
+  *((int32_t *)&mem[waddr]) = wdata;
 }
 
 VerilatedContext* contextp = NULL;
