@@ -13,12 +13,14 @@
 
 char mem[CONFIG_MSIZE];
 
-uint32_t mread(uint32_t raddr){
-  return *((uint32_t *)&mem[raddr-CONFIG_MBASE]);
+int32_t mread(uint32_t raddr){
+  uint32_t ra = raddr - CONFIG_MBASE;
+  printf("read mem address : %x",ra);
+  return *((int32_t *)&mem[rd]);
 }
 
-void mwrite(uint32_t waddr,uint32_t wdata){
-  *((uint32_t *)&mem[waddr]) = wdata;
+void mwrite(uint32_t waddr,int32_t wdata){
+  *((int32_t *)&mem[waddr]) = wdata;
 }
 
 VerilatedContext* contextp = NULL;
