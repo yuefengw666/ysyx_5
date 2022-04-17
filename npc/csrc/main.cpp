@@ -73,7 +73,7 @@ int main() {
   contextp->timeInc(1);
   top->clk = !top->clk;
   if(!top->clk){
-    if(contextp->time() > 2)
+    if(contextp->time() > 1)
     top->inst = mread(top->pc);
   }
 	//rst
