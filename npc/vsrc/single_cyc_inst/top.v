@@ -54,8 +54,8 @@ reg_file u_reg_file(
 
 //alu
 alu u_alu(
-  .clk (clk),
-  .rstn (rstn),
+  //.clk (clk),
+  //.rstn (rstn),
   .src1 (src1),
   .imm_I (imm_I),
   .addi (addi),
