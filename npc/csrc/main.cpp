@@ -11,7 +11,7 @@
 #define rd  1
 #define opcode  19//addi 0010011
 
-static char mem[CONFIG_MSIZE];
+static uint32_t mem[CONFIG_MSIZE] = {0};
 
 uint32_t mread(uint32_t raddr){
   return *((uint32_t *)&mem[raddr-CONFIG_MSIZE]);
