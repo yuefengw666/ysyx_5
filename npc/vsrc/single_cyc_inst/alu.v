@@ -5,7 +5,7 @@ module alu(
   input [63:0] imm_I,
   input addi,
   //output reg_wr,
-  output [63:0] result
+  output wire [63:0] result
 );
 
 assign result = addi ? (src1 + imm_I) : result;
