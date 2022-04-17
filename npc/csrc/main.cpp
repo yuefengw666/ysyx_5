@@ -1,6 +1,6 @@
 #include "verilated.h"
 #include "verilated_vcd_c.h"
-#include "obj_dir/Vtop.h"
+#include "Vtop.h"
 
 #define CONFIG_MSIZE = 0x0006000
 #define CONFIG_MBASE = 0x80000000
