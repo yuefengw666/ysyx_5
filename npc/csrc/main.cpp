@@ -61,9 +61,9 @@ int main() {
   top->clk = 0;
   top->rstn=0;
   //top->inst = 0;
-  mwrite(0,(imm<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode);//imm = 0 , rs1 =0 ,  rd = 1 //inst0:0+ reg0 = reg1  reg1:0
-  mwrite(4,((imm+1)<<20) | ((rs1+1)<<15) | (funt3<<12) | (rd<<7) | opcode); //inst1:1+reg1=reg1   reg1:1
-  mwrite(8,((imm+2)<<20) | ((rs1+1)<<15) | (funt3<<12) | (rd<<7) | opcode); //inst1:2+reg1=reg1   reg1:3
+  mwrite(0,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode);//imm = 1 , rs1 =0 ,  rd = 1 //inst0: 1+ reg0 = reg1  reg1:1
+  mwrite(4,((imm+2)<<20) | ((rs1+1)<<15) | (funt3<<12) | (rd<<7) | opcode); //inst1:reg1 = 2+ reg1   reg1:3
+  mwrite(8,((imm+3)<<20) | ((rs1+1)<<15) | (funt3<<12) | (rd<<7) | opcode); //inst1:reg1 = 3+ reg1   reg1:6
 
   //if(false && argc && argv && env){}
   //contextp->commandArgs(argc, argv);
