@@ -9,9 +9,9 @@ module idu(
 );
 
 wire [6:0] opcode;//6:0
-wire [4:0] rd;//11:7
+//wire [4:0] rd;//11:7
 wire [2:0] funct3;//14:12
-wire [4:0] rs1;//19:15
+//wire [4:0] rs1;//19:15
 wire [11:0] imm;//31:20
 
 assign opcode = inst[6:0];
