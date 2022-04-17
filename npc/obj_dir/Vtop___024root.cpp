@@ -7,18 +7,10 @@
 
 //==========
 
-VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
+VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___combo__TOP__1\n"); );
-    // Body
-    vlSelf->top__DOT__u_idu__DOT__opcode = (0x7fU & vlSelf->inst);
-}
-
-VL_INLINE_OPT void Vtop___024root___sequent__TOP__3(Vtop___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___sequent__TOP__3\n"); );
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___sequent__TOP__1\n"); );
     // Variables
     CData/*4:0*/ __Vdlyvdim0__top__DOT__u_reg_file__DOT__regs__v0;
     CData/*0:0*/ __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v0;
@@ -44,21 +36,6 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__3(Vtop___024root* vlSelf) {
         }
     } else {
         __Vdlyvset__top__DOT__u_reg_file__DOT__regs__v1 = 1U;
-    }
-    if (vlSelf->rstn) {
-        if (vlSelf->top__DOT__addi) {
-            vlSelf->result = (vlSelf->top__DOT__u_reg_file__DOT__regs
-                              [(0x1fU & (vlSelf->inst 
-                                         >> 0xfU))] 
-                              + (((- (QData)((IData)(
-                                                     (vlSelf->inst 
-                                                      >> 0x1fU)))) 
-                                  << 0xcU) | (QData)((IData)(
-                                                             (vlSelf->inst 
-                                                              >> 0x14U)))));
-        }
-    } else {
-        vlSelf->result = 0ULL;
     }
     if (__Vdlyvset__top__DOT__u_reg_file__DOT__regs__v0) {
         vlSelf->top__DOT__u_reg_file__DOT__regs[__Vdlyvdim0__top__DOT__u_reg_file__DOT__regs__v0] 
@@ -100,14 +77,24 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__3(Vtop___024root* vlSelf) {
     }
 }
 
-VL_INLINE_OPT void Vtop___024root___combo__TOP__4(Vtop___024root* vlSelf) {
+VL_INLINE_OPT void Vtop___024root___combo__TOP__2(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___combo__TOP__4\n"); );
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___combo__TOP__2\n"); );
     // Body
+    vlSelf->top__DOT__u_idu__DOT__opcode = (0x7fU & vlSelf->inst);
     vlSelf->top__DOT__addi = (0x13U == ((0x380U & (vlSelf->inst 
                                                    >> 5U)) 
                                         | (IData)(vlSelf->top__DOT__u_idu__DOT__opcode)));
+    vlSelf->result = ((IData)(vlSelf->top__DOT__addi)
+                       ? (vlSelf->top__DOT__u_reg_file__DOT__regs
+                          [(0x1fU & (vlSelf->inst >> 0xfU))] 
+                          + (((- (QData)((IData)((vlSelf->inst 
+                                                  >> 0x1fU)))) 
+                              << 0xcU) | (QData)((IData)(
+                                                         (vlSelf->inst 
+                                                          >> 0x14U)))))
+                       : vlSelf->result);
 }
 
 void Vtop___024root___eval(Vtop___024root* vlSelf) {
@@ -115,12 +102,11 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval\n"); );
     // Body
-    Vtop___024root___combo__TOP__1(vlSelf);
     if (((IData)(vlSelf->clk) & (~ (IData)(vlSelf->__Vclklast__TOP__clk)))) {
-        Vtop___024root___sequent__TOP__3(vlSelf);
+        Vtop___024root___sequent__TOP__1(vlSelf);
         vlSelf->__Vm_traceActivity[1U] = 1U;
     }
-    Vtop___024root___combo__TOP__4(vlSelf);
+    Vtop___024root___combo__TOP__2(vlSelf);
     // Final
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
 }
@@ -142,6 +128,10 @@ VL_INLINE_OPT QData Vtop___024root___change_request_1(Vtop___024root* vlSelf) {
     // Body
     // Change detection
     QData __req = false;  // Logically a bool
+    __req |= ((vlSelf->result ^ vlSelf->__Vchglast__TOP__result));
+    VL_DEBUG_IF( if(__req && ((vlSelf->result ^ vlSelf->__Vchglast__TOP__result))) VL_DBG_MSGF("        CHANGE: /home/yfwu/ysyx-workbench/npc/vsrc/single_cyc_inst/top.v:6: result\n"); );
+    // Final
+    vlSelf->__Vchglast__TOP__result = vlSelf->result;
     return __req;
 }
 
