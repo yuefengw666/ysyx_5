@@ -4,7 +4,7 @@ module pc_reg(
   output reg [31:0] pc
 );
 
-always@(posedge clk)begin
+always@(posedge clk or negedge rstn)begin
   if(!rstn)begin
     pc <= 32'h8000_0000;
   end
