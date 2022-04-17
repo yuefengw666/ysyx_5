@@ -61,7 +61,7 @@ int main() {
   //if(false && argc && argv && env){}
   //contextp->commandArgs(argc, argv);
   while (contextp->time() < 10  && !contextp->gotFinish()){
-  //top->inst = mread(top->pc);
+  top->inst = mread(top->pc);
 	step_and_dump_wave();
   contextp->timeInc(1);
 	top->clk = !top->clk;
