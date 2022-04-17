@@ -24,10 +24,10 @@ always@(posedge clk)begin
   if(!rstn)begin
     reg_wr <= 1'b0;
   end
-  else if (addi)begin
+  else if(addi)begin
     reg_wr <= 1'b1;
   end
-  else if begin
+  else begin
     reg_wr <= 1'b0;
   end
 end
