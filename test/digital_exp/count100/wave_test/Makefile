@@ -31,7 +31,7 @@ VERILATOR_FLAGS += --build
 # Check SystemVerilog assertions
 VERILATOR_FLAGS += --assert
 #timescale
-#VERILATOR_FLAGS += --timescale-override 1ns/1ps
+#VERILATOR_FLAGS += --timescale 1ns/1ps
 # Generate coverage analysis
 # VERILATOR_FLAGS += --coverage
 # Run Verilator in debug mode
