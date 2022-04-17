@@ -60,6 +60,7 @@ int main() {
   sim_init();
   top->clk = 0;
   top->rstn=0;
+	step_and_dump_wave();
   //top->inst = 0;
   mwrite(0,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode);//imm = 1 , rs1 =0 ,  rd = 1 //inst0: 1+ reg0 = reg1  reg1:1
   mwrite(4,((imm+2)<<20) | ((rs1+1)<<15) | (funt3<<12) | (rd<<7) | opcode); //inst1:reg1 = 2+ reg1   reg1:3
