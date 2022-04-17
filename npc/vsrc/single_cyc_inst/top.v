@@ -1,11 +1,12 @@
 module top(
   input clk,
   input rstn,
-  input inst,
+  input [32:0] inst,
+  output wire [31:0] pc,
   output wire [63:0] result
 );
 
-wire [31:0] pc;
+//wire [31:0] pc;
 
 //idu
 wire [4:0] rs1;

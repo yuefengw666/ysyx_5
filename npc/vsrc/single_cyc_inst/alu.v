@@ -5,7 +5,7 @@ module alu(
   input [63:0] imm_I,
   input addi,
   //output reg_wr,
-  output [64:0] result
+  output reg [63:0] result
 );
 
 always@(posedge clk)begin
