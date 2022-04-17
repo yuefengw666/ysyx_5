@@ -72,12 +72,12 @@ int main() {
 	step_and_dump_wave();
   top->clk = !top->clk;
   if(top->clk){
-    if(contextp->time() > 2)
+    if(contextp->time() > 3)
     top->inst = mread(top->pc);
   }
 	//rst
 	if(top->clk){
-		if(contextp->time() < 1){
+		if(contextp->time() < 2){
 			top->rstn = 0;
 	  }
 	  else {
