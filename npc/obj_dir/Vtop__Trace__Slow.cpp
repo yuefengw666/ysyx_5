@@ -65,8 +65,6 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         {int i; for (i=0; i<32; i++) {
                 tracep->declQuad(c+8+i*2,"top u_reg_file regs", true,(i+0), 63,0);}}
         tracep->declBit(c+72,"top u_reg_file wr_en", false,-1);
-        tracep->declBit(c+73,"top u_alu clk", false,-1);
-        tracep->declBit(c+74,"top u_alu rstn", false,-1);
         tracep->declQuad(c+6,"top u_alu src1", false,-1, 63,0);
         tracep->declQuad(c+3,"top u_alu imm_I", false,-1, 63,0);
         tracep->declBit(c+79,"top u_alu addi", false,-1);

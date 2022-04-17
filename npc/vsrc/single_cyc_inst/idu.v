@@ -7,7 +7,7 @@ module idu(
   output reg [4:0] rd,
   output reg [63:0] imm_I,
   output reg reg_wr,
-  output addi
+  output reg add
 );
 
 wire [6:0] opcode;//6:0
@@ -34,12 +34,14 @@ always@(posedge clk)begin
     rs1 <= rs1_t;
     rd <= rd_t;
     imm_I <= {{52{imm[11]}},imm};
+    add <= 1'b1
   end
   else begin
     reg_wr <= 1'b0;
     rs1 <= 'b0;
     rd <= 'b0;
     imm_I <= 'b0;
+    add <= 1'b0;
   end
 end
 //assign reg_wr = addi;

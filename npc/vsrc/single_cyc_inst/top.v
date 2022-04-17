@@ -14,7 +14,7 @@ wire [4:0] rs1;
 wire [4:0] rd;
 wire [63:0] imm_I;
 wire reg_wr;
-wire addi;
+wire add;
 
 //reg_file
 wire [63:0] src1;
@@ -38,7 +38,7 @@ idu u_idu(
   .rd (rd),
   .imm_I (imm_I),
   .reg_wr (reg_wr),
-  .addi (addi)
+  .add (add)
 );
 
 //reg_file
@@ -58,7 +58,7 @@ alu u_alu(
   //.rstn (rstn),
   .src1 (src1),
   .imm_I (imm_I),
-  .addi (addi),
+  .add (add),
   .result (result)
 );
 

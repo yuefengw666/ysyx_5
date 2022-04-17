@@ -3,12 +3,12 @@ module alu(
   //input rstn,
   input [63:0] src1,
   input [63:0] imm_I,
-  input addi,
+  input add,
   //output reg_wr,
   output  [63:0] result
 );
 
-assign result = addi ? (src1 + imm_I) : 0;
+assign result = add ? (src1 + imm_I) : 0;
 
 /*always@(posedge clk)begin
   if(!rstn)begin
