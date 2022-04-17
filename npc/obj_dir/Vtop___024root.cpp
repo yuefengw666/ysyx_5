@@ -94,7 +94,7 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__2(Vtop___024root* vlSelf) {
                               << 0xcU) | (QData)((IData)(
                                                          (vlSelf->inst 
                                                           >> 0x14U)))))
-                       : vlSelf->result);
+                       : 0ULL);
 }
 
 void Vtop___024root___eval(Vtop___024root* vlSelf) {
@@ -128,10 +128,6 @@ VL_INLINE_OPT QData Vtop___024root___change_request_1(Vtop___024root* vlSelf) {
     // Body
     // Change detection
     QData __req = false;  // Logically a bool
-    __req |= ((vlSelf->result ^ vlSelf->__Vchglast__TOP__result));
-    VL_DEBUG_IF( if(__req && ((vlSelf->result ^ vlSelf->__Vchglast__TOP__result))) VL_DBG_MSGF("        CHANGE: /home/yfwu/ysyx-workbench/npc/vsrc/single_cyc_inst/top.v:6: result\n"); );
-    // Final
-    vlSelf->__Vchglast__TOP__result = vlSelf->result;
     return __req;
 }
 

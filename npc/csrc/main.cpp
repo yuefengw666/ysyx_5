@@ -71,7 +71,7 @@ int main() {
   contextp->timeInc(1);
 	step_and_dump_wave();
   top->clk = !top->clk;
-  if(!top->clk){
+  if(top->clk){
     if(contextp->time() > 2)
     top->inst = mread(top->pc);
   }
