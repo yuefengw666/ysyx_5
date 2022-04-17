@@ -71,9 +71,10 @@ int main() {
   contextp->timeInc(1);
 	step_and_dump_wave();
   top->clk = !top->clk;
-  top->inst = mread(top->pc);
-  printf("top->pc: %d\n",top->pc);
-
+  if(!top->clk){
+    if(contextp->() > 4)
+    top->inst = mread(top->pc);
+  }
 	//rst
 	if(!top->clk){
 		if(contextp->time() < 4){
