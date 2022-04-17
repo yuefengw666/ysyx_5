@@ -25,6 +25,23 @@ void Vtop___024root::__Vconfigure(Vtop__Syms* _vlSymsp, bool first) {
 Vtop___024root::~Vtop___024root() {
 }
 
+void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___settle__TOP__2\n"); );
+    // Body
+    vlSelf->top__DOT__u_idu__DOT__opcode = (0x7fU & vlSelf->inst);
+    vlSelf->result = ((IData)(vlSelf->top__DOT__add)
+                       ? (vlSelf->top__DOT__u_reg_file__DOT__regs
+                          [vlSelf->top__DOT__rs1] + vlSelf->top__DOT__imm_I)
+                       : 0ULL);
+    vlSelf->top__DOT__u_idu__DOT__addi = (0x13U == 
+                                          ((0x380U 
+                                            & (vlSelf->inst 
+                                               >> 5U)) 
+                                           | (IData)(vlSelf->top__DOT__u_idu__DOT__opcode)));
+}
+
 void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -33,14 +50,12 @@ void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
 }
 
-void Vtop___024root___combo__TOP__2(Vtop___024root* vlSelf);
-
 void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_settle\n"); );
     // Body
-    Vtop___024root___combo__TOP__2(vlSelf);
+    Vtop___024root___settle__TOP__2(vlSelf);
 }
 
 void Vtop___024root___final(Vtop___024root* vlSelf) {
@@ -63,8 +78,9 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__rd = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__imm_I = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__reg_wr = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__addi = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__add = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_idu__DOT__opcode = VL_RAND_RESET_I(7);
+    vlSelf->top__DOT__u_idu__DOT__addi = VL_RAND_RESET_I(1);
     for (int __Vi0=0; __Vi0<32; ++__Vi0) {
         vlSelf->top__DOT__u_reg_file__DOT__regs[__Vi0] = VL_RAND_RESET_Q(64);
     }

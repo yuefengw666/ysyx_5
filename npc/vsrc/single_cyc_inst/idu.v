@@ -17,6 +17,7 @@ wire [2:0] funct3;//14:12
 wire [11:0] imm;//31:20
 wire [4:0] rs1_t;
 wire [4:0] rd_t;
+wire addi;
 
 assign opcode = inst[6:0];
 assign {imm,rs1_t,funct3,rd_t,opcode} = inst;
