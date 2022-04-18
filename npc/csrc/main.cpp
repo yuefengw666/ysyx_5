@@ -4,7 +4,7 @@
 #include "svdpi.h"
 #include "Vtop__Dpi.h"
 
-#define CONFIG_MSIZE  1024
+#define CONFIG_MSIZE  2048
 #define CONFIG_MBASE  0x80000000
 
 #define imm  0
