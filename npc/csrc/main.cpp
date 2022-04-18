@@ -39,6 +39,7 @@ void ebreak_en(){
   delete top;
   delete contextp;
   tfp->close();
+  exit(0);
 }
 
 void sim_init(){
@@ -115,7 +116,7 @@ int main() {
 */
   }
 
-  //sim_exit();
+  sim_exit();
   return 0;
 }
 
