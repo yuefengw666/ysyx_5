@@ -32,7 +32,7 @@ VerilatedVcdC* tfp = NULL;
 
 static Vtop* top;
 
-void ebreak_en(){
+int ebreak_en(){
   contextp->timeInc(1);
   top->eval();
   tfp->dump(contextp->time());
