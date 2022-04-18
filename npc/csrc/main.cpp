@@ -85,6 +85,7 @@ int main() {
     if(contextp->time() > 1)
     printf("top->pc : %x\n",top->pc);
     top->inst = mread(top->pc);
+    printf("top->inst: %x\n",top->inst);
   }
 	//rst
 	if(!top->clk){
