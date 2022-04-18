@@ -34,15 +34,14 @@ VerilatedVcdC* tfp = NULL;
 static Vtop* top;
 
 void ebreak_en(){
-  printf("********************ebreak");
+  printf("********************ebreak\n");
   contextp->timeInc(1);
-  //top->eval();
+  top->eval();
   tfp->dump(contextp->time());
   delete top;
   delete contextp;
   tfp->close();
-  return;
-  //exit(0);
+  exit(0);
 }
 
 void sim_init(){
@@ -119,7 +118,7 @@ int main() {
 */
   }
 
-  //sim_exit();
+  sim_exit();
   return 0;
 }
 
