@@ -24,7 +24,7 @@ assign opcode = inst[6:0];
 assign {imm,rs1_t,funct3,rd_t,opcode} = inst;
 //addi
 assign addi = ({funct3,opcode}==10'b000_0010011)? 1'b1 : 1'b0;
-assign ebreak = ({imm,funct3,opcode} == 22'b1000_1110011) : 1'b1 : 1'b0;
+assign ebreak = ({imm,funct3,opcode} == 22'b1000_1110011) ? 1'b1 : 1'b0;
 
 always@(posedge clk)begin
   if(!rstn)begin
