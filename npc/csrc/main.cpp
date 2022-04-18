@@ -119,7 +119,7 @@ int main() {
 */
   }
 
-  sim_exit();
+  //sim_exit();
   return 0;
 }
 
