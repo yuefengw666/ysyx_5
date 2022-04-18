@@ -18,9 +18,9 @@
 static uint8_t mem[CONFIG_MSIZE];
 
 int32_t mread(uint32_t raddr){
-  printf("pc:%x\n",raddr);
+  //printf("pc:%x\n",raddr);
   uint32_t ra = raddr - CONFIG_MBASE;
-  printf("read mem address : %x\n",ra);
+  //printf("read mem address : %x\n",ra);
   return *((int32_t *)&mem[ra]);
 }
 
@@ -86,9 +86,9 @@ int main() {
   top->clk = !top->clk;
   if(!top->clk){
     if(contextp->time() > 1)
-    printf("top->pc : %x\n",top->pc);
+    //printf("top->pc : %x\n",top->pc);
     top->inst = mread(top->pc);
-    printf("top->inst: %x\n",top->inst);
+    //printf("top->inst: %x\n",top->inst);
   }
 	//rst
 	if(!top->clk){
@@ -99,7 +99,7 @@ int main() {
 			top->rstn = 1;
 		}
 	}
-  
+  printf("r1:%d\n",top.reg_file->regs[1])
 	/*//en
 	if(!top->clk){
 		if(contextp->time() < 10 || contextp->time()>480){
