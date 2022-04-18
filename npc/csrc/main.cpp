@@ -1,6 +1,8 @@
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include "Vtop.h"
+#include "svdpi.h"
+#include "Vtop__Dpi.h"
 
 #define CONFIG_MSIZE  256
 #define CONFIG_MBASE  0x80000000
@@ -9,8 +11,8 @@
 #define rs1  0
 #define funt3  0 //addi 0
 #define rd  1
-#define opcode  19//addi 0010011
-
+#define opcode_addi  19//addi 0010011
+#define opcode_ebreak 115//ebreak 1110011
 static uint8_t mem[CONFIG_MSIZE];
 
 int32_t mread(uint32_t raddr){
@@ -23,6 +25,15 @@ int32_t mread(uint32_t raddr){
 void mwrite(uint32_t waddr,int32_t wdata){
   *((int32_t *)&mem[waddr]) = wdata;
 }
+
+void ebreak_en(
+  contextp->timeInc(1);
+  top->eval();
+  tfp->dump(contextp->time());
+  delete top;
+  delete contextp;
+  tfp->close();
+);
 
 VerilatedContext* contextp = NULL;
 VerilatedVcdC* tfp = NULL;
@@ -58,10 +69,11 @@ int main() {
   top->rstn=0;
 	step_and_dump_wave();
   //top->inst = 0;
-  mwrite(0,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode);//imm = 1 , rs1 =0 ,  rd = 1 //inst0: 1+ reg0 = reg1  reg1:1
-  mwrite(4,((imm+2)<<20) | ((rs1+1)<<15) | (funt3<<12) | (rd<<7) | opcode); //inst1:reg1 = 2+ reg1   reg1:3
-  mwrite(8,((imm+3)<<20) | ((rs1+1)<<15) | (funt3<<12) | (rd<<7) | opcode); //inst1:reg1 = 3+ reg1   reg1:6
-
+  mwrite(0,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);//imm = 1 , rs1 =0 ,  rd = 1 //inst0: 1+ reg0 = reg1  reg1:1
+  mwrite(4,((imm+2)<<20) | ((rs1+1)<<15) | (funt3<<12) | (rd<<7) | opcode_addi); //inst1:reg1 = 2+ reg1   reg1:3
+  mwrite(8,((imm+3)<<20) | ((rs1+1)<<15) | (funt3<<12) | (rd<<7) | opcode_addi); //inst1:reg1 = 3+ reg1   reg1:6
+  mwrite(12,((imm+1)<<20) | ((rs1)<<15) | (funt3<<12) | (rd-1<<7) | opcode_ebreak); //inst1:reg1 = 3+ reg1   reg1:6
+  
   //if(false && argc && argv && env){}
   //contextp->commandArgs(argc, argv);
   while (contextp->time() < 16  && !contextp->gotFinish()){

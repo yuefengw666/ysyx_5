@@ -1,3 +1,4 @@
+import "DPI-C" function void ebreak_en();
 module alu(
   //input clk,
   //input rstn,
@@ -9,6 +10,10 @@ module alu(
 );
 
 assign result = add ? (src1 + imm_I) : 0;
+
+always@(*)begin
+  if(ebreak) ebreak_en();
+end
 
 /*always@(posedge clk)begin
   if(!rstn)begin
