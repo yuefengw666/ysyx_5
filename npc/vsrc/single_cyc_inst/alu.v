@@ -1,6 +1,6 @@
 import "DPI-C" function void ebreak_en();
 module alu(
-  //input clk,
+  input clk,
   //input rstn,
   input [63:0] src1,
   input [63:0] imm_I,
