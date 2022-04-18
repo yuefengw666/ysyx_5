@@ -14,9 +14,9 @@
 char mem[CONFIG_MSIZE];
 
 int32_t mread(uint32_t raddr){
-  printf("pc:%x\n",raddr);
+  //printf("pc:%x\n",raddr);
   uint32_t ra = raddr - CONFIG_MBASE;
-  printf("read mem address : %x\n",ra);
+  //printf("read mem address : %x\n",ra);
   return *((int32_t *)&mem[ra]);
 }
 
@@ -25,7 +25,6 @@ void mwrite(uint32_t waddr,int32_t wdata){
   printf("mem data 0:%x\n",mem[0]);
   printf("mem data 4:%x\n",mem[1]);
   printf("mem data 8:%x\n",mem[2]);
-
 }
 
 VerilatedContext* contextp = NULL;
@@ -72,7 +71,7 @@ int main() {
 	step_and_dump_wave();
   contextp->timeInc(1);
   top->clk = !top->clk;
-  if(!top->clk){
+  if(top->clk){
     if(contextp->time() > 1)
     top->inst = mread(top->pc);
   }
