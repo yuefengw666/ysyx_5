@@ -36,7 +36,7 @@ static Vtop* top;
 void ebreak_en(){
   printf("********************ebreak");
   contextp->timeInc(1);
-  top->eval();
+  //top->eval();
   tfp->dump(contextp->time());
   delete top;
   delete contextp;
