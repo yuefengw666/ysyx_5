@@ -5,6 +5,7 @@ module alu(
   input [63:0] src1,
   input [63:0] imm_I,
   input add,
+  input ebreak,
   //output reg_wr,
   output  [63:0] result
 );

@@ -38,7 +38,8 @@ idu u_idu(
   .rd (rd),
   .imm_I (imm_I),
   .reg_wr (reg_wr),
-  .add (add)
+  .add (add),
+  .ebreak (ebreak)
 );
 
 //reg_file
