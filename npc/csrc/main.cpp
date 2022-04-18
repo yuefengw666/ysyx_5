@@ -22,9 +22,6 @@ int32_t mread(uint32_t raddr){
 
 void mwrite(uint32_t waddr,int32_t wdata){
   *((int32_t *)&mem[waddr]) = wdata;
-  printf("mem data 0:%x\n",mem[0]);
-  printf("mem data 4:%x\n",mem[1]);
-  printf("mem data 8:%x\n",mem[2]);
 }
 
 VerilatedContext* contextp = NULL;
