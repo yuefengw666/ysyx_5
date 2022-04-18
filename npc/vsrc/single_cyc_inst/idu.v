@@ -8,7 +8,7 @@ module idu(
   output reg [63:0] imm_I,
   output reg reg_wr,
   output reg add,
-  output wire ebreak
+  output reg ebreak
 );
 
 wire [6:0] opcode;//6:0
@@ -19,12 +19,14 @@ wire [11:0] imm;//31:20
 wire [4:0] rs1_t;
 wire [4:0] rd_t;
 wire addi;
+wire ebreak_t;
 
 assign opcode = inst[6:0];
 assign {imm,rs1_t,funct3,rd_t,opcode} = inst;
 //addi
 assign addi = ({funct3,opcode}==10'b000_0010011)? 1'b1 : 1'b0;
-assign ebreak = ({imm,funct3,opcode} == 22'b1000_1110011) ? 1'b1 : 1'b0;
+assign ebreak_t = ({imm,funct3,opcode} == 22'b1000_1110011) ? 1'b1 : 1'b0;
+
 
 always@(posedge clk)begin
   if(!rstn)begin
@@ -46,6 +48,18 @@ always@(posedge clk)begin
     rd <= 'b0;
     imm_I <= 'b0;
     add <= 1'b0;
+  end
+end
+
+always@(posedge clk)begin
+  if(!rstn)begin
+    ebreak <= 1'b0;
+  end
+  else if(ebreak_t)begin
+    ebreak <= 1'b1;
+  end
+  else begin
+    ebreak <= 1'b0;
   end
 end
 //assign reg_wr = addi;
