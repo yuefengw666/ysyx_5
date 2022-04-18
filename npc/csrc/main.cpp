@@ -99,7 +99,7 @@ int main() {
 			top->rstn = 1;
 		}
 	}
-  printf("r1:%d\n",top.reg_file->regs[1])
+  printf("r1:%d\n",top->regs[1])
 	/*//en
 	if(!top->clk){
 		if(contextp->time() < 10 || contextp->time()>480){
