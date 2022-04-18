@@ -5,7 +5,11 @@
 #include "Vtop___024root.h"
 #include "Vtop__Syms.h"
 
+#include "verilated_dpi.h"
+
 //==========
+
+void Vtop___024unit____Vdpiimwrap_ebreak_en_TOP____024unit();
 
 VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -13,6 +17,11 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___combo__TOP__1\n"); );
     // Body
     vlSelf->top__DOT__u_idu__DOT__opcode = (0x7fU & vlSelf->inst);
+    if ((0x473U == ((0x3ffc00U & (vlSelf->inst >> 0xaU)) 
+                    | ((0x380U & (vlSelf->inst >> 5U)) 
+                       | (IData)(vlSelf->top__DOT__u_idu__DOT__opcode))))) {
+        Vtop___024unit____Vdpiimwrap_ebreak_en_TOP____024unit();
+    }
 }
 
 VL_INLINE_OPT void Vtop___024root___sequent__TOP__3(Vtop___024root* vlSelf) {

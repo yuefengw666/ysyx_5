@@ -5,6 +5,8 @@
 #include "Vtop___024root.h"
 #include "Vtop__Syms.h"
 
+#include "verilated_dpi.h"
+
 //==========
 
 
@@ -25,6 +27,8 @@ void Vtop___024root::__Vconfigure(Vtop__Syms* _vlSymsp, bool first) {
 Vtop___024root::~Vtop___024root() {
 }
 
+void Vtop___024unit____Vdpiimwrap_ebreak_en_TOP____024unit();
+
 void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -35,6 +39,11 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
                        ? (vlSelf->top__DOT__u_reg_file__DOT__regs
                           [vlSelf->top__DOT__rs1] + vlSelf->top__DOT__imm_I)
                        : 0ULL);
+    if ((0x473U == ((0x3ffc00U & (vlSelf->inst >> 0xaU)) 
+                    | ((0x380U & (vlSelf->inst >> 5U)) 
+                       | (IData)(vlSelf->top__DOT__u_idu__DOT__opcode))))) {
+        Vtop___024unit____Vdpiimwrap_ebreak_en_TOP____024unit();
+    }
     vlSelf->top__DOT__u_idu__DOT__addi = (0x13U == 
                                           ((0x380U 
                                             & (vlSelf->inst 

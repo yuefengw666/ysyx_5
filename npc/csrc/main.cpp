@@ -26,6 +26,11 @@ void mwrite(uint32_t waddr,int32_t wdata){
   *((int32_t *)&mem[waddr]) = wdata;
 }
 
+VerilatedContext* contextp = NULL;
+VerilatedVcdC* tfp = NULL;
+
+static Vtop* top;
+
 void ebreak_en(
   contextp->timeInc(1);
   top->eval();
@@ -34,11 +39,6 @@ void ebreak_en(
   delete contextp;
   tfp->close();
 );
-
-VerilatedContext* contextp = NULL;
-VerilatedVcdC* tfp = NULL;
-
-static Vtop* top;
 
 void sim_init(){
   contextp = new VerilatedContext;
