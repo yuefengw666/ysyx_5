@@ -27,21 +27,16 @@ void Vtop___024root::__Vconfigure(Vtop__Syms* _vlSymsp, bool first) {
 Vtop___024root::~Vtop___024root() {
 }
 
-void Vtop___024unit____Vdpiimwrap_ebreak_en_TOP____024unit();
-
 void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___settle__TOP__2\n"); );
     // Body
-    vlSelf->top__DOT__u_idu__DOT__opcode = (0x7fU & vlSelf->inst);
-    if (vlSelf->top__DOT__ebreak) {
-        Vtop___024unit____Vdpiimwrap_ebreak_en_TOP____024unit();
-    }
     vlSelf->result = ((IData)(vlSelf->top__DOT__add)
                        ? (vlSelf->top__DOT__u_reg_file__DOT__regs
                           [vlSelf->top__DOT__rs1] + vlSelf->top__DOT__imm_I)
                        : 0ULL);
+    vlSelf->top__DOT__u_idu__DOT__opcode = (0x7fU & vlSelf->inst);
     vlSelf->top__DOT__u_idu__DOT__addi = (0x13U == 
                                           ((0x380U 
                                             & (vlSelf->inst 
