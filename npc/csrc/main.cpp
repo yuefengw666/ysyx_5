@@ -31,14 +31,14 @@ VerilatedVcdC* tfp = NULL;
 
 static Vtop* top;
 
-void ebreak_en(
+void ebreak_en{
   contextp->timeInc(1);
   top->eval();
   tfp->dump(contextp->time());
   delete top;
   delete contextp;
   tfp->close();
-)
+}
 
 void sim_init(){
   contextp = new VerilatedContext;
