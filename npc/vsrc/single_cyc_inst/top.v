@@ -15,7 +15,7 @@ wire [4:0] rd;
 wire [63:0] imm_I;
 wire reg_wr;
 wire add;
-
+wire ebreak;
 //reg_file
 wire [63:0] src1;
 
@@ -59,7 +59,8 @@ alu u_alu(
   .src1 (src1),
   .imm_I (imm_I),
   .add (add),
-  .result (result)
+  .result (result),
+  .ebreak (ebreak)
 );
 
 endmodule

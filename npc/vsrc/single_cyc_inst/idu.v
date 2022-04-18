@@ -7,8 +7,8 @@ module idu(
   output reg [4:0] rd,
   output reg [63:0] imm_I,
   output reg reg_wr,
-  output reg add
-  output wire ebreak;
+  output reg add,
+  output wire ebreak
 );
 
 wire [6:0] opcode;//6:0
