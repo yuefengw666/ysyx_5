@@ -3,6 +3,7 @@
 #include "Vtop.h"
 #include "svdpi.h"
 #include "Vtop__Dpi.h"
+#include <stdlib>
 
 #define CONFIG_MSIZE  0x06000000
 #define CONFIG_MBASE  0x80000000
