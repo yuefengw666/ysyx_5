@@ -35,15 +35,13 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___settle__TOP__2\n"); );
     // Body
     vlSelf->top__DOT__u_idu__DOT__opcode = (0x7fU & vlSelf->inst);
+    if (vlSelf->top__DOT__ebreak) {
+        Vtop___024unit____Vdpiimwrap_ebreak_en_TOP____024unit();
+    }
     vlSelf->result = ((IData)(vlSelf->top__DOT__add)
                        ? (vlSelf->top__DOT__u_reg_file__DOT__regs
                           [vlSelf->top__DOT__rs1] + vlSelf->top__DOT__imm_I)
                        : 0ULL);
-    if ((0x473U == ((0x3ffc00U & (vlSelf->inst >> 0xaU)) 
-                    | ((0x380U & (vlSelf->inst >> 5U)) 
-                       | (IData)(vlSelf->top__DOT__u_idu__DOT__opcode))))) {
-        Vtop___024unit____Vdpiimwrap_ebreak_en_TOP____024unit();
-    }
     vlSelf->top__DOT__u_idu__DOT__addi = (0x13U == 
                                           ((0x380U 
                                             & (vlSelf->inst 
@@ -88,6 +86,7 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__imm_I = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__reg_wr = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__add = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__ebreak = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_idu__DOT__opcode = VL_RAND_RESET_I(7);
     vlSelf->top__DOT__u_idu__DOT__addi = VL_RAND_RESET_I(1);
     for (int __Vi0=0; __Vi0<32; ++__Vi0) {
