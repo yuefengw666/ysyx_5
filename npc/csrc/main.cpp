@@ -14,7 +14,7 @@
 #define opcode_addi  19//addi 0010011
 #define opcode_ebreak 115//ebreak 1110011
 
-static uint8_t mem[CONFIG_MSIZE];
+char mem[CONFIG_MSIZE];
 
 int32_t mread(uint32_t raddr){
   printf("pc:%x\n",raddr);
