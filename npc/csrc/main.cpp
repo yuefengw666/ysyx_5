@@ -39,7 +39,8 @@ void ebreak_en(){
   delete top;
   delete contextp;
   tfp->close();
-  exit(0);
+  return 0;
+  //exit(0);
 }
 
 void sim_init(){
