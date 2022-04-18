@@ -4,7 +4,7 @@
 #include "svdpi.h"
 #include "Vtop__Dpi.h"
 
-#define CONFIG_MSIZE  256
+#define CONFIG_MSIZE  1024
 #define CONFIG_MBASE  0x80000000
 
 #define imm  0
@@ -13,6 +13,7 @@
 #define rd  1
 #define opcode_addi  19//addi 0010011
 #define opcode_ebreak 115//ebreak 1110011
+
 static uint8_t mem[CONFIG_MSIZE];
 
 int32_t mread(uint32_t raddr){
