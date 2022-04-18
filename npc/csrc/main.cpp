@@ -38,7 +38,7 @@ void ebreak_en(
   delete top;
   delete contextp;
   tfp->close();
-);
+)
 
 void sim_init(){
   contextp = new VerilatedContext;
