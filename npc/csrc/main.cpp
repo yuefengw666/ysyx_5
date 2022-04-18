@@ -32,15 +32,16 @@ VerilatedVcdC* tfp = NULL;
 
 static Vtop* top;
 
-int ebreak_en(){
+void ebreak_en(){
+  printf("********************ebreak");
   contextp->timeInc(1);
   top->eval();
   tfp->dump(contextp->time());
   delete top;
   delete contextp;
   tfp->close();
-  return 0;
-  //exit(0);
+  //return 0;
+  exit(0);
 }
 
 void sim_init(){
