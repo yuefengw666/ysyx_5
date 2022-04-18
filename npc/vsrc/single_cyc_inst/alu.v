@@ -12,7 +12,7 @@ module alu(
 
 assign result = add ? (src1 + imm_I) : 0;
 
-always@(*)begin
+always@(posedge clk)begin
   if(ebreak) ebreak_en();
 end
 
