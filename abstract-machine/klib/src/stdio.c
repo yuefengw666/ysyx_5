@@ -10,7 +10,7 @@ int printf(const char *fmt, ...) {
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-  panic("Not implemented");
+  //panic("Not implemented");
 }
 
 int sprintf(char *out, const char *fmt, ...) {
