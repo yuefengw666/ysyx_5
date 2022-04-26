@@ -5,8 +5,8 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
-int ulong2a(char *out, int *pn, int size, int num);
-int long2a(char *out, int *pn, int size, int num);
+int ulong2a(char *out, int *pn, int size, unsigned long num);
+int long2a(char *out, int *pn, int size, long num);
 int str2a(char *out, int *pn, int size, const char *str);
 int vsnprintf(char *out, size_t size, const char *fmt, va_list ap);
 
@@ -73,7 +73,7 @@ int vsnprintf(char *out, size_t size, const char *fmt, va_list ap) {
 }
 
 
-int ulong2a(char *out, int *pn, int size, int num){
+int ulong2a(char *out, int *pn, int size, unsigned long num){
   int n = *pn;
   int i = n;
 
@@ -93,7 +93,7 @@ int ulong2a(char *out, int *pn, int size, int num){
   return *pn;
 }
 
-int long2a(char *out, int *pn, int size, int num){
+int long2a(char *out, int *pn, int size, long num){
   int n = *pn;
   
   if(n < size-1 && num < 0){
