@@ -58,7 +58,7 @@ int vsnprintf(char *out, size_t size, const char *fmt, va_list ap) {
         long2a(out, &n, size, va_arg(ap,int));
         break;
       case 's':
-        str2a(out, &n, size, va_arg(ap,char *));
+        str2a(out, &n, size, va_arg(ap,char*));
         break;
       //case 'x':
       default:
