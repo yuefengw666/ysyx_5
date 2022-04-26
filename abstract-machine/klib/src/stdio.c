@@ -61,9 +61,9 @@ int vsnprintf(char *out, size_t size, const char *fmt, va_list ap) {
         str2a(out, &n, size, va_arg(ap,char*));
         break;
       //case 'x':
-      default:
-        return -1;
-        break;
+      //default:
+      //  return -1;
+      //  break;
     }
     fmt++;
   }
@@ -75,7 +75,7 @@ int vsnprintf(char *out, size_t size, const char *fmt, va_list ap) {
 
 int ulong2a(char *out, int *pn, int size, unsigned long num){
   int n = *pn;
-  //int i = n;
+  int i = n;
 
   while(n < size-1){
     out[n++] = num % 10 + '0';
@@ -85,11 +85,11 @@ int ulong2a(char *out, int *pn, int size, unsigned long num){
   
   *pn = n--;
 
-  /*while(i<n){
+  while(i<n){
     char c = out[i];
     out[i++] = out[n];
     out[n--] = c;
-  }*/
+  }
   return *pn;
 }
 
