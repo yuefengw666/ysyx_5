@@ -61,9 +61,9 @@ int vsnprintf(char *out, size_t size, const char *fmt, va_list ap) {
         str2a(out, &n, size, va_arg(ap,char*));
         break;
       //case 'x':
-      //default:
-      //  return -1;
-      //  break;
+      default:
+        return -1;
+        break;
     }
     fmt++;
   }
