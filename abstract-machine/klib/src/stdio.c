@@ -53,6 +53,7 @@ int vsnprintf(char *out, size_t size, const char *fmt, va_list ap) {
     switch(*fmt){
       case 'c':
         out[n++] = va_arg(ap,int);
+        printf("buf:%s",out);
         break;
       case 'd':
         long2a(out, &n, size, va_arg(ap,int));
