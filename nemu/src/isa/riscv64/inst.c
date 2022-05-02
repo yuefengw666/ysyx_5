@@ -127,6 +127,10 @@ static int decode_exec(Decode *s) {
 
   //string
   INSTPAT("??????? ????? ????? 111 ????? 11000 11", bgeu   , B, if((unsigned)src1 >= (unsigned)src2) s->dnpc = s->pc + offset);
+  
+  //hello-str
+  INSTPAT("0000001 ????? ????? 111 ????? 01100 11", remu   , R, R(dest) = (unsigned)src1 % (unsigned)src2 );//?
+
 
 
   /*--------------------------------------------------------------------------------------------*/
