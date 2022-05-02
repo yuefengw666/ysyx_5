@@ -5,9 +5,9 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
-int ulong2a(char *out, int *pn, int size, unsigned long num);
-int long2a(char *out, int *pn, int size, long num);
-int str2a(char *out, int *pn, int size, const char *str);
+int ulong2a(char *out, int *pn, size_t size, unsigned long num);
+int long2a(char *out, int *pn, size_t size, long num);
+int str2a(char *out, int *pn, size_t size, const char *str);
 int vsnprintf(char *out, size_t size, const char *fmt, va_list ap);
 
 int printf(const char *fmt, ...) {
@@ -16,7 +16,7 @@ int printf(const char *fmt, ...) {
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
   //panic("Not implemented");
-  return vsnprintf(out, (unsigned)-1, fmt, ap);
+  return vsnprintf(out, -1, fmt, ap);
 }
 
 int sprintf(char *out, const char *fmt, ...) {
@@ -73,7 +73,7 @@ int vsnprintf(char *out, size_t size, const char *fmt, va_list ap) {
 }
 
 
-int ulong2a(char *out, int *pn, int size, unsigned long num){
+int ulong2a(char *out, int *pn, size_t size, unsigned long num){
   int n = *pn;
   int i = n;
 
@@ -93,7 +93,7 @@ int ulong2a(char *out, int *pn, int size, unsigned long num){
   return *pn;
 }
 
-int long2a(char *out, int *pn, int size, long num){
+int long2a(char *out, int *pn, size_t size, long num){
   int n = *pn;
   
   if(n < size-1 && num < 0){
@@ -105,7 +105,7 @@ int long2a(char *out, int *pn, int size, long num){
   return ulong2a(out, pn, size, num);
 }
 
-int str2a(char *out, int *pn, int size, const char *str){
+int str2a(char *out, int *pn, size_t size, const char *str){
   int n = *pn;
   while(n < size -1 && *str){
     out[n++] = *str++;
