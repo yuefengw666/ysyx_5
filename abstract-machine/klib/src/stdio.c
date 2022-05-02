@@ -16,7 +16,7 @@ int printf(const char *fmt, ...) {
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
   //panic("Not implemented");
-  return vsnprintf(out, 999999, fmt, ap);
+  return vsnprintf(out, -1, fmt, ap);
 }
 
 int sprintf(char *out, const char *fmt, ...) {
