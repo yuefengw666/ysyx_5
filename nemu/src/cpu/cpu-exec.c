@@ -24,13 +24,15 @@ typedef struct
 
 int ringbuf_int(RINGBUF *ringbuf, char (*bufptr)[128], unsigned int size){
   printf("111\n");
-  ringbuf->buf = bufptr;
+  //ringbuf->buf = bufptr;
   //memset(ringbuf->buf,0,IRB_LENGTH);
   printf("222\n");
   ringbuf->size = size;
   printf("after size\n");
   ringbuf->head = 0;
   ringbuf->tail = 0;
+  ringbuf->buf = bufptr;
+
   return 0;
 }
 /*
