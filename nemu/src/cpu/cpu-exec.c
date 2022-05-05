@@ -22,9 +22,10 @@ typedef struct
   unsigned int tail;
 }RINGBUF;
 
-int ringbuf_int(RINGBUF *ringbuf, char (*bufptr)[128], unsigned size){
+int ringbuf_int(RINGBUF *ringbuf, /*char (*bufptr)[128],*/ unsigned size){
   printf("111\n");
-  ringbuf->buf = bufptr;
+  //ringbuf->buf = bufptr;
+  memset(ringbuf->buf,0,IRB_LENGTH);
   printf("222\n");
   ringbuf->size = size;
   ringbuf->head = 0;
@@ -61,7 +62,7 @@ void ringbuf_display(RINGBUF *ringbuf){
   return;
 }
 
-char iringbuf[IRB_SIZE][IRB_LENGTH];
+//char iringbuf[IRB_SIZE][IRB_LENGTH];
 RINGBUF *iring;
 
 CPU_state cpu = {};
@@ -154,7 +155,7 @@ void cpu_exec(uint64_t n) {
 
   uint64_t timer_start = get_time();
   printf("error befor ringbuf_int!\n");
-  ringbuf_int(iring,iringbuf,IRB_SIZE);
+  ringbuf_int(iring,IRB_SIZE);
   execute(n);
  //add some inst after bad inst;
   uint64_t timer_end = get_time();
