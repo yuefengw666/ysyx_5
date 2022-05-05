@@ -22,7 +22,7 @@ typedef struct
   unsigned int tail;
 }RINGBUF;
 
-int ringbuf_int(RINGBUF *ringbuf, char (*bufptr)[], unsigned size){
+int ringbuf_int(RINGBUF *ringbuf, char (*bufptr)[128], unsigned size){
   ringbuf->buf = bufptr;
   ringbuf->size = size;
   ringbuf->head = 0;
