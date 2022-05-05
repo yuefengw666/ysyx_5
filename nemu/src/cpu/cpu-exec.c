@@ -25,7 +25,7 @@ typedef struct
 int ringbuf_int(RINGBUF *ringbuf, /*char (*bufptr)[128],*/ unsigned int size){
   printf("111\n");
   //ringbuf->buf = bufptr;
-  //memset(ringbuf->buf,0,IRB_LENGTH);
+  memset(ringbuf->buf,0,IRB_LENGTH);
   printf("222\n");
   ringbuf->size = size;
   printf("after size\n");
