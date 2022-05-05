@@ -73,7 +73,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { 
     log_write("%s\n", _this->logbuf);
-    printf("%s\n",_this->logbuf);
+    printf("%d\n",_this->logbuf[1]);
     //printf("error!\n"); 
     //ringbuf_push(iring,_this->logbuf);
   }//add some inst befer bad inst
