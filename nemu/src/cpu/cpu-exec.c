@@ -156,6 +156,7 @@ void cpu_exec(uint64_t n) {
   uint64_t timer_start = get_time();
   printf("error befor ringbuf_int!\n");
   ringbuf_int(iring,IRB_SIZE);
+  printf("after ringbuf_int\n");
   execute(n);
  //add some inst after bad inst;
   uint64_t timer_end = get_time();
