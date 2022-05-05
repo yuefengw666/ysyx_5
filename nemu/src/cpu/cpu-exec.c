@@ -22,12 +22,12 @@ typedef struct
   unsigned int tail;
 }RINGBUF;
 
-int ringbuf_int(RINGBUF *ringbuf, char (*bufptr)[128], unsigned int size){
+int ringbuf_int(RINGBUF *ringbuf, char (*bufptr)[128], unsigned int ibr_size){
   printf("111\n");
-  //ringbuf->buf = bufptr;
+  ringbuf->buf = bufptr;
   //memset(ringbuf->buf,0,IRB_LENGTH);
   printf("222\n");
-  ringbuf->size = size;
+  ringbuf->size = ibr_size;
   printf("after size\n");
   ringbuf->head = 0;
   ringbuf->tail = 0;
