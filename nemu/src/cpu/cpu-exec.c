@@ -65,7 +65,7 @@ void ringbuf_display(RINGBUF *ringbuf){
   return;
 }
 
-char iringbuf[IRB_SIZE][IRB_LENGTH];
+char iringbuf[IRB_SIZE][IRB_LENGTH]={};
 RINGBUF *iring;
 
 CPU_state cpu = {};
