@@ -12,6 +12,8 @@
  */
 #define MAX_INST_TO_PRINT 10
 
+#define IRB_SIZE 128
+#define IRB_LENGTH 128
 typedef struct 
 {
   char *buf;
@@ -19,22 +21,23 @@ typedef struct
   unsigned int head;
   unsigned int tail;
 }RINGBUF;
-/*
-int ringbuf_int(RINGBUF *ringbuf, int *bufptr, unsigned size){
+
+int ringbuf_int(RINGBUF *ringbuf, char *bufptr, unsigned size){
   ringbuf->buf = bufptr;
   ringbuf->size = size;
   ringbuf->head = 0;
   ringbuf->tail = 0;
   return 0;
 }
-
+/*
 int ringbuf_free(RINGBUF *ringbuf){
   free(ringbuf->buf);
   return 0;
 }
 */
 int ringbuf_push(RINGBUF *ringbuf, char *str_in){
-  ringbuf->buf[ringbuf->tail] = *str_in;
+  ringbuf->buf += snprintf(ringbuf->buf, IRB_LENGTH, "%s", str_in);
+  //strncpy(ringbuf->buf[ringbuf->tail], str_in, IRB_LENGTH);
   ringbuf->tail = (ringbuf->tail+1) % ringbuf->size;
   return 0;
 }
@@ -56,7 +59,6 @@ void ringbuf_display(RINGBUF *ringbuf){
   return;
 }
 
-#define IRB_SIZE 128
 char iringbuf[IRB_SIZE];
 RINGBUF *iring;
 
@@ -148,7 +150,7 @@ void cpu_exec(uint64_t n) {
   }
 
   uint64_t timer_start = get_time();
-
+  ringbuf_int(iring,iringbuf,IRB_SIZE);
   execute(n);
  //add some inst after bad inst;
   uint64_t timer_end = get_time();
