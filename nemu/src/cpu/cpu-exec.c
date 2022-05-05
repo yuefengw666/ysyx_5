@@ -16,13 +16,13 @@
 #define IRB_LENGTH 128
 typedef struct 
 {
-  char *buf;
+  char (*buf)[128];
   unsigned int size;
   unsigned int head;
   unsigned int tail;
 }RINGBUF;
 
-int ringbuf_int(RINGBUF *ringbuf, char *bufptr, unsigned size){
+int ringbuf_int(RINGBUF *ringbuf, char (*bufptr)[], unsigned size){
   ringbuf->buf = bufptr;
   ringbuf->size = size;
   ringbuf->head = 0;
@@ -36,8 +36,8 @@ int ringbuf_free(RINGBUF *ringbuf){
 }
 */
 int ringbuf_push(RINGBUF *ringbuf, char *str_in){
-  ringbuf->buf += snprintf(ringbuf->buf, IRB_LENGTH, "%s", str_in);
-  //strncpy(ringbuf->buf[ringbuf->tail], str_in, IRB_LENGTH);
+  //ringbuf->buf += snprintf(ringbuf->buf, IRB_LENGTH, "%s", str_in);
+  memcpy(ringbuf->buf[ringbuf->tail], str_in, IRB_LENGTH);
   ringbuf->tail = (ringbuf->tail+1) % ringbuf->size;
   return 0;
 }
@@ -53,13 +53,13 @@ void ringbuf_display(RINGBUF *ringbuf){
   unsigned size = ringbuf->size;
 
   while(head != tail){
-    printf("ringbuf:%s\n",&ringbuf->buf[head]);
+    printf("ringbuf:%s\n",ringbuf->buf[head]);
     head = (head + 1) % size;
   }
   return;
 }
 
-char iringbuf[IRB_SIZE];
+char iringbuf[IRB_SIZE][IRB_LENGTH];
 RINGBUF *iring;
 
 CPU_state cpu = {};
@@ -73,9 +73,9 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { 
     log_write("%s\n", _this->logbuf);
-    printf("%d\n",_this->logbuf[1]);
+    //printf("%d\n",_this->logbuf[1]);
     //printf("error!\n"); 
-    //ringbuf_push(iring,_this->logbuf);
+    ringbuf_push(iring,_this->logbuf);
   }//add some inst befer bad inst
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
@@ -151,7 +151,7 @@ void cpu_exec(uint64_t n) {
   }
 
   uint64_t timer_start = get_time();
-  //ringbuf_int(iring,iringbuf,IRB_SIZE);
+  ringbuf_int(iring,iringbuf,IRB_SIZE);
   execute(n);
  //add some inst after bad inst;
   uint64_t timer_end = get_time();
@@ -161,7 +161,7 @@ void cpu_exec(uint64_t n) {
     case NEMU_RUNNING: nemu_state.state = NEMU_STOP; break;
 
     case NEMU_END: case NEMU_ABORT:
-      //ringbuf_display(iring);
+      ringbuf_display(iring);
       Log("nemu: %s at pc = " FMT_WORD,
           (nemu_state.state == NEMU_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :
            (nemu_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
