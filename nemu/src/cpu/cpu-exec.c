@@ -31,7 +31,7 @@ int ringbuf_int(RINGBUF *ringbuf, char (*bufptr)[128], unsigned int size){
   printf("after size\n");
   ringbuf->head = 0;
   ringbuf->tail = 0;
-  ringbuf->buf = bufptr;
+  //ringbuf->buf = bufptr;
 
   return 0;
 }
