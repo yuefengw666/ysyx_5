@@ -16,6 +16,7 @@
 #define IRB_SIZE 16
 #define IRB_LENGTH 128
 
+#ifdef CONFIG_ITRACE
 char iringbuf[IRB_SIZE][IRB_LENGTH];
 //unsigned int head=0;
 unsigned int tail=0;
@@ -45,66 +46,9 @@ static void iringbuf_display(){
       else printf("\t%s\n",iringbuf[k]);
     }
   }
-  /*for(int i=0; i<IRB_SIZE; i++){
-    if((i + 1)==error_inst_pos) printf("error-->iringbuf:%s\n",iringbuf[i]);
-    else printf("iringbuf:%s\n",iringbuf[i]);
-  }*/
 } 
-/*typedef struct 
-{
-  char (*buf)[128];
-  unsigned int size;
-  unsigned int head;
-  unsigned int tail;
-}RINGBUF;
+#endif
 
-int ringbuf_int(RINGBUF *ringbuf, char (*bufptr)[128], unsigned int ibr_size){
-  printf("111\n");
-  ringbuf->buf = bufptr;
-  //memset(ringbuf->buf,0,IRB_LENGTH);
-  printf("222\n");
-  ringbuf->size = ibr_size;
-  printf("after size\n");
-  ringbuf->head = 0;
-  ringbuf->tail = 0;
-  //ringbuf->buf = bufptr;
-
-  return 0;
-}
-
-int ringbuf_free(RINGBUF *ringbuf){
-  free(ringbuf->buf);
-  return 0;
-}
-
-int ringbuf_push(RINGBUF *ringbuf, char *str_in){
-  //ringbuf->buf += snprintf(ringbuf->buf, IRB_LENGTH, "%s", str_in);
-  memcpy(ringbuf->buf[ringbuf->tail], str_in, IRB_LENGTH);
-  ringbuf->tail = (ringbuf->tail+1) % ringbuf->size;
-  return 0;
-}
-
-int ringbuf_poll(RINGBUF *ringbuf, char str_out){
-  str_out;
-}
-*/
-/*
-void ringbuf_display(RINGBUF *ringbuf){
-  unsigned head = ringbuf->head;
-  unsigned tail = ringbuf->tail;
-  unsigned size = ringbuf->size;
-
-  while(head != tail){
-    printf("ringbuf:%s\n",ringbuf->buf[head]);
-    head = (head + 1) % size;
-  }
-  return;
-}*/
-/*
-char iringbuf[IRB_SIZE][IRB_LENGTH]={};
-RINGBUF ir, *iring;
-iring = &ir;
-*/
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
@@ -157,6 +101,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
 #endif
 }
 
+#ifdef CONFIG_ITRACE
 //Parse the instruction after the error instruction.
 static void parse_more_inst(Decode *s, vaddr_t pc){
   s->pc = pc;
@@ -164,7 +109,6 @@ static void parse_more_inst(Decode *s, vaddr_t pc){
   isa_exec_once(s);
   //s->isa.inst.val = inst_fetch(&s->snpc, 4);
   cpu.pc = s->dnpc;
-#ifdef CONFIG_ITRACE
   char *p = s->logbuf;
   p += snprintf(p, sizeof(s->logbuf), FMT_WORD ":", s->pc);
   int ilen = s->snpc - s->pc;
@@ -185,8 +129,8 @@ static void parse_more_inst(Decode *s, vaddr_t pc){
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, ilen);
   iringbuf_wr(s->logbuf);
   nemu_state.state  = NEMU_ABORT;
-#endif
 }
+#endif
 
 
 static void execute(uint64_t n) {
@@ -195,6 +139,7 @@ static void execute(uint64_t n) {
     exec_once(&s, cpu.pc);
     g_nr_guest_inst ++;
     trace_and_difftest(&s, cpu.pc);
+    #ifdef CONFIG_ITRACE
     if(nemu_state.state  == NEMU_ABORT){
       parse_more_inst(&s,cpu.pc);
       //cpu.pc += 4;
@@ -205,6 +150,7 @@ static void execute(uint64_t n) {
       parse_more_inst(&s,cpu.pc);
       //parse_more_inst(&s,cpu.pc);
     }
+    #endif
     if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
   }
@@ -243,7 +189,10 @@ void cpu_exec(uint64_t n) {
 
   switch (nemu_state.state) {
     case NEMU_RUNNING: nemu_state.state = NEMU_STOP; break;
-    case NEMU_ABORT:iringbuf_display();
+    case NEMU_ABORT:
+    #ifdef CONFIG_ITRACE
+      iringbuf_display();
+    #endif
     case NEMU_END:
       Log("nemu: %s at pc = " FMT_WORD,
           (nemu_state.state == NEMU_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :
