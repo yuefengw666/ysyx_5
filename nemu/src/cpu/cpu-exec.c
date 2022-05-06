@@ -29,10 +29,26 @@ static void iringbuf_wr(char *data_wr){
 }
 
 static void iringbuf_display(){
-  for(int i=0; i<IRB_SIZE; i++){
+  if(tail <= IRB_SIZE){
+    for(int i=0; i<=tail; i++){
+    if((i + 1)==error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[i]);
+    else printf("iringbuf:%s\n",iringbuf[i]);
+    }
+  }
+  else {
+    for(int j=tail%IRB_SIZE+1;j<IRB_SIZE;j++){
+    if((j + 1)==error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[j]);
+    else printf("iringbuf:%s\n",iringbuf[j]);
+    }
+    for(int k=0; k<tail%IRB_SIZE; k++){
+    if((k + 1)==error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[k]);
+    else printf("iringbuf:%s\n",iringbuf[k]);
+    }
+  }
+  /*for(int i=0; i<IRB_SIZE; i++){
     if((i + 1)==error_inst_pos) printf("error-->iringbuf:%s\n",iringbuf[i]);
     else printf("iringbuf:%s\n",iringbuf[i]);
-  }
+  }*/
 } 
 /*typedef struct 
 {
