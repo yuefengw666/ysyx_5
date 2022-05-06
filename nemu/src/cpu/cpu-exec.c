@@ -19,10 +19,10 @@ char iringbuf[IRB_SIZE][IRB_LENGTH];
 //unsigned int head=0;
 long tail=0;
 
-static void iringbuf_wr(char *data_wr, unsigned int size){
-  long wr_pos = tail % size;
+static void iringbuf_wr(char *data_wr){
+  //long wr_pos = tail % size;
   printf("tail:%ld\n",tail);
-  strncpy(iringbuf[wr_pos], data_wr, IRB_LENGTH);
+  strncpy(iringbuf[tail%IRB_SIZE], data_wr, IRB_LENGTH);
   tail++;
 }
 
@@ -97,7 +97,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { 
     log_write("%s\n", _this->logbuf);
-    iringbuf_wr(_this->logbuf, IRB_LENGTH);
+    iringbuf_wr(_this->logbuf);
   }//add some inst befer bad inst
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
