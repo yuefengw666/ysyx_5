@@ -197,11 +197,11 @@ static void execute(uint64_t n) {
     if(nemu_state.state  == NEMU_ABORT){
       parse_more_inst(&s,cpu.pc);
       //cpu.pc += 4;
-      parse_more_inst(&s,cpu.pc);
+      //parse_more_inst(&s,cpu.pc);
       //cpu.pc += 4;
-      parse_more_inst(&s,cpu.pc);
+      //parse_more_inst(&s,cpu.pc);
       //cpu.pc += 4;
-      parse_more_inst(&s,cpu.pc);
+      //parse_more_inst(&s,cpu.pc);
       //parse_more_inst(&s,cpu.pc);
     }
     if (nemu_state.state != NEMU_RUNNING) break;
