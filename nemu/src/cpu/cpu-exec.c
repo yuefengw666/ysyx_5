@@ -23,7 +23,7 @@ int error_inst_pos = -1;
 
 static void iringbuf_wr(char *data_wr){
   //long wr_pos = tail % size;
-  printf("tail:%d\n",tail);
+  //printf("tail:%d\n",tail);
   strncpy(iringbuf[tail%IRB_SIZE], data_wr, IRB_LENGTH);
   tail++;
 }
@@ -31,18 +31,18 @@ static void iringbuf_wr(char *data_wr){
 static void iringbuf_display(){
   if(tail < IRB_SIZE){
     for(int i=0; i<=tail; i++){
-    if(i == error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[i]);
-    else printf("iringbuf:%s\n",iringbuf[i]);
+    if(i == error_inst_pos%IRB_SIZE) printf("%s%s\n", ASNI_FMT("E*-->",ASNI_FG_RED),iringbuf[i]);
+    else printf("\t%s\n",iringbuf[i]);
     }
   }
   else {
     for(int j=tail%IRB_SIZE;j<IRB_SIZE;j++){
-      if(j == error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[j]);
-      else printf("iringbuf:%s\n",iringbuf[j]);
+      if(j == error_inst_pos%IRB_SIZE) printf("%s%s\n",ASNI_FMT("E*-->",ASNI_FG_RED),iringbuf[j]);
+      else printf("\t%s\n",iringbuf[j]);
     }
     for(int k=0; k<tail%IRB_SIZE; k++){
-      if(k == error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[k]);
-      else printf("iringbuf:%s\n",iringbuf[k]);
+      if(k == error_inst_pos%IRB_SIZE) printf("%s%s\n",ASNI_FMT("E*-->",ASNI_FG_RED),iringbuf[k]);
+      else printf("\t%s\n",iringbuf[k]);
     }
   }
   /*for(int i=0; i<IRB_SIZE; i++){
@@ -194,6 +194,10 @@ static void execute(uint64_t n) {
     g_nr_guest_inst ++;
     trace_and_difftest(&s, cpu.pc);
     if(nemu_state.state  == NEMU_ABORT){
+      parse_more_inst(&s,cpu.pc);
+      cpu.pc += 4;
+      parse_more_inst(&s,cpu.pc);
+      cpu.pc += 4;
       parse_more_inst(&s,cpu.pc);
       cpu.pc += 4;
       parse_more_inst(&s,cpu.pc);
