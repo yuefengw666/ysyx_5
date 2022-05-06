@@ -30,7 +30,7 @@ static void iringbuf_wr(char *data_wr){
 
 static void iringbuf_display(){
   for(int i=0; i<IRB_SIZE; i++){
-    if((i - 1)==error_inst_pos) printf("error-->iringbuf:%s\n",iringbuf[i]);
+    if((i + 1)==error_inst_pos) printf("error-->iringbuf:%s\n",iringbuf[i]);
     else printf("iringbuf:%s\n",iringbuf[i]);
   }
 } 
