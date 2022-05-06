@@ -14,6 +14,22 @@
 
 #define IRB_SIZE 128
 #define IRB_LENGTH 128
+
+char iringbuf[IRB_SIZE][IRB_LENGTH];
+unsigned int head=0;
+unsigned int tail=0;
+
+static void iringbuf_wr(unsigned int tail, char *data_wr, unsigned int size){
+  unsigned int wr_pos = tail % size;
+  strncpy(iringbuf[wr_pos], data_wr, IRB_LENGTH);
+  tail++;
+}
+
+static void iringbuf_display(){
+  for(int i=0; i<IRB_SIZE; i++){
+    printf("iringbuf:%s\n",iringbuf[i]);
+  }
+} 
 /*typedef struct 
 {
   char (*buf)[128];
@@ -80,6 +96,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { 
     log_write("%s\n", _this->logbuf);
+    iringbuf_wr(tail, _this->logbuf, IRB_LENGTH);
   }//add some inst befer bad inst
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
@@ -170,6 +187,7 @@ void cpu_exec(uint64_t n) {
            (nemu_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
             ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED))),
           nemu_state.halt_pc);
+      iringbuf_display();
       // fall through
     case NEMU_QUIT: statistic();
   }
