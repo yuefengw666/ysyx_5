@@ -12,16 +12,16 @@
  */
 #define MAX_INST_TO_PRINT 10
 
-#define IRB_SIZE 2
+#define IRB_SIZE 16
 #define IRB_LENGTH 128
 
 char iringbuf[IRB_SIZE][IRB_LENGTH];
 //unsigned int head=0;
-long tail=0;
+unsigned int tail=0;
 
 static void iringbuf_wr(char *data_wr){
   //long wr_pos = tail % size;
-  printf("tail:%ld\n",tail);
+  printf("tail:%d\n",tail);
   strncpy(iringbuf[tail%IRB_SIZE], data_wr, IRB_LENGTH);
   tail++;
 }
