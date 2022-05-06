@@ -13,7 +13,7 @@
  */
 #define MAX_INST_TO_PRINT 10
 
-#define IRB_SIZE 2
+#define IRB_SIZE 4
 #define IRB_LENGTH 128
 
 char iringbuf[IRB_SIZE][IRB_LENGTH];
