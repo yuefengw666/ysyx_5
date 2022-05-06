@@ -20,7 +20,7 @@ char iringbuf[IRB_SIZE][IRB_LENGTH];
 long tail=0;
 
 static void iringbuf_wr(char *data_wr, unsigned int size){
-  unsigned int wr_pos = tail % size;
+  long wr_pos = tail % size;
   printf("tail:%ld\n",tail);
   strncpy(iringbuf[wr_pos], data_wr, IRB_LENGTH);
   tail++;
