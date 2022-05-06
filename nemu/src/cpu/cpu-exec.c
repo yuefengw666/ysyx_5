@@ -161,7 +161,8 @@ static void exec_once(Decode *s, vaddr_t pc) {
 static void parse_more_inst(Decode *s, vaddr_t pc){
   s->pc = pc;
   s->snpc = pc;
-  s->isa.inst.val = inst_fetch(&s->snpc, 4);
+  isa_exec_once(s);
+  //s->isa.inst.val = inst_fetch(&s->snpc, 4);
   cpu.pc = s->dnpc;
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
@@ -195,10 +196,10 @@ static void execute(uint64_t n) {
     trace_and_difftest(&s, cpu.pc);
     if(nemu_state.state  == NEMU_ABORT){
       parse_more_inst(&s,cpu.pc);
-      cpu.pc += 4;
+      //cpu.pc += 4;
       parse_more_inst(&s,cpu.pc);
-      cpu.pc += 4;
-      parse_more_inst(&s,cpu.pc);
+      //cpu.pc += 4;
+      //parse_more_inst(&s,cpu.pc);
       //cpu.pc += 4;
       //parse_more_inst(&s,cpu.pc);
       //parse_more_inst(&s,cpu.pc);
