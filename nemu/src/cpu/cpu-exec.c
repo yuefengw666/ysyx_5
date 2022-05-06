@@ -161,8 +161,8 @@ static void exec_once(Decode *s, vaddr_t pc) {
 static void parse_more_inst(Decode *s, vaddr_t pc){
   s->pc = pc;
   s->snpc = pc;
-  isa_exec_once(s);
-  //s->isa.inst.val = inst_fetch(&s->snpc, 4);
+  //isa_exec_once(s);
+  s->isa.inst.val = inst_fetch(&s->snpc, 4);
   cpu.pc = s->dnpc;
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
