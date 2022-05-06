@@ -19,6 +19,7 @@
 char iringbuf[IRB_SIZE][IRB_LENGTH];
 //unsigned int head=0;
 unsigned int tail=0;
+unsigned int error_inst_pos=0;
 
 static void iringbuf_wr(char *data_wr){
   //long wr_pos = tail % size;
@@ -29,7 +30,8 @@ static void iringbuf_wr(char *data_wr){
 
 static void iringbuf_display(){
   for(int i=0; i<IRB_SIZE; i++){
-    printf("iringbuf:%s\n",iringbuf[i]);
+    if(i==error_inst_pos) printf("error-->iringbuf:%s\n",iringbuf[i]);
+    else printf("iringbuf:%s\n",iringbuf[i]);
   }
 } 
 /*typedef struct 
@@ -99,6 +101,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (ITRACE_COND) { 
     log_write("%s\n", _this->logbuf);
     iringbuf_wr(_this->logbuf);
+    error_inst_pos++;
   }//add some inst befer bad inst
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
