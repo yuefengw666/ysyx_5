@@ -2,6 +2,7 @@
 #include <cpu/decode.h>
 #include <cpu/difftest.h>
 #include <locale.h>
+#include <cpu/ifetch.h>
 
 #include "../monitor/sdb/sdb.h"
 
@@ -137,12 +138,45 @@ static void exec_once(Decode *s, vaddr_t pc) {
 #endif
 }
 
+//Parse the instruction after the error instruction.
+static void parse_more_inst(Decode *s, vaddr_t pc){
+  s->pc = pc;
+  s->snpc = pc;
+  s->isa.inst.val = inst_fetch(&s->snpc, 4);
+  cpu.pc = s->dnpc;
+#ifdef CONFIG_ITRACE
+  char *p = s->logbuf;
+  p += snprintf(p, sizeof(s->logbuf), FMT_WORD ":", s->pc);
+  int ilen = s->snpc - s->pc;
+  int i;
+  uint8_t *inst = (uint8_t *)&s->isa.inst.val;
+  for (i = 0; i < ilen; i ++) {
+    p += snprintf(p, 4, " %02x", inst[i]);
+  }
+  int ilen_max = MUXDEF(CONFIG_ISA_x86, 8, 4);
+  int space_len = ilen_max - ilen;
+  if (space_len < 0) space_len = 0;
+  space_len = space_len * 3 + 1;
+  memset(p, ' ', space_len);
+  p += space_len;
+
+  void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
+  disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
+      MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, ilen);
+  iringbuf_wr(s->logbuf);
+#endif
+}
+
+
 static void execute(uint64_t n) {
   Decode s;
   for (;n > 0; n --) {
     exec_once(&s, cpu.pc);
     g_nr_guest_inst ++;
     trace_and_difftest(&s, cpu.pc);
+    if(nemu_state.state  == NEMU_ABORT){
+      parse_more_inst(&s,cpu.pc);
+    }
     if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
   }
