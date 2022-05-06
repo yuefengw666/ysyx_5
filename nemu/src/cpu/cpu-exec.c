@@ -31,7 +31,7 @@ static void iringbuf_wr(char *data_wr){
 static void iringbuf_display(){
   if(tail < IRB_SIZE){
     for(int i=0; i<=tail; i++){
-    if(i == error_inst_pos%IRB_SIZE) printf("%s%s\n", ASNI_FMT("E*-->",ASNI_FG_RED),iringbuf[i]);
+    if(i == error_inst_pos%IRB_SIZE) printf("%s%s\n", ASNI_FMT("E*-->\t",ASNI_FG_RED),iringbuf[i]);
     else printf("\t%s\n",iringbuf[i]);
     }
   }
