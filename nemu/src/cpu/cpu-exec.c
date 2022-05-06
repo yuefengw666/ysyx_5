@@ -37,11 +37,11 @@ static void iringbuf_display(){
   }
   else {
     for(int j=tail%IRB_SIZE;j<IRB_SIZE;j++){
-      if(j == error_inst_pos%IRB_SIZE) printf("%s%s\n",ASNI_FMT("\tE*-->",ASNI_FG_RED),iringbuf[j]);
+      if(j == error_inst_pos%IRB_SIZE) printf("%s%s\n",ASNI_FMT("  E*-->",ASNI_FG_RED),iringbuf[j]);
       else printf("\t%s\n",iringbuf[j]);
     }
     for(int k=0; k<tail%IRB_SIZE; k++){
-      if(k == error_inst_pos%IRB_SIZE) printf("%s%s\n",ASNI_FMT("E*-->",ASNI_FG_RED),iringbuf[k]);
+      if(k == error_inst_pos%IRB_SIZE) printf("%s%s\n",ASNI_FMT("  E*-->",ASNI_FG_RED),iringbuf[k]);
       else printf("\t%s\n",iringbuf[k]);
     }
   }
