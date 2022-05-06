@@ -19,7 +19,7 @@
 char iringbuf[IRB_SIZE][IRB_LENGTH];
 //unsigned int head=0;
 unsigned int tail=0;
-unsigned int error_inst_pos=0;
+int error_inst_pos = -1;
 
 static void iringbuf_wr(char *data_wr){
   //long wr_pos = tail % size;
@@ -31,18 +31,18 @@ static void iringbuf_wr(char *data_wr){
 static void iringbuf_display(){
   if(tail < IRB_SIZE){
     for(int i=0; i<=tail; i++){
-    if((i + 1)==error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[i]);
+    if(i == error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[i]);
     else printf("iringbuf:%s\n",iringbuf[i]);
     }
   }
   else {
-    for(int j=(tail+1)%IRB_SIZE;j<IRB_SIZE;j++){
-    if((j + 1)==error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[j]);
-    else printf("iringbuf:%s\n",iringbuf[j]);
+    for(int j=tail;j<IRB_SIZE;j++){
+      if(j == error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[j]);
+      else printf("iringbuf:%s\n",iringbuf[j]);
     }
     for(int k=0; k<(tail+1)%IRB_SIZE; k++){
-    if((k + 1)==error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[k]);
-    else printf("iringbuf:%s\n",iringbuf[k]);
+      if(k == error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[k]);
+      else printf("iringbuf:%s\n",iringbuf[k]);
     }
   }
   /*for(int i=0; i<IRB_SIZE; i++){
