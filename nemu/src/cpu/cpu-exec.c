@@ -184,6 +184,7 @@ static void parse_more_inst(Decode *s, vaddr_t pc){
   disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, ilen);
   iringbuf_wr(s->logbuf);
+  nemu_state.state  = NEMU_ABORT;
 #endif
 }
 
