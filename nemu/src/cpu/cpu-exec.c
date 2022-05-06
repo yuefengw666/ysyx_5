@@ -13,7 +13,7 @@
  */
 #define MAX_INST_TO_PRINT 10
 
-#define IRB_SIZE 8
+#define IRB_SIZE 3
 #define IRB_LENGTH 128
 
 char iringbuf[IRB_SIZE][IRB_LENGTH];
@@ -198,11 +198,11 @@ static void execute(uint64_t n) {
     if(nemu_state.state  == NEMU_ABORT){
       parse_more_inst(&s,cpu.pc);
       //cpu.pc += 4;
-      parse_more_inst(&s,cpu.pc);
+      //parse_more_inst(&s,cpu.pc);
       //cpu.pc += 4;
-      parse_more_inst(&s,cpu.pc);
+      //parse_more_inst(&s,cpu.pc);
       //cpu.pc += 4;
-      parse_more_inst(&s,cpu.pc);
+      //parse_more_inst(&s,cpu.pc);
       //parse_more_inst(&s,cpu.pc);
     }
     if (nemu_state.state != NEMU_RUNNING) break;
