@@ -36,11 +36,11 @@ static void iringbuf_display(){
     }
   }
   else {
-    for(int j=tail;j<IRB_SIZE;j++){
+    for(int j=tail%IRB_SIZE;j<IRB_SIZE;j++){
       if(j == error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[j]);
       else printf("iringbuf:%s\n",iringbuf[j]);
     }
-    for(int k=0; k<(tail+1)%IRB_SIZE; k++){
+    for(int k=0; k<tail%IRB_SIZE; k++){
       if(k == error_inst_pos%IRB_SIZE) printf("error-->iringbuf:%s\n",iringbuf[k]);
       else printf("iringbuf:%s\n",iringbuf[k]);
     }
