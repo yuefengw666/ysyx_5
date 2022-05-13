@@ -49,6 +49,7 @@ ysyx_22040237_idu ysyx_22040237_idu_u0(
   .rs1_r_en (rs1_r_en),
   .rs1_r_addr (rs1_r_addr),
   .rs2_r_en (rs2_r_en),
+  .rs2_r_addr (rs2_r_addr),
   .rd_w_en (rd_w_en),
   .rd_w_addr (rd_w_addr)
 );
@@ -65,7 +66,8 @@ ysyx_22040237_reg_file ysyx_22040237_reg_file_u0(
   .clk (clk),
   .rst (rst),
   .reg_wr_en (reg_w_en),
-  .reg_addr (rd_w_addr),
+  .wr_addr (rd_w_addr),
+  .wr_data (rddata),
   .reg1_rd_en (rs1_r_en),
   .reg2_rd_en (rs2_r_en),
   .reg1_rd_addr (rs1_r_addr),
