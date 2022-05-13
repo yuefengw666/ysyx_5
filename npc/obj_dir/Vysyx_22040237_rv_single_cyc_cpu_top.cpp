@@ -14,6 +14,7 @@ Vysyx_22040237_rv_single_cyc_cpu_top::Vysyx_22040237_rv_single_cyc_cpu_top(Veril
     , rst{vlSymsp->TOP.rst}
     , inst_in{vlSymsp->TOP.inst_in}
     , pc_o{vlSymsp->TOP.pc_o}
+    , rs2_data{vlSymsp->TOP.rs2_data}
     , rootp{&(vlSymsp->TOP)}
 {
 }
