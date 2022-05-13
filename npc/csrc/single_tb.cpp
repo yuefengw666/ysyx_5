@@ -35,7 +35,9 @@ int main(int argc, char**argv, char** env){
         if(dut->clk == 1){
             posedge_cnt++;  //count posedge 
             switch(posedge_cnt){
-                7: dut->inst_in = (1<<20) | (0<<15) | (0<<12) | (1<<7) | (19);
+                case 7: 
+                    dut->inst_in = (1<<20) | (0<<15) | (0<<12) | (1<<7) | (19); 
+                    break;
             }
         }
         m_trace->dump(sim_time); //write all the traced signal values into our waveform dump file
