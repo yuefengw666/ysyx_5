@@ -1,4 +1,4 @@
-module ysyx_22040237_rv_cpu_top(
+module ysyx_22040237_rv_single_cyc_cpu_top(
   input clk,
   input rst,
   input [31:0] inst_in,
