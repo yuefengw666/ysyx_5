@@ -9,9 +9,9 @@
 vluint64_t sim_time = 0;
 vluint64_t posedge_cnt = 0;
 
-void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &sim_time){
+void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &posedge_cnt){
     dut->rst = 0;
-    if(sim_time < 6){
+    if(posedge_cnt < 6){
         dut->rst = 1;
         //dut-inst_in = 0x00000000;
     }
@@ -28,12 +28,13 @@ int main(int argc, char**argv, char** env){
     m_trace->open("./logs/wave.vcd");
     
     while(sim_time < MAX_SIM_TIME){
-        dut_reset(dut, sim_time);
+        //dut_reset(dut, sim_time);
 
         dut->clk ^= 1;
         dut->eval(); //evaluate all the signals in design
         if(dut->clk == 1){
             posedge_cnt++;  //count posedge 
+            dut_reset(dut, posedge_cnt);
             switch(posedge_cnt){
                 case 7: 
                     dut->inst_in = (1<<20) | (0<<15) | (0<<12) | (1<<7) | (19); 
