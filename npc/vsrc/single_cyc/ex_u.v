@@ -1,3 +1,5 @@
+`include "defines.v"
+
 module ysyx_22040237_exu(
   input rst,
 

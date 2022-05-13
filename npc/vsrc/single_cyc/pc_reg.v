@@ -1,4 +1,4 @@
-`include "define.v"
+`include "defines.v"
 
 module ysyx_22040237_pc_reg(
   input clk,
