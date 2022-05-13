@@ -37,8 +37,6 @@ assign inst_addi = opcode[0] & opcode[1] & ~opcode[2] & ~opcode[3] & opcode[4] &
 
 // R [0], I [1], S [2], B [3], U [4], J [5]
 assign inst_type[1] = rst ? 1'b0 : inst_addi;
-//exclude warning for now
-assign {inst_type[5:2],inst_type[0]} = 5'b0;
 
 //get inst opcode
 //INST_ADD->8'h11
@@ -52,8 +50,8 @@ assign inst_opcode[6] = rst ? 1'b0 : 0;
 assign inst_opcode[7] = rst ? 1'b0 : 0;
 
 //get operands
-assign op1 = rst ? 64'h0 : (inst_type[1] ? rs1_data : 64'h0);
-assign op2 = rst ? 64'h0 : (inst_type[1] ? { {52{imm[11]}}, imm } : 64'h0);
+assign op1 = rst ? 64'h0 : ((|inst_type) ? rs1_data : 64'h0); //|inst_type exclude warning for now
+assign op2 = rst ? 64'h0 : ((|inst_type) ? { {52{imm[11]}}, imm } : 64'h0);
 
 //generate reg write and read enable
 assign rs1_r_en = rst ? 1'b0 : inst_type[1];
