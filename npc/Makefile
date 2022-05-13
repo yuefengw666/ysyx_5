@@ -52,7 +52,7 @@ run: $(VSRC) $(CSRC)
 
 	@echo
 	@echo "-- VERILATE ----------------"
-	$(VERILATOR) -Wall --trace -cc -I./vsrc -exe -build $(CSRC) -top $(TOP_DESIGN_NAME)
+	$(VERILATOR) -Wall --trace -cc -I./vsrc/single_cyc -exe -build $(CSRC) -top $(TOP_DESIGN_NAME)
 
 	#@echo
 	#@echo "-- BUILD -------------------"
