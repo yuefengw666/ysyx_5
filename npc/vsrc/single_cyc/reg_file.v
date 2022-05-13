@@ -1,5 +1,3 @@
-`include "defines.v"
-
 module ysyx_22040237_reg_file(
   input clk,
   input rst,
