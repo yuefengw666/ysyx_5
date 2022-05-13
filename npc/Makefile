@@ -8,9 +8,10 @@ endif
 ######################################################################
 
 #set source
-TOP_DESIGN_NAME = top
-VSRC = $(shell find $(abspath ./vsrc/single_cyc_inst/) -name "*.v")
-CSRC = $(shell find $(abspath ./csrc) -name "*.cpp")
+TOP_DESIGN_NAME = rv_sinrv_single_cyc_cpu_top
+VSRC = $(shell find $(abspath ./vsrc/single_cyc/) -name "*.v")
+#CSRC = $(shell find $(abspath ./csrc) -name "*.cpp")
+CSRC = ./csrc/single_tb.cpp
 
 ######################################################################
 # Set up variables
@@ -77,6 +78,7 @@ run: $(VSRC) $(CSRC)
 gtk:
 	gtkwave ./logs/wave.vcd &
 
+.PHONY:clean
 clean:
 	rm -rf obj_dir logs *.log
 
