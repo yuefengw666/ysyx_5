@@ -18,8 +18,8 @@ reg [63:0] regs[0:31];
 
 wire r_wr_en;
 
-assign rd1_data = reg1_rd_en ? regs[rd1_addr] : `ysyx_22040237_REGS_INIT;
-assign rd2_data = reg2_rd_en ? regs[rd2_addr] : `ysyx_22040237_REGS_INIT;
+assign reg1_rd_data = reg1_rd_en ? regs[reg1_rd_addr] : `ysyx_22040237_REGS_INIT;
+assign reg2_rd_data = reg2_rd_en ? regs[reg2_rd_addr] : `ysyx_22040237_REGS_INIT;
 
 assign r_wr_en = reg_wr_en && (wr_addr !=5'b0);
 

@@ -5,6 +5,6 @@ module ysyx_22040237_ifu(
   output [31:0] inst_o
 );
 
-assign inst_o = inst;
+assign inst_o = inst_i;
 
 endmodule

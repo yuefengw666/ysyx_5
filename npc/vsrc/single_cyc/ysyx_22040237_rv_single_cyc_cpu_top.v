@@ -65,9 +65,9 @@ ysyx_22040237_exu ysyx_22040237_exu_u0(
 ysyx_22040237_reg_file ysyx_22040237_reg_file_u0(
   .clk (clk),
   .rst (rst),
-  .reg_wr_en (reg_w_en),
+  .reg_wr_en (rd_w_en),
   .wr_addr (rd_w_addr),
-  .wr_data (rddata),
+  .wr_data (rd_data),
   .reg1_rd_en (rs1_r_en),
   .reg2_rd_en (rs2_r_en),
   .reg1_rd_addr (rs1_r_addr),
