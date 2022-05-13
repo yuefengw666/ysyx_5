@@ -177,8 +177,8 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceFullSub0(Vysyx_2204023
                                                 : 0U))]
                                      : 0ULL)),64);
         tracep->fullQData(oldp+77,(((IData)(vlSelf->rst)
-                                     ? 0ULL : ((2U 
-                                                & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))
+                                     ? 0ULL : ((0U 
+                                                != (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))
                                                 ? (
                                                    (1U 
                                                     & ((~ (IData)(vlSelf->rst)) 
@@ -200,8 +200,8 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceFullSub0(Vysyx_2204023
                                                     : 0ULL)
                                                 : 0ULL))),64);
         tracep->fullQData(oldp+79,(((IData)(vlSelf->rst)
-                                     ? 0ULL : ((2U 
-                                                & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))
+                                     ? 0ULL : ((0U 
+                                                != (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))
                                                 ? (
                                                    ((- (QData)((IData)(
                                                                        (vlSelf->inst_in 
@@ -227,8 +227,8 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceFullSub0(Vysyx_2204023
                                                    ((IData)(vlSelf->rst)
                                                      ? 0ULL
                                                      : 
-                                                    ((2U 
-                                                      & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))
+                                                    ((0U 
+                                                      != (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))
                                                       ? 
                                                      ((1U 
                                                        & ((~ (IData)(vlSelf->rst)) 
@@ -253,8 +253,8 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceFullSub0(Vysyx_2204023
                                                    ((IData)(vlSelf->rst)
                                                      ? 0ULL
                                                      : 
-                                                    ((2U 
-                                                      & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))
+                                                    ((0U 
+                                                      != (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))
                                                       ? 
                                                      (((- (QData)((IData)(
                                                                           (vlSelf->inst_in 

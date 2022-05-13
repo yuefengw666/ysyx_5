@@ -45,8 +45,9 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root___settle__TOP__1(Vysyx_22040
            | (((~ (IData)(vlSelf->rst)) & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi)) 
               << 4U));
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type 
-        = (((~ (IData)(vlSelf->rst)) & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi)) 
-           << 1U);
+        = ((0x3dU & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type)) 
+           | (((~ (IData)(vlSelf->rst)) & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi)) 
+              << 1U));
     if (vlSelf->rst) {
         vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_w_addr = 0U;
         vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_data = 0ULL;
@@ -58,8 +59,8 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root___settle__TOP__1(Vysyx_22040
         vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_data 
             = ((0x11U == (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode))
                 ? (((IData)(vlSelf->rst) ? 0ULL : (
-                                                   (2U 
-                                                    & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))
+                                                   (0U 
+                                                    != (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))
                                                     ? 
                                                    ((1U 
                                                      & ((~ (IData)(vlSelf->rst)) 
@@ -81,7 +82,7 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root___settle__TOP__1(Vysyx_22040
                                                      : 0ULL)
                                                     : 0ULL)) 
                    + ((IData)(vlSelf->rst) ? 0ULL : 
-                      ((2U & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))
+                      ((0U != (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))
                         ? (((- (QData)((IData)((vlSelf->inst_in 
                                                 >> 0x1fU)))) 
                             << 0xcU) | (QData)((IData)(
