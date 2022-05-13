@@ -14,7 +14,7 @@ always(*)begin
   end
   else begin
     case(inst_opcode)
-      `INST_ADD: rd_data = op1 + op2;
+      `ysyx_22040237_INST_ADD: rd_data = op1 + op2;
       default: rd_data = 64'h0;
     endcase
   end
