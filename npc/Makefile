@@ -52,7 +52,7 @@ run: $(VSRC) $(CSRC)
 
 	@echo
 	@echo "-- VERILATE ----------------"
-	$(VERILATOR) $(VERILATOR_FLAGS) -top $(TOP_DESIGN_NAME) define.v $^
+	$(VERILATOR) $(VERILATOR_FLAGS) -top $(TOP_DESIGN_NAME) ./vsrc/single_cyc/define.v $^
 
 	#@echo
 	#@echo "-- BUILD -------------------"
