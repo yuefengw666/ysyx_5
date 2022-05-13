@@ -8,7 +8,7 @@ endif
 ######################################################################
 
 #set source
-TOP_DESIGN_NAME = rv_sinrv_single_cyc_cpu_top
+TOP_DESIGN_NAME = ysyx_22040237_rv_single_cyc_cpu_top
 VSRC = $(shell find $(abspath ./vsrc/single_cyc/) -name "*.v")
 #CSRC = $(shell find $(abspath ./csrc) -name "*.cpp")
 CSRC = ./csrc/single_tb.cpp
