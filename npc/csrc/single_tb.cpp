@@ -10,7 +10,7 @@ vluint64_t sim_time = 0;
 
 int main(int argc, char**argv, char** env){
     //instantiate top module
-    Vrv_single_cyc_cpu_top *dut = new Vrv_single_cyc_cpu_top;
+    Vysyx_22040237_rv_single_cyc_cpu_top *dut = new Vrv_single_cyc_cpu_top;
 
     //set up waveform
     Verilated::traceEverOn(true);
