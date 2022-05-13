@@ -33,7 +33,7 @@ assign rs1 = inst[19:15];
 assign imm = inst[31:20];
 
 // addi: func3:000, opcode:00100(11)
-assign inst_addi = opcode[0] & opcode[1] ~opcode[2] & ~opcode[3] & opcode[4] & ~opcode[5] & ~opcode[6] & ~func3[0] & ~func3[1] & ~func3[2];
+assign inst_addi = opcode[0] & opcode[1] & ~opcode[2] & ~opcode[3] & opcode[4] & ~opcode[5] & ~opcode[6] & ~func3[0] & ~func3[1] & ~func3[2];
 
 // R [0], I [1], S [2], B [3], U [4], J [5]
 assign inst_type[1] = rst ? 1'b0 : inst_addi;
