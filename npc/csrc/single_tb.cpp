@@ -7,6 +7,15 @@
 
 #define MAX_SIM_TIME 20
 vluint64_t sim_time = 0;
+vluint64_t posedge_cnt = 0;
+
+void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &sim_time){
+    dut->rst = 0;
+    if(sim_time < 6){
+        dut->rst = 1;
+        //dut-inst_in = 0x00000000;
+    }
+}
 
 int main(int argc, char**argv, char** env){
     //instantiate top module
@@ -19,8 +28,16 @@ int main(int argc, char**argv, char** env){
     m_trace->open("./logs/wave.vcd");
     
     while(sim_time < MAX_SIM_TIME){
+        dut_reset(dut, sim_time);
+
         dut->clk ^= 1;
         dut->eval(); //evaluate all the signals in design
+        if(dut->clk == 1){
+            posedge_cnt++;  //count posedge 
+            switch(posedge_cnt){
+                7: dut->inst_in = (1<<20) | (0<<15) | (0<<12) | (1<<7) | (19);
+            }
+        }
         m_trace->dump(sim_time); //write all the traced signal values into our waveform dump file
         sim_time++;
     }
