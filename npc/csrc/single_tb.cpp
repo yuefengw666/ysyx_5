@@ -37,7 +37,8 @@ int main(int argc, char**argv, char** env){
             dut_reset(dut, posedge_cnt);
             switch(posedge_cnt){
                 case 7: 
-                    dut->inst_in = (1<<20) | (1<<15) | (0<<12) | (1<<7) | (19); 
+                    dut->inst_in = (1<<20) | (1<<15) | (0<<12) | (1<<7) | (19);
+                    dut->eval();
                     break;
             }
         }
