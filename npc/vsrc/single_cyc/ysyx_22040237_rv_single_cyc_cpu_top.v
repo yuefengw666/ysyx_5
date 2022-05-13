@@ -6,7 +6,7 @@ module ysyx_22040237_rv_single_cyc_cpu_top(
   output [31:0] pc_o
 );
 
-wire inst;
+wire [31:0] inst;
 
 //regs  output 
 wire [63:0] rs1_data;

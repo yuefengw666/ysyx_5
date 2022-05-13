@@ -5,7 +5,7 @@ module ysyx_22040237_exu(
   input [63:0] op1,
   input [63:0] op2,
 
-  output [63:0] rd_data
+  output reg [63:0] rd_data
 );
 
 always@(*)begin
