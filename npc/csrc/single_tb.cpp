@@ -25,7 +25,7 @@ int main(int argc, char**argv, char** env){
         sim_time++;
     }
 
-    mtrace->close();
+    m_trace->close();
     delete dut;
     exit(EXIT_SUCCESS);
 }
