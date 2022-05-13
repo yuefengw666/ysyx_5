@@ -8,7 +8,7 @@ module ysyx_22040237_exu(
   output [63:0] rd_data
 );
 
-always(*)begin
+always@(*)begin
   if(rst) begin
     rd_data = 64'h0;
   end

@@ -13,7 +13,7 @@ module ysyx_22040237_idu(
   output rs2_r_en,
   output [4:0] rs2_r_addr,
   output rd_w_en,
-  output [4:0] rd_w_addr,
+  output [4:0] rd_w_addr
 );
 
 wire [6:0] opcode;
