@@ -41,11 +41,13 @@ VM_USER_LDLIBS = \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
+	mem \
 	single_tb \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
-	./csrc \
+	/home/yfwu/ysyx-workbench/npc/csrc \
+	/home/yfwu/ysyx-workbench/npc/csrc/mem \
 
 
 ### Default rules...
@@ -57,7 +59,9 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
-single_tb.o: ./csrc/single_tb.cpp
+mem.o: /home/yfwu/ysyx-workbench/npc/csrc/mem/mem.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+single_tb.o: /home/yfwu/ysyx-workbench/npc/csrc/single_tb.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
