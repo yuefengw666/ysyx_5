@@ -53,7 +53,7 @@ int main(int argc, char**argv, char** env){
             posedge_cnt++;  //count posedge 
             dut_reset(dut, posedge_cnt);
             switch(posedge_cnt){
-                case 7: 
+                case 3: 
                     //dut->inst_in = (1<<20) | (1<<15) | (0<<12) | (1<<7) | (19);
                     dut->inst_in = pmem_read(dut->pc_o);
                     dut->eval();
