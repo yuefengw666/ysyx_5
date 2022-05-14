@@ -16,11 +16,10 @@ static inline void host_write(void *addr, word_t data){
     return;
 }
 
-word_t* pmem_read(paddr_t addr){
+word_t pmem_read(paddr_t addr){
     if( (addr >= CONFIG_MBASE) && (addr < (paddr_t)CONFIG_MBASE + CONFIG_MSIZE) ){
       printf("in pmem_read\n");
-      word_t *ret;
-      (*ret) = host_read(guest_to_host(addr));
+      word_t ret = *(host_read(guest_to_host(addr)));
       //printf("read data: %lx\n",ret);
       return ret;
     }
