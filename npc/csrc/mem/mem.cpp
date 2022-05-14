@@ -19,10 +19,10 @@ word_t pmem_read(paddr_t addr){
     if( (addr >= CONFIG_MBASE) && (addr < (paddr_t)CONFIG_MBASE + CONFIG_MSIZE) ){
       printf("in pmem_read\n");
       word_t ret = host_read(guest_to_host(addr));
-      printf("read data: %x\n",ret);
+      printf("read data: %lx\n",ret);
       return ret;
     }
-    printf("read address = %x is out of bound of pmem.",addr);
+    printf("read address = %lx is out of bound of pmem.",addr);
     return 0;
 }
 
