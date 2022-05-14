@@ -13,17 +13,16 @@ static inline word_t host_read(void *addr){
 static inline void host_write(void *addr, word_t data){
     printf("in host _write data:%lx\n",data);
     *(uint64_t *)addr = data;
-    printf("in host addr:%x\n",&addr);
     return;
 }
 
-word_t pmem_read(paddr_t addr){
+word_t* pmem_read(paddr_t addr){
     if( (addr >= CONFIG_MBASE) && (addr < (paddr_t)CONFIG_MBASE + CONFIG_MSIZE) ){
       printf("in pmem_read\n");
       word_t *ret;
       (*ret) = host_read(guest_to_host(addr));
-      printf("read data: %lx\n",ret);
-      return ret;
+      //printf("read data: %lx\n",ret);
+      return *ret;
     }
     printf("read address = %x is out of bound of pmem.",addr);
     return 0;
