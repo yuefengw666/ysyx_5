@@ -52,12 +52,12 @@ int main(int argc, char**argv, char** env){
         if(dut->clk == 1){
             posedge_cnt++;  //count posedge 
             dut_reset(dut, posedge_cnt);
-            switch(posedge_cnt){
-                case 3: 
+            //switch(posedge_cnt){
+                //case 3: 
                     //dut->inst_in = (1<<20) | (1<<15) | (0<<12) | (1<<7) | (19);
-                    dut->inst_in = pmem_read(dut->pc_o);
-                    dut->eval();
-                    break;
+            if(posedge_cnt>=3){
+                dut->inst_in = pmem_read(dut->pc_o);
+                dut->eval();
             }
         }
         m_trace->dump(sim_time); //write all the traced signal values into our waveform dump file
