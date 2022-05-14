@@ -23,6 +23,7 @@ word_t pmem_read(paddr_t addr){
       //word_t *ret = *(host_read(guest_to_host(addr)));
       //printf("read data: %lx\n",ret);
       word_t ret = host_read(guest_to_host(addr));
+      printf("read data ret; %lx\n",ret);
       return ret;
       //return host_read(guest_to_host(addr));
     }
