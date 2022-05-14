@@ -52,7 +52,7 @@ int main(int argc, char**argv, char** env){
             switch(posedge_cnt){
                 case 7: 
                     //dut->inst_in = (1<<20) | (1<<15) | (0<<12) | (1<<7) | (19);
-                    dut->inst_in = pmem_read(dut->inst);
+                    dut->inst_in = pmem_read(dut->pc);
                     dut->eval();
                     break;
             }
