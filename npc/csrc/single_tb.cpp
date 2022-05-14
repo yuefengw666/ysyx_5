@@ -4,10 +4,19 @@
 #include <verilated_vcd_c.h>
 #include "Vysyx_22040237_rv_single_cyc_cpu_top.h"
 //#include "Vrv_single_cyc_cpu_top__027unit.h"
+#include "npc_common.h"
+#include "mem.h"
 
 #define MAX_SIM_TIME 20
 vluint64_t sim_time = 0;
 vluint64_t posedge_cnt = 0;
+
+#define imm 0
+#define rs1 0
+#define funt3 0
+#define rd 1
+#define opcode_addi 19
+#define opcode_ebreak 115
 
 void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &posedge_cnt){
     dut->rst = 0;
@@ -18,6 +27,11 @@ void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &posedge_cn
 }
 
 int main(int argc, char**argv, char** env){
+
+    pmem_write(0x80000000,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
+    pmem_write(0x80000004,(imm+2<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
+    pmem_write(0x80000008,(imm+3<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
+
     //instantiate top module
     Vysyx_22040237_rv_single_cyc_cpu_top *dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
 
@@ -37,7 +51,8 @@ int main(int argc, char**argv, char** env){
             dut_reset(dut, posedge_cnt);
             switch(posedge_cnt){
                 case 7: 
-                    dut->inst_in = (1<<20) | (1<<15) | (0<<12) | (1<<7) | (19);
+                    //dut->inst_in = (1<<20) | (1<<15) | (0<<12) | (1<<7) | (19);
+                    dut->inst_in = pmem_read(dut->inst);
                     dut->eval();
                     break;
             }

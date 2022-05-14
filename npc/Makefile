@@ -63,7 +63,7 @@ run: $(VSRC) $(CSRC)
 	@mkdir -p logs
 	obj_dir/V$(TOP_DESIGN_NAME) +trace
 
-	#@echo
+	#@ech
 	#@echo "-- COVERAGE ----------------"
 	#@rm -rf logs/annotated
 	#$(VERILATOR_COVERAGE) --annotate logs/annotated logs/coverage.dat
