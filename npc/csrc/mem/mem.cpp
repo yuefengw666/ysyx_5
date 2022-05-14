@@ -22,7 +22,7 @@ word_t* pmem_read(paddr_t addr){
       word_t *ret;
       (*ret) = host_read(guest_to_host(addr));
       //printf("read data: %lx\n",ret);
-      return *ret;
+      return ret;
     }
     printf("read address = %x is out of bound of pmem.",addr);
     return 0;
