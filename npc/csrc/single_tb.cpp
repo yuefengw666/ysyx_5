@@ -4,8 +4,8 @@
 #include <verilated_vcd_c.h>
 #include "Vysyx_22040237_rv_single_cyc_cpu_top.h"
 //#include "Vrv_single_cyc_cpu_top__027unit.h"
-#include "./csrc/include/npc_common.h"
-#include "./csrc/include/mem.h"
+#include "include/npc_common.h"
+#include "include/mem.h"
 
 #define MAX_SIM_TIME 20
 vluint64_t sim_time = 0;
