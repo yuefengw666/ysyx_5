@@ -13,6 +13,7 @@ static inline word_t host_read(void *addr){
 static inline void host_write(void *addr, word_t data){
     printf("in host _write data:%lx\n",data);
     *(uint64_t *)addr = data;
+    printf("write data:%lx\n",*addr);
     return;
 }
 
