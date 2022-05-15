@@ -31,6 +31,7 @@ void ebreak(){
     //m_trace->dump(sim_time);
     m_trace->close();
     delete dut;
+    printf("111\n");
     exit(EXIT_SUCCESS);
 }
 
