@@ -28,12 +28,12 @@ VerilatedVcdC *m_trace = NULL;
 
 void ebreak(){
     printf("***********************ebreak*****************************\n");
-    //m_trace->dump(sim_time);
-    //m_trace->close();
-    //printf("1\n");
-    //delete dut;
-    //printf("2\n");
-    //exit(EXIT_FAILURE);
+    m_trace->dump(sim_time);
+    m_trace->close();
+    printf("1\n");
+    delete dut;
+    printf("2\n");
+    exit(-1));
 }
 
 void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &posedge_cnt){
