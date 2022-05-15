@@ -11,18 +11,21 @@
 
 class Vysyx_22040237_rv_single_cyc_cpu_top__Syms;
 class Vysyx_22040237_rv_single_cyc_cpu_top_VerilatedVcd;
+class Vysyx_22040237_rv_single_cyc_cpu_top___024unit;
 
 
 //----------
 
 VL_MODULE(Vysyx_22040237_rv_single_cyc_cpu_top___024root) {
   public:
+    // CELLS
+    Vysyx_22040237_rv_single_cyc_cpu_top___024unit* __PVT____024unit;
 
     // PORTS
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
     VL_IN(inst_in,31,0);
-    VL_OUT(pc_o,31,0);
+    VL_OUT(pc,31,0);
     VL_OUT64(rs2_data,63,0);
 
     // LOCAL SIGNALS

@@ -15,6 +15,9 @@
 
 // INCLUDE MODULE CLASSES
 #include "Vysyx_22040237_rv_single_cyc_cpu_top___024root.h"
+#include "Vysyx_22040237_rv_single_cyc_cpu_top___024unit.h"
+
+// DPI TYPES for DPI Export callbacks (Internal use)
 
 // SYMS CLASS (contains all model state)
 class Vysyx_22040237_rv_single_cyc_cpu_top__Syms final : public VerilatedSyms {
@@ -27,6 +30,7 @@ class Vysyx_22040237_rv_single_cyc_cpu_top__Syms final : public VerilatedSyms {
 
     // MODULE INSTANCE STATE
     Vysyx_22040237_rv_single_cyc_cpu_top___024root TOP;
+    Vysyx_22040237_rv_single_cyc_cpu_top___024unit TOP____024unit;
 
     // CONSTRUCTORS
     Vysyx_22040237_rv_single_cyc_cpu_top__Syms(VerilatedContext* contextp, const char* namep, Vysyx_22040237_rv_single_cyc_cpu_top* modelp);

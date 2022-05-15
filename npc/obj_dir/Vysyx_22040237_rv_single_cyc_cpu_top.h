@@ -9,11 +9,13 @@
 #define VERILATED_VYSYX_22040237_RV_SINGLE_CYC_CPU_TOP_H_  // guard
 
 #include "verilated_heavy.h"
+#include "svdpi.h"
 
 class Vysyx_22040237_rv_single_cyc_cpu_top__Syms;
 class Vysyx_22040237_rv_single_cyc_cpu_top___024root;
 class VerilatedVcdC;
 class Vysyx_22040237_rv_single_cyc_cpu_top_VerilatedVcd;
+class Vysyx_22040237_rv_single_cyc_cpu_top___024unit;
 
 
 // This class is the main interface to the Verilated model
@@ -30,12 +32,13 @@ class Vysyx_22040237_rv_single_cyc_cpu_top VL_NOT_FINAL {
     VL_IN8(&clk,0,0);
     VL_IN8(&rst,0,0);
     VL_IN(&inst_in,31,0);
-    VL_OUT(&pc_o,31,0);
+    VL_OUT(&pc,31,0);
     VL_OUT64(&rs2_data,63,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.
     // Otherwise the application code can consider these internals.
+    Vysyx_22040237_rv_single_cyc_cpu_top___024unit* const __PVT____024unit;
 
     // Root instance pointer to allow access to model internals,
     // including inlined /* verilator public_flat_* */ items.

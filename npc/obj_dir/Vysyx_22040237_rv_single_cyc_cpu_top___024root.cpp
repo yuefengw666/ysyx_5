@@ -5,6 +5,8 @@
 #include "Vysyx_22040237_rv_single_cyc_cpu_top___024root.h"
 #include "Vysyx_22040237_rv_single_cyc_cpu_top__Syms.h"
 
+#include "verilated_dpi.h"
+
 //==========
 
 VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__2(Vysyx_22040237_rv_single_cyc_cpu_top___024root* vlSelf) {
@@ -27,6 +29,8 @@ VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__
               << 4U));
 }
 
+void Vysyx_22040237_rv_single_cyc_cpu_top___024unit____Vdpiimwrap_ebreak_TOP____024unit();
+
 VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___sequent__TOP__3(Vysyx_22040237_rv_single_cyc_cpu_top___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_22040237_rv_single_cyc_cpu_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -37,10 +41,13 @@ VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___sequent__TOP
     CData/*0:0*/ __Vdlyvset__ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__regs__v32;
     QData/*63:0*/ __Vdlyvval__ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__regs__v32;
     // Body
+    if ((IData)((0x73U == (0x707fU & vlSelf->inst_in)))) {
+        Vysyx_22040237_rv_single_cyc_cpu_top___024unit____Vdpiimwrap_ebreak_TOP____024unit();
+    }
     __Vdlyvset__ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__regs__v0 = 0U;
     __Vdlyvset__ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__regs__v32 = 0U;
-    vlSelf->pc_o = ((IData)(vlSelf->rst) ? 0x80000000U
-                     : ((IData)(4U) + vlSelf->pc_o));
+    vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000U
+                   : ((IData)(4U) + vlSelf->pc));
     if (vlSelf->rst) {
         __Vdlyvset__ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__regs__v0 = 1U;
     } else if ((((~ (IData)(vlSelf->rst)) & ((IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type) 
@@ -98,8 +105,13 @@ VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__4\n"); );
     // Body
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type 
-        = (((~ (IData)(vlSelf->rst)) & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi)) 
-           << 1U);
+        = (2U & (((~ (IData)(vlSelf->rst)) & ((IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi) 
+                                              | (IData)(
+                                                        (0x73U 
+                                                         == 
+                                                         (0x707fU 
+                                                          & vlSelf->inst_in))))) 
+                 << 1U));
     if (vlSelf->rst) {
         vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_w_addr = 0U;
         vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_data = 0ULL;

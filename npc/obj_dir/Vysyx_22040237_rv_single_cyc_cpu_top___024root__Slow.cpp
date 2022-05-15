@@ -5,6 +5,8 @@
 #include "Vysyx_22040237_rv_single_cyc_cpu_top___024root.h"
 #include "Vysyx_22040237_rv_single_cyc_cpu_top__Syms.h"
 
+#include "verilated_dpi.h"
+
 //==========
 
 
@@ -45,8 +47,13 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root___settle__TOP__1(Vysyx_22040
            | (((~ (IData)(vlSelf->rst)) & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi)) 
               << 4U));
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type 
-        = (((~ (IData)(vlSelf->rst)) & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi)) 
-           << 1U);
+        = (2U & (((~ (IData)(vlSelf->rst)) & ((IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi) 
+                                              | (IData)(
+                                                        (0x73U 
+                                                         == 
+                                                         (0x707fU 
+                                                          & vlSelf->inst_in))))) 
+                 << 1U));
     if (vlSelf->rst) {
         vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_w_addr = 0U;
         vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_data = 0ULL;
@@ -124,7 +131,7 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root___ctor_var_reset(Vysyx_22040
     vlSelf->clk = VL_RAND_RESET_I(1);
     vlSelf->rst = VL_RAND_RESET_I(1);
     vlSelf->inst_in = VL_RAND_RESET_I(32);
-    vlSelf->pc_o = VL_RAND_RESET_I(32);
+    vlSelf->pc = VL_RAND_RESET_I(32);
     vlSelf->rs2_data = VL_RAND_RESET_Q(64);
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode = VL_RAND_RESET_I(8);
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_w_addr = VL_RAND_RESET_I(5);

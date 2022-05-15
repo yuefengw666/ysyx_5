@@ -4,6 +4,7 @@
 #include "Vysyx_22040237_rv_single_cyc_cpu_top.h"
 #include "Vysyx_22040237_rv_single_cyc_cpu_top__Syms.h"
 #include "verilated_vcd_c.h"
+#include "verilated_dpi.h"
 
 //============================================================
 // Constructors
@@ -13,8 +14,9 @@ Vysyx_22040237_rv_single_cyc_cpu_top::Vysyx_22040237_rv_single_cyc_cpu_top(Veril
     , clk{vlSymsp->TOP.clk}
     , rst{vlSymsp->TOP.rst}
     , inst_in{vlSymsp->TOP.inst_in}
-    , pc_o{vlSymsp->TOP.pc_o}
+    , pc{vlSymsp->TOP.pc}
     , rs2_data{vlSymsp->TOP.rs2_data}
+    , __PVT____024unit{vlSymsp->TOP.__PVT____024unit}
     , rootp{&(vlSymsp->TOP)}
 {
 }
