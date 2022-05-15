@@ -30,8 +30,9 @@ void ebreak(){
     printf("***********************ebreak*****************************\n");
     //m_trace->dump(sim_time);
     m_trace->close();
+    printf("1\n")
     delete dut;
-    printf("111\n");
+    printf("2\n");
     exit(EXIT_SUCCESS);
 }
 
@@ -48,7 +49,7 @@ int main(int argc, char**argv, char** env){
     pmem_write(0x80000000,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
     pmem_write(0x80000004,(imm+2<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
     pmem_write(0x80000008,(imm+3<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
-    //pmem_write(0x8000000c,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd-1<<7) | opcode_ebreak);
+    pmem_write(0x8000000c,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd-1<<7) | opcode_ebreak);
     //instantiate top module
     Vysyx_22040237_rv_single_cyc_cpu_top *dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
 
