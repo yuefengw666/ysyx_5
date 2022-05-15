@@ -33,7 +33,7 @@ void ebreak(){
     //printf("1\n");
     //delete dut;
     //printf("2\n");
-    exit(EXIT_SUCCESS);
+    exit(EXIT_FAILURE);
 }
 
 void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &posedge_cnt){
@@ -72,6 +72,7 @@ int main(int argc, char**argv, char** env){
                     //dut->inst_in = (1<<20) | (1<<15) | (0<<12) | (1<<7) | (19);
             if(posedge_cnt>=3){
                 dut->inst_in = pmem_read(dut->pc);
+                
                 //dut->eval();
             }
         }
