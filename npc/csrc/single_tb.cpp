@@ -73,7 +73,7 @@ int main(int argc, char**argv, char** env){
             if(posedge_cnt>=3){
                 dut->inst_in = pmem_read(dut->pc);
                 
-                //dut->eval();
+                dut->eval();
             }
         }
         m_trace->dump(sim_time); //write all the traced signal values into our waveform dump file
