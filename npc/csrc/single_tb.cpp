@@ -3,6 +3,8 @@
 #include <verilated.h>
 #include <verilated_vcd_c.h>
 #include "Vysyx_22040237_rv_single_cyc_cpu_top.h"
+#include "Vysyx_22040237_rv_single_cyc_cpu_top__Dpi.h"
+
 //#include "Vrv_single_cyc_cpu_top__027unit.h"
 #include "include/npc_common.h"
 #include "include/mem.h"
