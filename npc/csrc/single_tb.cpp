@@ -35,7 +35,7 @@ void ebreak(){
     printf("1\n");
     delete dut;
     printf("2\n");
-    //exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
 }
 
 void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &posedge_cnt){
