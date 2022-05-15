@@ -32,9 +32,7 @@ void ebreak(){
     printf("sim_time %ld\n",sim_time);
     m_trace->dump(sim_time);
     m_trace->close();
-    printf("1\n");
     delete dut;
-    printf("2\n");
     exit(EXIT_SUCCESS);
 }
 
@@ -67,7 +65,7 @@ int main(int argc, char**argv, char** env){
         //dut_reset(dut, sim_time);
 
         dut->clk ^= 1;
-        dut->eval(); //evaluate all the signals in design
+        //dut->eval(); //evaluate all the signals in design
         if(dut->clk == 1){
             posedge_cnt++;  //count posedge 
             dut_reset(dut, posedge_cnt);
@@ -79,6 +77,7 @@ int main(int argc, char**argv, char** env){
                 //dut->eval();
             }
         }
+        dut->eval();
         m_trace->dump(sim_time); //write all the traced signal values into our waveform dump file
         sim_time++;
     }
