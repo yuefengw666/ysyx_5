@@ -13,16 +13,10 @@
 #define MAX_SIM_TIME 20
 vluint64_t sim_time = 0;
 vluint64_t posedge_cnt = 0;
-/*
-//instantiate top module
-Vysyx_22040237_rv_single_cyc_cpu_top *dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
 
-//set up waveform
-Verilated::traceEverOn(true);
-VerilatedVcdC *m_trace = new VerilatedVcdC;
-dut->trace(m_trace,5); //trace  5 level
-m_trace->open("./logs/wave.vcd");
-*/
+Vysyx_22040237_rv_single_cyc_cpu_top *dut;
+VerilatedVcdC *m_trace = NULL;
+
 #define imm 0
 #define rs1 0
 #define funt3 0
