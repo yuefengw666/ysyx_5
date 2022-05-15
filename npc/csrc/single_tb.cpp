@@ -7,8 +7,8 @@
 #include "Vysyx_22040237_rv_single_cyc_cpu_top__Dpi.h"
 
 //#include "Vrv_single_cyc_cpu_top__027unit.h"
-#include "include/npc_common.h"
-#include "include/mem.h"
+#include "npc_common.h"
+#include "mem.h"
 
 //word_t pmem_read(paddr_t addr);
 //void pmem_write(paddr_t addr, word_t data);
