@@ -74,6 +74,7 @@ int main(int argc, char**argv, char** env){
                 dut->inst_in = pmem_read(dut->pc);
                 
                 dut->eval();
+                printf("***!!!!\n");
             }
         }
         m_trace->dump(sim_time); //write all the traced signal values into our waveform dump file
