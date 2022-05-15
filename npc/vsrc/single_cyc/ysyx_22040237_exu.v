@@ -1,6 +1,7 @@
 import "DPI-C" function void ebreak();
 
 module ysyx_22040237_exu(
+  input clk,
   input rst,
 
   input [7:0] inst_opcode,

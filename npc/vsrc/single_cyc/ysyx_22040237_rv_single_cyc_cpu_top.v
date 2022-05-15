@@ -61,6 +61,7 @@ ysyx_22040237_idu ysyx_22040237_idu_u0(
 );
 
 ysyx_22040237_exu ysyx_22040237_exu_u0(
+  .clk (clk),
   .rst (rst),
   .inst_opcode (inst_opcode),
   .op1 (op1),
