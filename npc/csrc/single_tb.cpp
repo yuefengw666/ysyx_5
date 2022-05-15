@@ -28,7 +28,7 @@ VerilatedVcdC *m_trace = NULL;
 
 void ebreak(){
     printf("***********************ebreak*****************************\n");
-    m_trace->dump(sim_time);
+    //m_trace->dump(sim_time);
     m_trace->close();
     delete dut;
     exit(EXIT_SUCCESS);
