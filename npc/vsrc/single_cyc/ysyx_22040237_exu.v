@@ -25,7 +25,7 @@ always@(*)begin
   end
 end
 
-always@(posedge clk)begin
+always@(*)begin
   if(inst_ebreak) ebreak();
 end
 
