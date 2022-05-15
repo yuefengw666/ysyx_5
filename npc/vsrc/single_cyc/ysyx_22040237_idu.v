@@ -8,6 +8,9 @@ module ysyx_22040237_idu(
   output [63:0] op1,
   output [63:0] op2,
 
+  //no encode for ebreak for now
+  output inst_ebreak,
+
   output rs1_r_en,
   output [4:0] rs1_r_addr,
   output rs2_r_en,
@@ -22,6 +25,7 @@ wire [2:0] func3;
 wire [4:0] rs1;
 wire [11:0] imm;
 
+wire type_I;
 wire [5:0] inst_type;
 
 wire inst_addi;
@@ -34,9 +38,14 @@ assign imm = inst[31:20];
 
 // addi: func3:000, opcode:00100(11)
 assign inst_addi = opcode[0] & opcode[1] & ~opcode[2] & ~opcode[3] & opcode[4] & ~opcode[5] & ~opcode[6] & ~func3[0] & ~func3[1] & ~func3[2];
+//ebreak: 
+assign inst_ebreak = opcode[0] & opcode[1] & ~opcode[2] & ~opcode[3] & opcode[4] & opcode[5] & opcode[6] & ~func3[0] & ~func3[1] & ~func3[2];
+
+//judge I type
+assign type_I = inst_addi | inst_ebreak;
 
 // R [0], I [1], S [2], B [3], U [4], J [5]
-assign inst_type[1] = rst ? 1'b0 : inst_addi;
+assign inst_type[1] = rst ? 1'b0 : type_I;
 assign {inst_type[5:2], inst_type[0]} = 5'b0;
 
 //get inst opcode

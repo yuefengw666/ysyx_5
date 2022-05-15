@@ -14,12 +14,29 @@
 vluint64_t sim_time = 0;
 vluint64_t posedge_cnt = 0;
 
+//instantiate top module
+Vysyx_22040237_rv_single_cyc_cpu_top *dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
+
+//set up waveform
+Verilated::traceEverOn(true);
+VerilatedVcdC *m_trace = new VerilatedVcdC;
+dut->trace(m_trace,5); //trace  5 level
+m_trace->open("./logs/wave.vcd");
+
 #define imm 0
 #define rs1 0
 #define funt3 0
 #define rd 1
 #define opcode_addi 19
 #define opcode_ebreak 115
+
+void ebreak(){
+    printf("***********************ebreak*****************************\n");
+    m_trace->dump(sim_time);
+    m_trace->close();
+    delete dut;
+    exit(EXIT_SUCCESS);
+}
 
 void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &posedge_cnt){
     dut->rst = 0;
@@ -34,7 +51,7 @@ int main(int argc, char**argv, char** env){
     pmem_write(0x80000000,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
     pmem_write(0x80000004,(imm+2<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
     pmem_write(0x80000008,(imm+3<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
-
+/*
     //instantiate top module
     Vysyx_22040237_rv_single_cyc_cpu_top *dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
 
@@ -43,7 +60,7 @@ int main(int argc, char**argv, char** env){
     VerilatedVcdC *m_trace = new VerilatedVcdC;
     dut->trace(m_trace,5); //trace  5 level
     m_trace->open("./logs/wave.vcd");
-    
+*/    
     while(sim_time < MAX_SIM_TIME){
         //dut_reset(dut, sim_time);
 
@@ -56,7 +73,7 @@ int main(int argc, char**argv, char** env){
                 //case 3: 
                     //dut->inst_in = (1<<20) | (1<<15) | (0<<12) | (1<<7) | (19);
             if(posedge_cnt>=3){
-                dut->inst_in = pmem_read(dut->pc_o);
+                dut->inst_in = pmem_read(dut->pc);
                 dut->eval();
             }
         }

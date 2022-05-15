@@ -3,7 +3,7 @@ module ysyx_22040237_rv_single_cyc_cpu_top(
   input rst,
   input [31:0] inst_in,
 
-  output [31:0] pc_o,
+  output [31:0] pc,
   //************exclude warning for now
   output [63:0] rs2_data
 );
@@ -15,6 +15,8 @@ wire [63:0] rs1_data;
 //wire [63:0] rs2_data;
 
 //idu output 
+wire inst_ebreak;
+
 wire [7:0] inst_opcode;
 wire [63:0] op1;
 wire [63:0] op2;
@@ -32,7 +34,7 @@ wire [63:0] rd_data;
 ysyx_22040237_pc_reg ysyx_22040237_pc_reg_u0(
   .clk (clk),
   .rst (rst),
-  .pc_reg (pc_o)
+  .pc_reg (pc)
 );
 
 ysyx_22040237_ifu ysyx_22040237_ifu_u0(
@@ -43,6 +45,8 @@ ysyx_22040237_ifu ysyx_22040237_ifu_u0(
 ysyx_22040237_idu ysyx_22040237_idu_u0(
   .rst (rst),
   .inst (inst),
+
+  .inst_ebreak (inst_ebreak),
 
   .rs1_data (rs1_data),
   .inst_opcode (inst_opcode),
@@ -61,7 +65,8 @@ ysyx_22040237_exu ysyx_22040237_exu_u0(
   .inst_opcode (inst_opcode),
   .op1 (op1),
   .op2 (op2),
-  .rd_data (rd_data)
+  .rd_data (rd_data),
+  .inst_ebreak (inst_ebreak)
 );
 
 ysyx_22040237_reg_file ysyx_22040237_reg_file_u0(
