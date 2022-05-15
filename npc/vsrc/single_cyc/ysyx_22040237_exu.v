@@ -1,4 +1,4 @@
-import "DPI-C" function void ebreak();
+import "DPI-C" function void ebreak(vluint64_t sim_time);
 
 module ysyx_22040237_exu(
   input clk,

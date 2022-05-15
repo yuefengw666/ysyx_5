@@ -26,11 +26,10 @@ VerilatedVcdC* m_trace = NULL;
 #define opcode_addi 19
 #define opcode_ebreak 115
 
-void ebreak(){
+void ebreak(vluint64_t sim_time){
     printf("***********************ebreak*****************************\n");
-    //m_trace->dump(sim_time);
-    sim_time++;
-    //m_trace->close();
+    m_trace->dump(sim_time);
+    m_trace->close();
     printf("1\n");
     delete dut;
     printf("2\n");
