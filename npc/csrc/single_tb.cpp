@@ -16,8 +16,8 @@
 vluint64_t sim_time = 0;
 vluint64_t posedge_cnt = 0;
 
-Vysyx_22040237_rv_single_cyc_cpu_top *dut;
-VerilatedVcdC *m_trace = NULL;
+static Vysyx_22040237_rv_single_cyc_cpu_top* dut;
+VerilatedVcdC* m_trace = NULL;
 
 #define imm 0
 #define rs1 0
@@ -34,7 +34,7 @@ void ebreak(){
     printf("1\n");
     delete dut;
     printf("2\n");
-    exit(-1);
+    exit(EXIT_SUCCESS);
 }
 
 void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &posedge_cnt){
