@@ -53,12 +53,14 @@ int main(int argc, char**argv, char** env){
     pmem_write(0x80000008,(imm+3<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
     pmem_write(0x8000000c,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd-1<<7) | opcode_ebreak);
     //instantiate top module
-    Vysyx_22040237_rv_single_cyc_cpu_top *dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
+    //Vysyx_22040237_rv_single_cyc_cpu_top *dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
+    dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
 
     //set up waveform
     Verilated::traceEverOn(true);
-    VerilatedVcdC *m_trace = new VerilatedVcdC;
-    dut->trace(m_trace,5); //trace  5 level
+    //VerilatedVcdC *m_trace = new VerilatedVcdC;
+    m_trace = new VerilatedVcdC;
+    dut->trace(m_trace,99); //trace  5 level
     m_trace->open("./logs/wave.vcd");
     
     while(sim_time < MAX_SIM_TIME){
