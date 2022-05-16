@@ -10,8 +10,6 @@
 #include "include/npc_common.h"
 #include "include/mem.h"
 
-//word_t pmem_read(paddr_t addr);
-//void pmem_write(paddr_t addr, word_t data);
 
 #define MAX_SIM_TIME 20
 vluint64_t sim_time = 0;
@@ -29,7 +27,7 @@ VerilatedVcdC* m_trace = NULL;
 
 void ebreak(){
     printf("***********************ebreak*****************************\n");
-    printf("sim_time %ld\n",sim_time);
+    //printf("sim_time %ld\n",sim_time);
     m_trace->dump(sim_time);
     m_trace->close();
     delete dut;
@@ -50,6 +48,8 @@ int main(int argc, char**argv, char** env){
     pmem_write(0x80000004,(imm+2<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
     pmem_write(0x80000008,(imm+3<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
     pmem_write(0x8000000c,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd-1<<7) | opcode_ebreak);
+
+    Verilated::commandArgs(argc, argv);
     //instantiate top module
     //Vysyx_22040237_rv_single_cyc_cpu_top *dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
     dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
