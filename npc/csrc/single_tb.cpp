@@ -47,12 +47,13 @@ long img_size = 0;
 
 static long load_img() {
   if (img_file == NULL) {
-    Log("No image is given. Use the default build-in image.");
+    printf("No image is given. Use the default build-in image.");
     return 4096; // built-in image size
   }
 
   FILE *fp = fopen(img_file, "rb");
-  Assert(fp, "Can not open '%s'", img_file);
+  //Assert(fp, "Can not open '%s'", img_file);
+  assert(fp);
 
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);
@@ -70,7 +71,7 @@ static long load_img() {
 
 int parse_args(int argc, char *argv[]){
     if(argc == 2){
-        if(strlen(argc[1] != 0)){
+        if(strlen(argv[1] != 0)){
             img_file = argv[1];
             img_size = load_img();
         }
