@@ -13,6 +13,8 @@ VSRC = $(shell find $(abspath ./vsrc/single_cyc/) -name "*.v")
 CSRC = $(shell find $(abspath ./csrc) -name "*.cpp")
 #CSRC = ./csrc/single_tb.cpp
 
+IMG = ""
+
 ######################################################################
 # Set up variables
 
@@ -66,7 +68,7 @@ run: $(VSRC) $(CSRC)
 	@echo "-- RUN ---------------------"
 	@rm -rf logs
 	@mkdir -p logs
-	obj_dir/V$(TOP_DESIGN_NAME)
+	obj_dir/V$(TOP_DESIGN_NAME) $(IMG)
 
 	@echo
 	@echo "-- DONE --------------------"
