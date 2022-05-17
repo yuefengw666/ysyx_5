@@ -11,7 +11,7 @@
 #include "include/mem.h"
 
 
-#define MAX_SIM_TIME 20
+#define MAX_SIM_TIME 200
 vluint64_t sim_time = 0;
 vluint64_t posedge_cnt = 0;
 
@@ -111,7 +111,7 @@ int main(int argc, char**argv, char** env){
             //switch(posedge_cnt){
                 //case 3: 
                     //dut->inst_in = (1<<20) | (1<<15) | (0<<12) | (1<<7) | (19);
-            if(posedge_cnt>=3){
+            if(posedge_cnt>=2){
                 dut->inst_in = pmem_read(dut->pc);
                 printf("current PC:%x\tinst:%x\n",dut->pc,dut->inst_in);
                 dut->eval();
