@@ -45,7 +45,7 @@ void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &posedge_cn
 static char *img_file = NULL;
 long img_size = 0;
 
-static long load_img() {
+static long load_img(char *img_file) {
   if (img_file == NULL) {
     printf("No image is given. Use the default build-in image.");
     return 4096; // built-in image size
@@ -73,7 +73,7 @@ int parse_args(int argc, char *argv[]){
     if(argc == 2){
         if(strlen(argv[1]) != 0){
             img_file = argv[1];
-            img_size = load_img();
+            img_size = load_img(img_file);
         }
     }
     return 0;
