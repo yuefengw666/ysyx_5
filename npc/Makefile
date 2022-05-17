@@ -68,7 +68,7 @@ run: $(VSRC) $(CSRC)
 	@echo "-- RUN ---------------------"
 	@rm -rf logs
 	@mkdir -p logs
-	obj_dir/V$(TOP_DESIGN_NAME) $(IMG)
+	obj_dir/V$(TOP_DESIGN_NAME)
 
 	@echo
 	@echo "-- DONE --------------------"
