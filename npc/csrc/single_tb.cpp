@@ -105,8 +105,12 @@ int main(int argc, char**argv, char** env){
         //dut_reset(dut, sim_time);
         if(sim_time <2 ){
             dut->rst = 1;
+            dut->eval();
         }
-        else { dut->rst = 0;}
+        else { 
+            dut->rst = 0;
+            dut->eval();
+        }
 
         dut->clk ^= 1;
         dut->eval(); //evaluate all the signals in design
