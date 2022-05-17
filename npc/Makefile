@@ -42,6 +42,11 @@ VERILATOR_FLAGS += --build
 #VERILATOR_INPUT = $(DESIGN_NAME).v $(SIM_NAME).cpp
 
 ######################################################################
+	#@ech
+	#@echo "-- COVERAGE ----------------"
+	#@rm -rf logs/annotated
+	#$(VERILATOR_COVERAGE) --annotate logs/annotated logs/coverage.dat
+######################################################################
 
 default: run
 
@@ -61,12 +66,7 @@ run: $(VSRC) $(CSRC)
 	@echo "-- RUN ---------------------"
 	@rm -rf logs
 	@mkdir -p logs
-	obj_dir/V$(TOP_DESIGN_NAME) +trace
-
-	#@ech
-	#@echo "-- COVERAGE ----------------"
-	#@rm -rf logs/annotated
-	#$(VERILATOR_COVERAGE) --annotate logs/annotated logs/coverage.dat
+	obj_dir/V$(TOP_DESIGN_NAME)
 
 	@echo
 	@echo "-- DONE --------------------"
