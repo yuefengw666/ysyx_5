@@ -103,7 +103,7 @@ int main(int argc, char**argv, char** env){
     dut->rst = 0;
     while(sim_time < MAX_SIM_TIME){
         //dut_reset(dut, sim_time);
-        if(sim <2 ){
+        if(sim_time <2 ){
             dut->rst = 1;
         }
         else { dut->rst = 0;}
