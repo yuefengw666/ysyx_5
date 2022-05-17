@@ -103,20 +103,11 @@ int main(int argc, char**argv, char** env){
     dut->rst = 0;
     while(sim_time < MAX_SIM_TIME){
         //dut_reset(dut, sim_time);
-        if(sim_time <2 ){
-            dut->rst = 1;
-            dut->eval();
-        }
-        else { 
-            dut->rst = 0;
-            dut->eval();
-        }
-
         dut->clk ^= 1;
         dut->eval(); //evaluate all the signals in design
         if(dut->clk == 1){
             posedge_cnt++;  //count posedge 
-            //dut_reset(dut, posedge_cnt);
+            dut_reset(dut, posedge_cnt);
             //switch(posedge_cnt){
                 //case 3: 
                     //dut->inst_in = (1<<20) | (1<<15) | (0<<12) | (1<<7) | (19);
