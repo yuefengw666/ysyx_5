@@ -38,7 +38,6 @@ void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &posedge_cn
     dut->rst = 0;
     if(posedge_cnt < 3){
         dut->rst = 1;
-        dut->eval();
         //dut-inst_in = 0x00000000;
     }
 }
@@ -100,9 +99,14 @@ int main(int argc, char**argv, char** env){
     m_trace = new VerilatedVcdC;
     dut->trace(m_trace,99); //trace  5 level
     m_trace->open("./logs/wave.vcd");
-    
+
+    dut->rst = 0;
     while(sim_time < MAX_SIM_TIME){
         //dut_reset(dut, sim_time);
+        if(sim <2 ){
+            dut->rst = 1
+        }
+        else { dut->rst = 0}
 
         dut->clk ^= 1;
         dut->eval(); //evaluate all the signals in design
