@@ -71,7 +71,7 @@ static long load_img(char *img_file) {
 
 int parse_args(int argc, char *argv[]){
     if(argc == 2){
-        if(strlen(argc[1]) != 0){
+        if(strlen(argv[1]) != 0){
             img_file = argv[1];
             img_size = load_img(img_file);
         }
