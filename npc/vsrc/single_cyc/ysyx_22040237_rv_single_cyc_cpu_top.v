@@ -44,6 +44,7 @@ ysyx_22040237_ifu ysyx_22040237_ifu_u0(
 
 ysyx_22040237_idu ysyx_22040237_idu_u0(
   .rst (rst),
+  .pc (pc),
   .inst (inst),
 
   .inst_ebreak (inst_ebreak),
