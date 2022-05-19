@@ -208,9 +208,17 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceFullSub0(Vysyx_2204023
                                            & vlSelf->inst_in)))));
         tracep->fullIData(oldp+90,((((- (IData)((vlSelf->inst_in 
                                                  >> 0x1fU))) 
-                                     << 0x15U) | (0xff000U 
-                                                  & (vlSelf->inst_in 
-                                                     >> 0xcU)))),32);
+                                     << 0x15U) | ((0x100000U 
+                                                   & (vlSelf->inst_in 
+                                                      >> 0xbU)) 
+                                                  | ((0xff000U 
+                                                      & vlSelf->inst_in) 
+                                                     | ((0x800U 
+                                                         & (vlSelf->inst_in 
+                                                            >> 9U)) 
+                                                        | (0x7feU 
+                                                           & (vlSelf->inst_in 
+                                                              >> 0x14U))))))),32);
         tracep->fullQData(oldp+91,(((IData)(vlSelf->rst)
                                      ? 0ULL : ((0x11U 
                                                 == (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode))
