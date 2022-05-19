@@ -73,7 +73,7 @@ assign src_j = { {11{imm_u_j[19]}}, imm_u_j[19], imm_u_j[7:0], imm_u_j[8], imm_u
 
 // addi: func3:000, opcode:0010011
 assign inst_addi = opcode[0] & opcode[1] & ~opcode[2] & ~opcode[3] & opcode[4] & ~opcode[5] & ~opcode[6] & ~func3[0] & ~func3[1] & ~func3[2];
-//ebreak: 
+//ebreak: 1110011
 assign inst_ebreak = opcode[0] & opcode[1] & ~opcode[2] & ~opcode[3] & opcode[4] & opcode[5] & opcode[6] & ~func3[0] & ~func3[1] & ~func3[2];
 
 //dummy
