@@ -85,7 +85,7 @@ int parse_args(int argc, char *argv[]){
 
 int main(int argc, char**argv, char** env){
 
-    pmem_write(0x80000000,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
+    //pmem_write(0x80000000,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
     //pmem_write(0x80000004,(imm+3<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
     //pmem_write(0x80000008,(imm<<20) | (rs1<<15) | (funt3+1<<12) | (rd+1<<7) | opcode_auipc);
     //pmem_write(0x8000000c,(imm<<20) | (rs1<<15) | (funt3+1<<12) | (rd+1<<7) | opcode_auipc);
