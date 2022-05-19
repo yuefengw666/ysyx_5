@@ -35,6 +35,7 @@ wire [19:0] imm_u_j;
 
 wire [63:0] src_i;
 wire [63:0] src_u;
+wire [31:0] src_j;
 
 wire type_R;
 wire type_I;
