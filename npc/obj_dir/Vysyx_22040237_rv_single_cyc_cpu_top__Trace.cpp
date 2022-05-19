@@ -65,9 +65,9 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceChgSub0(Vysyx_22040237
             tracep->chgCData(oldp+70,(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rs1_r_addr),5);
             tracep->chgBit(oldp+71,(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_w_en));
             tracep->chgCData(oldp+72,(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_w_addr),5);
-            tracep->chgBit(oldp+73,(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_auipc));
-            tracep->chgCData(oldp+74,(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type),6);
-            tracep->chgBit(oldp+75,(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi));
+            tracep->chgCData(oldp+73,(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type),6);
+            tracep->chgBit(oldp+74,(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi));
+            tracep->chgBit(oldp+75,(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_auipc));
             tracep->chgBit(oldp+76,(((IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_w_en) 
                                      & (0U != (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_w_addr)))));
         }
@@ -117,6 +117,13 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceChgSub0(Vysyx_22040237
                                                   == 
                                                   (0x707fU 
                                                    & vlSelf->inst_in)))))));
+        tracep->chgBit(oldp+99,((1U & ((IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_auipc) 
+                                       | (IData)((0x37U 
+                                                  == 
+                                                  (0x7fU 
+                                                   & vlSelf->inst_in)))))));
+        tracep->chgBit(oldp+100,((IData)((0x37U == 
+                                          (0x7fU & vlSelf->inst_in)))));
     }
 }
 

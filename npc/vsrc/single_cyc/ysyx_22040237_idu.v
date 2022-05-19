@@ -85,11 +85,11 @@ assign inst_type = { type_J, type_U, type_B, type_S, type_I, type_R};
 
 //get inst opcode
 //INST_ADD->8'h11
-assign inst_opcode[0] = rst ? 1'b0 : ( inst_addi | inst_auipc );
+assign inst_opcode[0] = rst ? 1'b0 : ( inst_addi | inst_auipc | inst_lui);
 assign inst_opcode[1] = rst ? 1'b0 : 0;
 assign inst_opcode[2] = rst ? 1'b0 : 0;
 assign inst_opcode[3] = rst ? 1'b0 : 0;
-assign inst_opcode[4] = rst ? 1'b0 : ( inst_addi | inst_auipc );
+assign inst_opcode[4] = rst ? 1'b0 : ( inst_addi | inst_auipc | inst_lui);
 assign inst_opcode[5] = rst ? 1'b0 : 0;
 assign inst_opcode[6] = rst ? 1'b0 : 0;
 assign inst_opcode[7] = rst ? 1'b0 : 0;
