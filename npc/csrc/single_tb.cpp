@@ -81,10 +81,10 @@ int parse_args(int argc, char *argv[]){
 
 int main(int argc, char**argv, char** env){
 
-    //pmem_write(0x80000000,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
-    //pmem_write(0x80000004,(imm+2<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
-    //pmem_write(0x80000008,(imm+3<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
-    //pmem_write(0x8000000c,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd-1<<7) | opcode_ebreak);
+    pmem_write(0x80000000,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
+    pmem_write(0x80000004,(imm+2<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
+    pmem_write(0x80000008,(imm+3<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
+    pmem_write(0x8000000c,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd-1<<7) | opcode_ebreak);
 
     parse_args(argc,argv);
 
@@ -111,7 +111,7 @@ int main(int argc, char**argv, char** env){
             //switch(posedge_cnt){
                 //case 3: 
                     //dut->inst_in = (1<<20) | (1<<15) | (0<<12) | (1<<7) | (19);
-            if(posedge_cnt>=2){
+            if(dut->rst != 1){
                 dut->inst_in = pmem_read(dut->pc);
                 printf("current PC:%x\tinst:%x\n",dut->pc,dut->inst_in);
                 dut->eval();
