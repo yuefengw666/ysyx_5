@@ -27,6 +27,7 @@ VerilatedVcdC* m_trace = NULL;
 #define opcode_auipc 23
 #define opcode_lui 55
 #define opcode_jal 111
+#define opcode_jalr 103
 
 void ebreak(){
     printf("***********************ebreak*****************************\n");
@@ -85,13 +86,15 @@ int parse_args(int argc, char *argv[]){
 int main(int argc, char**argv, char** env){
 
     pmem_write(0x80000000,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
-    pmem_write(0x80000004,(imm+2<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
+    pmem_write(0x80000004,(imm+3<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
     //pmem_write(0x80000008,(imm<<20) | (rs1<<15) | (funt3+1<<12) | (rd+1<<7) | opcode_auipc);
     //pmem_write(0x8000000c,(imm<<20) | (rs1<<15) | (funt3+1<<12) | (rd+1<<7) | opcode_auipc);
     //pmem_write(0x80000010,(imm<<20) | (rs1<<15) | (funt3+1<<12) | (rd+2<<7) | opcode_lui);
     //pmem_write(0x80000014,(imm<<20) | (rs1<<15) | (funt3+2<<12) | (rd+2<<7) | opcode_lui);
-    pmem_write(0x80000008,(0<<31)|(2<<21) | (0<<20) | (0<<12) | (rd+3<<7) | opcode_jal); // pc = pc + 4(offset) reg4 = pc+4
-    pmem_write(0x8000000c,(0<<31)|(2<<21) | (0<<20) | (0<<12) | (rd+3<<7) | opcode_jal); // pc = pc + 4(offset) reg4 = pc+4
+    //pmem_write(0x80000008,(0<<31)|(2<<21) | (0<<20) | (0<<12) | (rd+3<<7) | opcode_jal); // pc = pc + 4(offset) reg4 = pc+4
+    //pmem_write(0x8000000c,(0<<31)|(2<<21) | (0<<20) | (0<<12) | (rd+3<<7) | opcode_jal); // pc = pc + 4(offset) reg4 = pc+4
+    pmem_write(0x80000008,(imm+8<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_jalr); //pc = 8(imm) + 4(rs1:4)=c reg1 = pc + 4 = c
+    pmem_write(0x8000000c,(imm+4<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_jalr); //pc = 4(imm) + c(rs1:c) = 10 reg1 = pc + 4=10
 
     pmem_write(0x80000010,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd-1<<7) | opcode_ebreak);
 
