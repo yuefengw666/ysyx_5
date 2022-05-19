@@ -22,7 +22,7 @@ wire [63:0] op1;
 wire [63:0] op2;
 
 wire jump_flag;
-wire [63:0] jump_offset;
+wire [31:0] jump_offset;
 
 wire rs1_r_en;
 wire [4:0] rs1_r_addr;

@@ -86,9 +86,13 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceChgSub0(Vysyx_22040237
                                     : 0ULL)),64);
         tracep->chgBit(oldp+88,((IData)((0x73U == (0x707fU 
                                                    & vlSelf->inst_in)))));
-        tracep->chgQData(oldp+89,((QData)((IData)((0xff000U 
-                                                   & (vlSelf->inst_in 
-                                                      >> 0xcU))))),64);
+        tracep->chgQData(oldp+89,((((- (QData)((IData)(
+                                                       (vlSelf->inst_in 
+                                                        >> 0x1fU)))) 
+                                    << 0x15U) | (QData)((IData)(
+                                                                (0xff000U 
+                                                                 & (vlSelf->inst_in 
+                                                                    >> 0xcU)))))),64);
         tracep->chgQData(oldp+91,(((IData)(vlSelf->rst)
                                     ? 0ULL : ((0x11U 
                                                == (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode))

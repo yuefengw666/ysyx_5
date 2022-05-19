@@ -2,7 +2,7 @@ module ysyx_22040237_pc_reg(
   input clk,
   input rst,
   input jump_flag,
-  input [63:0] jump_offset,
+  input [31:0] jump_offset,
   output reg [31:0] pc_reg 
 );
 
