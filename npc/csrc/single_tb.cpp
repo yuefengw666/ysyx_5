@@ -36,7 +36,7 @@ void ebreak(){
 
 void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &posedge_cnt){
     dut->rst = 0;
-    if(posedge_cnt < 4){
+    if(posedge_cnt < 3){
         dut->rst = 1;
         //dut-inst_in = 0x00000000;
     }
