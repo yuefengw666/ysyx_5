@@ -133,7 +133,10 @@ VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__
                | (QData)((IData)((vlSelf->inst_in >> 0x14U))));
     } else if ((0x10U == (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))) {
         vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__op2 
-            = (QData)((IData)((0xfffff000U & vlSelf->inst_in)));
+            = (((QData)((IData)((- (IData)((vlSelf->inst_in 
+                                            >> 0x1fU))))) 
+                << 0x20U) | (QData)((IData)((0xfffff000U 
+                                             & vlSelf->inst_in))));
     }
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_w_addr = 0U;
     if ((2U == (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))) {

@@ -115,7 +115,7 @@ always@(*)begin
     end
     6'b010000:begin
       if(inst_auipc)begin
-        op1 = pc; 
+        op1 = {32'b0,pc}; 
       end
       else begin
         op1 = 'b0;
@@ -124,10 +124,10 @@ always@(*)begin
       rd_w_en = 1'b1;
       rd_w_addr = rd;
     end
-    //default:begin
-    //  op1 = 'b0;
-    //  op2 = 'b0;
-    //end
+    default:begin
+      op1 = 'b0;
+      op2 = 'b0;
+    end
   endcase
 end
 
