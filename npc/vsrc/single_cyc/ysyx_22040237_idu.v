@@ -66,7 +66,7 @@ assign src_i = { {52{imm_i[11]}},imm_i};
 //U
 assign src_u = { {32{imm_u_j[19]}}, imm_u_j, 12'b0};
 //J
-assign src_j = { {11{imm_u_j[19]}}, imm_u_j[19], imm_u_j[7:0], imm_u_j[8], imm_u_j[18:9], 1'b0};
+assign src_j = { {11{imm_u_j[19]}}, imm_u_j[19], imm_u_j[7:0], imm_u_j[8], imm_u_j[18:9], 1'b0};//??src_j[0]
 
 // addi: func3:000, opcode:00100(11)
 assign inst_addi = opcode[0] & opcode[1] & ~opcode[2] & ~opcode[3] & opcode[4] & ~opcode[5] & ~opcode[6] & ~func3[0] & ~func3[1] & ~func3[2];
