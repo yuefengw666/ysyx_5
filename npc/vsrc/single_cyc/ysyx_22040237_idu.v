@@ -41,6 +41,7 @@ wire [5:0] inst_type;
 
 wire inst_addi;
 wire inst_auipc;
+wire inst_lui;
 
 //parse inst
 assign opcode = inst[6:0];
@@ -68,13 +69,15 @@ assign inst_ebreak = opcode[0] & opcode[1] & ~opcode[2] & ~opcode[3] & opcode[4]
 //dummy
 //auipc: opcode:0010111
 assign inst_auipc = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & opcode[4] & ~opcode[5] & ~opcode[6];
+//lui: opcode: 0110111
+assign inst_lui = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & opcode[4] & opcode[5] & ~opcode[6];
 
 //judge type
 assign type_R = 1'b0;
 assign type_I = inst_addi | inst_ebreak;
 assign type_S = 1'b0;
 assign type_B = 1'b0;
-assign type_U = inst_auipc;
+assign type_U = inst_auipc | inst_lui;
 assign type_J = 1'b0;
 
 // R [0], I [1], S [2], B [3], U [4], J [5]
