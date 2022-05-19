@@ -13,7 +13,6 @@ module ysyx_22040237_idu(
   
   //jal pc offset;
   output jump_flag,
-  output [31:0] src_j,
 
   //no encode for ebreak for now
   output inst_ebreak,
@@ -132,8 +131,8 @@ always@(*)begin
       if(inst_jalr)begin
         op1 = { 32'b0, pc};
         op2 = 64'h4;
-        op1_jump = rs1_data;
-        op2_jump = src_i;
+        op1_jump = rs1_data[31:0];
+        op2_jump = src_i[31:0];
       end
       else begin
         op1 = rs1_data;
