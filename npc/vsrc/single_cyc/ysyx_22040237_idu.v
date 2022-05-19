@@ -8,6 +8,8 @@ module ysyx_22040237_idu(
   output [7:0] inst_opcode,
   output reg [63:0] op1,
   output reg [63:0] op2,
+  output reg [31:0] op1_jump,
+  output reg [31:0] op2_jump,
   
   //jal pc offset;
   output jump_flag,
@@ -47,6 +49,7 @@ wire inst_addi;
 wire inst_auipc;
 wire inst_lui;
 wire inst_jal;
+wire inst_jalr;
 
 //parse inst
 assign opcode = inst[6:0];
@@ -80,10 +83,12 @@ assign inst_auipc = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & opcode[4] &
 assign inst_lui = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & opcode[4] & opcode[5] & ~opcode[6];
 //jal: 1101111
 assign inst_jal = opcode[0] & opcode[1] & opcode[2] & opcode[3] & ~opcode[4] & opcode[5] & opcode[6];
+//jalr: 1100111
+assign inst_jalr = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & ~opcode[4] & opcode[5] & opcode[6];
 
 //judge type
 assign type_R = 1'b0;
-assign type_I = inst_addi | inst_ebreak;
+assign type_I = inst_addi | inst_ebreak | inst_jalr;
 assign type_S = 1'b0;
 assign type_B = 1'b0;
 assign type_U = inst_auipc | inst_lui;
@@ -93,12 +98,12 @@ assign type_J = inst_jal;
 assign inst_type = { type_J, type_U, type_B, type_S, type_I, type_R};
 
 //get inst opcode
-//INST_ADD->8'h11
-assign inst_opcode[0] = rst ? 1'b0 : ( inst_addi | inst_auipc | inst_lui | inst_jal);
+//INST_ADD->8'h01  INSR_ADD_PC -> 8'h10
+assign inst_opcode[0] = rst ? 1'b0 : ( inst_addi | inst_auipc | inst_lui | inst_jal | inst_jalr );
 assign inst_opcode[1] = rst ? 1'b0 : 0;
 assign inst_opcode[2] = rst ? 1'b0 : 0;
 assign inst_opcode[3] = rst ? 1'b0 : 0;
-assign inst_opcode[4] = rst ? 1'b0 : ( inst_addi | inst_auipc | inst_lui | inst_jal);
+assign inst_opcode[4] = rst ? 1'b0 : 0;
 assign inst_opcode[5] = rst ? 1'b0 : 0;
 assign inst_opcode[6] = rst ? 1'b0 : 0;
 assign inst_opcode[7] = rst ? 1'b0 : 0;
@@ -109,6 +114,8 @@ assign inst_opcode[7] = rst ? 1'b0 : 0;
 always@(*)begin
   op1 = 'b0;
   op2 = 'b0;
+  op1_jump = 'b0;
+  op2_jump = 'b0;
   rs1_r_en = 1'b0;
   rs1_r_addr = 'b0;
   rs2_r_en = 1'b0;
@@ -118,12 +125,20 @@ always@(*)begin
 
   case(inst_type)
     `ysyx_22040237_INST_I:begin
-      op1 = rs1_data;
-      op2 = src_i;
-      rs1_r_en = 1'b1;
-      rs1_r_addr = rs1;
-      rd_w_en = 1'b1;
-      rd_w_addr = rd;
+        rs1_r_en = 1'b1;
+        rs1_r_addr = rs1;
+        rd_w_en = 1'b1;
+        rd_w_addr = rd;
+      if(inst_jalr)begin
+        op1 = { 32'b0, pc};
+        op2 = 64'h4;
+        op1_jump = rs1_data;
+        op2_jump = src_i;
+      end
+      else begin
+        op1 = rs1_data;
+        op2 = src_i;
+      end
     end
     `ysyx_22040237_INST_U:begin
       if(inst_auipc)begin
@@ -139,6 +154,8 @@ always@(*)begin
     `ysyx_22040237_INST_J:begin
       op1 = {32'b0, pc};
       op2 = 64'h4;
+      op1_jump = pc;
+      op2_jump = src_j;
       rd_w_en = 1'b1;
       rd_w_addr = rd;
     end
@@ -149,7 +166,7 @@ always@(*)begin
   endcase
 end
 
-assign jump_flag = inst_jal;
+assign jump_flag = inst_jal | inst_jalr;
 /*
 //generate reg write and read enable
 assign rs1_r_en = rst ? 1'b0 : inst_type[1];
