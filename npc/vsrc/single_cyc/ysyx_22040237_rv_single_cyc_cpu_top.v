@@ -21,6 +21,9 @@ wire [7:0] inst_opcode;
 wire [63:0] op1;
 wire [63:0] op2;
 
+wire jump_flag;
+wire [63:0] jump_offset;
+
 wire rs1_r_en;
 wire [4:0] rs1_r_addr;
 wire rs2_r_en;
@@ -34,6 +37,9 @@ wire [63:0] rd_data;
 ysyx_22040237_pc_reg ysyx_22040237_pc_reg_u0(
   .clk (clk),
   .rst (rst),
+  .jump_flag (jump_flag),
+  .jump_offset (jump_offset),
+  
   .pc_reg (pc)
 );
 
@@ -48,6 +54,8 @@ ysyx_22040237_idu ysyx_22040237_idu_u0(
   .inst (inst),
 
   .inst_ebreak (inst_ebreak),
+  .jump_flag (jump_flag),
+  .src_j (jump_offset);
 
   .rs1_data (rs1_data),
   .inst_opcode (inst_opcode),

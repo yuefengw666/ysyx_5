@@ -8,6 +8,10 @@ module ysyx_22040237_idu(
   output [7:0] inst_opcode,
   output reg [63:0] op1,
   output reg [63:0] op2,
+  
+  //jal pc offset;
+  output jump_flag,
+  output [63:0] src_j,
 
   //no encode for ebreak for now
   output inst_ebreak,
@@ -26,7 +30,7 @@ wire [2:0] func3;
 wire [4:0] rs1;
 wire [11:0] imm_i;
 
-wire [19:0] imm_u;
+wire [19:0] imm_u_j;
 
 wire [63:0] src_i;
 wire [63:0] src_u;
@@ -42,6 +46,7 @@ wire [5:0] inst_type;
 wire inst_addi;
 wire inst_auipc;
 wire inst_lui;
+wire inst_jal;
 
 //parse inst
 assign opcode = inst[6:0];
@@ -52,14 +57,16 @@ assign func3 = inst[14:12];
 assign rs1 = inst[19:15];
 assign imm_i = inst[31:20];
 
-//U type
-assign imm_u = inst[31:12];
+//U J type
+assign imm_u_j = inst[31:12];
 
 //imm extension
 //I
 assign src_i = { {52{imm_i[11]}},imm_i};
 //U
-assign src_u = { {32{imm_u[19]}}, imm_u, 12'b0};
+assign src_u = { {32{imm_u_j[19]}}, imm_u_j, 12'b0};
+//J
+assign src_j = { {43{imm_u_j[31]}}, imm_u_j[31], imm_u_j[19:12], imm_u_j[20], imm_u_j[30:21], 1'b0};
 
 // addi: func3:000, opcode:00100(11)
 assign inst_addi = opcode[0] & opcode[1] & ~opcode[2] & ~opcode[3] & opcode[4] & ~opcode[5] & ~opcode[6] & ~func3[0] & ~func3[1] & ~func3[2];
@@ -71,6 +78,8 @@ assign inst_ebreak = opcode[0] & opcode[1] & ~opcode[2] & ~opcode[3] & opcode[4]
 assign inst_auipc = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & opcode[4] & ~opcode[5] & ~opcode[6];
 //lui: opcode: 0110111
 assign inst_lui = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & opcode[4] & opcode[5] & ~opcode[6];
+//jal: 1101111
+assign inst_jal = opcode[0] & opcode[1] & opcode[2] & opcode[3] & ~opcode[4] & opcode[5] & opcode[6];
 
 //judge type
 assign type_R = 1'b0;
@@ -78,18 +87,18 @@ assign type_I = inst_addi | inst_ebreak;
 assign type_S = 1'b0;
 assign type_B = 1'b0;
 assign type_U = inst_auipc | inst_lui;
-assign type_J = 1'b0;
+assign type_J = inst_jal;
 
 // R [0], I [1], S [2], B [3], U [4], J [5]
 assign inst_type = { type_J, type_U, type_B, type_S, type_I, type_R};
 
 //get inst opcode
 //INST_ADD->8'h11
-assign inst_opcode[0] = rst ? 1'b0 : ( inst_addi | inst_auipc | inst_lui);
+assign inst_opcode[0] = rst ? 1'b0 : ( inst_addi | inst_auipc | inst_lui | inst_jal);
 assign inst_opcode[1] = rst ? 1'b0 : 0;
 assign inst_opcode[2] = rst ? 1'b0 : 0;
 assign inst_opcode[3] = rst ? 1'b0 : 0;
-assign inst_opcode[4] = rst ? 1'b0 : ( inst_addi | inst_auipc | inst_lui);
+assign inst_opcode[4] = rst ? 1'b0 : ( inst_addi | inst_auipc | inst_lui | inst_jal);
 assign inst_opcode[5] = rst ? 1'b0 : 0;
 assign inst_opcode[6] = rst ? 1'b0 : 0;
 assign inst_opcode[7] = rst ? 1'b0 : 0;
@@ -108,7 +117,7 @@ always@(*)begin
   rd_w_addr = 'b0;
 
   case(inst_type)
-    6'b000010:begin
+    `ysyx_22040237_INST_I:begin
       op1 = rs1_data;
       op2 = src_i;
       rs1_r_en = 1'b1;
@@ -116,7 +125,7 @@ always@(*)begin
       rd_w_en = 1'b1;
       rd_w_addr = rd;
     end
-    6'b010000:begin
+    `ysyx_22040237_INST_U:begin
       if(inst_auipc)begin
         op1 = {32'b0,pc}; 
       end
@@ -127,6 +136,12 @@ always@(*)begin
       rd_w_en = 1'b1;
       rd_w_addr = rd;
     end
+    `yxyx_22040237_INST_J:begin
+      op1 = pc;
+      op2 = 32'h4;
+      rd_w_en = 1'b1;
+      rd_w_addr = rd;
+    end
     default:begin
       op1 = 'b0;
       op2 = 'b0;
@@ -134,6 +149,7 @@ always@(*)begin
   endcase
 end
 
+assign jump_flag = inst_jal;
 /*
 //generate reg write and read enable
 assign rs1_r_en = rst ? 1'b0 : inst_type[1];
