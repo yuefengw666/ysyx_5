@@ -55,10 +55,9 @@ VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___sequent__TOP
     }
     vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000U
                    : ((IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_jal)
-                       ? (vlSelf->pc + (((IData)((0x7ffffffffffULL 
-                                                  & (- (QData)((IData)(
-                                                                       (vlSelf->inst_in 
-                                                                        >> 0x1fU)))))) 
+                       ? (vlSelf->pc + (((- (IData)(
+                                                    (vlSelf->inst_in 
+                                                     >> 0x1fU))) 
                                          << 0x15U) 
                                         | (0xff000U 
                                            & (vlSelf->inst_in 

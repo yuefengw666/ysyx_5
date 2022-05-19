@@ -86,44 +86,42 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceChgSub0(Vysyx_22040237
                                     : 0ULL)),64);
         tracep->chgBit(oldp+88,((IData)((0x73U == (0x707fU 
                                                    & vlSelf->inst_in)))));
-        tracep->chgQData(oldp+89,((((- (QData)((IData)(
-                                                       (vlSelf->inst_in 
-                                                        >> 0x1fU)))) 
-                                    << 0x15U) | (QData)((IData)(
-                                                                (0xff000U 
-                                                                 & (vlSelf->inst_in 
-                                                                    >> 0xcU)))))),64);
-        tracep->chgQData(oldp+91,(((IData)(vlSelf->rst)
+        tracep->chgIData(oldp+89,((((- (IData)((vlSelf->inst_in 
+                                                >> 0x1fU))) 
+                                    << 0x15U) | (0xff000U 
+                                                 & (vlSelf->inst_in 
+                                                    >> 0xcU)))),32);
+        tracep->chgQData(oldp+90,(((IData)(vlSelf->rst)
                                     ? 0ULL : ((0x11U 
                                                == (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode))
                                                ? (vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__op1 
                                                   + vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__op2)
                                                : 0ULL))),64);
-        tracep->chgCData(oldp+93,((0x7fU & vlSelf->inst_in)),7);
-        tracep->chgCData(oldp+94,((0x1fU & (vlSelf->inst_in 
+        tracep->chgCData(oldp+92,((0x7fU & vlSelf->inst_in)),7);
+        tracep->chgCData(oldp+93,((0x1fU & (vlSelf->inst_in 
                                             >> 7U))),5);
-        tracep->chgCData(oldp+95,((7U & (vlSelf->inst_in 
+        tracep->chgCData(oldp+94,((7U & (vlSelf->inst_in 
                                          >> 0xcU))),3);
-        tracep->chgCData(oldp+96,((0x1fU & (vlSelf->inst_in 
+        tracep->chgCData(oldp+95,((0x1fU & (vlSelf->inst_in 
                                             >> 0xfU))),5);
-        tracep->chgSData(oldp+97,((vlSelf->inst_in 
+        tracep->chgSData(oldp+96,((vlSelf->inst_in 
                                    >> 0x14U)),12);
-        tracep->chgIData(oldp+98,((vlSelf->inst_in 
+        tracep->chgIData(oldp+97,((vlSelf->inst_in 
                                    >> 0xcU)),20);
-        tracep->chgQData(oldp+99,((((- (QData)((IData)(
+        tracep->chgQData(oldp+98,((((- (QData)((IData)(
                                                        (vlSelf->inst_in 
                                                         >> 0x1fU)))) 
                                     << 0xcU) | (QData)((IData)(
                                                                (vlSelf->inst_in 
                                                                 >> 0x14U))))),64);
-        tracep->chgQData(oldp+101,((((QData)((IData)(
+        tracep->chgQData(oldp+100,((((QData)((IData)(
                                                      (- (IData)(
                                                                 (vlSelf->inst_in 
                                                                  >> 0x1fU))))) 
                                      << 0x20U) | (QData)((IData)(
                                                                  (0xfffff000U 
                                                                   & vlSelf->inst_in))))),64);
-        tracep->chgBit(oldp+103,((1U & ((IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi) 
+        tracep->chgBit(oldp+102,((1U & ((IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi) 
                                         | (IData)((0x73U 
                                                    == 
                                                    (0x707fU 
