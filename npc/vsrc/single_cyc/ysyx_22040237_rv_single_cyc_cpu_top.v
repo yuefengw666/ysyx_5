@@ -55,7 +55,7 @@ ysyx_22040237_idu ysyx_22040237_idu_u0(
 
   .inst_ebreak (inst_ebreak),
   .jump_flag (jump_flag),
-  .src_j (jump_offset);
+  .src_j (jump_offset),
 
   .rs1_data (rs1_data),
   .inst_opcode (inst_opcode),

@@ -136,7 +136,7 @@ always@(*)begin
       rd_w_en = 1'b1;
       rd_w_addr = rd;
     end
-    `yxyx_22040237_INST_J:begin
+    `ysyx_22040237_INST_J:begin
       op1 = pc;
       op2 = 32'h4;
       rd_w_en = 1'b1;
