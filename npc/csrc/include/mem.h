@@ -1,4 +1,4 @@
-#include "npc_common.h"
+//#include "npc_common.h"
 
 uint8_t* guest_to_host(paddr_t paddr);
 static inline word_t host_read(void *addr);
