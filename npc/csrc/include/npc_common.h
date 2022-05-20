@@ -18,7 +18,7 @@ typedef struct {
   vaddr_t pc;
 } NPC_CPU;
 
-//extern CPU_state npc_cpu;
+extern NPC_CPU npc_cpu;
 
 
 // ----------- state -----------
