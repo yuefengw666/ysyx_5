@@ -17,7 +17,7 @@ typedef struct
 {
   word_t gpr[32];
   vaddr_t pc;
-} npcsaddasstate;
+} NPC_state;
 
 //extern CPU_state npc_cpu;
 
