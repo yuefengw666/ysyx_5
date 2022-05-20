@@ -10,7 +10,7 @@
 #include "npc_common.h"
 #include "mem.h"
 
-
+NPC_CPU npc_cpu;
 #define MAX_SIM_TIME 200
 vluint64_t sim_time = 0;
 vluint64_t posedge_cnt = 0;
