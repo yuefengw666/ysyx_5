@@ -35,6 +35,7 @@ VM_PREFIX = Vysyx_22040237_rv_single_cyc_cpu_top
 VM_MODPREFIX = Vysyx_22040237_rv_single_cyc_cpu_top
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
+	csrc/include/ \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \

@@ -9,7 +9,7 @@ endif
 
 #set source
 VSRC_PATH = vsrc/single_cyc/
-INC_PATH = csrc/include/
+INC_PATH = $(NPC_HOME)/csrc/include/
 INC_FLAG = $(addprefix -I -CFLAGS, $(INC_PATH))
 
 TOP_DESIGN_NAME = ysyx_22040237_rv_single_cyc_cpu_top
