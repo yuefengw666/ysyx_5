@@ -10,7 +10,7 @@ endif
 #set source
 VSRC_PATH = vsrc/single_cyc/
 INC_PATH = csrc/include/
-INC_FLAG = $(addprefix -I, $(INC_PATH))
+INC_FLAG = $(addprefix -I -CFLAGS, $(INC_PATH))
 
 TOP_DESIGN_NAME = ysyx_22040237_rv_single_cyc_cpu_top
 VSRC = $(shell find $(abspath ./vsrc/single_cyc/) -name "*.v")
