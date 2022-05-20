@@ -12,14 +12,14 @@ typedef word_t vaddr_t;
 typedef uint32_t paddr_t;
 
 extern uint8_t pmem[CONFIG_MSIZE];
-/*
+
 typedef struct {
   word_t gpr[32];
   vaddr_t pc;
 } CPU_state;
 
-extern CPU_state npc_cpu;
-*/
+//extern CPU_state npc_cpu;
+
 
 // ----------- state -----------
 /*
