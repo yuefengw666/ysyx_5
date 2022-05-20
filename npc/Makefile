@@ -9,6 +9,7 @@ endif
 
 #set source
 VSRC_PATH = vsrc/single_cyc/
+INC_PATH = csrc/include/
 TOP_DESIGN_NAME = ysyx_22040237_rv_single_cyc_cpu_top
 VSRC = $(shell find $(abspath ./vsrc/single_cyc/) -name "*.v")
 CSRC = $(shell find $(abspath ./csrc) -name "*.cpp")
@@ -20,16 +21,16 @@ IMG = ""
 # Set up variables
 
 VERILATOR = verilator
-VERILATOR_COVERAGE = verilator_coverage
+#VERILATOR_COVERAGE = verilator_coverage
 
 # Warn abount lint issues; may not want this on less solid designs
-VERILATOR_FLAGS += -Wall
+#VERILATOR_FLAGS += -Wall
 # Generate C++ in executable form
-VERILATOR_FLAGS += -cc --exe
+#VERILATOR_FLAGS += -cc --exe
 # Make waveforms
-VERILATOR_FLAGS += --trace
+#VERILATOR_FLAGS += --trace
 # The option calls GNU Make or CMake to build the model.
-VERILATOR_FLAGS += --build
+#VERILATOR_FLAGS += --build
 # Check SystemVerilog assertions
 #VERILATOR_FLAGS += --assert
 #timescale
@@ -62,8 +63,8 @@ run: $(VSRC) $(CSRC)
 	@echo "-- VERILATE ----------------"
 	$(VERILATOR) -Wall --trace -cc $(VSRC_PATH)/ysyx_22040237_defines.v $(VSRC) -exe --build $(CSRC) -top $(TOP_DESIGN_NAME)
 
-	#@echo
-	#@echo "-- BUILD -------------------"
+	@echo
+	@echo "-- BUILD -------------------"
 
 	@echo
 	@echo "-- RUN ---------------------"
