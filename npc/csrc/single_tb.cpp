@@ -8,7 +8,7 @@
 
 //#include "Vrv_single_cyc_cpu_top__027unit.h"
 #include "npc_common.h"
-#include "include/mem.h"
+#include "mem.h"
 
 
 #define MAX_SIM_TIME 200
