@@ -10,6 +10,8 @@ endif
 #set source
 VSRC_PATH = vsrc/single_cyc/
 INC_PATH = csrc/include/
+INC_FLAG = $(addprefix -I, $(INC_PATH))
+
 TOP_DESIGN_NAME = ysyx_22040237_rv_single_cyc_cpu_top
 VSRC = $(shell find $(abspath ./vsrc/single_cyc/) -name "*.v")
 CSRC = $(shell find $(abspath ./csrc) -name "*.cpp")
@@ -61,7 +63,7 @@ run: $(VSRC) $(CSRC)
 
 	@echo
 	@echo "-- VERILATE ----------------"
-	$(VERILATOR) -Wall --trace -cc $(VSRC_PATH)/ysyx_22040237_defines.v $(VSRC) -exe --build $(CSRC) -top $(TOP_DESIGN_NAME)
+	$(VERILATOR) -Wall --trace -cc $(VSRC_PATH)/ysyx_22040237_defines.v $(VSRC) -exe --build $(CSRC) -top $(TOP_DESIGN_NAME) $(INC_FLAG)
 
 	@echo
 	@echo "-- BUILD -------------------"
