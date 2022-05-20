@@ -1,5 +1,5 @@
-#include "../include/npc_common.h"
-#include "../include/mem.h"
+#include "npc_common.h"
+#include "mem.h"
 
 uint8_t pmem[CONFIG_MSIZE] = {0};
 
