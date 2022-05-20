@@ -35,7 +35,7 @@ void ebreak(){
     m_trace->dump(sim_time);
     m_trace->close();
     delete dut;
-    exit(EXIT_FAILURE);
+    exit(EXIT_SUCCESS);
 }
 
 void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &posedge_cnt){
