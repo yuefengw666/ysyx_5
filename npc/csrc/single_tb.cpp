@@ -9,7 +9,7 @@
 //#include "Vrv_single_cyc_cpu_top__027unit.h"
 #include "npc_common.h"
 
-NPC_CPU npc_cpu;
+NPC_CPUstate npc_cpu;
 #define MAX_SIM_TIME 200
 vluint64_t sim_time = 0;
 vluint64_t posedge_cnt = 0;
