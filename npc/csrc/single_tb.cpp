@@ -5,8 +5,8 @@
 #include "Vysyx_22040237_rv_single_cyc_cpu_top.h"
 #include "svdpi.h"
 #include "Vysyx_22040237_rv_single_cyc_cpu_top__Dpi.h"
-
 //#include "Vrv_single_cyc_cpu_top__027unit.h"
+
 #include "npc_common.h"
 
 NPC_CPUstate npc_cpu;
@@ -28,6 +28,7 @@ VerilatedVcdC* m_trace = NULL;
 #define opcode_jal 111
 #define opcode_jalr 103
 
+
 void ebreak(){
     printf("***********************ebreak*****************************\n");
     //printf("sim_time %ld\n",sim_time);
@@ -37,7 +38,7 @@ void ebreak(){
     exit(EXIT_SUCCESS);
 }
 
-void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &posedge_cnt){
+void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &sim_time){
     dut->rst = 0;
     if(posedge_cnt < 3){
         dut->rst = 1;
@@ -84,6 +85,7 @@ int parse_args(int argc, char *argv[]){
 
 int main(int argc, char**argv, char** env){
 
+    //**********single inst test**************
     //pmem_write(0x80000000,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
     //pmem_write(0x80000004,(imm+3<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_addi);
     //pmem_write(0x80000008,(imm<<20) | (rs1<<15) | (funt3+1<<12) | (rd+1<<7) | opcode_auipc);
@@ -118,7 +120,7 @@ int main(int argc, char**argv, char** env){
         dut->eval(); //evaluate all the signals in design
         if(dut->clk == 1){
             posedge_cnt++;  //count posedge 
-            dut_reset(dut, posedge_cnt);
+            dut_reset(dut, sim_time);
             //switch(posedge_cnt){
                 //case 3: 
                     //dut->inst_in = (1<<20) | (1<<15) | (0<<12) | (1<<7) | (19);
