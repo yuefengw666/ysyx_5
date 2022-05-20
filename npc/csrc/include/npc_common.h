@@ -13,10 +13,11 @@ typedef uint32_t paddr_t;
 
 extern uint8_t pmem[CONFIG_MSIZE];
 
-typedef struct {
+typedef struct
+{
   word_t gpr[32];
   vaddr_t pc;
-}NPCCPU_state;
+} CPU_state;
 
 //extern CPU_state npc_cpu;
 
