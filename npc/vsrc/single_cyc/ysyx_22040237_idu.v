@@ -17,6 +17,9 @@ module ysyx_22040237_idu(
   //no encode for ebreak for now
   output inst_ebreak,
 
+  //**************identify invalid inst for sim*****************
+  output invalid_inst;
+
   output reg rs1_r_en,
   output reg [4:0] rs1_r_addr,
   output reg rs2_r_en,
@@ -50,6 +53,7 @@ wire inst_auipc;
 wire inst_lui;
 wire inst_jal;
 wire inst_jalr;
+
 
 //parse inst
 assign opcode = inst[6:0];
@@ -85,6 +89,9 @@ assign inst_lui = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & opcode[4] & o
 assign inst_jal = opcode[0] & opcode[1] & opcode[2] & opcode[3] & ~opcode[4] & opcode[5] & opcode[6];
 //jalr: 1100111
 assign inst_jalr = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & ~opcode[4] & opcode[5] & opcode[6];
+
+//******************identify invalid inst*************************************
+assign invalid_inst = ~( inst_auipc |inst_ebreak| inst_auipc | inst_lui | inst_jal | inst_jalr );
 
 //judge type
 assign type_R = 1'b0;

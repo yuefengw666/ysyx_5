@@ -6,17 +6,128 @@
 #include "svdpi.h"
 #include "Vysyx_22040237_rv_single_cyc_cpu_top__Dpi.h"
 //#include "Vrv_single_cyc_cpu_top__027unit.h"
+//transfer regs
+#include "verilated_dpi.h"
 
 #include "npc_common.h"
+#include "utils.h"
 
-NPC_CPUstate npc_cpu;
+
 #define MAX_SIM_TIME 200
 vluint64_t sim_time = 0;
-vluint64_t posedge_cnt = 0;
 
 static Vysyx_22040237_rv_single_cyc_cpu_top* dut;
 VerilatedVcdC* m_trace = NULL;
 
+static char *img_file = NULL;
+long img_size = 0;
+
+NPCstate npc_state = { .state = NPC_STOP };
+NPC_CPU npc_cpu;
+
+uint64_t *cpu_gpr = NULL;
+extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
+  cpu_gpr = (uint64_t *)(((VerilatedDpiOpenVar*)r)->datap());
+  for(int i=0; i<32; i++){
+      npc_cpu.gpr[i] = cpu_gpr[i];
+  }
+}
+
+void init_monitor(int, char *[]);
+
+void npc_reset(){
+    dut->rst = 1;
+    for(int n=0; n<2; n++){
+        dut->clk ^= 1; 
+        dut->eval();
+        m_trace->dump(sime_time);
+        sim_time++;
+    }
+    dut->rst = 0;
+}
+
+void exit_npc(int flag){
+
+    m_trace->dump(sim_time);
+    m_trace->close();
+    delete dut;
+    exit(flag);
+}
+
+void ebreak(){
+    printf("***********************ebreak*****************************\n");
+    int npc_exit_flag = 0;
+    if(npc_cpu.gpr[10] != 0){
+        //printf("regs[10]:%lx\n",npc_cpu.gpr[10]);
+        npc_exit_flag = 1;
+        printf("npc: %s at pc = %x\n",ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED),dut->pc); 
+    }
+    else {
+        printf("npc: %s at pc = %x\n",ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN), dut->pc);
+    }
+    exit_npc(npc_exit_flag);
+}
+
+void set_npc_state(int state, vaddr_t pc){
+    //difftest_skip_ref()
+    npc_state.state = state;
+    npc_state.halt_pc = pc;
+    //npc_state.halt_ret = halt_ret;
+}
+
+static void npc_sim_half(){
+    dut->clk ^= 1;
+    dut->eval();
+    if(dut->clk == 1 && dut->rst != 1){
+        dut->inst_in = pmem_read(dut->pc);
+        dut->eval();
+    }
+    m_trace->dump(sim_time);
+    sim_time++;
+}
+
+static void npc_sim_once(){
+    npc_sim_half();
+    npc_sim_half();
+}
+
+static void exec_once(){
+    npc_sim_once();
+    //ITRACE
+    //......
+}
+
+static void execute(uint64_t n){
+    for(; n > 0; n--){
+        exec_once();
+        //trace_and_difftest()
+        if(npc_state.state != NPC_RUNNING) break;
+    }
+}
+
+void npc_exec(uint64_t n){
+    switch(npc_state.state){
+        case NPC_END: case NPC_ABORT:
+            printf("Program execution has ended.\n");
+            return;
+        default:npc_state.state = NPC_RUNNING;
+    }
+    
+    execute(n);
+
+    switch(npc_state.state){
+        case NPC_RUNNING: nemu_state.state = NPC_STOP;break;
+        case NPC_ABORT:
+        case NPC_END:
+            printf("npc: %s at pc = %x\n", ASNI_FMT("ABORT", ASNI_BG_RED),npc_state.halt_pc);
+                //(npc_state.state == NEMU_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :
+                //(npc_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
+                //ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED))),
+                //npc_state.halt_pc); break;
+    }
+}
+
+/*
 #define imm 0
 #define rs1 0
 #define funt3 0
@@ -27,61 +138,7 @@ VerilatedVcdC* m_trace = NULL;
 #define opcode_lui 55
 #define opcode_jal 111
 #define opcode_jalr 103
-
-
-void ebreak(){
-    printf("***********************ebreak*****************************\n");
-    //printf("sim_time %ld\n",sim_time);
-    m_trace->dump(sim_time);
-    m_trace->close();
-    delete dut;
-    exit(EXIT_SUCCESS);
-}
-
-void dut_reset(Vysyx_22040237_rv_single_cyc_cpu_top *dut, vluint64_t &sim_time){
-    dut->rst = 0;
-    if(posedge_cnt < 3){
-        dut->rst = 1;
-        //dut-inst_in = 0x00000000;
-    }
-}
-
-static char *img_file = NULL;
-long img_size = 0;
-
-static long load_img(char *img_file) {
-  if (img_file == NULL) {
-    printf("No image is given. Use the default build-in image.\n");
-    return 4096; // built-in image size
-  }
-
-  FILE *fp = fopen(img_file, "rb");
-  //Assert(fp, "Can not open '%s'", img_file);
-  assert(fp);
-
-  fseek(fp, 0, SEEK_END);
-  long size = ftell(fp);
-
-  printf("The image is %s, size = %ld\n", img_file, size);
-
-  fseek(fp, 0, SEEK_SET);
-  //int ret = fread(guest_to_host(RESET_VECTOR), size, 1, fp);
-  int ret = fread(pmem, size, 1, fp);
-  assert(ret == 1);
-
-  fclose(fp);
-  return size;
-}
-
-int parse_args(int argc, char *argv[]){
-    if(argc == 2){
-        if(strlen(argv[1]) != 0){
-            img_file = argv[1];
-            img_size = load_img(img_file);
-        }
-    }
-    return 0;
-}
+*/
 
 int main(int argc, char**argv, char** env){
 
@@ -99,7 +156,6 @@ int main(int argc, char**argv, char** env){
 
     //pmem_write(0x80000018,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd-1<<7) | opcode_ebreak);
 
-    parse_args(argc,argv);
 
     Verilated::commandArgs(argc, argv);
     //instantiate top module
@@ -110,10 +166,14 @@ int main(int argc, char**argv, char** env){
     Verilated::traceEverOn(true);
     //VerilatedVcdC *m_trace = new VerilatedVcdC;
     m_trace = new VerilatedVcdC;
-    dut->trace(m_trace,99); //trace  5 level
+    dut->trace(m_trace,99); //trace  99 level
     m_trace->open("./logs/wave.vcd");
 
-    dut->rst = 0;
+    init_monitor(argc,argv);
+
+
+    npc_exec(-1);
+/*
     while(sim_time < MAX_SIM_TIME){
         //dut_reset(dut, sim_time);
         dut->clk ^= 1;
@@ -134,7 +194,7 @@ int main(int argc, char**argv, char** env){
         m_trace->dump(sim_time); //write all the traced signal values into our waveform dump file
         sim_time++;
     }
-
+*/
     m_trace->close();
     delete dut;
     exit(EXIT_SUCCESS);

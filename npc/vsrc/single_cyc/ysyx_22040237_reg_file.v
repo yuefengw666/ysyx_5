@@ -1,3 +1,5 @@
+import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
+
 module ysyx_22040237_reg_file(
   input clk,
   input rst,
@@ -17,6 +19,9 @@ module ysyx_22040237_reg_file(
 reg [63:0] regs[0:31];
 
 wire r_wr_en;
+
+//transfer registers pointer
+initial set_gpr_ptr(regs);
 
 assign reg1_rd_data = reg1_rd_en ? regs[reg1_rd_addr] : `ysyx_22040237_REGS_INIT;
 assign reg2_rd_data = reg2_rd_en ? regs[reg2_rd_addr] : `ysyx_22040237_REGS_INIT;

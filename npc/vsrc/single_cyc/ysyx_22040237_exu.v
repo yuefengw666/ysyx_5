@@ -1,5 +1,5 @@
 import "DPI-C" function void ebreak();
-
+import "DPI-C" function void set_npc_state(int state, vaddr_t pc);
 module ysyx_22040237_exu(
   input clk,
   //input rst,
@@ -11,6 +11,7 @@ module ysyx_22040237_exu(
   input [31:0] op2_jump,
 
   input inst_ebreak,
+  input invalid_inst;
 
   output reg [63:0] rd_data,
   output reg [31:0] pc_jump_addr
@@ -31,8 +32,16 @@ always@(*)begin
   endcase
 end
 
+//**********************************sim end*************************
 always@(posedge clk)begin
   if(inst_ebreak) ebreak();
+end
+
+//***********************************identify invalid inst, sim stop************
+always@(*)begin
+  if(invalid_inst)begin
+    set_npc_state(NPC_ABORT,dut->pc);
+  end
 end
 
 endmodule
