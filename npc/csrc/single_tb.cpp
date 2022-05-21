@@ -75,6 +75,7 @@ void ebreak(){
 void set_npc_state(int state){
     //difftest_skip_ref()
     npc_state.state = state;
+    printf("parse??:%d\n",state);
     npc_state.halt_pc = dut->pc;
     //npc_state.halt_ret = halt_ret;
 }
