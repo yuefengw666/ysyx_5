@@ -17,6 +17,7 @@
 
 #define MAX_SIM_TIME 200
 vluint64_t sim_time = 0;
+vluint64_t pos_cnt = 0;
 
 static Vysyx_22040237_rv_single_cyc_cpu_top* dut;
 VerilatedVcdC* m_trace = NULL;
@@ -38,15 +39,17 @@ extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
 void init_monitor(int , char*[]);
 
 void npc_reset(){
-    dut->clk = 0;
     dut->rst = 1;
     for(int n=0; n<4; n++){
         dut->clk ^= 1; 
         dut->eval();
+        if(dut->clk == 1){
+            pos_cnt++;
+        }
         m_trace->dump(sim_time);
         sim_time++;
     }
-    dut->rst = 0;
+    if(pos_cnt >= 3) dut->rst = 0;
 }
 
 void exit_npc(int flag){
