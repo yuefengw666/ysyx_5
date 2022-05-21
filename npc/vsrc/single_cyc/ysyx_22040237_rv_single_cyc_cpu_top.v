@@ -87,7 +87,7 @@ ysyx_22040237_exu ysyx_22040237_exu_u0(
   .rd_data (rd_data),
   .pc_jump_addr (pc_jump_addr),
   .inst_ebreak (inst_ebreak),
-  .valid_inst (valid_inst)
+  .invalid_inst (invalid_inst)
 );
 
 ysyx_22040237_reg_file ysyx_22040237_reg_file_u0(
