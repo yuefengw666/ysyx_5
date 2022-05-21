@@ -16,6 +16,7 @@ wire [63:0] rs1_data;
 
 //idu output 
 wire inst_ebreak;
+wire invalid_inst;
 
 wire [7:0] inst_opcode;
 wire [63:0] op1;
@@ -57,6 +58,7 @@ ysyx_22040237_idu ysyx_22040237_idu_u0(
 
   .inst_ebreak (inst_ebreak),
   .jump_flag (jump_flag),
+  .invalid_inst (invalid_inst),
 
   .rs1_data (rs1_data),
   .inst_opcode (inst_opcode),
@@ -84,7 +86,8 @@ ysyx_22040237_exu ysyx_22040237_exu_u0(
 
   .rd_data (rd_data),
   .pc_jump_addr (pc_jump_addr),
-  .inst_ebreak (inst_ebreak)
+  .inst_ebreak (inst_ebreak),
+  .valid_inst (valid_inst)
 );
 
 ysyx_22040237_reg_file ysyx_22040237_reg_file_u0(
