@@ -97,7 +97,7 @@ assign inst_jalr = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & ~opcode[4] &
 assign inst_sd = ~opcode[6] & opcode[5] & ~opcode[4] & ~opcode[3] & ~opcode[2] & opcode[1] & opcode[0];
 
 //******************identify invalid inst*************************************
-assign invalid_inst = ~( inst_dummy | inst_addi | inst_ebreak| inst_auipc | inst_lui | inst_jal | inst_jalr );
+assign invalid_inst = ~( inst_dummy | inst_addi | inst_ebreak| inst_auipc | inst_lui | inst_jal | inst_jalr | inst_sd );
 
 //judge type
 assign type_R = 1'b0;

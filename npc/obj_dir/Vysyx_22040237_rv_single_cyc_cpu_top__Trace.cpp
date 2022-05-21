@@ -135,7 +135,9 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceChgSub0(Vysyx_22040237
                                                         | (0x7feU 
                                                            & (vlSelf->inst_in 
                                                               >> 0x14U))))))),32);
-        tracep->chgBit(oldp+109,((1U & (~ (IData)((0U 
+        tracep->chgBit(oldp+109,((IData)((0x23U == 
+                                          (0x7fU & vlSelf->inst_in)))));
+        tracep->chgBit(oldp+110,((1U & (~ (IData)((0U 
                                                    != 
                                                    (0x7fU 
                                                     & vlSelf->inst_in)))))));
