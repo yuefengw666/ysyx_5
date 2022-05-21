@@ -24,8 +24,8 @@ VerilatedVcdC* m_trace = NULL;
 static char *img_file = NULL;
 long img_size = 0;
 
-//NPCstate npc_state = { .state = NPC_STOP };
-//NPC_CPU npc_cpu;
+NPCstate npc_state = { .state = NPC_STOP };
+NPC_CPU npc_cpu;
 
 uint64_t *cpu_gpr = NULL;
 extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
