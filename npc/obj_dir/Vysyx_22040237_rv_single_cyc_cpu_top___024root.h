@@ -24,9 +24,9 @@ VL_MODULE(Vysyx_22040237_rv_single_cyc_cpu_top___024root) {
     // PORTS
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
+    VL_IN8(__pinNumber5,0,0);
     VL_IN(inst_in,31,0);
     VL_OUT(pc,31,0);
-    VL_OUT64(rs2_data,63,0);
 
     // LOCAL SIGNALS
     CData/*0:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_ebreak;
