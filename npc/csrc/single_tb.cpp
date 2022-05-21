@@ -10,7 +10,7 @@
 #include "verilated_dpi.h"
 
 #include "npc_common.h"
-//#include <utils.h>
+#include <utils.h>
 
 
 enum { NPC_RUNNING, NPC_STOP, NPC_END, NPC_ABORT, NPC_QUIT };
