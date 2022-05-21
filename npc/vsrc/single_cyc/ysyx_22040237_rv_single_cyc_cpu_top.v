@@ -3,7 +3,7 @@ module ysyx_22040237_rv_single_cyc_cpu_top(
   input rst,
   input [31:0] inst_in,
 
-  output [31:0] pc
+  output [31:0] pc,
   //************exclude warning for now
   output [63:0] rs2_data
 );
