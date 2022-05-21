@@ -26,8 +26,6 @@ VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__
         = (((- (QData)((IData)((vlSelf->inst_in >> 0x1fU)))) 
             << 0xcU) | (QData)((IData)((vlSelf->inst_in 
                                         >> 0x14U))));
-    vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi 
-        = (IData)((0x13U == (0x707fU & vlSelf->inst_in)));
 }
 
 void Vysyx_22040237_rv_single_cyc_cpu_top___024unit____Vdpiimwrap_ebreak_TOP____024unit();
@@ -48,7 +46,13 @@ VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___sequent__TOP
     if (vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_ebreak) {
         Vysyx_22040237_rv_single_cyc_cpu_top___024unit____Vdpiimwrap_ebreak_TOP____024unit();
     }
-    if ((1U & ((~ (IData)(vlSelf->rst)) & (~ ((((((IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_auipc) 
+    if ((1U & ((~ (IData)(vlSelf->rst)) & (~ ((((((
+                                                   (~ (IData)(
+                                                              (0U 
+                                                               != 
+                                                               (0x7fU 
+                                                                & vlSelf->inst_in)))) 
+                                                   | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi)) 
                                                   | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_ebreak)) 
                                                  | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_auipc)) 
                                                 | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_lui)) 
@@ -118,6 +122,8 @@ VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__
     // Body
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_ebreak 
         = (IData)((0x73U == (0x707fU & vlSelf->inst_in)));
+    vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi 
+        = (IData)((0x13U == (0x707fU & vlSelf->inst_in)));
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_lui 
         = (IData)((0x37U == (0x7fU & vlSelf->inst_in)));
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_auipc 
