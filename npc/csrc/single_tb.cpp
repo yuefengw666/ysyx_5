@@ -42,9 +42,9 @@ void npc_reset(){
     dut->rst = 1;
     for(int n=0; n<2; n++){
         dut->clk ^= 1; 
-        dut->eval();
-        m_trace->dump(sim_time);
-        sim_time++;
+        //dut->eval();
+        //m_trace->dump(sim_time);
+        //sim_time++;
     }
     dut->rst = 0;
 }
