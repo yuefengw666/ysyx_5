@@ -1,4 +1,6 @@
 #include "npc_common.h"
+#include <cassert>
+#include <cstring>
 
 static char *img_file = NULL;
 long img_size = 0;
