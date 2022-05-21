@@ -29,6 +29,7 @@ VL_MODULE(Vysyx_22040237_rv_single_cyc_cpu_top___024root) {
     VL_OUT64(rs2_data,63,0);
 
     // LOCAL SIGNALS
+    CData/*0:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_ebreak;
     CData/*7:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode;
     CData/*0:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__rs1_r_en;
     CData/*4:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__rs1_r_addr;

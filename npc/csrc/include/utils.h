@@ -1,7 +1,7 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
-#include <npc_common.h>
+//#include <npc_common.h>
 
 // ----------- state -----------
 
