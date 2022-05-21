@@ -180,7 +180,7 @@ int main(int argc, char**argv, char** env){
 
     npc_reset();
 
-
+    printf("111\n");
     npc_exec(-1);
 /*
     while(sim_time < MAX_SIM_TIME){
