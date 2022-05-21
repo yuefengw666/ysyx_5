@@ -225,17 +225,22 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceFullSub0(Vysyx_2204023
         tracep->fullIData(oldp+96,(vlSelf->inst_in),32);
         tracep->fullIData(oldp+97,(vlSelf->pc),32);
         tracep->fullQData(oldp+98,(vlSelf->rs2_data),64);
-        tracep->fullBit(oldp+100,((1U & (~ (((((((~ (IData)(
-                                                            (0U 
-                                                             != 
-                                                             (0x7fU 
-                                                              & vlSelf->inst_in)))) 
-                                                 | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi)) 
-                                                | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_ebreak)) 
-                                               | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_auipc)) 
-                                              | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_lui)) 
-                                             | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_jal)) 
-                                            | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_jalr))))));
+        tracep->fullBit(oldp+100,((1U & (~ ((((((((~ (IData)(
+                                                             (0U 
+                                                              != 
+                                                              (0x7fU 
+                                                               & vlSelf->inst_in)))) 
+                                                  | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi)) 
+                                                 | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_ebreak)) 
+                                                | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_auipc)) 
+                                               | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_lui)) 
+                                              | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_jal)) 
+                                             | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_jalr)) 
+                                            | (IData)(
+                                                      (0x23U 
+                                                       == 
+                                                       (0x7fU 
+                                                        & vlSelf->inst_in))))))));
         tracep->fullCData(oldp+101,((0x7fU & vlSelf->inst_in)),7);
         tracep->fullCData(oldp+102,((0x1fU & (vlSelf->inst_in 
                                               >> 7U))),5);
