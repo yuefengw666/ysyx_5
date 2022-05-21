@@ -11,7 +11,7 @@ module ysyx_22040237_exu(
   input [31:0] op2_jump,
 
   input inst_ebreak,
-  input invalid_inst;
+  input invalid_inst,
 
   output reg [63:0] rd_data,
   output reg [31:0] pc_jump_addr

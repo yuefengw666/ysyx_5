@@ -18,7 +18,7 @@ module ysyx_22040237_idu(
   output inst_ebreak,
 
   //**************identify invalid inst for sim*****************
-  output invalid_inst;
+  output invalid_inst,
 
   output reg rs1_r_en,
   output reg [4:0] rs1_r_addr,
