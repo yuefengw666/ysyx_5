@@ -45,6 +45,7 @@ void npc_reset(){
         dut->eval();
         if(dut->clk == 1){
             pos_cnt++;
+            printf("pos_cnt:%d\n",pos_cnt);
         }
         m_trace->dump(sim_time);
         sim_time++;
