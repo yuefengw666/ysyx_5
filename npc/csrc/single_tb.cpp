@@ -137,6 +137,7 @@ void npc_exec(uint64_t n){
                 //(npc_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
                 //ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED))),
                 //npc_state.halt_pc); break;
+            exit_npc(1);
     }
 }
 
