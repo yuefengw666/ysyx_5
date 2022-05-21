@@ -5,14 +5,14 @@ module ysyx_22040237_rv_single_cyc_cpu_top(
 
   output [31:0] pc,
   //************exclude warning for now
-  output [63:0] rs2_data
+  //output [63:0] rs2_data
 );
 
 wire [31:0] inst;
 
 //regs  output 
 wire [63:0] rs1_data;
-//wire [63:0] rs2_data;
+wire [63:0] rs2_data;
 
 //idu output 
 wire inst_ebreak;
