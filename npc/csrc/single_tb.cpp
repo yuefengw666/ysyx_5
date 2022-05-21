@@ -132,7 +132,7 @@ void npc_exec(uint64_t n){
         case NPC_RUNNING: npc_state.state = NPC_STOP;break;
         case NPC_ABORT:
         case NPC_END:
-            printf("npc: %s, invalid opcode(%x) at pc = %lx\n", ASNI_FMT("ABORT", ASNI_BG_RED),dut->inst_in,npc_state.halt_pc);
+            printf("npc: %s, invalid opcode at pc = %lx\n", ASNI_FMT("ABORT", ASNI_BG_RED),npc_state.halt_pc);
                 //(npc_state.state == NEMU_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :
                 //(npc_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
                 //ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED))),
