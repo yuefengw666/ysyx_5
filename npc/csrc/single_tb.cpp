@@ -71,7 +71,7 @@ void ebreak(){
     int npc_exit_flag = 0;
     if(npc_cpu.gpr[10] != 0){
         //printf("regs[10]:%lx\n",npc_cpu.gpr[10]);
-        npc_exit_flag = 1;
+        npc_exit_flag = 0;
         printf("npc: %s at pc = %x\n",ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED),dut->pc); 
     }
     else {
