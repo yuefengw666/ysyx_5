@@ -47,7 +47,7 @@ void npc_reset(){
         sim_time++;
     }
     dut->rst = 0;
-    printf()
+    printf("1\n");
 }
 
 void exit_npc(int flag){
