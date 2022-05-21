@@ -10,7 +10,7 @@
 #include "verilated_dpi.h"
 
 #include "npc_common.h"
-#include <utils.h>
+//#include <utils.h>
 
 
 enum { NPC_RUNNING, NPC_STOP, NPC_END, NPC_ABORT, NPC_QUIT };
@@ -24,7 +24,7 @@ VerilatedVcdC* m_trace = NULL;
 static char *img_file = NULL;
 long img_size = 0;
 
-NPCstate npc_state = { .state = NPC_STOP };
+//NPCstate npc_state = { .state = NPC_STOP };
 NPC_CPU npc_cpu;
 
 uint64_t *cpu_gpr = NULL;
