@@ -13,7 +13,7 @@ typedef struct {
   uint32_t halt_ret;
 } NPCstate;
 
-extern NPCstate npc_state;
+//extern NPCstate npc_state;
 
 // ----------- timer -----------
 
