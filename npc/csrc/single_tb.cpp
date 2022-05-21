@@ -49,7 +49,7 @@ void npc_reset(){
         m_trace->dump(sim_time);
         sim_time++;
     }
-    if(pos_cnt >= 3) dut->rst = 0;
+    if(pos_cnt >= 2) dut->rst = 0;
 }
 
 void exit_npc(int flag){
