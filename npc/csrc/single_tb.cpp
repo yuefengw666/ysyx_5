@@ -21,8 +21,8 @@ vluint64_t sim_time = 0;
 static Vysyx_22040237_rv_single_cyc_cpu_top* dut;
 VerilatedVcdC* m_trace = NULL;
 
-char *img_file = NULL;
-long img_size = 0;
+//char *img_file = NULL;
+//long img_size = 0;
 
 NPCstate npc_state = { .state = NPC_STOP };
 NPC_CPU npc_cpu;

@@ -2,8 +2,8 @@
 #include <cassert>
 #include <cstring>
 
-extern  char *img_file = NULL;
-extern long img_size = 0;
+char *img_file = NULL;
+long img_size = 0;
 
 static long load_img(char *img_file) {
   if (img_file == NULL) {
