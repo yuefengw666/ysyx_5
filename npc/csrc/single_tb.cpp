@@ -10,7 +10,7 @@
 #include "verilated_dpi.h"
 
 #include "npc_common.h"
-#include "utils.h"
+#include <utils.h>
 
 
 #define MAX_SIM_TIME 200
