@@ -40,7 +40,7 @@ void init_monitor(int , char*[]);
 void npc_reset(){
     dut->clk = 0;
     dut->rst = 1;
-    for(int n=0; n<3; n++){
+    for(int n=0; n<2; n++){
         dut->clk ^= 1; 
         dut->eval();
         m_trace->dump(sim_time);
