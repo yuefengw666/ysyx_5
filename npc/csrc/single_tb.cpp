@@ -167,7 +167,8 @@ int main(int argc, char**argv, char** env){
     //pmem_write(0x80000010,(imm+4<<20) | (rs1+4<<15) | (funt3<<12) | (rd<<7) | opcode_jalr); //pc = 4(imm) + reg4 reg1 = pc + 4 = c
     //pmem_write(0x80000014,(imm+4<<20) | (rs1+1<<15) | (funt3<<12) | (rd<<7) | opcode_jalr); //pc = 4(imm) + c(rs1:c) = 10 reg1 = pc + 4=10
 
-    pmem_write(0x80000008,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd-1<<7) | opcode_ebreak);
+    pmem_write(0x80000008,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd-1<<7) | 64);
+    pmem_write(0x8000000c,(imm+1<<20) | (rs1<<15) | (funt3<<12) | (rd-1<<7) | opcode_ebreak);
 
 
     Verilated::commandArgs(argc, argv);
