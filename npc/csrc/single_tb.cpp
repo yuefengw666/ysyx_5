@@ -38,6 +38,7 @@ extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
 void init_monitor(int , char*[]);
 
 void npc_reset(){
+    dut->clk = 0;
     dut->rst = 1;
     for(int n=0; n<2; n++){
         dut->clk ^= 1; 
@@ -46,6 +47,7 @@ void npc_reset(){
         sim_time++;
     }
     dut->rst = 0;
+    printf()
 }
 
 void exit_npc(int flag){
@@ -176,7 +178,7 @@ int main(int argc, char**argv, char** env){
     npc_reset();
 
 
-    npc_exec(2);
+    npc_exec(-1);
 /*
     while(sim_time < MAX_SIM_TIME){
         //dut_reset(dut, sim_time);
