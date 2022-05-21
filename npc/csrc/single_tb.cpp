@@ -173,6 +173,8 @@ int main(int argc, char**argv, char** env){
 
     init_monitor(argc,argv);
 
+    npc_reset();
+
 
     npc_exec(-1);
 /*
