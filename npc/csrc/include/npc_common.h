@@ -23,19 +23,6 @@ void pmem_write(paddr_t addr, word_t data);
 typedef struct {
   word_t gpr[32];
   vaddr_t pc;
-} NPC_CPUstate;
+} NPC_CPU;
 
-extern NPC_CPUstate npc_cpu;
-
-
-// ----------- state -----------
-
-enum { NPC_RUNNING, NPC_STOP, NPC_END, NPC_ABORT, NPC_QUIT };
-
-typedef struct {
-  int state;
-  vaddr_t halt_pc;
-  uint32_t halt_ret;
-} NPCState;
-
-extern NPCState npc_state;
+//extern NPC_CPU npc_cpu;
