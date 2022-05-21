@@ -2,7 +2,7 @@ import "DPI-C" function void ebreak();
 import "DPI-C" function void set_npc_state(int state);
 module ysyx_22040237_exu(
   input clk,
-  //input rst,
+  input rst,
 
   input [7:0] inst_opcode,
   input [63:0] op1,
