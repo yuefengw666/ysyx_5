@@ -9,10 +9,10 @@
 
 //==========
 
-VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__1(Vysyx_22040237_rv_single_cyc_cpu_top___024root* vlSelf) {
+VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__2(Vysyx_22040237_rv_single_cyc_cpu_top___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_22040237_rv_single_cyc_cpu_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__1\n"); );
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__2\n"); );
     // Body
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode 
         = (0xf9U & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode));
@@ -250,7 +250,7 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root___eval(Vysyx_22040237_rv_sin
     Vysyx_22040237_rv_single_cyc_cpu_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22040237_rv_single_cyc_cpu_top___024root___eval\n"); );
     // Body
-    Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__1(vlSelf);
+    Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__2(vlSelf);
     vlSelf->__Vm_traceActivity[1U] = 1U;
     if (((IData)(vlSelf->clk) & (~ (IData)(vlSelf->__Vclklast__TOP__clk)))) {
         Vysyx_22040237_rv_single_cyc_cpu_top___024root___sequent__TOP__3(vlSelf);

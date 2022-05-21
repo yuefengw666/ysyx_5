@@ -27,11 +27,12 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root::__Vconfigure(Vysyx_22040237
 Vysyx_22040237_rv_single_cyc_cpu_top___024root::~Vysyx_22040237_rv_single_cyc_cpu_top___024root() {
 }
 
-void Vysyx_22040237_rv_single_cyc_cpu_top___024root___settle__TOP__2(Vysyx_22040237_rv_single_cyc_cpu_top___024root* vlSelf) {
+void Vysyx_22040237_rv_single_cyc_cpu_top___024root___settle__TOP__1(Vysyx_22040237_rv_single_cyc_cpu_top___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_22040237_rv_single_cyc_cpu_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22040237_rv_single_cyc_cpu_top___024root___settle__TOP__2\n"); );
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22040237_rv_single_cyc_cpu_top___024root___settle__TOP__1\n"); );
     // Body
+    vlSelf->rs2_data = 0ULL;
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode 
         = (0xf9U & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode));
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode 
@@ -193,7 +194,7 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root___eval_settle(Vysyx_22040237
     Vysyx_22040237_rv_single_cyc_cpu_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22040237_rv_single_cyc_cpu_top___024root___eval_settle\n"); );
     // Body
-    Vysyx_22040237_rv_single_cyc_cpu_top___024root___settle__TOP__2(vlSelf);
+    Vysyx_22040237_rv_single_cyc_cpu_top___024root___settle__TOP__1(vlSelf);
     vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->__Vm_traceActivity[1U] = 1U;
     vlSelf->__Vm_traceActivity[0U] = 1U;
@@ -214,6 +215,7 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root___ctor_var_reset(Vysyx_22040
     vlSelf->rst = VL_RAND_RESET_I(1);
     vlSelf->inst_in = VL_RAND_RESET_I(32);
     vlSelf->pc = VL_RAND_RESET_I(32);
+    vlSelf->rs2_data = VL_RAND_RESET_Q(64);
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rs1_data = VL_RAND_RESET_Q(64);
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_ebreak = VL_RAND_RESET_I(1);
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode = VL_RAND_RESET_I(8);

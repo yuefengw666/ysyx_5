@@ -92,7 +92,8 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceChgSub0(Vysyx_22040237
         tracep->chgBit(oldp+94,(vlSelf->rst));
         tracep->chgIData(oldp+95,(vlSelf->inst_in),32);
         tracep->chgIData(oldp+96,(vlSelf->pc),32);
-        tracep->chgBit(oldp+97,((1U & (~ (((((((~ (IData)(
+        tracep->chgQData(oldp+97,(vlSelf->rs2_data),64);
+        tracep->chgBit(oldp+99,((1U & (~ (((((((~ (IData)(
                                                           (0U 
                                                            != 
                                                            (0x7fU 
@@ -103,25 +104,25 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceChgSub0(Vysyx_22040237
                                             | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_lui)) 
                                            | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_jal)) 
                                           | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_jalr))))));
-        tracep->chgCData(oldp+98,((0x7fU & vlSelf->inst_in)),7);
-        tracep->chgCData(oldp+99,((0x1fU & (vlSelf->inst_in 
-                                            >> 7U))),5);
-        tracep->chgCData(oldp+100,((7U & (vlSelf->inst_in 
-                                          >> 0xcU))),3);
+        tracep->chgCData(oldp+100,((0x7fU & vlSelf->inst_in)),7);
         tracep->chgCData(oldp+101,((0x1fU & (vlSelf->inst_in 
+                                             >> 7U))),5);
+        tracep->chgCData(oldp+102,((7U & (vlSelf->inst_in 
+                                          >> 0xcU))),3);
+        tracep->chgCData(oldp+103,((0x1fU & (vlSelf->inst_in 
                                              >> 0xfU))),5);
-        tracep->chgSData(oldp+102,((vlSelf->inst_in 
+        tracep->chgSData(oldp+104,((vlSelf->inst_in 
                                     >> 0x14U)),12);
-        tracep->chgIData(oldp+103,((vlSelf->inst_in 
+        tracep->chgIData(oldp+105,((vlSelf->inst_in 
                                     >> 0xcU)),20);
-        tracep->chgQData(oldp+104,((((QData)((IData)(
+        tracep->chgQData(oldp+106,((((QData)((IData)(
                                                      (- (IData)(
                                                                 (vlSelf->inst_in 
                                                                  >> 0x1fU))))) 
                                      << 0x20U) | (QData)((IData)(
                                                                  (0xfffff000U 
                                                                   & vlSelf->inst_in))))),64);
-        tracep->chgIData(oldp+106,((((- (IData)((vlSelf->inst_in 
+        tracep->chgIData(oldp+108,((((- (IData)((vlSelf->inst_in 
                                                  >> 0x1fU))) 
                                      << 0x15U) | ((0x100000U 
                                                    & (vlSelf->inst_in 
@@ -134,7 +135,7 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceChgSub0(Vysyx_22040237
                                                         | (0x7feU 
                                                            & (vlSelf->inst_in 
                                                               >> 0x14U))))))),32);
-        tracep->chgBit(oldp+107,((1U & (~ (IData)((0U 
+        tracep->chgBit(oldp+109,((1U & (~ (IData)((0U 
                                                    != 
                                                    (0x7fU 
                                                     & vlSelf->inst_in)))))));
