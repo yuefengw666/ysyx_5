@@ -3,6 +3,8 @@
 static char *img_file = NULL;
 long img_size = 0;
 
+void init_motior(int argc, char *argv[]);
+
 static long load_img(char *img_file) {
   if (img_file == NULL) {
     printf("No image is given. Use the default build-in image.\n");
