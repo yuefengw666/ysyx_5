@@ -75,6 +75,9 @@ assign src_u = { {32{imm_u_j[19]}}, imm_u_j, 12'b0};
 //J
 assign src_j = { {11{imm_u_j[19]}}, imm_u_j[19], imm_u_j[7:0], imm_u_j[8], imm_u_j[18:9], 1'b0};//??src_j[0]
 
+//**********************for sim ******dummy opcode*********************************
+assign inst_dummy = !(|opcode);
+
 // addi: func3:000, opcode:0010011
 assign inst_addi = opcode[0] & opcode[1] & ~opcode[2] & ~opcode[3] & opcode[4] & ~opcode[5] & ~opcode[6] & ~func3[0] & ~func3[1] & ~func3[2];
 //ebreak: 1110011
@@ -91,7 +94,7 @@ assign inst_jal = opcode[0] & opcode[1] & opcode[2] & opcode[3] & ~opcode[4] & o
 assign inst_jalr = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & ~opcode[4] & opcode[5] & opcode[6];
 
 //******************identify invalid inst*************************************
-assign invalid_inst = ~( inst_auipc |inst_ebreak| inst_auipc | inst_lui | inst_jal | inst_jalr );
+assign invalid_inst = ~( inst_dummy | inst_addi | inst_ebreak| inst_auipc | inst_lui | inst_jal | inst_jalr );
 
 //judge type
 assign type_R = 1'b0;
