@@ -176,7 +176,7 @@ int main(int argc, char**argv, char** env){
     npc_reset();
 
 
-    npc_exec(-1);
+    npc_exec(2);
 /*
     while(sim_time < MAX_SIM_TIME){
         //dut_reset(dut, sim_time);
