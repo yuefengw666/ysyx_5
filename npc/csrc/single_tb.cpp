@@ -48,6 +48,10 @@ void npc_reset(){
             printf("pos_cnt:%ld\n",pos_cnt);
             if(pos_cnt >=3) dut->rst = 0;
         }
+        if(dut->clk == 1 && dut->rst != 1){
+            dut->inst_in = pmem_read(dut->pc);
+            dut->eval();
+        }
         m_trace->dump(sim_time);
         sim_time++;
     }
