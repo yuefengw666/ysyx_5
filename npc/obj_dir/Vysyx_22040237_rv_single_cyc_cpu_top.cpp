@@ -15,7 +15,6 @@ Vysyx_22040237_rv_single_cyc_cpu_top::Vysyx_22040237_rv_single_cyc_cpu_top(Veril
     , rst{vlSymsp->TOP.rst}
     , inst_in{vlSymsp->TOP.inst_in}
     , pc{vlSymsp->TOP.pc}
-    , __pinNumber5{vlSymsp->TOP.__pinNumber5}
     , __PVT____024unit{vlSymsp->TOP.__PVT____024unit}
     , rootp{&(vlSymsp->TOP)}
 {

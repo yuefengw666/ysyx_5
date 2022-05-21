@@ -291,7 +291,5 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root___eval_debug_assertions(Vysy
         Verilated::overWidthError("clk");}
     if (VL_UNLIKELY((vlSelf->rst & 0xfeU))) {
         Verilated::overWidthError("rst");}
-    if (VL_UNLIKELY((vlSelf->__pinNumber5 & 0xfeU))) {
-        Verilated::overWidthError("__pinNumber5");}
 }
 #endif  // VL_DEBUG
