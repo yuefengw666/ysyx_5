@@ -46,11 +46,12 @@ void npc_reset(){
         if(dut->clk == 1){
             pos_cnt++;
             printf("pos_cnt:%ld\n",pos_cnt);
+            if(pos_cnt >=3) dut->rst = 0;
         }
         m_trace->dump(sim_time);
         sim_time++;
     }
-    if(pos_cnt >= 1) dut->rst = 0;
+    //if(pos_cnt >= 1) dut->rst = 0;
 }
 
 void exit_npc(int flag){
@@ -181,7 +182,6 @@ int main(int argc, char**argv, char** env){
 
     npc_reset();
 
-    printf("111\n");
     npc_exec(3);
 /*
     while(sim_time < MAX_SIM_TIME){
