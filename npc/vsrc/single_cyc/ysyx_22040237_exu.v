@@ -39,7 +39,7 @@ end
 
 //***********************************identify invalid inst, sim stop************
 always@(*)begin
-  if(!rst && invalid_inst)begin
+  if((!rst) && invalid_inst)begin
     set_npc_state(3);//NPC_ABORT
   end
 end
