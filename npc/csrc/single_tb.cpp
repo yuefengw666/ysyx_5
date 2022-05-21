@@ -45,7 +45,7 @@ void npc_reset(){
         dut->eval();
         if(dut->clk == 1){
             pos_cnt++;
-            printf("pos_cnt:%ld\n",pos_cnt);
+            //printf("pos_cnt:%ld\n",pos_cnt);
             if(pos_cnt >=3) dut->rst = 0;
         }
         if(dut->clk == 1 && dut->rst != 1){
@@ -83,7 +83,7 @@ void ebreak(){
 void set_npc_state(int state){
     //difftest_skip_ref()
     npc_state.state = state;
-    printf("parse??:%d\n",state);
+    //printf("parse??:%d\n",state);
     npc_state.halt_pc = dut->pc;
     //npc_state.halt_ret = halt_ret;
 }
