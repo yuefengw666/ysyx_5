@@ -38,7 +38,7 @@ always@(posedge clk)begin
 end
 
 //***********************************identify invalid inst, sim stop************
-always@(*)begin
+always@(clk)begin
   if((!rst) && invalid_inst)begin
     set_npc_state(3);//NPC_ABORT
   end
