@@ -131,7 +131,7 @@ void npc_exec(uint64_t n){
     }
 }
 
-/*
+
 #define imm 0
 #define rs1 0
 #define funt3 0
@@ -142,7 +142,7 @@ void npc_exec(uint64_t n){
 #define opcode_lui 55
 #define opcode_jal 111
 #define opcode_jalr 103
-*/
+
 
 int main(int argc, char**argv, char** env){
 
