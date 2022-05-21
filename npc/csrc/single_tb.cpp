@@ -40,7 +40,7 @@ void init_monitor(int , char*[]);
 
 void npc_reset(){
     dut->rst = 1;
-    for(int n=0; n<6; n++){
+    for(int n=0; n<5; n++){
         dut->clk ^= 1; 
         dut->eval();
         if(dut->clk == 1){
