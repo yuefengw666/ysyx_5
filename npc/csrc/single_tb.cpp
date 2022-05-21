@@ -68,10 +68,10 @@ void ebreak(){
     exit_npc(npc_exit_flag);
 }
 
-void set_npc_state(int state, vaddr_t pc){
+void set_npc_state(int state){
     //difftest_skip_ref()
     npc_state.state = state;
-    npc_state.halt_pc = pc;
+    npc_state.halt_pc = dut->pc;
     //npc_state.halt_ret = halt_ret;
 }
 

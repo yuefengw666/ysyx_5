@@ -1,5 +1,5 @@
 import "DPI-C" function void ebreak();
-import "DPI-C" function void set_npc_state(int state, uint32_t pc);
+import "DPI-C" function void set_npc_state(int state);
 module ysyx_22040237_exu(
   input clk,
   //input rst,
@@ -40,7 +40,7 @@ end
 //***********************************identify invalid inst, sim stop************
 always@(*)begin
   if(invalid_inst)begin
-    set_npc_state(NPC_ABORT,dut->pc);
+    set_npc_state(NPC_ABORT);
   end
 end
 
