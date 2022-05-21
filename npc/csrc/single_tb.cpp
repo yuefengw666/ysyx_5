@@ -35,7 +35,7 @@ extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
   }
 }
 
-void init_monitor(int, char *[]);
+void init_monitor(int argc, char *argv[]);
 
 void npc_reset(){
     dut->rst = 1;
