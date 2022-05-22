@@ -2,6 +2,8 @@
 #include <cassert>
 #include <cstring>
 
+void init_sdb();
+
 static char *img_file = NULL;
 static long img_size = 0;
 
@@ -43,5 +45,5 @@ int parse_args(int argc, char *argv[]){
 void init_monitor(int argc, char *argv[]) {
     parse_args(argc,argv);
 
-    
+    init_sdb();
 }
