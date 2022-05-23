@@ -44,6 +44,9 @@ VM_USER_LDLIBS = \
 VM_USER_CLASSES = \
 	mem \
 	monitor \
+	expr \
+	sdb \
+	watchpoint \
 	single_tb \
 
 # User .cpp directories (from .cpp's on Verilator command line)
@@ -51,6 +54,7 @@ VM_USER_DIR = \
 	/home/yfwu/ysyx-workbench/npc/csrc \
 	/home/yfwu/ysyx-workbench/npc/csrc/mem \
 	/home/yfwu/ysyx-workbench/npc/csrc/monitor \
+	/home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb \
 
 
 ### Default rules...
@@ -65,6 +69,12 @@ VPATH += $(VM_USER_DIR)
 mem.o: /home/yfwu/ysyx-workbench/npc/csrc/mem/mem.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 monitor.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/monitor.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+expr.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb/expr.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+sdb.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb/sdb.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+watchpoint.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb/watchpoint.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 single_tb.o: /home/yfwu/ysyx-workbench/npc/csrc/single_tb.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<

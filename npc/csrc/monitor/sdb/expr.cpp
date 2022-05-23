@@ -6,7 +6,7 @@
 #include "npc_common.h"
 #include <regex.h>
 
-void npc_reg_str2val(const char *s, bool *success);
+word_t npc_reg_str2val(const char *s, bool *success);
 
 enum {
   TK_NOTYPE = 256, 
