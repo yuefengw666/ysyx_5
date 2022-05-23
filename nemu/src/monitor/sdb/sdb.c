@@ -72,7 +72,7 @@ static int cmd_x(char *args){
   char *arg2 = strtok(NULL, " ");
 
   if(arg1 == NULL || arg2 == NULL){
-    printf("Argument error, EX: x 10 $esp");
+    printf("Argument error, EX: x 10 $esp\n");
     return 0;
   }
 

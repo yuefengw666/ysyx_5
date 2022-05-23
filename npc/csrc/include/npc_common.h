@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <cstring>
+#include <cassert>
+
+//CONFIG
+#define CONFIG_SDB 1
+#define CONFIG_WATCHPOINT 1
 
 #define CONFIG_MSIZE 0x8000000
 #define CONFIG_MBASE 0x80000000

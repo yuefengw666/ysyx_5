@@ -12,6 +12,8 @@ static int is_batch_mode = false;
 void init_regex();
 void init_wp_pool();
 void npc_exec(uint64_t n);
+void npc_regs_display();
+word_t pmem_read(paddr addr);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -38,7 +40,7 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
-  nemu_state.state = NEMU_QUIT;
+  npc_state.state = NPC_QUIT;
   return -1;
 }
 
@@ -48,14 +50,16 @@ static int cmd_si(char *args){
   char *arg = strtok(NULL, " ");
   
   if(arg == NULL) {
-    npc_exec(1);
     printf("execute 1 inst \n");
+    npc_exec(1);
   }
   else {
     int num = atoi(arg);
     if(num <= 0) printf("Arguments error,should >= 1\n");
-    else npc_exec(num);
-    printf("execute %d insts\n",num); 
+    else {
+      printf("execute %d insts\n",num); 
+      npc_exec(num);
+    }
   }
   return 0;
 }
@@ -68,7 +72,7 @@ static int cmd_info(char *args){
     return 0;
   }
   
-  if (strcmp(arg,"r") == 0) isa_reg_display();
+  if (strcmp(arg,"r") == 0) npc_regs_display();
   else if(strcmp(arg,"w")==0) info_wp();
   
   return 0;
@@ -91,11 +95,8 @@ static int cmd_x(char *args){
     for(int i=0; i<n; i++){
       int addr = i*4 + val_expr;
       printf("0x%08x\t",addr);
-        for(int j=3; j>=0; j--){
-          word_t val = vaddr_read(addr + j,1);
-          printf("0x%02lx  ",val);
-        }
-        printf("\n");
+      word_t val = pmem_read(addr);
+      printf("0x%08lx\n",val);
     }
   }
   else {
@@ -170,6 +171,7 @@ static struct {
 
 };
 
+#define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0]))
 #define NR_CMD ARRLEN(cmd_table)
 
 static int cmd_help(char *args) {
@@ -199,7 +201,7 @@ void sdb_set_batch_mode() {
   is_batch_mode = true;
 }
 
-void sdb_mainloop() {
+void npc_sdb_mainloop() {
   if (is_batch_mode) {
     cmd_c(NULL);
     return;

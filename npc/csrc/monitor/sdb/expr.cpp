@@ -1,9 +1,12 @@
-#include <isa.h>
-#include <memory/vaddr.h>
+//#include <isa.h>
+//#include <memory/vaddr.h>
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
  */
+#include "npc_common.h"
 #include <regex.h>
+
+void npc_reg_str2val(const char *s, bool *success);
 
 enum {
   TK_NOTYPE = 256, 
@@ -52,6 +55,7 @@ static struct rule {
 
 };
 
+#define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0]))
 #define NR_REGEX ARRLEN(rules)
 
 static regex_t re[NR_REGEX] = {};
@@ -68,7 +72,8 @@ void init_regex() {
     ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);//REG_NEWLINE  REG_EXTENDED
     if (ret != 0) {
       regerror(ret, &re[i], error_msg, 128);
-      panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
+      printf("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
+      assert(0);
     }
   }
 }
@@ -222,12 +227,12 @@ word_t eval(int p, int q, bool *success){
     case TK_DEC: sscanf(tokens[p].str,"%ld",&val_temp); break;
     case TK_HEX: sscanf(tokens[p].str,"%lx",&val_temp); break;
     case TK_REG: 
-                if(strcmp(tokens[p].str,"$pc")==0){
-                  val_temp = cpu.pc;
-                }
-                else {
-                  val_temp = isa_reg_str2val(tokens[p].str,success);
-                }
+                //if(strcmp(tokens[p].str,"$pc")==0){
+                //  val_temp = cpu.pc;
+                //}
+                //else {
+                  val_temp = npc_reg_str2val(tokens[p].str,success);
+                //}
                 break;
     default:printf("value:%s error\n",tokens[p].str);
     }
@@ -259,7 +264,7 @@ word_t eval(int p, int q, bool *success){
       case TK_DIV:
                   if(val2==0){
                     *success = false;
-                    Log("Warning: the divisor is 0 at position %d\n",q);
+                    printf("Warning: the divisor is 0 at position %d\n",q);
                     return 0;
                   }
                   val = val1 / val2;  break;
@@ -269,7 +274,7 @@ word_t eval(int p, int q, bool *success){
       case TK_AND: val = val1 && val2; break;
       case TK_OR: val = val1 || val2;break;
       case TK_INV: val = !val2; break;
-      case TK_DEREF: val = vaddr_read(val2,4);
+      case TK_DEREF: val = pmem_read(val2);
       default:printf("Unknow token type\n");*success = false; return 0;
     }
     return val;

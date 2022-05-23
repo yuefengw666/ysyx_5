@@ -11,6 +11,7 @@
 
 #include "npc_common.h"
 #include <utils.h>
+#include "csrc/monitor/sdb/sdb.h"
 
 
 //enum { NPC_RUNNING, NPC_STOP, NPC_END, NPC_ABORT, NPC_QUIT };
@@ -44,7 +45,21 @@ void npc_regs_display(){
     printf("pc\t0x%08lx\t%lu\n",dut->pc,dut->pc);
 }
 
+word_t npc_reg_str2val(const char *s, bool *success) {
+  *success = true;
+
+  for(int i=0; i<32; i++){
+    if(strcmp(s,npc_regs[i])==0){
+      return cpu_gpr[i];
+    }
+  }
+  *success = false;
+  printf("convert error, invalid token of str.\n");
+  return 0;
+}
+
 void init_monitor(int , char*[]);
+void npc_sdb_mainloop();
 
 void npc_reset(){
     dut->rst = 1;
@@ -96,6 +111,16 @@ void set_npc_state(int state){
     //npc_state.halt_ret = halt_ret;
 }
 
+static void trace_and_difftest(){
+    printf("current pc:%x\n",dut->pc);
+#ifdef CONFIG_WATCHPOINT 
+  bool changed;
+  changed = scan_wp();
+  if(changed)
+    nemu_state.state = NPC_STOP;
+#endif
+}
+
 static void npc_sim_half(){
     dut->clk ^= 1;
     dut->eval();
@@ -121,7 +146,9 @@ static void exec_once(){
 static void execute(uint64_t n){
     for(; n > 0; n--){
         exec_once();
-        //trace_and_difftest()
+        #ifdef CONFIG_SDB
+            trace_and_difftest();
+        #endif
         if(npc_state.state != NPC_RUNNING) break;
     }
 }
@@ -133,7 +160,7 @@ void npc_exec(uint64_t n){
             return;
         default:npc_state.state = NPC_RUNNING;
     }
-    
+
     execute(n);
 
     switch(npc_state.state){
@@ -145,7 +172,8 @@ void npc_exec(uint64_t n){
                 //(npc_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
                 //ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED))),
                 //npc_state.halt_pc); break;
-            exit_npc(1);//failure to exit
+            exit_npc(EXIT_FAILURE);//failure to exit
+        case NPC_QUIT: exit_npc(EXIT_SUCCESS);
     }
 }
 
@@ -195,7 +223,11 @@ int main(int argc, char**argv, char** env){
 
     npc_reset();
 
-    npc_exec(-1);
+    #ifdef CONFIG_SDB
+        npc_sdb_mainloop();
+    #else
+        npc_exec(-1);
+    #endif
 /*
     while(sim_time < MAX_SIM_TIME){
         //dut_reset(dut, sim_time);
