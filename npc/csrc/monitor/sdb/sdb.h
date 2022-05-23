@@ -1,7 +1,7 @@
 #ifndef __SDB_H__
 #define __SDB_H__
 
-#include <npc_common.h>
+//#include <npc_common.h>
 
 //expr
 word_t expr(char *e, bool *success);
