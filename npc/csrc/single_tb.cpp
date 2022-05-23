@@ -13,6 +13,8 @@
 #include "npc_state.h"
 #include <utils.h>
 #include "sdb.h"
+#include "readline/readline.h"
+#include "readline/history.h"
 
 
 //enum { NPC_RUNNING, NPC_STOP, NPC_END, NPC_ABORT, NPC_QUIT };
