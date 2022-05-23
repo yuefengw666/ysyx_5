@@ -25,14 +25,14 @@ static inline void host_write(void *addr, word_t data);
 word_t pmem_read(paddr_t addr);
 void pmem_write(paddr_t addr, word_t data);
 
-
+/*
 typedef struct {
   word_t gpr[32];
   vaddr_t pc;
 } NPC_CPU;
 
 extern NPC_CPU npc_cpu;
-
+*/
 const char *npc_regs[] = {
   "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
   "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
