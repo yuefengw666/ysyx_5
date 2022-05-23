@@ -15,6 +15,34 @@ void npc_exec(uint64_t n);
 void npc_regs_display();
 word_t pmem_read(paddr_t addr);
 
+static std::string readline(int fd)
+{
+  struct termios tios;
+  bool noncanonical = tcgetattr(fd, &tios) == 0 && (tios.c_lflag & ICANON) == 0;
+
+  std::string s;
+  for (char ch; read(fd, &ch, 1) == 1; )
+  {
+    if (ch == '\x7f')
+    {
+      if (s.empty())
+        continue;
+      s.erase(s.end()-1);
+
+      if (noncanonical && write(fd, "\b \b", 3) != 3)
+        ; // shut up gcc
+    }
+    else if (noncanonical && write(fd, &ch, 1) != 1)
+      ; // shut up gcc
+
+    if (ch == '\n')
+      break;
+    if (ch != '\x7f')
+      s += ch;
+  }
+  return s;
+}
+
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
   static char *line_read = NULL;
