@@ -36,6 +36,14 @@ extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
   }
 }
 
+void npc_regs_display(){
+    int i;
+    for(i=0; i<32; i++){
+        printf("%s\t0x%08lx\t%lu\n",npc_regs[i], cpu_gpr[i], cpu_gpr[i]);
+    }
+    printf("pc\t0x%08lx\t%lu\n",dut->pc,dut->pc);
+}
+
 void init_monitor(int , char*[]);
 
 void npc_reset(){

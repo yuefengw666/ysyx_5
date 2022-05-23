@@ -47,11 +47,15 @@ static int cmd_help(char *args);
 static int cmd_si(char *args){
   char *arg = strtok(NULL, " ");
   
-  if(arg == NULL) cpu_exec(1);
+  if(arg == NULL) {
+    npc_exec(1);
+    printf("execute 1 inst \n");
+  }
   else {
     int num = atoi(arg);
     if(num <= 0) printf("Arguments error,should >= 1\n");
-    else cpu_exec(num); 
+    else npc_exec(num);
+    printf("execute %d insts\n",num); 
   }
   return 0;
 }
