@@ -10,8 +10,9 @@
 #include "verilated_dpi.h"
 
 #include "npc_common.h"
+#include "npc_state.h"
 #include <utils.h>
-#include "csrc/monitor/sdb/sdb.h"
+#include "sdb.h"
 
 
 //enum { NPC_RUNNING, NPC_STOP, NPC_END, NPC_ABORT, NPC_QUIT };
