@@ -43,7 +43,7 @@ void npc_regs_display(){
     for(i=0; i<32; i++){
         printf("%s\t0x%08lx\t%lu\n",npc_regs[i], cpu_gpr[i], cpu_gpr[i]);
     }
-    printf("pc\t0x%08lx\t%lu\n",dut->pc,dut->pc);
+    printf("pc\t0x%08x\t%u\n",dut->pc,dut->pc);
 }
 
 word_t npc_reg_str2val(const char *s, bool *success) {
@@ -118,7 +118,7 @@ static void trace_and_difftest(){
   bool changed;
   changed = scan_wp();
   if(changed)
-    nemu_state.state = NPC_STOP;
+    npc_state.state = NPC_STOP;
 #endif
 }
 
