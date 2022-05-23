@@ -13,7 +13,7 @@ void init_regex();
 void init_wp_pool();
 void npc_exec(uint64_t n);
 void npc_regs_display();
-word_t pmem_read(paddr addr);
+word_t pmem_read(paddr_t addr);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
