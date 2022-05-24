@@ -1,10 +1,8 @@
 //#include <isa.h>
 //#include <cpu/cpu.h>
 #include "npc_common.h"
-extern "C" { 
-  #include <readline/readline.h>
-  #include <readline/history.h>
-}
+#include <readline/readline.h>
+#include <readline/history.h>
 #include "sdb.h"
 #include "utils.h"
 #include "string"
@@ -17,9 +15,8 @@ void init_wp_pool();
 void npc_exec(uint64_t n);
 void npc_regs_display();
 word_t pmem_read(paddr_t addr);
-extern "C"{
-  char *readline(const char *);
-}
+  
+char *readline(const char *);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
