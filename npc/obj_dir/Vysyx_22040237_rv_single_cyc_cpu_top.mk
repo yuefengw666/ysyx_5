@@ -46,6 +46,7 @@ VM_USER_CLASSES = \
 	mem \
 	monitor \
 	expr \
+	sdb \
 	watchpoint \
 	single_tb \
 
@@ -71,6 +72,8 @@ mem.o: /home/yfwu/ysyx-workbench/npc/csrc/mem/mem.cpp
 monitor.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/monitor.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 expr.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb/expr.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+sdb.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb/sdb.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 watchpoint.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb/watchpoint.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<

@@ -62,7 +62,7 @@ word_t npc_reg_str2val(const char *s, bool *success) {
 }
 
 void init_monitor(int , char*[]);
-void npc_sdb_mainloop();
+extern "C" void npc_sdb_mainloop();
 
 void npc_reset(){
     dut->rst = 1;
