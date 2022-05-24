@@ -36,12 +36,12 @@ VM_MODPREFIX = Vysyx_22040237_rv_single_cyc_cpu_top
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
 	-I/home/yfwu/ysyx-workbench/npc/csrc/include \
-	/lib/x86_64-linux-gnu/libreadline.so \
 	-lreadline \
 	-lncurses \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
+	/lib/x86_64-linux-gnu/libreadline.so \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \

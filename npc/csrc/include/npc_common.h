@@ -5,8 +5,8 @@
 #include <cassert>
 
 //CONFIG
-//#define CONFIG_SDB 0
-//#define CONFIG_WATCHPOINT 0
+#define CONFIG_SDB 0
+#define CONFIG_WATCHPOINT 0
 
 #define CONFIG_MSIZE 0x8000000
 #define CONFIG_MBASE 0x80000000
