@@ -63,7 +63,7 @@ run: $(VSRC) $(CSRC)
 
 	@echo
 	@echo "-- VERILATE ----------------"
-	$(VERILATOR) -Wall --trace -cc $(VSRC_PATH)/ysyx_22040237_defines.v $(VSRC) -exe --build -CFLAGS -ldl -lreadline $(CSRC) -top $(TOP_DESIGN_NAME) -CFLAGS $(INC_FLAG)
+	$(VERILATOR) -Wall --trace -cc $(VSRC_PATH)/ysyx_22040237_defines.v $(VSRC) -exe --build -lreadline $(CSRC) -top $(TOP_DESIGN_NAME) -CFLAGS $(INC_FLAG)
 
 	@echo
 	@echo "-- BUILD -------------------"
