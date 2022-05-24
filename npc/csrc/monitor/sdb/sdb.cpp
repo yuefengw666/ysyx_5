@@ -29,7 +29,7 @@ static char* rl_gets() {
   }
 
   //getline(cin,line_read);
-  line_read = readline("(npc) ");
+  line_read = readline(ASNI_FMT("(npc) ",ASNI_BG_BLUE));
 
   if (line_read && *line_read) {
     add_history(line_read);
