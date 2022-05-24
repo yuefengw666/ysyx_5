@@ -62,7 +62,9 @@ word_t npc_reg_str2val(const char *s, bool *success) {
 }
 
 void init_monitor(int , char*[]);
-void npc_sdb_mainloop();
+#ifdef CONFIG_SDB
+    void npc_sdb_mainloop();
+#endif
 
 void npc_reset(){
     dut->rst = 1;
