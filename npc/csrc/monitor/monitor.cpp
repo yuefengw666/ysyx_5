@@ -45,5 +45,5 @@ int parse_args(int argc, char *argv[]){
 void init_monitor(int argc, char *argv[]) {
     parse_args(argc,argv);
 
-    init_sdb();
+    //init_sdb();
 }
