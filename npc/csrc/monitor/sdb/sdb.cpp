@@ -5,7 +5,7 @@
 #include <readline/history.h>
 #include "sdb.h"
 #include "utils.h"
-//#include "string"
+#include "string"
 //#include <memory/vaddr.h>
 
 static int is_batch_mode = false;
