@@ -36,7 +36,6 @@ VM_MODPREFIX = Vysyx_22040237_rv_single_cyc_cpu_top
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
 	-I/home/yfwu/ysyx-workbench/npc/csrc/include \
-	-E \
 	-ldl \
 	-lreadline \
 	-lncurses \
