@@ -13,14 +13,14 @@
  */
 #define MAX_INST_TO_PRINT 10
 
+#ifdef CONFIG_ITRACE
 #define IRB_SIZE 16
 #define IRB_LENGTH 128
 
-#ifdef CONFIG_ITRACE
 char iringbuf[IRB_SIZE][IRB_LENGTH];
 //unsigned int head=0;
-unsigned int tail=0;
-int error_inst_pos = -1;
+int tail=0;
+//int error_inst_pos = -1;
 
 static void iringbuf_wr(char *data_wr){
   //long wr_pos = tail % size;
@@ -30,20 +30,17 @@ static void iringbuf_wr(char *data_wr){
 }
 
 static void iringbuf_display(){
-  if(tail < IRB_SIZE){
-    for(int i=0; i<=tail; i++){
-    if(i == error_inst_pos%IRB_SIZE) printf("%s%s\n", ASNI_FMT("E*-->\t",ASNI_FG_RED),iringbuf[i]);
-    else printf("\t%s\n",iringbuf[i]);
+  int error_inst_pos = ( tail - 1 ) % IRB_SIZE; 
+  if( tail < (IRB_SIZE + 1) ){
+    for(int i=0; i<= (tail-1); i++){
+      if(i == error_inst_pos) printf("%s%s\n", ASNI_FMT("E*-->",ASNI_FG_RED),iringbuf[i]);
+      else printf("     %s\n",iringbuf[i]);
     }
   }
-  else {
-    for(int j=tail%IRB_SIZE;j<IRB_SIZE;j++){
-      if(j == error_inst_pos%IRB_SIZE) printf("%s%s\n",ASNI_FMT("   E*-->",ASNI_FG_RED),iringbuf[j]);
-      else printf("\t%s\n",iringbuf[j]);
-    }
-    for(int k=0; k<tail%IRB_SIZE; k++){
-      if(k == error_inst_pos%IRB_SIZE) printf("%s%s\n",ASNI_FMT("   E*-->",ASNI_FG_RED),iringbuf[k]);
-      else printf("\t%s\n",iringbuf[k]);
+  else{
+    for(int j=0; j<=IRB_SIZE; j++){
+      if(j == error_inst_pos) printf("%s%s\n", ASNI_FMT("E*-->",ASNI_FG_RED),iringbuf[j]);
+      else printf("     %s\n",iringbuf[j]);
     }
   }
 } 
@@ -61,8 +58,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (ITRACE_COND) { 
     log_write("%s\n", _this->logbuf);
     iringbuf_wr(_this->logbuf);
-    error_inst_pos++;
-  }//add some inst befer bad inst
+  }
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
@@ -100,7 +96,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, ilen);
 #endif
 }
-
+/*
 #ifdef CONFIG_ITRACE
 //Parse the instruction after the error instruction.
 static void parse_more_inst(Decode *s, vaddr_t pc){
@@ -131,7 +127,7 @@ static void parse_more_inst(Decode *s, vaddr_t pc){
   nemu_state.state  = NEMU_ABORT;
 }
 #endif
-
+*/
 
 static void execute(uint64_t n) {
   Decode s;
@@ -139,7 +135,7 @@ static void execute(uint64_t n) {
     exec_once(&s, cpu.pc);
     g_nr_guest_inst ++;
     trace_and_difftest(&s, cpu.pc);
-    #ifdef CONFIG_ITRACE
+    /*#ifdef CONFIG_ITRACE
     if(nemu_state.state  == NEMU_ABORT){
       parse_more_inst(&s,cpu.pc);
       //cpu.pc += 4;
@@ -150,7 +146,7 @@ static void execute(uint64_t n) {
       parse_more_inst(&s,cpu.pc);
       //parse_more_inst(&s,cpu.pc);
     }
-    #endif
+    #endif*/
     if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
   }
@@ -190,10 +186,10 @@ void cpu_exec(uint64_t n) {
   switch (nemu_state.state) {
     case NEMU_RUNNING: nemu_state.state = NEMU_STOP; break;
     case NEMU_ABORT:
+    case NEMU_END:
     #ifdef CONFIG_ITRACE
       iringbuf_display();
     #endif
-    case NEMU_END:
       Log("nemu: %s at pc = " FMT_WORD,
           (nemu_state.state == NEMU_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :
            (nemu_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
