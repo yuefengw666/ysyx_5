@@ -9,7 +9,7 @@
 //transfer regs
 #include "verilated_dpi.h"
 
-#include "npc_common.h"
+//#include "npc_common.h"
 #include "npc_state.h"
 #include <utils.h>
 #include "sdb.h"
@@ -17,7 +17,6 @@
 #include "readline/history.h"
 
 
-//enum { NPC_RUNNING, NPC_STOP, NPC_END, NPC_ABORT, NPC_QUIT };
 
 #define MAX_SIM_TIME 200
 vluint64_t sim_time = 0;
