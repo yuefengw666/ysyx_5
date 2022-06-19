@@ -1,13 +1,15 @@
 #include <npc_common.h>
 #include "npc_state.h"
+#include "utils.h"
+
 #include <dlfcn.h>
 
+/*
 #include <isa.h>
 #include <cpu/cpu.h>
 #include <memory/paddr.h>
-#include <utils.h>
 #include <difftest-def.h>
-
+*/
 void (*ref_difftest_memcpy)(paddr_t addr, void *buf, size_t n, bool direction) = NULL;
 void (*ref_difftest_regcpy)(void *dut, bool direction) = NULL;
 void (*ref_difftest_exec)(uint64_t n) = NULL;
@@ -84,10 +86,29 @@ void init_difftest(char *ref_so_file, long img_size) { // remove int port
   ref_difftest_regcpy(&npc_cpu, DIFFTEST_TO_REF);
 }
 
+bool isa_difftest_checkregs(NPC_CPU *ref_r, vaddr_t pc) {
+  for(int i=0; i<32; i++){
+    if(ref_r->gpr[i] != npc_cpu.gpr[i]) {
+      printf("%s at gpr:%s!\n",ASNI_FMT("DIFFTEST E*-->",ASNI_FG_RED),regs[i]);
+      printf("%s:0x%08lx\n",ASNI_FMT("REF",ASNI_FG_GREEN),ref_r->gpr[i]);
+      printf("%s:0x%08lx\n",ASNI_FMT("NEMU",ASNI_FG_RED),npc_cpu.gpr[i]);
+      return false;
+    }
+  }
+
+  if(ref_r->pc != npc_cpu.pc) { 
+    printf("%s at pc!\n",ASNI_FMT("DIFFTEST E*-->",ASNI_FG_RED));
+    printf("%s:0x%08lx\n",ASNI_FMT("REF",ASNI_FG_GREEN),ref_r->pc);
+    printf("%s:0x%08lx\n",ASNI_FMT("NEMU",ASNI_FG_RED),npc_cpu.pc);
+    return false;
+  }
+  return true;
+}
+
 static void checkregs(NPC_CPU *ref, vaddr_t pc) {
   if (!isa_difftest_checkregs(ref, pc)) {
-    nemu_state.state = NEMU_ABORT;
-    nemu_state.halt_pc = pc;
+    npc_state.state = NPC_ABORT;
+    npc_state.halt_pc = pc;
     //isa_reg_display();
   }
 }
