@@ -1,8 +1,4 @@
-//#include "npc_common.h"
-
-typedef uint64_t word_t;
-typedef word_t vaddr_t;
-typedef uint32_t paddr_t;
+#include "npc_common.h"
 
 typedef struct {
   word_t gpr[32];
