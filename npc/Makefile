@@ -19,7 +19,7 @@ CSRC += $(shell find $(abspath ./csrc) -name "*.c")
 #CSRC = ./csrc/single_tb.cpp
 
 IMG = ""
-
+DIFF_REF_SO = "/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so"
 ######################################################################
 # Set up variables
 
@@ -65,7 +65,8 @@ run: $(VSRC) $(CSRC)
 	@echo
 	@echo "-- VERILATE ----------------"
 	$(VERILATOR) -Wall --trace -cc $(VSRC_PATH)/ysyx_22040237_defines.v $(VSRC) -exe --build $(CSRC) -top $(TOP_DESIGN_NAME) -CFLAGS $(INC_FLAG) \
-		/lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses
+		/lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses\
+		-LDFLAGS -ldl -CFLAGS -fpermissive
 
 	@echo
 	@echo "-- BUILD -------------------"
@@ -74,7 +75,7 @@ run: $(VSRC) $(CSRC)
 	@echo "-- RUN ---------------------"
 	@rm -rf logs
 	@mkdir -p logs
-	obj_dir/V$(TOP_DESIGN_NAME) $(IMG)
+	obj_dir/V$(TOP_DESIGN_NAME) $(IMG) -diff $(DIFF_REF_SO)
 
 	@echo
 	@echo "-- DONE --------------------"

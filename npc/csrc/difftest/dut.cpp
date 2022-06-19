@@ -58,7 +58,7 @@ void init_difftest(char *ref_so_file, long img_size) { // remove int port
   assert(ref_so_file != NULL);
 
   void *handle;
-  handle = dlopen(ref_so_file, RTLD_LAZY | MUXNDEF(CONFIG_CC_ASAN, RTLD_DEEPBIND, 0));
+  handle = dlopen(ref_so_file, RTLD_LAZY);//remove | MUXNDEF(CONFIG_CC_ASAN, RTLD_DEEPBIND, 0));
   assert(handle);
 
   ref_difftest_memcpy = dlsym(handle, "difftest_memcpy");
@@ -76,8 +76,8 @@ void init_difftest(char *ref_so_file, long img_size) { // remove int port
   void (*ref_difftest_init)() = dlsym(handle, "difftest_init");// remove int
   assert(ref_difftest_init);
 
-  Log("Differential testing: %s", ASNI_FMT("ON", ASNI_FG_GREEN));
-  Log("The result of every instruction will be compared with %s. "
+  printf("Differential testing: %s", ASNI_FMT("ON", ASNI_FG_GREEN));
+  printf("The result of every instruction will be compared with %s. "
       "This will help you a lot for debugging, but also significantly reduce the performance. "
       "If it is not necessary, you can turn it off in menuconfig.", ref_so_file);
 
@@ -89,7 +89,7 @@ void init_difftest(char *ref_so_file, long img_size) { // remove int port
 bool isa_difftest_checkregs(NPC_CPU *ref_r, vaddr_t pc) {
   for(int i=0; i<32; i++){
     if(ref_r->gpr[i] != npc_cpu.gpr[i]) {
-      printf("%s at gpr:%s!\n",ASNI_FMT("DIFFTEST E*-->",ASNI_FG_RED),regs[i]);
+      printf("%s at gpr:%s!\n",ASNI_FMT("DIFFTEST E*-->",ASNI_FG_RED),npc_regs[i]);
       printf("%s:0x%08lx\n",ASNI_FMT("REF",ASNI_FG_GREEN),ref_r->gpr[i]);
       printf("%s:0x%08lx\n",ASNI_FMT("NEMU",ASNI_FG_RED),npc_cpu.gpr[i]);
       return false;
