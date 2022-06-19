@@ -1,4 +1,4 @@
-#include "npc_common.h"
+//#include "npc_common.h"
 #include "npc_state.h"
 #include "utils.h"
 
