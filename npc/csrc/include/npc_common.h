@@ -28,6 +28,7 @@ word_t pmem_read(paddr_t addr);
 void pmem_write(paddr_t addr, word_t data);
 
 //difftest
+/*
 #ifdef CONFIG_DIFFTEST
 enum
 {
@@ -40,7 +41,7 @@ extern void (*ref_difftest_exec)(uint64_t n);
 extern void (*ref_difftest_raise_intr)(uint64_t NO);
 extern void (*ref_difftest_init)();
 #endif
-
+*/
 
 /*
 typedef struct {
