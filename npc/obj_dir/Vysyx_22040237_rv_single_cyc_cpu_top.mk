@@ -38,10 +38,12 @@ VM_USER_CFLAGS = \
 	-I/home/yfwu/ysyx-workbench/npc/csrc/include \
 	-lreadline \
 	-lncurses \
+	-fpermissive \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
 	/lib/x86_64-linux-gnu/libreadline.so \
+	-ldl \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
