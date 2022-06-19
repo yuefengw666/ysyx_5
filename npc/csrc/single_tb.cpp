@@ -9,8 +9,8 @@
 //transfer regs
 #include "verilated_dpi.h"
 
-//#include "npc_common.h"
-#include "npc_state.h"
+#include "npc_common.h"
+//#include "npc_state.h"
 #include <utils.h>
 #include "sdb.h"
 #include "readline/readline.h"
