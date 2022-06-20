@@ -56,7 +56,7 @@ assign rf[28] = regs[28];
 assign rf[29] = regs[29];
 assign rf[30] = regs[30];
 assign rf[31] = regs[31];
-assign rf[32] = {32'b0,pc+1}; 
+assign rf[32] = {32'b0,pc}; 
 //transfer registers pointer
 initial set_gpr_ptr(rf);
 //!!--------------------------------------------------------!!

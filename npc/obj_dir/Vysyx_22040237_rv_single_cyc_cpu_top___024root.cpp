@@ -37,7 +37,7 @@ VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___sequent__TOP
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22040237_rv_single_cyc_cpu_top___024root___sequent__TOP__3\n"); );
     // Variables
     CData/*0:0*/ __Vdlyvset__ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__regs__v0;
-    CData/*4:0*/ __Vdlyvdim0__ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__regs__v32;
+    CData/*5:0*/ __Vdlyvdim0__ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__regs__v32;
     CData/*0:0*/ __Vdlyvset__ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__regs__v32;
     QData/*63:0*/ __Vdlyvval__ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__regs__v32;
     // Body
@@ -357,7 +357,6 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root___eval(Vysyx_22040237_rv_sin
     vlSelf->__Vm_traceActivity[1U] = 1U;
     if (((IData)(vlSelf->clk) & (~ (IData)(vlSelf->__Vclklast__TOP__clk)))) {
         Vysyx_22040237_rv_single_cyc_cpu_top___024root___sequent__TOP__3(vlSelf);
-        vlSelf->__Vm_traceActivity[2U] = 1U;
     }
     Vysyx_22040237_rv_single_cyc_cpu_top___024root___combo__TOP__5(vlSelf);
     // Final

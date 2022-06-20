@@ -49,12 +49,12 @@ VL_MODULE(Vysyx_22040237_rv_single_cyc_cpu_top___024root) {
     QData/*63:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__op2;
     QData/*63:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_data;
     QData/*63:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__src_i;
-    VlUnpacked<QData/*63:0*/, 32> ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__regs;
+    VlUnpacked<QData/*63:0*/, 33> ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__regs;
     VlUnpacked<QData/*63:0*/, 33> ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__rf;
 
     // LOCAL VARIABLES
     CData/*0:0*/ __Vclklast__TOP__clk;
-    VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
+    VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
 
     // INTERNAL VARIABLES
     Vysyx_22040237_rv_single_cyc_cpu_top__Syms* vlSymsp;  // Symbol table
