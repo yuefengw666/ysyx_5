@@ -47,21 +47,26 @@ VM_USER_LDLIBS = \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
+	dpi \
 	dut \
 	mem \
 	monitor \
 	expr \
 	sdb \
 	watchpoint \
-	single_tb \
+	npc_reg \
+	npc_sim \
+	single_core_tb \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
 	/home/yfwu/ysyx-workbench/npc/csrc \
+	/home/yfwu/ysyx-workbench/npc/csrc/DPI_C \
 	/home/yfwu/ysyx-workbench/npc/csrc/difftest \
 	/home/yfwu/ysyx-workbench/npc/csrc/mem \
 	/home/yfwu/ysyx-workbench/npc/csrc/monitor \
 	/home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb \
+	/home/yfwu/ysyx-workbench/npc/csrc/npc_sim \
 
 
 ### Default rules...
@@ -73,6 +78,8 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
+dpi.o: /home/yfwu/ysyx-workbench/npc/csrc/DPI_C/dpi.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 dut.o: /home/yfwu/ysyx-workbench/npc/csrc/difftest/dut.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 mem.o: /home/yfwu/ysyx-workbench/npc/csrc/mem/mem.cpp
@@ -85,7 +92,11 @@ sdb.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb/sdb.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 watchpoint.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb/watchpoint.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-single_tb.o: /home/yfwu/ysyx-workbench/npc/csrc/single_tb.cpp
+npc_reg.o: /home/yfwu/ysyx-workbench/npc/csrc/npc_sim/npc_reg.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+npc_sim.o: /home/yfwu/ysyx-workbench/npc/csrc/npc_sim/npc_sim.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+single_core_tb.o: /home/yfwu/ysyx-workbench/npc/csrc/single_core_tb.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
