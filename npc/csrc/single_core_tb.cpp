@@ -8,9 +8,12 @@ void init_monitor(int , char*[]);
 
 int main(int argc, char**argv, char** env){
 
+    
+    init_monitor(argc,argv);
+    
     sim_init();
 
-    init_monitor(argc,argv);
+    npc_reset();
 
     #ifdef CONFIG_SDB
         npc_sdb_mainloop();
