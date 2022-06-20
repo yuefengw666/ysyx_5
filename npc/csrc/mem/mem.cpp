@@ -14,7 +14,6 @@ static inline void host_write(void *addr, word_t data){
 }
 
 word_t pmem_read(paddr_t addr){
-    printf("read pc address %x\n",addr);
     if( (addr >= CONFIG_MBASE) && (addr < (paddr_t)CONFIG_MBASE + CONFIG_MSIZE) ){
       word_t ret = host_read(guest_to_host(addr));
       return ret;
