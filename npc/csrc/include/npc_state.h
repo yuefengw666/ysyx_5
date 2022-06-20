@@ -17,6 +17,19 @@ const char *npc_regs[] = {
   "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
 };
 
+
+// ----------- state -----------
+
+enum { NPC_RUNNING, NPC_STOP, NPC_END, NPC_ABORT, NPC_QUIT };
+
+typedef struct {
+  int state;
+  vaddr_t halt_pc;
+  uint32_t halt_ret;
+} NPCstate;
+
+extern NPCstate npc_state;
+
 #ifdef CONFIG_DIFFTEST
 enum
 {

@@ -1,11 +1,14 @@
 #include "npc_common.h"
 #include <cassert>
 #include <cstring>
+#include <unistd.h>
 
 void init_sdb();
+void init_difftest(char *ref_so_file, long img_size);
 
 static char *img_file = NULL;
 static long img_size = 0;
+static char *diff_so_file = NULL;
 
 static long load_img(char *img_file) {
   if (img_file == NULL) {
@@ -31,6 +34,37 @@ static long load_img(char *img_file) {
   return size;
 }
 
+
+static int parse_args(int argc, char *argv[]) {
+  const struct option table[] = {
+    {"batch"    , no_argument      , NULL, 'b'},
+    {"log"      , required_argument, NULL, 'l'},
+    {"diff"     , required_argument, NULL, 'd'},
+    {"port"     , required_argument, NULL, 'p'},
+    {"help"     , no_argument      , NULL, 'h'},
+    {0          , 0                , NULL,  0 },
+  };
+  int o;
+  while ( (o = getopt_long(argc, argv, "-bhl:d:p:", table, NULL)) != -1) {
+    switch (o) {
+      //case 'b': sdb_set_batch_mode(); break;
+      //case 'p': sscanf(optarg, "%d", &difftest_port); break;
+      //case 'l': log_file = optarg; break;
+      case 'd': diff_so_file = optarg; break;
+      case 1: img_file = optarg; return 0;
+      default:
+        printf("Usage: %s [OPTION...] IMAGE [args]\n\n", argv[0]);
+        printf("\t-b,--batch              run with batch mode\n");
+        printf("\t-l,--log=FILE           output log to FILE\n");
+        printf("\t-d,--diff=REF_SO        run DiffTest with reference REF_SO\n");
+        printf("\t-p,--port=PORT          run DiffTest with port PORT\n");
+        printf("\n");
+        exit(0);
+    }
+  }
+  return 0;
+}
+/*
 int parse_args(int argc, char *argv[]){
     if(argc == 2){
         if(strlen(argv[1]) > 0){
@@ -40,10 +74,14 @@ int parse_args(int argc, char *argv[]){
     }
     return 0;
 }
-
+*/
 
 void init_monitor(int argc, char *argv[]) {
     parse_args(argc,argv);
+    
+    img_size = load_img(img_file);
 
+    init_difftest(diff_so_file, img_size);//remove difftest_port
+    
     init_sdb();
 }

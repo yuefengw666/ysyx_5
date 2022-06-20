@@ -4,6 +4,9 @@ module ysyx_22040237_reg_file(
   input clk,
   input rst,
   
+  //----------------------transfer pc value to sim for dpi_c;
+  input [31:0] pc;
+  //-----------------------
   input reg_wr_en,
   input [4:0] wr_addr,
   input [63:0] wr_data,
@@ -17,11 +20,14 @@ module ysyx_22040237_reg_file(
 );
 
 reg [63:0] regs[0:31];
-
 wire r_wr_en;
 
+//!!---------------------for DPI_C--------------------------!!
+wire [63:0] rf[32:0];
+assign rf[32] = {32'b0,pc}; 
 //transfer registers pointer
-initial set_gpr_ptr(regs);
+initial set_gpr_ptr(rf);
+//!!--------------------------------------------------------!!
 
 assign reg1_rd_data = reg1_rd_en ? regs[reg1_rd_addr] : `ysyx_22040237_REGS_INIT;
 assign reg2_rd_data = reg2_rd_en ? regs[reg2_rd_addr] : `ysyx_22040237_REGS_INIT;

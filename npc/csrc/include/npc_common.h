@@ -1,10 +1,15 @@
+#ifndef __COMMON_H__
+#define __COMMON_H__
+
 #include <stdio.h>
+#include <iostream>
 #include <stdlib.h>
 #include <stdint.h>
 #include <cstring>
 #include <cassert>
 
 //CONFIG
+#define CONFIG_VCD 0
 #define CONFIG_SDB 0
 #define CONFIG_WATCHPOINT 0
 #define CONFIG_DIFFTEST 0
@@ -19,43 +24,14 @@ typedef uint64_t word_t;
 typedef word_t vaddr_t;
 typedef uint32_t paddr_t;
 
-//mem
 extern uint8_t pmem[CONFIG_MSIZE];
+
+/*
 uint8_t* guest_to_host(paddr_t paddr);
 static inline word_t host_read(void *addr);
 static inline void host_write(void *addr, word_t data);
 word_t pmem_read(paddr_t addr);
 void pmem_write(paddr_t addr, word_t data);
+*/
 
-//difftest
-/*
-#ifdef CONFIG_DIFFTEST
-enum
-{
-  DIFFTEST_TO_DUT,
-  DIFFTEST_TO_REF
-};
-extern void (*ref_difftest_memcpy)(paddr_t addr, void *buf, size_t n, bool direction);
-extern void (*ref_difftest_regcpy)(void *dut, bool direction);
-extern void (*ref_difftest_exec)(uint64_t n);
-extern void (*ref_difftest_raise_intr)(uint64_t NO);
-extern void (*ref_difftest_init)();
 #endif
-*/
-
-/*
-typedef struct {
-  word_t gpr[32];
-  vaddr_t pc;
-} NPC_CPU;
-
-extern NPC_CPU npc_cpu;
-*/
-
-/*const char *npc_regs[] = {
-  "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
-  "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
-  "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7",
-  "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
-};
-*/
