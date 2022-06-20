@@ -9,7 +9,7 @@ static int is_batch_mode = false;
 
 void init_regex();
 void init_wp_pool();
-void npc_exec(uint64_t n);
+void npc_run(uint64_t n);
 void npc_regs_display();
 word_t pmem_read(paddr_t addr);
   
@@ -36,7 +36,7 @@ static char* rl_gets() {
 }
 
 static int cmd_c(char *args) {
-  npc_exec(-1);
+  npc_run(-1);
   return 0;
 }
 
@@ -53,14 +53,14 @@ static int cmd_si(char *args){
   
   if(arg == NULL) {
     printf("execute 1 inst \n");
-    npc_exec(1);
+    npc_run(1);
   }
   else {
     int num = atoi(arg);
     if(num <= 0) printf("Arguments error,should >= 1\n");
     else {
       printf("execute %d insts\n",num); 
-      npc_exec(num);
+      npc_run(num);
     }
   }
   return 0;
