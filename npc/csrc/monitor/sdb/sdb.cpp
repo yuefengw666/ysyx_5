@@ -1,12 +1,9 @@
-//#include <isa.h>
-//#include <cpu/cpu.h>
-//#include "npc_common.h"
+#include "sdb.h"
+#include "npc_state.h"
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "sdb.h"
 #include "utils.h"
 #include "string"
-//#include <memory/vaddr.h>
 
 static int is_batch_mode = false;
 
