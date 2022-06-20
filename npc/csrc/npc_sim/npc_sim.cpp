@@ -84,13 +84,13 @@ static void npc_sim_once(){
     npc_sim_half();
     npc_sim_half();
 }
-void npc_regs_display()
+void npc_regs_display();
 
-void exec_once(){
+static void exec_once(){
     npc_sim_once();
     printf("current npc_cpu.pc:%lx\n",npc_cpu.pc);
     printf("current dut->pc:%x\n",dut->pc);
-    npc_regs_display();    
+    npc_regs_display();
     //ITRACE
 }
 
