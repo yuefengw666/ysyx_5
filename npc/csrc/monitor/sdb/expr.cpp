@@ -4,6 +4,7 @@
  * Type 'man regex' for more information about POSIX regex functions.
  */
 #include "npc_common.h"
+#include "mem.h"
 #include <regex.h>
 
 word_t npc_reg_str2val(const char *s, bool *success);
