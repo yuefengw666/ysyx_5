@@ -32,7 +32,8 @@ void ebreak(){
 void set_npc_state(int state){
     //difftest_skip_ref()
     npc_state.state = state;
-    //printf("parse??:%d\n",state);
+    printf("parse??:%d\n",state);
     npc_state.halt_pc = npc_cpu.pc;
+    printf("parse in pc :%lx\n",npc_cpu.pc);
     //npc_state.halt_ret = halt_ret;
 }
