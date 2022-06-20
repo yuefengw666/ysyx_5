@@ -87,6 +87,7 @@ static void npc_sim_once(){
 
 static void exec_once(){
     npc_sim_once();
+    printf("current pc:%lx\n",npc_cpu.pc);
     //ITRACE
 }
 
