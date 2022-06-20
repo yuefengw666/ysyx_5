@@ -5,7 +5,7 @@ void npc_regs_display(){
     for(i=0; i<32; i++){
         printf("%s\t0x%08lx\t%lu\n",npc_regs[i], npc_cpu.gpr[i], npc_cpu.gpr[i]);
     }
-    printf("pc\t0x%08x\t%u\n",npc_cpu.pc,npc_cpu.pc);
+    printf("pc\t0x%08lx\t%lu\n",npc_cpu.pc,npc_cpu.pc);
 }
 
 word_t npc_reg_str2val(const char *s, bool *success) {
@@ -13,7 +13,7 @@ word_t npc_reg_str2val(const char *s, bool *success) {
 
   for(int i=0; i<32; i++){
     if(strcmp(s,npc_regs[i])==0){
-      return npc_cpu_gpr[i];
+      return npc_cpu.gpr[i];
     }
   }
   *success = false;
