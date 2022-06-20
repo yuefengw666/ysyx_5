@@ -54,7 +54,7 @@ VERILATOR = verilator
 	#@rm -rf logs/annotated
 	#$(VERILATOR_COVERAGE) --annotate logs/annotated logs/coverage.dat
 ######################################################################
-
+#-CFLAGS -fpermissive
 default: run
 
 run: $(VSRC) $(CSRC)
@@ -66,7 +66,7 @@ run: $(VSRC) $(CSRC)
 	@echo "-- VERILATE ----------------"
 	$(VERILATOR) -Wall --trace -cc $(VSRC_PATH)/ysyx_22040237_defines.v $(VSRC) -exe --build $(CSRC) -top $(TOP_DESIGN_NAME) -CFLAGS $(INC_FLAG) \
 		/lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses\
-		-LDFLAGS -ldl -CFLAGS -fpermissive
+		-LDFLAGS -ldl
 
 	@echo
 	@echo "-- BUILD -------------------"
