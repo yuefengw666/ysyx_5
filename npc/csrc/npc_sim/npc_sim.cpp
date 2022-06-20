@@ -43,7 +43,7 @@ void npc_reset(){
     }
 }
 
-exit_npc(int exit_flag){
+void exit_npc(int exit_flag){
     #ifdef CONFIG_VCD
     m_trace->dump(sim_time);
     m_trace->close();
