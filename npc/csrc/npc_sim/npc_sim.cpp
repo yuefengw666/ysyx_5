@@ -6,7 +6,7 @@ VerilatedVcdC* m_trace = NULL;
 NPC_CPU npc_cpu;
 NPCstate npc_state = {.state = NPC_STOP};
 
-static void sim_init(){
+void sim_init(){
     //instantiate top module
     dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
     sim_time = 0;
@@ -21,7 +21,7 @@ static void sim_init(){
     #endif
 }
 
-static void npc_reset(){
+void npc_reset(){
     pos_cnt = 0;
     dut->rst = 1;
     for(int n=0; n<5; n++){
@@ -43,7 +43,7 @@ static void npc_reset(){
     }
 }
 
-void exit_npc(int exit_flag){
+exit_npc(int exit_flag){
     #ifdef CONFIG_VCD
     m_trace->dump(sim_time);
     m_trace->close();
@@ -95,7 +95,7 @@ static void execute(uint64_t n){
     }
 }
 
-static void npc_run(uint64_t n){
+void npc_run(uint64_t n){
     switch(npc_state.state){
         case NPC_END: case NPC_ABORT:
             printf("Program execution has ended.\n");

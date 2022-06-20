@@ -47,7 +47,6 @@ VM_USER_LDLIBS = \
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
 	dpi \
-	dut \
 	mem \
 	monitor \
 	expr \
@@ -61,7 +60,6 @@ VM_USER_CLASSES = \
 VM_USER_DIR = \
 	/home/yfwu/ysyx-workbench/npc/csrc \
 	/home/yfwu/ysyx-workbench/npc/csrc/DPI_C \
-	/home/yfwu/ysyx-workbench/npc/csrc/difftest \
 	/home/yfwu/ysyx-workbench/npc/csrc/mem \
 	/home/yfwu/ysyx-workbench/npc/csrc/monitor \
 	/home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb \
@@ -78,8 +76,6 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 VPATH += $(VM_USER_DIR)
 
 dpi.o: /home/yfwu/ysyx-workbench/npc/csrc/DPI_C/dpi.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-dut.o: /home/yfwu/ysyx-workbench/npc/csrc/difftest/dut.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 mem.o: /home/yfwu/ysyx-workbench/npc/csrc/mem/mem.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
