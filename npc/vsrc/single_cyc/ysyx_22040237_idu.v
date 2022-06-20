@@ -96,9 +96,9 @@ assign inst_jalr = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & ~opcode[4] &
 //sd:   0100011        ################# no parse ############
 assign inst_sd = ~opcode[6] & opcode[5] & ~opcode[4] & ~opcode[3] & ~opcode[2] & opcode[1] & opcode[0];
 
-//******************identify invalid inst*************************************
+//******************identify invalid inst*********************************************************************************//
 assign invalid_inst = ~( inst_dummy | inst_addi | inst_ebreak| inst_auipc | inst_lui | inst_jal | inst_jalr | inst_sd );
-
+//************************************************************************************************************************//
 //judge type
 assign type_R = 1'b0;
 assign type_I = inst_addi | inst_ebreak | inst_jalr;
