@@ -15,8 +15,8 @@
 
 
 #define MAX_SIM_TIME 20000
-extern vluint64_t sim_time = 0;
-extern vluint64_t pos_cnt = 0;
+extern vluint64_t sim_time;
+extern vluint64_t pos_cnt;
 
 void sim_init();
 void npc_reset();
