@@ -19,7 +19,7 @@ module ysyx_22040237_reg_file(
   output [63:0] reg2_rd_data
 );
 
-reg [63:0] regs[0:32];
+reg [63:0] regs[0:31];
 wire r_wr_en;
 
 //!!---------------------for DPI_C--------------------------!!

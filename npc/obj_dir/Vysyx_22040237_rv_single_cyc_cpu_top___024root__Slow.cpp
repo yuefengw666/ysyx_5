@@ -154,7 +154,7 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root___settle__TOP__1(Vysyx_22040
         = vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__regs
         [0x1fU];
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_reg_file_u0__DOT__rf[0x20U] 
-        = (QData)((IData)(((IData)(1U) + vlSelf->pc)));
+        = (QData)((IData)(vlSelf->pc));
     vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode 
         = ((0xfeU & (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode)) 
            | ((~ (IData)(vlSelf->rst)) & (((((IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi) 
