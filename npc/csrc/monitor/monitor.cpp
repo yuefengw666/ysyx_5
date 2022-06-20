@@ -51,7 +51,7 @@ static int parse_args(int argc, char *argv[]) {
       //case 'b': sdb_set_batch_mode(); break;
       //case 'p': sscanf(optarg, "%d", &difftest_port); break;
       //case 'l': log_file = optarg; break;
-      case 'd': diff_so_file = optarg; break;
+      //case 'd': diff_so_file = optarg; break;
       case 1: img_file = optarg; return 0;
       default:
         printf("Usage: %s [OPTION...] IMAGE [args]\n\n", argv[0]);
@@ -82,7 +82,7 @@ void init_monitor(int argc, char *argv[]) {
     
     img_size = load_img(img_file);
 
-    init_difftest(diff_so_file, img_size);//remove difftest_port
+    //init_difftest(diff_so_file, img_size);//remove difftest_port
     
     init_sdb();
 }
