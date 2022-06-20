@@ -86,7 +86,7 @@ static void npc_sim_once(){
 }
 void npc_regs_display()
 
-static void exec_once(){
+void exec_once(){
     npc_sim_once();
     printf("current npc_cpu.pc:%lx\n",npc_cpu.pc);
     printf("current dut->pc:%x\n",dut->pc);
