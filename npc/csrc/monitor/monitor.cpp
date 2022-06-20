@@ -1,6 +1,7 @@
 #include "npc_common.h"
 #include <cassert>
 #include <cstring>
+#include "getopt.h"
 #include <unistd.h>
 
 void init_sdb();
