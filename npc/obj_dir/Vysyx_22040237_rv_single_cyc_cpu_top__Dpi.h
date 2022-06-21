@@ -15,10 +15,10 @@ extern "C" {
     // DPI IMPORTS
     // DPI import at /home/yfwu/ysyx-workbench/npc/vsrc/single_cyc/ysyx_22040237_exu.v:1:30
     extern void ebreak();
+    // DPI import at /home/yfwu/ysyx-workbench/npc/vsrc/single_cyc/ysyx_22040237_exu.v:3:30
+    extern void invalid_inst_o();
     // DPI import at /home/yfwu/ysyx-workbench/npc/vsrc/single_cyc/ysyx_22040237_reg_file.v:1:30
     extern void set_gpr_ptr(const svOpenArrayHandle a);
-    // DPI import at /home/yfwu/ysyx-workbench/npc/vsrc/single_cyc/ysyx_22040237_exu.v:2:30
-    extern void set_npc_state(int state, int halt_ret);
 
 #ifdef __cplusplus
 }
