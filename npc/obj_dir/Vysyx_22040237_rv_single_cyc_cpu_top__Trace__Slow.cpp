@@ -100,6 +100,7 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceInitSub0(Vysyx_2204023
         tracep->declBit(c+115,"ysyx_22040237_rv_single_cyc_cpu_top ysyx_22040237_idu_u0 inst_dummy", false,-1);
         tracep->declBit(c+97,"ysyx_22040237_rv_single_cyc_cpu_top ysyx_22040237_exu_u0 clk", false,-1);
         tracep->declBit(c+98,"ysyx_22040237_rv_single_cyc_cpu_top ysyx_22040237_exu_u0 rst", false,-1);
+        tracep->declQuad(c+100,"ysyx_22040237_rv_single_cyc_cpu_top ysyx_22040237_exu_u0 pc", false,-1, 63,0);
         tracep->declBus(c+4,"ysyx_22040237_rv_single_cyc_cpu_top ysyx_22040237_exu_u0 inst_opcode", false,-1, 7,0);
         tracep->declQuad(c+5,"ysyx_22040237_rv_single_cyc_cpu_top ysyx_22040237_exu_u0 op1", false,-1, 63,0);
         tracep->declQuad(c+7,"ysyx_22040237_rv_single_cyc_cpu_top ysyx_22040237_exu_u0 op2", false,-1, 63,0);
