@@ -168,7 +168,7 @@ always@(*)begin
       op1 = pc;
       op2 = 64'h4;
       op1_jump = pc;
-      op2_jump = src_j;
+      op2_jump = {32'b0,src_j};
       rd_w_en = 1'b1;
       rd_w_addr = rd;
     end
