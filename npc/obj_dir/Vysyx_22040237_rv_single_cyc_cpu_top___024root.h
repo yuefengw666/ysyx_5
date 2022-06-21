@@ -25,7 +25,7 @@ VL_MODULE(Vysyx_22040237_rv_single_cyc_cpu_top___024root) {
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
     VL_IN(inst_in,31,0);
-    VL_OUT(pc,31,0);
+    VL_OUT64(pc,63,0);
     VL_OUT64(rs2_data,63,0);
 
     // LOCAL SIGNALS
@@ -41,9 +41,6 @@ VL_MODULE(Vysyx_22040237_rv_single_cyc_cpu_top___024root) {
     CData/*0:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_lui;
     CData/*0:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_jal;
     CData/*0:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_jalr;
-    IData/*31:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__op1_jump;
-    IData/*31:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__op2_jump;
-    IData/*31:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__pc_jump_addr;
     QData/*63:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__rs1_data;
     QData/*63:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__op1;
     QData/*63:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT__op2;
@@ -54,6 +51,8 @@ VL_MODULE(Vysyx_22040237_rv_single_cyc_cpu_top___024root) {
 
     // LOCAL VARIABLES
     CData/*0:0*/ __Vclklast__TOP__clk;
+    QData/*63:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT____Vcellout__ysyx_22040237_idu_u0__op2_jump;
+    QData/*63:0*/ ysyx_22040237_rv_single_cyc_cpu_top__DOT____Vcellout__ysyx_22040237_idu_u0__op1_jump;
     VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
 
     // INTERNAL VARIABLES

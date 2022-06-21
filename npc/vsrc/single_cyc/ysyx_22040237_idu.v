@@ -145,8 +145,8 @@ always@(*)begin
       if(inst_jalr)begin
         op1 = pc;
         op2 = 64'h4;
-        op1_jump = rs1_data[31:0];
-        op2_jump = src_i[31:0];
+        op1_jump = rs1_data;
+        op2_jump = src_i;
       end
       else begin
         op1 = rs1_data;

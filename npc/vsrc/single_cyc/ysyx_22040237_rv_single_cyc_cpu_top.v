@@ -21,8 +21,8 @@ wire invalid_inst;
 wire [7:0] inst_opcode;
 wire [63:0] op1;
 wire [63:0] op2;
-wire [31:0] op1_jump;
-wire [31:0] op2_jump;
+wire [63:0] op1_jump;
+wire [63:0] op2_jump;
 
 wire jump_flag;
 
@@ -35,7 +35,7 @@ wire [4:0] rd_w_addr;
 
 //exu output 
 wire [63:0] rd_data;
-wire [31:0] pc_jump_addr; 
+wire [63:0] pc_jump_addr; 
 
 ysyx_22040237_pc_reg ysyx_22040237_pc_reg_u0(
   .clk (clk),
