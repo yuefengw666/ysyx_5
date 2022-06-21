@@ -32,7 +32,7 @@ void ebreak(){
     //exit_npc(npc_exit_flag);
 }
 
-void invalid_inst(){
+void invalid_inst_o(){
   printf("invalid opcode at pc = %08lx\n",npc_cpu.pc);
 
   printf("There are two cases which will trigger this unexpected exception:\n"
