@@ -33,7 +33,7 @@ void ebreak(){
 }
 
 void invalid_inst_o(){
-  printf("invalid opcode at pc = %08lx\n",npc_cpu.pc);
+  printf("%s at pc = %08lx\n",ASNI_FMT("invalid opcode", ASNI_FG_RED),npc_cpu.pc);
 
   printf("There are two cases which will trigger this unexpected exception:\n"
       "1. The instruction at PC = %08lx is not implemented.\n"
