@@ -5,7 +5,7 @@ module ysyx_22040237_reg_file(
   input rst,
   
   //----------------------transfer pc value to sim for dpi_c;
-  input [31:0] pc,
+  input [63:0] pc,
   //-----------------------
   input reg_wr_en,
   input [4:0] wr_addr,
@@ -31,7 +31,7 @@ always@(*)begin
   for(i=0; i<32; i++)begin
     rf[i] = regs[i];
   end
-  rf[32] = {32'b0,pc};
+  rf[32] = pc;
 end
 
 always@(*)begin

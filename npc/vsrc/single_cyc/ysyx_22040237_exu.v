@@ -7,14 +7,14 @@ module ysyx_22040237_exu(
   input [7:0] inst_opcode,
   input [63:0] op1,
   input [63:0] op2,
-  input [31:0] op1_jump,
-  input [31:0] op2_jump,
+  input [63:0] op1_jump,
+  input [63:0] op2_jump,
 
   input inst_ebreak,
   input invalid_inst,
 
   output reg [63:0] rd_data,
-  output reg [31:0] pc_jump_addr
+  output reg [63:0] pc_jump_addr
 );
 
 always@(*)begin

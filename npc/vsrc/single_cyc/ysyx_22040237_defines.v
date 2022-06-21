@@ -1,4 +1,4 @@
-`define ysyx_22040237_PC_RESET_ADDR 32'h80000000
+`define ysyx_22040237_PC_RESET_ADDR 64'h80000000
 
 //inst opcode 
 `define ysyx_22040237_INST_ADD 8'h01

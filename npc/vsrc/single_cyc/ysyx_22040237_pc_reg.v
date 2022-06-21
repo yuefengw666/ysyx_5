@@ -2,8 +2,8 @@ module ysyx_22040237_pc_reg(
   input clk,
   input rst,
   input jump_flag,
-  input [31:0] pc_jump_addr,
-  output reg [31:0] pc_reg 
+  input [63:0] pc_jump_addr,
+  output reg [63:0] pc_reg 
 );
 
 always@(posedge clk)begin
@@ -14,7 +14,7 @@ always@(posedge clk)begin
     pc_reg <= pc_jump_addr;
   end
   else begin
-    pc_reg <= pc_reg + 32'h4;
+    pc_reg <= pc_reg + 64'h4;
   end
 end
 

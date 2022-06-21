@@ -1,6 +1,6 @@
 module ysyx_22040237_idu(
   input rst,
-  input [31:0] pc,
+  input [63:0] pc,
   input [31:0] inst,
   
   input [63:0] rs1_data,
@@ -8,8 +8,8 @@ module ysyx_22040237_idu(
   output [7:0] inst_opcode,
   output reg [63:0] op1,
   output reg [63:0] op2,
-  output reg [31:0] op1_jump,
-  output reg [31:0] op2_jump,
+  output reg [63:0] op1_jump,
+  output reg [63:0] op2_jump,
   
   //jal pc offset;
   output jump_flag,
@@ -143,7 +143,7 @@ always@(*)begin
         rd_w_en = 1'b1;
         rd_w_addr = rd;
       if(inst_jalr)begin
-        op1 = { 32'b0, pc};
+        op1 = pc;
         op2 = 64'h4;
         op1_jump = rs1_data[31:0];
         op2_jump = src_i[31:0];
@@ -155,7 +155,7 @@ always@(*)begin
     end
     `ysyx_22040237_INST_U:begin
       if(inst_auipc)begin
-        op1 = {32'b0,pc}; 
+        op1 = pc; 
       end
       else begin
         op1 = 'b0;
@@ -165,7 +165,7 @@ always@(*)begin
       rd_w_addr = rd;
     end
     `ysyx_22040237_INST_J:begin
-      op1 = {32'b0, pc};
+      op1 = pc;
       op2 = 64'h4;
       op1_jump = pc;
       op2_jump = src_j;
