@@ -31,6 +31,10 @@ void ebreak(){
     //exit_npc(npc_exit_flag);
 }
 
+void invalid_inst(){
+    
+}
+
 void set_npc_state(int state, int halt_ret){
     //difftest_skip_ref()
     npc_state.state = state;
