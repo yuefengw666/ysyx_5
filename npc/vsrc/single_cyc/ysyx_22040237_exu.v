@@ -33,7 +33,7 @@ always@(*)begin
 end
 
 //**********************************sim end*************************
-always@(*)begin
+always@(clk)begin
   if(inst_ebreak) ebreak();
 end
 
