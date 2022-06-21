@@ -30,6 +30,8 @@ always@(*)begin
     rf[i] = regs[i];
   end
   rf[32] = {32'b0,pc};
+end
+always@(*)begin
   set_gpr_ptr(rf);
 end
 /*
