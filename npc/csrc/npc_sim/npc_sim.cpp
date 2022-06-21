@@ -117,17 +117,17 @@ void npc_run(uint64_t n){
         case NPC_RUNNING: npc_state.state = NPC_STOP;break;
         case NPC_ABORT:
         case NPC_END:
-          Log("npc: %s at pc = " FMT_WORD,
-              (nemu_state.state == NEMU_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :
-               (nemu_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
+          printf("npc: %s at pc = %lx\n",
+              (npc_state.state == NPC_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :
+               (npc_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
                 ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED))),
-                nemu_state.halt_pc);
+                npc_state.halt_pc);
             //printf("npc: %s, invalid opcode at pc = %lx\n", ASNI_FMT("ABORT", ASNI_BG_RED),npc_state.halt_pc);
                 //(npc_state.state == NEMU_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :
                 //(npc_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
                 //ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED))),
                 //npc_state.halt_pc); break;
-            exit_npc(EXIT_FAILURE);//failure to exit
+            exit_npc(npc_state.halt_ret);//failure to exit
         case NPC_QUIT: exit_npc(EXIT_SUCCESS);
     }
 }
