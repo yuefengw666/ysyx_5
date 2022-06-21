@@ -88,7 +88,7 @@ assign inst_ebreak = opcode[0] & opcode[1] & ~opcode[2] & ~opcode[3] & opcode[4]
 //auipc: opcode:0010111
 assign inst_auipc = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & opcode[4] & ~opcode[5] & ~opcode[6];
 //lui: opcode: 0110111
-assign inst_lui = opcode[0] & opcode[1] & opcode[2] & ~opcode[3] & opcode[4] & opcode[5] & ~opcode[6];
+assign inst_lui = opcode[0] & ~opcode[1] & opcode[2] & ~opcode[3] & opcode[4] & opcode[5] & ~opcode[6];
 //jal: 1101111
 assign inst_jal = opcode[0] & opcode[1] & opcode[2] & opcode[3] & ~opcode[4] & opcode[5] & opcode[6];
 //jalr: 1100111
