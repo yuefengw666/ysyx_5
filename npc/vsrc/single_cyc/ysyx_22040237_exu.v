@@ -1,5 +1,6 @@
 import "DPI-C" function void ebreak();
-import "DPI-C" function void set_npc_state(int state, int halt_ret);
+//import "DPI-C" function void set_npc_state(int state, int halt_ret);
+import "DPI-C" function void invalid_inst();
 module ysyx_22040237_exu(
   input clk,
   input rst,

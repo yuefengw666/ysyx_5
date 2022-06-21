@@ -15,6 +15,7 @@ extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
   npc_cpu.pc = cpu_gpr[32];
 }
 void set_npc_state(int state, int halt_ret);
+
 void ebreak(){
     printf("***********************ebreak*****************************\n");
     //int npc_exit_flag = 0;
@@ -32,7 +33,13 @@ void ebreak(){
 }
 
 void invalid_inst(){
-    
+  printf("invalid opcode at pc = %08lx\n",npc_cpu.pc);
+
+  printf("There are two cases which will trigger this unexpected exception:\n"
+      "1. The instruction at PC = %08lx is not implemented.\n"
+      "2. Something is implemented incorrectly.\n",npc_cpu.pc);
+
+  set_npc_state(NPC_ABORT, -1);
 }
 
 void set_npc_state(int state, int halt_ret){
