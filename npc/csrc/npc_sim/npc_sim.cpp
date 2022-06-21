@@ -89,9 +89,9 @@ void npc_regs_display();
 
 static void exec_once(){
     npc_sim_once();
-    printf("current npc_cpu.pc:%lx\n",npc_cpu.pc);
-    printf("current dut->pc:%x\n",dut->pc);
-    npc_regs_display();
+    //printf("current npc_cpu.pc:%lx\n",npc_cpu.pc);
+    //printf("current dut->pc:%x\n",dut->pc);
+    //npc_regs_display();
     //ITRACE
 }
 
