@@ -24,52 +24,19 @@ wire r_wr_en;
 
 //!!---------------------for DPI_C--------------------------!!
 integer i;
+
 reg [63:0] rf[0:32];
+
 always@(*)begin
   for(i=0; i<32; i++)begin
     rf[i] = regs[i];
   end
   rf[32] = {32'b0,pc};
 end
+
 always@(*)begin
   set_gpr_ptr(rf);
 end
-/*
-assign rf[0] = regs[0];
-assign rf[1] = regs[1];
-assign rf[2] = regs[2];
-assign rf[3] = regs[3];
-assign rf[4] = regs[4];
-assign rf[5] = regs[5];
-assign rf[6] = regs[6];
-assign rf[7] = regs[7];
-assign rf[8] = regs[8];
-assign rf[9] = regs[9];
-assign rf[10] = regs[10];
-assign rf[11] = regs[11];
-assign rf[12] = regs[12];
-assign rf[13] = regs[13];
-assign rf[14] = regs[14];
-assign rf[15] = regs[15];
-assign rf[16] = regs[16];
-assign rf[17] = regs[17];
-assign rf[18] = regs[18];
-assign rf[19] = regs[19];
-assign rf[20] = regs[20];
-assign rf[21] = regs[21];
-assign rf[22] = regs[22];
-assign rf[23] = regs[23];
-assign rf[24] = regs[24];
-assign rf[25] = regs[25];
-assign rf[26] = regs[26];
-assign rf[27] = regs[27];
-assign rf[28] = regs[28];
-assign rf[29] = regs[29];
-assign rf[30] = regs[30];
-assign rf[31] = regs[31];
-assign rf[32] = {32'b0,pc}; 
-*/
-//initial set_gpr_ptr(rf);
 //!!--------------------------------------------------------!!
 
 assign reg1_rd_data = reg1_rd_en ? regs[reg1_rd_addr] : `ysyx_22040237_REGS_INIT;
