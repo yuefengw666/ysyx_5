@@ -23,7 +23,15 @@ reg [63:0] regs[0:31];
 wire r_wr_en;
 
 //!!---------------------for DPI_C--------------------------!!
-wire [63:0] rf[0:32];
+integer i;
+reg [63:0] rf[0:32];
+always@(*)begin
+  for(i=0; i<32; i++)begin
+    rf[i] = regs[i];
+  end
+  rf[32] = {32'b0,pc};
+end
+/*
 assign rf[0] = regs[0];
 assign rf[1] = regs[1];
 assign rf[2] = regs[2];
@@ -57,7 +65,7 @@ assign rf[29] = regs[29];
 assign rf[30] = regs[30];
 assign rf[31] = regs[31];
 assign rf[32] = {32'b0,pc}; 
-//transfer registers pointer
+*/
 initial set_gpr_ptr(rf);
 //!!--------------------------------------------------------!!
 

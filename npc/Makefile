@@ -18,7 +18,7 @@ CSRC = $(shell find $(abspath ./csrc) -name "*.cpp")
 CSRC += $(shell find $(abspath ./csrc) -name "*.c")
 #CSRC = ./csrc/single_tb.cpp
 
-IMG = ""
+#IMG = ""
 DIFF_REF_SO = "/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so"
 ######################################################################
 # Set up variables
