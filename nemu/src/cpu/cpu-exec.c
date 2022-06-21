@@ -30,17 +30,18 @@ static void iringbuf_wr(char *data_wr){
 }
 
 static void iringbuf_display(){
+  printf("%s\n",ASNI_FMT("Error instruction apper in ...",ASNI_FG_RED));
   int error_inst_pos = ( tail - 1 ) % IRB_SIZE; 
   if( tail < (IRB_SIZE + 1) ){
     for(int i=0; i<= (tail-1); i++){
-      if(i == error_inst_pos) printf("%s%s\n", ASNI_FMT("E*-->",ASNI_FG_RED),iringbuf[i]);
-      else printf("     %s\n",iringbuf[i]);
+      if(i == error_inst_pos) printf("%s%s\n", ASNI_FMT("E*->",ASNI_FG_RED),iringbuf[i]);
+      else printf("    %s\n",iringbuf[i]);
     }
   }
   else{
     for(int j=0; j<=IRB_SIZE; j++){
-      if(j == error_inst_pos) printf("%s%s\n", ASNI_FMT("E*-->",ASNI_FG_RED),iringbuf[j]);
-      else printf("     %s\n",iringbuf[j]);
+      if(j == error_inst_pos) printf("%s%s\n", ASNI_FMT("E*->",ASNI_FG_RED),iringbuf[j]);
+      else printf("    %s\n",iringbuf[j]);
     }
   }
 } 
