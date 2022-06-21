@@ -43,7 +43,7 @@ end
 //***********************************identify invalid inst, sim stop************
 always@(posedge clk)begin
   if((!rst) && invalid_inst)begin
-    set_npc_state(3,-1);//NPC_ABORT halt_ret = -1 
+    invalid_inst_o(); 
   end
 end
 
