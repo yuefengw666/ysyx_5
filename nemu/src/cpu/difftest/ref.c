@@ -4,36 +4,44 @@
 #include <memory/paddr.h>
 
 void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
-  //assert(0);
+  //nemu as ref
+  uint8_t *ref_mem = guest_to_host(addr);
+  uint8_t *dut_mem = (uint8_t *)buf;
+
   if(direction == DIFFTEST_TO_DUT){
-    buf = (void *)guest_to_host(addr);
+    for(int i=0; i<n; i++){
+        *dut_mem = *ref_mem;
+        ref_mem++;
+        dut_mem++;
+    }
   }
   else if(direction == DIFFTEST_TO_REF){
-    Log("%x,%lx", addr, n);
-    char *buf_char = (char *)buf;
     for (int i = 0; i < n; i++)
     {
-      paddr_write(addr + i, 1, buf_char[i]);
+        *ref_mem = *dut_mem;
+        ref_mem++;
+        dut_mem++;
     }
   }
 }
 
 void difftest_regcpy(void *dut, bool direction) {
-  //assert(0);
-    if (direction == DIFFTEST_TO_DUT)
-  {
-    for (int i = 0; i < 32; i++)
-      ((CPU_state *)dut)->gpr[i] = cpu.gpr[i];
-    ((CPU_state *)dut)->pc = cpu.pc;
-  }
-  else if (direction == DIFFTEST_TO_REF)
-  {
-    cpu = *(CPU_state *)dut;
-  }
+    CPU_state *reg_state = (CPU_state *)dut;
+    if (direction == DIFFTEST_TO_DUT){//ref regs to dut
+      reg_state->pc = cpu.pc;
+      for(int i=0; i<32; i++){
+        reg_state->gpr[i] = cpu.gpr[i];
+      }
+    }
+    else if(direction == DIFFTEST_TO_REF){//dut_regs to ref
+      cpu.pc = reg_state->pc;
+      for(int i=0; i<32; i++){
+        cpu.gpr[i] = reg_state->gpr[i];
+      }
+    }
 }
 
 void difftest_exec(uint64_t n) {
-  //assert(0);
   cpu_exec(n);
 }
 

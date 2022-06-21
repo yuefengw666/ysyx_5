@@ -89,9 +89,6 @@ void npc_regs_display();
 
 static void exec_once(){
     npc_sim_once();
-    //printf("current npc_cpu.pc:%lx\n",npc_cpu.pc);
-    //printf("current dut->pc:%x\n",dut->pc);
-    //npc_regs_display();
     //ITRACE
 }
 
@@ -122,11 +119,6 @@ void npc_run(uint64_t n){
                (npc_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
                 ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED))),
                 npc_state.halt_pc);
-            //printf("npc: %s, invalid opcode at pc = %lx\n", ASNI_FMT("ABORT", ASNI_BG_RED),npc_state.halt_pc);
-                //(npc_state.state == NEMU_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :
-                //(npc_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
-                //ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED))),
-                //npc_state.halt_pc); break;
             exit_npc(npc_state.halt_ret);//failure to exit
         case NPC_QUIT: exit_npc(EXIT_SUCCESS);
     }
