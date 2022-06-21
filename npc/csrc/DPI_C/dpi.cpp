@@ -22,10 +22,10 @@ void ebreak(){
         //printf("regs[10]:%lx\n",npc_cpu.gpr[10]);
         //npc_exit_flag = 1;
         //printf("npc: %s at pc = %lx\n",ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED),npc_cpu.pc); 
-        set_npc_state(NPC_ABORT,-1);
+        set_npc_state(NPC_ABORT,npc_cpu.pc,-1);
     }
     else {
-        set_npc_state(NPC_END,0);
+        set_npc_state(NPC_END,npc_cpu.pc,0);
         //printf("npc: %s at pc = %lx\n",ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN), npc_cpu.pc);
     }
     //exit_npc(npc_exit_flag);

@@ -17,17 +17,17 @@ VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024unit____Vdpiimwrap_
     ebreak();
 }
 
-extern "C" void set_npc_state(int state, const svBitVecVal* pc, const svBitVecVal* halt_ret);
+extern "C" void set_npc_state(int state, const svBitVecVal* pc, int halt_ret);
 
-VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024unit____Vdpiimwrap_set_npc_state_TOP____024unit(IData/*31:0*/ state, QData/*63:0*/ pc, QData/*63:0*/ halt_ret) {
+VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024unit____Vdpiimwrap_set_npc_state_TOP____024unit(IData/*31:0*/ state, QData/*63:0*/ pc, IData/*31:0*/ halt_ret) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        Vysyx_22040237_rv_single_cyc_cpu_top___024unit____Vdpiimwrap_set_npc_state_TOP____024unit\n"); );
     // Body
     int state__Vcvt;
     for (size_t state__Vidx = 0; state__Vidx < 1; ++state__Vidx) state__Vcvt = state;
     svBitVecVal pc__Vcvt[2];
     for (size_t pc__Vidx = 0; pc__Vidx < 1; ++pc__Vidx) VL_SET_SVBV_Q(64, pc__Vcvt + 2 * pc__Vidx, pc);
-    svBitVecVal halt_ret__Vcvt[2];
-    for (size_t halt_ret__Vidx = 0; halt_ret__Vidx < 1; ++halt_ret__Vidx) VL_SET_SVBV_Q(64, halt_ret__Vcvt + 2 * halt_ret__Vidx, halt_ret);
+    int halt_ret__Vcvt;
+    for (size_t halt_ret__Vidx = 0; halt_ret__Vidx < 1; ++halt_ret__Vidx) halt_ret__Vcvt = halt_ret;
     set_npc_state(state__Vcvt, pc__Vcvt, halt_ret__Vcvt);
 }
 
