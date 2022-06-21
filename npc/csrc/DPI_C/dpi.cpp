@@ -18,7 +18,7 @@ void set_npc_state(int state, int halt_ret);
 void ebreak(){
     printf("***********************ebreak*****************************\n");
     //int npc_exit_flag = 0;
-    if(npc_cpu.gpr[10] != 0){
+    if(npc_cpu.gpr[10] == 0){
         //printf("regs[10]:%lx\n",npc_cpu.gpr[10]);
         //npc_exit_flag = 1;
         //printf("npc: %s at pc = %lx\n",ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED),npc_cpu.pc); 
