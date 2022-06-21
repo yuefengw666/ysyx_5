@@ -72,7 +72,7 @@ static void trace_and_difftest(){
 static void npc_sim_half(){
     dut->clk ^= 1;
     //dut->eval();
-    if(dut->clk == 1 && dut->rst != 1){
+    if(dut->rst != 1){
         dut->inst_in = pmem_read(dut->pc);
         //dut->eval();
     }
