@@ -17,14 +17,16 @@ VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024unit____Vdpiimwrap_
     ebreak();
 }
 
-extern "C" void set_npc_state(int state);
+extern "C" void set_npc_state(int state, int halt_ret);
 
-VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024unit____Vdpiimwrap_set_npc_state_TOP____024unit(IData/*31:0*/ state) {
+VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024unit____Vdpiimwrap_set_npc_state_TOP____024unit(IData/*31:0*/ state, IData/*31:0*/ halt_ret) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        Vysyx_22040237_rv_single_cyc_cpu_top___024unit____Vdpiimwrap_set_npc_state_TOP____024unit\n"); );
     // Body
     int state__Vcvt;
     for (size_t state__Vidx = 0; state__Vidx < 1; ++state__Vidx) state__Vcvt = state;
-    set_npc_state(state__Vcvt);
+    int halt_ret__Vcvt;
+    for (size_t halt_ret__Vidx = 0; halt_ret__Vidx < 1; ++halt_ret__Vidx) halt_ret__Vcvt = halt_ret;
+    set_npc_state(state__Vcvt, halt_ret__Vcvt);
 }
 
 extern "C" void set_gpr_ptr(const svOpenArrayHandle a);

@@ -14,7 +14,7 @@ extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
   }
   npc_cpu.pc = cpu_gpr[32];
 }
-void set_npc_state(int state)
+void set_npc_state(int state,int halt_ret);
 void ebreak(){
     printf("***********************ebreak*****************************\n");
     //int npc_exit_flag = 0;
