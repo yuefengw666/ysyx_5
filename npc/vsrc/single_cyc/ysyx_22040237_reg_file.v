@@ -30,6 +30,7 @@ always@(*)begin
     rf[i] = regs[i];
   end
   rf[32] = {32'b0,pc};
+  set_gpr_ptr(rf);
 end
 /*
 assign rf[0] = regs[0];
@@ -66,7 +67,7 @@ assign rf[30] = regs[30];
 assign rf[31] = regs[31];
 assign rf[32] = {32'b0,pc}; 
 */
-initial set_gpr_ptr(rf);
+//initial set_gpr_ptr(rf);
 //!!--------------------------------------------------------!!
 
 assign reg1_rd_data = reg1_rd_en ? regs[reg1_rd_addr] : `ysyx_22040237_REGS_INIT;
