@@ -95,6 +95,7 @@ void npc_regs_display();
 
 static void exec_once(){
     npc_sim_once();
+    printf("111\n");
     //ITRACE
 }
 
