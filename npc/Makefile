@@ -18,8 +18,13 @@ CSRC = $(shell find $(abspath ./csrc) -name "*.cpp")
 CSRC += $(shell find $(abspath ./csrc) -name "*.c")
 #CSRC = ./csrc/single_tb.cpp
 
-#IMG = ""
+#Compilation flags
+DIFF_LDFLAGS = -lpthread -lSDL2 -fsanitize=address -ldl
+
+#
 DIFF_REF_SO = "/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so"
+ARGS_DIFF = --diff=$(DIFF_REF_SO)
+
 ######################################################################
 # Set up variables
 
@@ -64,9 +69,10 @@ run: $(VSRC) $(CSRC)
 
 	@echo
 	@echo "-- VERILATE ----------------"
-	$(VERILATOR) -Wall --trace -cc $(VSRC_PATH)/ysyx_22040237_defines.v $(VSRC) -exe --build $(CSRC) -top $(TOP_DESIGN_NAME) -CFLAGS $(INC_FLAG) \
+	$(VERILATOR) -Wall --trace -cc $(VSRC_PATH)/ysyx_22040237_defines.v $(VSRC) -exe --build $(CSRC) -top $(TOP_DESIGN_NAME) \
+		-CFLAGS $(INC_FLAG) \
 		/lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses\
-		-LDFLAGS -ldl
+		-LDFLAGS $(DIFF_LDFLAGS)
 
 	@echo
 	@echo "-- BUILD -------------------"
@@ -75,7 +81,7 @@ run: $(VSRC) $(CSRC)
 	@echo "-- RUN ---------------------"
 	@rm -rf logs
 	@mkdir -p logs
-	obj_dir/V$(TOP_DESIGN_NAME) $(IMG) -diff $(DIFF_REF_SO)
+	obj_dir/V$(TOP_DESIGN_NAME) $(IMG) $(ARGS_DIFF)
 
 	@echo
 	@echo "-- DONE --------------------"
