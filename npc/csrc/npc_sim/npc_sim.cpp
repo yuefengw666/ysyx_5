@@ -100,9 +100,7 @@ static void exec_once(){
 static void execute(uint64_t n){
     for(; n > 0; n--){
         exec_once();
-        printf("before diff:%d\n",npc_state.state);
         trace_and_difftest();
-        printf("after diff:%d\n",npc_state.state);
         if(npc_state.state != NPC_RUNNING) break;
     }
 }
