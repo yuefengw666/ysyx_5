@@ -18,7 +18,7 @@ void putch(char ch) {
 }
 
 void halt(int code) {
-  asm volatile("mv a0, %0; .word 0x00100073" : :"r"(code));
+  asm volatile("mv a0, %0; .word 0x00100073" : :"r"(code));//like nemu_trap(code);
   while (1);
 }
 
