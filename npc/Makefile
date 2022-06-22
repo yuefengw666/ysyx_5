@@ -23,7 +23,7 @@ DIFF_LDFLAGS = "-lpthread -lSDL2 -fsanitize=address -ldl"
 
 #
 DIFF_REF_SO = "/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so"
-ARGS_DIFF = --diff=$(DIFF_REF_SO)
+#ARGS_DIFF = --diff=$(DIFF_REF_SO)
 
 ######################################################################
 # Set up variables
@@ -81,7 +81,7 @@ run: $(VSRC) $(CSRC)
 	@echo "-- RUN ---------------------"
 	@rm -rf logs
 	@mkdir -p logs
-	obj_dir/V$(TOP_DESIGN_NAME) $(IMG) $(ARGS_DIFF)
+	obj_dir/V$(TOP_DESIGN_NAME) $(IMG) --diff $(DIFF_REF_SO)
 
 	@echo
 	@echo "-- DONE --------------------"
