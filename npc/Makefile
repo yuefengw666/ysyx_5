@@ -81,7 +81,7 @@ run: $(VSRC) $(CSRC)
 	@echo "-- RUN ---------------------"
 	@rm -rf logs
 	@mkdir -p logs
-	obj_dir/V$(TOP_DESIGN_NAME) $(IMG) --diff $(DIFF_REF_SO)
+	obj_dir/V$(TOP_DESIGN_NAME) $(IMG) -d $(DIFF_REF_SO)
 
 	@echo
 	@echo "-- DONE --------------------"
