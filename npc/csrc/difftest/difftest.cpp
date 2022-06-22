@@ -65,10 +65,10 @@ void init_difftest(char *ref_so_file, long img_size) {
   void (*ref_difftest_init)() = (void(*)())dlsym(handle, "difftest_init");
   assert(ref_difftest_init);
 
-  printf("Differential testing: %s", ASNI_FMT("ON", ASNI_FG_GREEN));
-  printf("The result of every instruction will be compared with %s. "
-      "This will help you a lot for debugging, but also significantly reduce the performance. "
-      "If it is not necessary, you can turn it off in menuconfig.", ref_so_file);
+  printf("Differential testing: %s\n", ASNI_FMT("ON", ASNI_FG_GREEN));
+  printf("The result of every instruction will be compared with %s. \n"
+      "This will help you a lot for debugging, but also significantly reduce the performance. \n"
+      "If it is not necessary, you can turn it off in menuconfig.\n", ref_so_file);
 
   ref_difftest_init();
   ref_difftest_memcpy(RESET_VECTOR, guest_to_host(RESET_VECTOR), img_size, DIFFTEST_TO_REF);
