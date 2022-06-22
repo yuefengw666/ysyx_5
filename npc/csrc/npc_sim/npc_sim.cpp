@@ -79,6 +79,7 @@ static void npc_sim_half(){
     dut->clk ^= 1;
     dut->eval();
     if( dut->clk == 1 && dut->rst != 1){
+        printf("dut->pc:%lx\n",dut->pc);
         dut->inst_in = pmem_read(dut->pc);
         dut->eval();
     }
