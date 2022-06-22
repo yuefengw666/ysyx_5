@@ -38,7 +38,7 @@ wire [19:0] imm_u_j;
 
 wire [63:0] src_i;
 wire [63:0] src_u;
-wire [31:0] src_j;
+wire [63:0] src_j;
 
 wire type_R;
 wire type_I;
@@ -74,7 +74,7 @@ assign src_i = { {52{imm_i[11]}},imm_i};
 //U
 assign src_u = { {32{imm_u_j[19]}}, imm_u_j, 12'b0};
 //J
-assign src_j = { {11{imm_u_j[19]}}, imm_u_j[19], imm_u_j[7:0], imm_u_j[8], imm_u_j[18:9], 1'b0};//??src_j[0]
+assign src_j = { {43{imm_u_j[19]}}, imm_u_j[19], imm_u_j[7:0], imm_u_j[8], imm_u_j[18:9], 1'b0};//??src_j[0]
 
 //**********************for sim ******dummy opcode*********************************
 wire inst_dummy = !(|opcode);
@@ -168,7 +168,7 @@ always@(*)begin
       op1 = pc;
       op2 = 64'h4;
       op1_jump = pc;
-      op2_jump = {32'b0,src_j};
+      op2_jump = src_j;
       rd_w_en = 1'b1;
       rd_w_addr = rd;
     end
