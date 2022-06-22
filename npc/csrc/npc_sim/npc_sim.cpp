@@ -119,7 +119,7 @@ void npc_run(uint64_t n){
         case NPC_RUNNING: npc_state.state = NPC_STOP;break;
         case NPC_ABORT:
         case NPC_END:
-          printf("npc:%s%s at pc = %lx\n",ASNI_FMT("npc:",ASNI_BG_CYAN),
+          printf("%s %s at pc = %lx\n",ASNI_FMT("npc:",ASNI_BG_CYAN),
               (npc_state.state == NPC_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :
                (npc_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
                 ASNI_FMT("HIT BAD TRAP", ASNI_FG_RED))),
