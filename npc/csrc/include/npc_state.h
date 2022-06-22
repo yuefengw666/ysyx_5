@@ -31,7 +31,7 @@ typedef struct {
 } NPCstate;
 
 extern NPCstate npc_state;
-
+/*
 #ifdef CONFIG_DIFFTEST
 enum
 {
@@ -44,5 +44,5 @@ extern void (*ref_difftest_exec)(uint64_t n);
 extern void (*ref_difftest_raise_intr)(uint64_t NO);
 extern void (*ref_difftest_init)();
 #endif
-
+*/
 #endif
