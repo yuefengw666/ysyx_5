@@ -63,7 +63,6 @@ static void trace_and_difftest(){
 
 //DIFFTEST
 #ifdef CONFIG_DIFFTEST
-printf("to ref pc :%lx\n",dut->pc);
     difftest_step(dut->pc, npc_cpu.pc);//npc_cpu.pc should dnpc ,and not used yet.
 #endif
 
