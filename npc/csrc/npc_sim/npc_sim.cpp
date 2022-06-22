@@ -95,7 +95,6 @@ void npc_regs_display();
 
 static void exec_once(){
     npc_sim_once();
-    printf("111\n");
     //ITRACE
 }
 
@@ -103,6 +102,7 @@ static void execute(uint64_t n){
     for(; n > 0; n--){
         exec_once();
         trace_and_difftest();
+        printf("111\n");
         if(npc_state.state != NPC_RUNNING) break;
     }
 }
