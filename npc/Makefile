@@ -19,7 +19,7 @@ CSRC += $(shell find $(abspath ./csrc) -name "*.c")
 #CSRC = ./csrc/single_tb.cpp
 
 #Compilation flags
-DIFF_LDFLAGS = -lpthread -lSDL2 -fsanitize=address -ldl
+DIFF_LDFLAGS = "-lpthread -lSDL2 -fsanitize=address -ldl"
 
 #
 DIFF_REF_SO = "/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so"
