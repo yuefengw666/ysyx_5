@@ -22,7 +22,7 @@ CSRC += $(shell find $(abspath ./csrc) -name "*.c")
 DIFF_LDFLAGS = "-lpthread -lSDL2 -fsanitize=address -ldl"
 
 #
-DIFF_REF_SO = "$(NEMU_HOME)/nemu/build/riscv64-nemu-interpreter-so"
+DIFF_REF_SO = $(NEMU_HOME)/build/riscv64-nemu-interpreter-so
 #ARGS_DIFF = --diff=$(DIFF_REF_SO)
 
 ######################################################################
