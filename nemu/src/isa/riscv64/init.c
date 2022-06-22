@@ -25,5 +25,4 @@ void init_isa() {
 
   /* Initialize this virtual computer system. */
   restart();
-  printf("pc : %lx after init diff_init\n",cpu.pc);
 }

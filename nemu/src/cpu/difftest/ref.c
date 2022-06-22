@@ -40,6 +40,8 @@ void difftest_regcpy(void *dut, bool direction) {
         cpu.gpr[i] = reg_state->gpr[i];
       }
     }
+
+  printf("pc : %lx after init diff_init\n",cpu.pc);
 }
 
 void difftest_exec(uint64_t n) {
@@ -53,5 +55,4 @@ void difftest_raise_intr(word_t NO) {
 void difftest_init() {
   /* Perform ISA dependent initialization. */
   init_isa();
-  printf("pc : %lx after init diff_init\n",cpu.pc);
 }
