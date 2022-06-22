@@ -101,6 +101,7 @@ static void execute(uint64_t n){
     for(; n > 0; n--){
         exec_once();
         trace_and_difftest();
+        put(npc_state.state);
         if(npc_state.state != NPC_RUNNING) break;
     }
 }
