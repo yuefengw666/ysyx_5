@@ -53,4 +53,5 @@ void difftest_raise_intr(word_t NO) {
 void difftest_init() {
   /* Perform ISA dependent initialization. */
   init_isa();
+  printf("pc : %lx after init diff_init\n",cpu.pc);
 }
