@@ -5,6 +5,7 @@
 
 void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
   //nemu as ref
+  printf("to ref addr%x:\n",addr);
   uint8_t *ref_mem = guest_to_host(addr);
   uint8_t *dut_mem = buf;
 
