@@ -26,7 +26,7 @@ always@(*)begin
   case(inst_opcode)
     `ysyx_22040237_INST_ADD: begin
       rd_data = op1 + op2;
-      pc_jump_addr = op1_jump + op2_jump;
+      pc_jump_addr = op1_jump - op2_jump;
     end
     default: begin
       rd_data = 64'h0;
