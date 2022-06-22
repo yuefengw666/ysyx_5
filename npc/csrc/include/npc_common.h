@@ -10,7 +10,7 @@
 
 //CONFIG
 #define CONFIG_VCD 0
-#define CONFIG_SDB 0
+//#define CONFIG_SDB 0
 #define CONFIG_WATCHPOINT 0
 #define CONFIG_DIFFTEST 0
 

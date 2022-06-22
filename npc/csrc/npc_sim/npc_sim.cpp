@@ -93,6 +93,7 @@ static void npc_sim_once(){
 void npc_regs_display();
 
 static void exec_once(){
+    printf("npc exec pc:%lx\n",dut->pc);
     npc_sim_once();
     //ITRACE
 }
