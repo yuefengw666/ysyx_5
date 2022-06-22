@@ -6,7 +6,7 @@
 void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
   //nemu as ref
   uint8_t *ref_mem = guest_to_host(addr);
-  uint8_t *dut_mem = (uint8_t *)buf;
+  uint8_t *dut_mem = buf;
 
   if(direction == DIFFTEST_TO_DUT){
     for(int i=0; i<n; i++){
