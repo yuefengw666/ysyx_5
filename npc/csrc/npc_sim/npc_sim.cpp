@@ -81,7 +81,6 @@ static void npc_sim_half(){
     if( dut->clk == 1 && dut->rst != 1){
         printf("dut->pc:%lx\n",dut->pc);
         dut->inst_in = pmem_read(dut->pc);
-        printf("2231\n");
         dut->eval();
     }
     m_trace->dump(sim_time);
