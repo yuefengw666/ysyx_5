@@ -8,11 +8,12 @@ void init_monitor(int , char*[]);
 
 int main(int argc, char**argv, char** env){
 
+    sim_init();
     npc_reset();
     
     init_monitor(argc,argv);
     
-    sim_init();
+    //sim_init();
 
     //npc_reset();
 
