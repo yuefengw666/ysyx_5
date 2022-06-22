@@ -22,7 +22,7 @@ CSRC += $(shell find $(abspath ./csrc) -name "*.c")
 DIFF_LDFLAGS = "-lpthread -lSDL2 -fsanitize=address -ldl"
 
 #
-DIFF_REF_SO = "/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so"
+DIFF_REF_SO = "$(NEMU_HOME)/nemu/build/riscv64-nemu-interpreter-so"
 #ARGS_DIFF = --diff=$(DIFF_REF_SO)
 
 ######################################################################
@@ -81,7 +81,7 @@ run: $(VSRC) $(CSRC)
 	@echo "-- RUN ---------------------"
 	@rm -rf logs
 	@mkdir -p logs
-	obj_dir/V$(TOP_DESIGN_NAME) $(IMG) -d --diff=$(DIFF_REF_SO)
+	obj_dir/V$(TOP_DESIGN_NAME) $(IMG) -d $(DIFF_REF_SO)
 
 	@echo
 	@echo "-- DONE --------------------"
