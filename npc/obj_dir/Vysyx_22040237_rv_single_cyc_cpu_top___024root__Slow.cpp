@@ -267,9 +267,9 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root___settle__TOP__1(Vysyx_22040
     } else if ((0x10U != (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))) {
         if ((0x20U == (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_type))) {
             vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__op2_jump 
-                = (QData)((IData)((((- (IData)((vlSelf->inst_in 
-                                                >> 0x1fU))) 
-                                    << 0x15U) | ((0x100000U 
+                = (((- (QData)((IData)((vlSelf->inst_in 
+                                        >> 0x1fU)))) 
+                    << 0x15U) | (QData)((IData)(((0x100000U 
                                                   & (vlSelf->inst_in 
                                                      >> 0xbU)) 
                                                  | ((0xff000U 

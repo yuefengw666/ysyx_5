@@ -127,22 +127,24 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceChgSub0(Vysyx_22040237
                                      << 0x20U) | (QData)((IData)(
                                                                  (0xfffff000U 
                                                                   & vlSelf->inst_in))))),64);
-        tracep->chgIData(oldp+112,((((- (IData)((vlSelf->inst_in 
-                                                 >> 0x1fU))) 
-                                     << 0x15U) | ((0x100000U 
-                                                   & (vlSelf->inst_in 
-                                                      >> 0xbU)) 
-                                                  | ((0xff000U 
-                                                      & vlSelf->inst_in) 
-                                                     | ((0x800U 
-                                                         & (vlSelf->inst_in 
-                                                            >> 9U)) 
-                                                        | (0x7feU 
-                                                           & (vlSelf->inst_in 
-                                                              >> 0x14U))))))),32);
-        tracep->chgBit(oldp+113,((IData)((0x23U == 
+        tracep->chgQData(oldp+112,((((- (QData)((IData)(
+                                                        (vlSelf->inst_in 
+                                                         >> 0x1fU)))) 
+                                     << 0x15U) | (QData)((IData)(
+                                                                 ((0x100000U 
+                                                                   & (vlSelf->inst_in 
+                                                                      >> 0xbU)) 
+                                                                  | ((0xff000U 
+                                                                      & vlSelf->inst_in) 
+                                                                     | ((0x800U 
+                                                                         & (vlSelf->inst_in 
+                                                                            >> 9U)) 
+                                                                        | (0x7feU 
+                                                                           & (vlSelf->inst_in 
+                                                                              >> 0x14U))))))))),64);
+        tracep->chgBit(oldp+114,((IData)((0x23U == 
                                           (0x7fU & vlSelf->inst_in)))));
-        tracep->chgBit(oldp+114,((1U & (~ (IData)((0U 
+        tracep->chgBit(oldp+115,((1U & (~ (IData)((0U 
                                                    != 
                                                    (0x7fU 
                                                     & vlSelf->inst_in)))))));
