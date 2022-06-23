@@ -83,7 +83,7 @@ int parse_args(int argc, char *argv[]){
 void init_monitor(int argc, char *argv[]) {
     parse_args(argc,argv);
     
-    long img_size = load_img(img_file);
+    long img_size = load_img();
     //diff_so_file = (char *)"/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so";
     //init_difftest("/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so", img_size);//remove difftest_port
     init_difftest(diff_so_file, img_size);//remove difftest_port
