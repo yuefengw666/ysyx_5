@@ -12,6 +12,9 @@ NPCstate npc_state = {.state = NPC_STOP};
 void difftest_step(vaddr_t pc, vaddr_t npc);
 
 void sim_init(){
+
+    Verilated::commandArgs(argc, argv);
+    
     //instantiate top module
     dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
     sim_time = 0;

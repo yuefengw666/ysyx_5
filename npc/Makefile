@@ -60,7 +60,7 @@ VERILATOR = verilator
 ######################################################################
 #-CFLAGS -fpermissive
 default: run
-
+#$(IMG) -d $(DIFF_REF_SO)
 run: $(VSRC) $(CSRC)
 	@$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo
@@ -80,7 +80,7 @@ run: $(VSRC) $(CSRC)
 	@echo "-- RUN ---------------------"
 	@rm -rf logs
 	@mkdir -p logs
-	obj_dir/V$(TOP_DESIGN_NAME) $(IMG) -d $(DIFF_REF_SO)
+	obj_dir/V$(TOP_DESIGN_NAME)
 
 	@echo
 	@echo "-- DONE --------------------"
