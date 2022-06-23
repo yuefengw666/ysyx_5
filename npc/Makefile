@@ -24,6 +24,8 @@ VERILATOR = verilator
 VERILATOR_FLAGS += -Wall --trace -cc --build
 #High performance optimizations
 VERILATOR_FLAGS += -O3
+#include path
+VERILATOR_FLAGS += -I$(VSRC_PATH)
 
 #---------G++ Compilation flags-------------
 LDFLAGS = "-lpthread -lSDL2 -fsanitize=address -ldl"
