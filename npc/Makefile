@@ -48,7 +48,7 @@ $(shell mkdir -p $(BUILD_DIR))
 
 $(BIN): $(VDEFINE) $(VSRCS) $(CSRCS)
 	@$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-#@rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
 
 	@echo
 	@echo "-- Verilator design "
