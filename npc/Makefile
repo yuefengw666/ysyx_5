@@ -17,7 +17,7 @@ CSRCS += $(shell find $(abspath ./csrc) -name "*.cpp")
 
 TOP_DESIGN_NAME = ysyx_22040237_rv_single_cyc_cpu_top
 TOP = top
-VDEFINE = $(VSRC_PATH)/ysyx_22040237_defines.v
+VDEFINE = $(VSRC_PATH)ysyx_22040237_defines.v
 
 #---------Verilator flags---------
 VERILATOR = verilator
