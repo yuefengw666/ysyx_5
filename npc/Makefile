@@ -22,7 +22,7 @@ VDEFINE = $(VSRC_PATH)/ysyx_22040237_defines.v
 LDFLAGS = "-lpthread -lSDL2 -fsanitize=address -ldl"
 
 #readline link
-RLFLGAS = "/lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses"
+RLFLGAS = /lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses
 
 #Args
 DIFF_REF_SO = "$(NEMU_HOME)/build/riscv64-nemu-interpreter-so"
