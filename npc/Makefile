@@ -16,6 +16,7 @@ VSRCS = $(shell find $(abspath $(VSRC_PATH)) -name "*.v")
 CSRCS = $(shell find $(abspath ./csrc) -name "*.cpp")
 
 TOP_DESIGN_NAME = ysyx_22040237_rv_single_cyc_cpu_top
+TOP = top
 VDEFINE = $(abspath $(VSRC_PATH)/ysyx_22040237_defines.v)
 
 #---------Verilator flags---------
@@ -36,7 +37,7 @@ ARGS_DIFF = "-d $(DIFF_REF_SO)"
 #---------Build director--------------------
 BUILD_DIR = ./build
 OBJ_DIR = $(BUILD_DIR)/obj_dir
-BIN = $(BUILD_DIR)/$(TOP_DESIGN_NAME)
+BIN = $(BUILD_DIR)/$(TOP)
 
 ######################################################################
 
