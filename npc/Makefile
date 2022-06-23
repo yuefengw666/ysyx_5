@@ -77,8 +77,7 @@ $(BIN): $(VDEFINE) $(VSRCS) $(CSRCS)
 run: $(BIN)
 	@echo
 	@echo "-- RUN ---------------------"
-	@rm -rf $(BUILD_DIR)/wave
-	@mkdir -p $(BUILD_DIR)/wave
+	@rm -rf $(BUILD_DIR)/wavc.vcd
 	@$^ $(IMG) $(ARGS_DIFF)
 
 	@echo
