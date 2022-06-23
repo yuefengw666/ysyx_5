@@ -13,15 +13,10 @@ int main(int argc, char**argv, char** env){
     
     init_monitor(argc,argv);
     
-    //sim_init();
-
-    //npc_reset();
-
     #ifdef CONFIG_SDB
         npc_sdb_mainloop();
     #else
         npc_run(-1);
     #endif
-    exit_npc(EXIT_SUCCESS);
-
+    //exit_npc(EXIT_SUCCESS);
 }

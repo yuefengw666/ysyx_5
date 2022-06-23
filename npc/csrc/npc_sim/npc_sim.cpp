@@ -22,7 +22,7 @@ void sim_init(){
     //VerilatedVcdC *m_trace = new VerilatedVcdC;
     m_trace = new VerilatedVcdC;
     dut->trace(m_trace,99); //trace  99 level
-    m_trace->open("./logs/wave.vcd");
+    m_trace->open("./build/wave.vcd");
     #endif
 }
 
