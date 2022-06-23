@@ -21,7 +21,7 @@ VDEFINE = $(VSRC_PATH)ysyx_22040237_defines.v
 
 #---------Verilator flags---------
 VERILATOR = verilator
-VERILATOR_FLAGS += -Wall --trace -cc --build
+VERILATOR_FLAGS += -Wall -MMD --trace -cc --build
 #High performance optimizations
 VERILATOR_FLAGS += -O3
 #include path
@@ -30,7 +30,7 @@ VERILATOR_FLAGS += -O3
 #---------G++ Compilation flags-------------
 LDFLAGS = "-lpthread -lSDL2 -fsanitize=address -ldl"
 #readline link
-RLFLGAS = "/lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses"
+RLFLGAS = /lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses
 
 #---------NPC exec args--------------------
 DIFF_REF_SO = "$(NEMU_HOME)/build/riscv64-nemu-interpreter-so"
