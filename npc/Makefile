@@ -8,7 +8,7 @@ endif
 ######################################################################
 
 #---------set source--------------
-VSRC_PATH = vsrc/single_cyc/
+VSRC_PATH = ./vsrc/single_cyc/
 INC_PATH = $(NPC_HOME)/csrc/include
 INC_FLAG = $(addprefix -I, $(INC_PATH))
 
