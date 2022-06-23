@@ -24,8 +24,6 @@ VERILATOR = verilator
 VERILATOR_FLAGS += -Wall -MMD --trace -cc --build
 #High performance optimizations
 VERILATOR_FLAGS += -O3
-#include path
-#VERILATOR_FLAGS += -I$(VSRC_PATH)
 
 #---------G++ Compilation flags-------------
 LDFLAGS = "-lpthread -lSDL2 -fsanitize=address -ldl"
@@ -33,8 +31,9 @@ LDFLAGS = "-lpthread -lSDL2 -fsanitize=address -ldl"
 RLFLGAS = /lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses
 
 #---------NPC exec args--------------------
-DIFF_REF_SO = "$(NEMU_HOME)/build/riscv64-nemu-interpreter-so"
-ARGS_DIFF = "-d $(DIFF_REF_SO)"
+IMG ?=
+DIFF_REF_SO = $(NEMU_HOME)/build/riscv64-nemu-interpreter-so
+ARGS_DIFF += -d $(DIFF_REF_SO)
 
 #---------Build director--------------------
 BUILD_DIR = ./build
@@ -78,7 +77,7 @@ run: $(BIN)
 	@echo
 	@echo "-- RUN ---------------------"
 	@rm -rf $(BUILD_DIR)/wavc.vcd
-	@$^ $(IMG) $(ARGS_DIFF)
+	@$^ $(ARGS_DIFF) $(IMG)
 
 	@echo
 	@echo "-- DONE --------------------"

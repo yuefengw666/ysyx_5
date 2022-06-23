@@ -1,4 +1,5 @@
 #include "npc_common.h"
+#include "mem.h"
 #include <cassert>
 #include <cstring>
 #include "getopt.h"
@@ -11,7 +12,7 @@ static char *img_file = NULL;
 static long img_size = 0;
 static char *diff_so_file = NULL;
 
-static long load_img(char *img_file) {
+static long load_img() {
   if (img_file == NULL) {
     printf("No image is given. Use the default build-in image.\n");
     return 4096; // built-in image size
@@ -19,7 +20,10 @@ static long load_img(char *img_file) {
 
   FILE *fp = fopen(img_file, "rb");
   //Assert(fp, "Can not open '%s'", img_file);
-  assert(fp);
+  if(fp == NULL){
+    printf("Can not open '%s'\n", img_file);
+    assert(fp);
+  }
 
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);
@@ -27,8 +31,7 @@ static long load_img(char *img_file) {
   printf("The image is %s, size = %ld\n", img_file, size);
 
   fseek(fp, 0, SEEK_SET);
-  //int ret = fread(guest_to_host(RESET_VECTOR), size, 1, fp);
-  int ret = fread(pmem, size, 1, fp);
+  int ret = fread(guest_to_host(RESET_VECTOR), size, 1, fp);
   assert(ret == 1);
 
   fclose(fp);
@@ -80,7 +83,7 @@ int parse_args(int argc, char *argv[]){
 void init_monitor(int argc, char *argv[]) {
     parse_args(argc,argv);
     
-    img_size = load_img(img_file);
+    long img_size = load_img(img_file);
     //diff_so_file = (char *)"/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so";
     //init_difftest("/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so", img_size);//remove difftest_port
     init_difftest(diff_so_file, img_size);//remove difftest_port
