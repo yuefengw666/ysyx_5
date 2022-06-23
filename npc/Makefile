@@ -57,8 +57,7 @@ $(BIN): $(VDEFINE) $(VSRCS) $(CSRCS)
 	@echo
 	@echo "-- VERILATE ----------------"
 	$(VERILATOR) $(VERILATOR_FLAGS) \
-		--top $(TOP_DESIGN_NAME) $^ \
-		$(addprefix -CFLAGS, $(INC_FLAG)) \
+		--top $(TOP_DESIGN_NAME) $^ $(addprefix -CFLAGS, $(INC_FLAG)) \
 		$(RLFLGAS)\
 		$(addprefix -LDFLAGS, $(LDFLAGS)) \
 		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
