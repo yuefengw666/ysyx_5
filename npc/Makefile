@@ -12,8 +12,8 @@ VSRC_PATH = ./vsrc/single_cyc/
 INC_PATH = $(NPC_HOME)/csrc/include
 INC_FLAG = $(addprefix -I, $(INC_PATH))
 
-VSRCS = $(shell find $(abspath $(VSRC_PATH)) -name "*.v")
-CSRCS = $(shell find $(abspath ./csrc) -name "*.cpp")
+VSRCS += $(shell find $(abspath $(VSRC_PATH)) -name "*.v")
+CSRCS += $(shell find $(abspath ./csrc) -name "*.cpp")
 
 TOP_DESIGN_NAME = ysyx_22040237_rv_single_cyc_cpu_top
 TOP = top
