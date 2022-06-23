@@ -82,8 +82,8 @@ void init_monitor(int argc, char *argv[]) {
     
     img_size = load_img(img_file);
 
-    //init_difftest("/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so", img_size);//remove difftest_port
-    init_difftest("diff_so_file", img_size);//remove difftest_port
+    init_difftest("/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so", img_size);//remove difftest_port
+    //init_difftest("diff_so_file", img_size);//remove difftest_port
     
     init_sdb();
 }
