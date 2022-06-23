@@ -55,7 +55,7 @@ static int parse_args(int argc, char *argv[]) {
       //case 'p': sscanf(optarg, "%d", &difftest_port); break;
       //case 'l': log_file = optarg; break;
       case 'd': diff_so_file = optarg; break;
-      case 1: printf("ARGS=IMG getopt_long return optarg is %s\n",optarg);
+      case 1: printf("ARGS=IMG getopt_long return optarg is %d\n",o);
              img_file = optarg; return 0;
       default:
         printf("Usage: %s [OPTION...] IMAGE [args]\n\n", argv[0]);
