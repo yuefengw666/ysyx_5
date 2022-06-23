@@ -33,7 +33,7 @@ RLFLGAS = /lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncur
 #---------NPC exec args--------------------
 IMG ?=
 DIFF_REF_SO = $(NEMU_HOME)/build/riscv64-nemu-interpreter-so
-ARGS_DIFF += -d $(DIFF_REF_SO)
+ARGS_DIFF = --diff=$(DIFF_REF_SO) #/ -d $(DIFF_REF_SO)
 
 #---------Build director--------------------
 BUILD_DIR = ./build
