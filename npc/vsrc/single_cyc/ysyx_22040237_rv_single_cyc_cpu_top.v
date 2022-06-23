@@ -1,4 +1,3 @@
-`include "ysyx_22040237_defines.v"
 module ysyx_22040237_rv_single_cyc_cpu_top(
   input clk,
   input rst,

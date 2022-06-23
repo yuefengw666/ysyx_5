@@ -1,5 +1,3 @@
-`include "ysyx_22040237_defines.v"
-
 import "DPI-C" function void ebreak();
 import "DPI-C" function void invalid_inst_o();
 
@@ -26,7 +24,7 @@ always@(*)begin
   rd_data = 'b0;
   pc_jump_addr = 'b0;
   case(inst_opcode)
-    `YSYX_22040237_INST_ADD: begin
+    `ysyx_22040237_INST_ADD: begin
       rd_data = op1 + op2;
       pc_jump_addr = op1_jump + op2_jump;
     end
