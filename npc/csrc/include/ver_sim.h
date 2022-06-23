@@ -3,11 +3,9 @@
 
 #include <verilated.h>
 #include <verilated_vcd_c.h>
-//#include "Vysyx_22040237_rv_single_cyc_cpu_top.h"
-#include "Vtop.h"
+#include "Vysyx_22040237_rv_single_cyc_cpu_top.h"
 #include "svdpi.h"
-//#include "Vysyx_22040237_rv_single_cyc_cpu_top__Dpi.h"
-#include "Vtop__Dpi.g"
+#include "Vysyx_22040237_rv_single_cyc_cpu_top__Dpi.h"
 #include "verilated_dpi.h"  //transfer regs
 
 #include "npc_common.h"
