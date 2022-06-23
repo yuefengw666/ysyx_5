@@ -5,7 +5,9 @@ vluint64_t sim_time;
 vluint64_t pos_cnt;
 
 static Vysyx_22040237_rv_single_cyc_cpu_top* dut;
-VerilatedVcdC* m_trace = NULL;
+#ifdef CONFIG_VCD
+  VerilatedVcdC* m_trace = NULL;
+#endif
 NPC_CPU npc_cpu;
 NPCstate npc_state = {.state = NPC_STOP};
 
@@ -34,7 +36,6 @@ void npc_reset(){
         dut->eval();
         if(dut->clk == 1){
             pos_cnt++;
-            //printf("pos_cnt:%ld\n",pos_cnt);
             if(pos_cnt >=3) dut->rst = 0;
         }
         if(dut->rst != 1){
@@ -58,7 +59,6 @@ void exit_npc(int exit_flag){
 }
 
 static void trace_and_difftest(){
-    //printf("current pc:%x\n",dut->pc);
 //ITRACE
 
 //DIFFTEST
@@ -82,7 +82,9 @@ static void npc_sim_half(){
         dut->inst_in = pmem_read(dut->pc);
         dut->eval();
     }
-    m_trace->dump(sim_time);
+    #ifdef CONFIG_VCD
+        m_trace->dump(sim_time);
+    #endif
     sim_time++;
 }
 

@@ -68,24 +68,11 @@ static int parse_args(int argc, char *argv[]) {
   }
   return 0;
 }
-/*
-int parse_args(int argc, char *argv[]){
-    if(argc == 2){
-        if(strlen(argv[1]) > 0){
-            img_file = argv[1];
-            img_size = load_img(img_file);
-        }
-    }
-    return 0;
-}
-*/
 
 void init_monitor(int argc, char *argv[]) {
     parse_args(argc,argv);
     
     long img_size = load_img();
-    //diff_so_file = (char *)"/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so";
-    //init_difftest("/home/yfwu/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so", img_size);//remove difftest_port
     init_difftest(diff_so_file, img_size);//remove difftest_port
     
     init_sdb();

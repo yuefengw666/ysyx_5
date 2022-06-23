@@ -9,16 +9,8 @@ typedef struct {
 } NPC_CPU;
 
 extern NPC_CPU npc_cpu;
-/*
-const char *npc_regs[] = {
-  "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
-  "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
-  "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7",
-  "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
-};
-*/
-extern const char *npc_regs[];
 
+extern const char *npc_regs[];
 
 // ----------- state -----------
 
@@ -31,18 +23,5 @@ typedef struct {
 } NPCstate;
 
 extern NPCstate npc_state;
-/*
-#ifdef CONFIG_DIFFTEST
-enum
-{
-  DIFFTEST_TO_DUT,
-  DIFFTEST_TO_REF
-};
-extern void (*ref_difftest_memcpy)(paddr_t addr, void *buf, size_t n, bool direction);
-extern void (*ref_difftest_regcpy)(void *dut, bool direction);
-extern void (*ref_difftest_exec)(uint64_t n);
-extern void (*ref_difftest_raise_intr)(uint64_t NO);
-extern void (*ref_difftest_init)();
-#endif
-*/
+
 #endif

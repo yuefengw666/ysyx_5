@@ -1,8 +1,3 @@
-//#include <isa.h>
-//#include <memory/vaddr.h>
-/* We use the POSIX regex functions to process regular expressions.
- * Type 'man regex' for more information about POSIX regex functions.
- */
 #include "npc_common.h"
 #include "mem.h"
 #include <regex.h>
@@ -18,10 +13,7 @@ enum {
   TK_EQ, TK_UNEQ,
   TK_AND, TK_OR,
   
-
-  
   /* TODO: Add more token types */
-
 };
 
 static struct rule {
@@ -245,10 +237,6 @@ word_t eval(int p, int q, bool *success){
   else {
     word_t val1=0,val2=0,val=0;
     int op_pos = get_main_op(p,q,success);
-    //printf("op_pos:%d\n",op_pos);
-    //printf("p:%d\n",p);
-    //printf("q:%d\n",q);
-    
     if(tokens[op_pos].type == TK_NEG || tokens[op_pos].type == TK_DEREF || tokens[op_pos].type == TK_INV){
       val2 = eval(op_pos+1,q,success);
     }
@@ -257,7 +245,6 @@ word_t eval(int p, int q, bool *success){
       val2 = eval(op_pos+1,q,success);
     }
     
-    //printf("val1:%ld val2:%ld\n",val1,val2);
     switch(tokens[op_pos].type){
       case TK_ADD:val = val1 + val2;break;
       case TK_SUB:val = val1 - val2;break;
