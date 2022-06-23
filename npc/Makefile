@@ -21,7 +21,7 @@ CSRC = $(shell find $(abspath ./csrc) -name "*.cpp")
 DIFF_LDFLAGS = "-lpthread -lSDL2 -fsanitize=address -ldl"
 
 #
-DIFF_REF_SO = $(NEMU_HOME)/build/riscv64-nemu-interpreter-so
+DIFF_REF_SO = "$(NEMU_HOME)/build/riscv64-nemu-interpreter-so"
 #ARGS_DIFF = --diff=$(DIFF_REF_SO)
 
 ######################################################################
@@ -60,7 +60,7 @@ VERILATOR = verilator
 ######################################################################
 #-CFLAGS -fpermissive
 default: run
-#$(IMG) -d $(DIFF_REF_SO)
+
 run: $(VSRC) $(CSRC)
 	@$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo
