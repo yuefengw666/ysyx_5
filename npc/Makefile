@@ -53,7 +53,7 @@ $(BIN): $(VSRCS) $(CSRCS)
 
 	@echo
 	@echo "-- VERILATE ----------------"
-	$(VERILATOR) $(VERILATOR_CFLAGS)\
+	$(VERILATOR) $(VERILATOR_FLAGS)\
 	--top $(TOP_DESIGN_NAME) $^\
 	$(addprefix -CFLAGS, $(INC_FLAG))\
 	$(RLFLGAS)\
