@@ -45,7 +45,7 @@ BIN = $(BUILD_DIR)/$(TOP)
 
 default: $(BIN)
 
-$(shell mkdir -p $(BUILD_DIR))
+$(shell mkdir -p $(OBJ_DIR))
 
 $(BIN): $(VDEFINE) $(VSRCS) $(CSRCS)
 	@$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
