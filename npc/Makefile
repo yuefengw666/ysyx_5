@@ -48,7 +48,7 @@ $(shell mkdir -p $(BUILD_DIR))
 
 $(BIN): $(VDEFINE) $(VSRCS) $(CSRCS)
 	@$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	@rm -rf $(OBJ_DIR)
+#@rm -rf $(OBJ_DIR)
 
 	@echo
 	@echo "-- Verilator design "
@@ -76,7 +76,7 @@ $(BIN): $(VDEFINE) $(VSRCS) $(CSRCS)
 run: $(BIN)
 	@echo
 	@echo "-- RUN ---------------------"
-	@rm -rf $(BUILD_DIR)/wavc.vcd
+	@rm -rf $(BUILD_DIR)/wave.vcd
 	@$^ $(ARGS_DIFF) $(IMG)
 
 	@echo
