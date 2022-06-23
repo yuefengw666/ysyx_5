@@ -44,7 +44,7 @@ default: $(BIN)
 
 $(shell mkdir -p $(BUILD_DIR))
 
-$(BIN): $(VSRCS) $(CSRCS)
+$(BIN): $(VDEFINE) $(VSRCS) $(CSRCS)
 	@$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@rm -rf $(OBJ_DIR)
 
@@ -54,7 +54,7 @@ $(BIN): $(VSRCS) $(CSRCS)
 	@echo
 	@echo "-- VERILATE ----------------"
 	$(VERILATOR) $(VERILATOR_FLAGS)\
-	--top $(TOP_DESIGN_NAME) $^\
+	$^ --top $(TOP_DESIGN_NAME)\
 	$(addprefix -CFLAGS, $(INC_FLAG))\
 	$(RLFLGAS)\
 	$(addprefix -LDFLAGS, $(LDFLAGS))\
