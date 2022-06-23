@@ -21,7 +21,7 @@ VDEFINE = $(VSRC_PATH)ysyx_22040237_defines.v
 
 #---------Verilator flags---------
 VERILATOR = verilator
-VERILATOR_FLAGS += -Wall -MMD --trace -cc --build
+VERILATOR_FLAGS += -Wall -MMD -cc --build
 #High performance optimizations
 VERILATOR_FLAGS += -O3
 
