@@ -7,90 +7,105 @@ endif
 
 ######################################################################
 
-#---------set source--------------
-VSRC_PATH = ./vsrc/single_cyc/
+#set source
+VSRC_PATH = vsrc/single_cyc/
 INC_PATH = $(NPC_HOME)/csrc/include
 INC_FLAG = $(addprefix -I, $(INC_PATH))
 
-VSRCS += $(shell find $(abspath $(VSRC_PATH)) -name "*.v")
-CSRCS += $(shell find $(abspath ./csrc) -name "*.cpp")
+VSRC = $(shell find $(abspath ./vsrc/single_cyc/) -name "*.v")
+CSRC = $(shell find $(abspath ./csrc) -name "*.cpp")
 
 TOP_DESIGN_NAME = ysyx_22040237_rv_single_cyc_cpu_top
-TOP = top
-VDEFINE = $(abspath $(VSRC_PATH)/ysyx_22040237_defines.v)
+VDEFINE = $(VSRC_PATH)/ysyx_22040237_defines.v
 
-#---------Verilator flags---------
-VERILATOR = verilator
-VERILATOR_FLAGS += -Wall --trace -cc --build
-#High performance optimizations
-VERILATOR_FLAGS += -O3
-#include path
-VERILATOR_FLAGS += -I$(VSRC_PATH)
-
-#---------G++ Compilation flags-------------
+#Compilation flags
 LDFLAGS = "-lpthread -lSDL2 -fsanitize=address -ldl"
+
 #readline link
 RLFLGAS = "/lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses"
 
-#---------NPC exec args--------------------
+#Args
 DIFF_REF_SO = "$(NEMU_HOME)/build/riscv64-nemu-interpreter-so"
 ARGS_DIFF = "-d $(DIFF_REF_SO)"
 
-#---------Build director--------------------
-BUILD_DIR = ./build
-OBJ_DIR = $(BUILD_DIR)/obj_dir
-BIN = $(BUILD_DIR)/$(TOP)
+######################################################################
+# Set up variables
+
+VERILATOR = verilator
+#VERILATOR_COVERAGE = verilator_coverage
+
+# Warn abount lint issues; may not want this on less solid designs
+#VERILATOR_FLAGS += -Wall
+# Generate C++ in executable form
+#VERILATOR_FLAGS += -cc --exe
+# Make waveforms
+#VERILATOR_FLAGS += --trace
+# The option calls GNU Make or CMake to build the model.
+#VERILATOR_FLAGS += --build
+# Check SystemVerilog assertions
+#VERILATOR_FLAGS += --assert
+#timescale
+#VERILATOR_FLAGS += --timescale 1ns/1ps
+# Generate coverage analysis
+# VERILATOR_FLAGS += --coverage
+# Run Verilator in debug mode
+#VERILATOR_FLAGS += --debug
+# Add this trace to get a backtrace in gdb
+#VERILATOR_FLAGS += --gdbbt
+
+# Input files for Verilator
+#VERILATOR_INPUT = $(DESIGN_NAME).v $(SIM_NAME).cpp
 
 ######################################################################
+#@ech
+#@echo "-- COVERAGE ----------------"
+#@rm -rf logs/annotated
+#$(VERILATOR_COVERAGE) --annotate logs/annotated logs/coverage.dat
+######################################################################
 
-default: $(BIN)
 
-$(shell mkdir -p $(BUILD_DIR))
+default: run
 
-$(BIN): $(VDEFINE) $(VSRCS) $(CSRCS)
+run: $(VSRC) $(CSRC)
 	@$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	@rm -rf $(OBJ_DIR)
-
 	@echo
 	@echo "-- Verilator design "
 
 	@echo
 	@echo "-- VERILATE ----------------"
-	$(VERILATOR) $(VERILATOR_FLAGS)\
-	$^ --top $(TOP_DESIGN_NAME)\
-	$(addprefix -CFLAGS, $(INC_FLAG))\
-	$(RLFLGAS)\
-	$(addprefix -LDFLAGS, $(LDFLAGS))\
-	--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
+	$(VERILATOR) -Wall --trace -cc $(VDEFINE) $(VSRC) -exe --build $(CSRC) -top $(TOP_DESIGN_NAME) \
+		-CFLAGS $(INC_FLAG) \
+		$(RLFLGAS)\
+		-LDFLAGS $(LDFLAGS)
 
 	@echo
 	@echo "-- BUILD -------------------"
-# To compile, we can either
-# 1*. Pass --build to Verilator by editing VERILATOR_FLAGS above. 
-# 2. Or, run the make rules Verilator does:
-#	$(MAKE) -j -C obj_dir -f Vtop.mk Vtop
-#--> -C obj_dir tells make to work in obj_dir directory, -f Vtop.mk tell make
-#to build the target Vtop, which is name of executable
-# 3. Or, call a submakefile where we can override the rules ourselves:
-#	$(MAKE) -j -C obj_dir -f ../Makefile_obj
 
-run: $(BIN)
 	@echo
 	@echo "-- RUN ---------------------"
-	@rm -rf $(BUILD_DIR)/wave
-	@mkdir -p $(BUILD_DIR)/wave
-	@$^ $(IMG) $(ARGS_DIFF)
+	@rm -rf logs
+	@mkdir -p logs
+	obj_dir/V$(TOP_DESIGN_NAME) $(IMG) $(ARGS_DIFF)
 
 	@echo
 	@echo "-- DONE --------------------"
+	@echo "To see waveforms, open wave.vcd in a waveform viewer"
 	@echo
 
+##*.dmp #*.vpd #coverage.dat #core
+
 gtk:
-	gtkwave $(BUILD_DIR)/wave.vcd &
+	gtkwave ./logs/wave.vcd &
 
+.PHONY:clean
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf obj_dir logs *.log
 
-.PHONY:clean run gtk
+all:
+	@echo "Write this Makefile by your self."
+
+sim:
+	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
+	@echo "Write this Makefile by your self."
 
 include ../Makefile
