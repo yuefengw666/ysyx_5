@@ -12,7 +12,7 @@ typedef struct{
 } ELF_Func_Info;
 
 
-ELF_Func_Info elf_func_info[max_num_func];
+static ELF_Func_Info elf_func_info[max_num_func];
 int cnt_trace_func = 0;
 
 void init_elf(const char *elf_file){
