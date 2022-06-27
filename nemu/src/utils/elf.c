@@ -15,6 +15,10 @@ typedef struct{
 static ELF_Func_Info elf_func_info[max_num_func];
 int cnt_trace_func = 0;
 
+
+Elf64_Shdr shdr[999];///******can not define NULL
+Elf64_Sym sym[999];
+
 void init_elf(const char *elf_file){
     if(elf_file == NULL){
         Log("No elf file is given.\n");
@@ -73,7 +77,7 @@ void init_elf(const char *elf_file){
               representations of the symbol names.  If the value is nonzero, it represents a  string  table
               index that gives the symbol name.  Otherwise, the symbol has no name.*/
     fseek(fp, shdr[6].sh_offset, SEEK_SET);
-    Elf64_Sym *sym=NULL;
+    //Elf64_Sym sym[999];
     int ret_rd_sym = fread(sym, 1, shdr[6].sh_size, fp);
     Assert(ret_rd_sym != 0, "ELF sym read error");
     
