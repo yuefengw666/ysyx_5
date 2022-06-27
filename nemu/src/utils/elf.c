@@ -111,8 +111,8 @@ void init_elf(const char *elf_file){
     return;
 }
 
-#define FRB_SIZE 100
-#define FRB_LENGTH 256
+#define FRB_SIZE 1000
+#define FRB_LENGTH 1024
 static char ftrace_ringbuf[FRB_SIZE][FRB_LENGTH];
 static int cnt_ftrace = 0;
 static int func_dep = 0;//display blank
@@ -121,8 +121,8 @@ static char blank[100]= {0};
 void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
     int pc_func_index = -1;
     int dnpc_func_index = -1;
-    printf("trace func number: %d\n", cnt_trace_func);
-    printf("pc:%lx, dnpc:%lx, inst_opcode:%d\n",pc, dnpc, pc_inst_opcode);
+    //printf("trace func number: %d\n", cnt_trace_func);
+    //printf("pc:%lx, dnpc:%lx, inst_opcode:%x\n",pc, dnpc, pc_inst_opcode);
     
     for(int i=0; i<cnt_trace_func; i++){
         if( (pc >= elf_func_info[i].addr) && (pc < elf_func_info[i].addr + elf_func_info[i].size) ){
