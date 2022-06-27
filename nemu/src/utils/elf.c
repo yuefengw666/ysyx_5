@@ -24,6 +24,7 @@ void init_elf(const char *elf_file){
     FILE *fp = fopen(elf_file, "rb");
     Assert(fp, "Can not open %s'", elf_file);
 
+    printf("111\n");
 
     //postion elf header
     Elf64_Ehdr *ehdr = (Elf64_Ehdr *)malloc(sizeof(Elf64_Ehdr));
@@ -43,7 +44,6 @@ void init_elf(const char *elf_file){
     Elf64_Shdr *shdr_symtab = NULL;
     Elf64_Shdr *shdr_strtab = NULL;
     
-    printf("111\n");
     int i = 0;
     while( (shdr_symtab == NULL || shdr_strtab == NULL) && (i < ehdr->e_shnum) ){
         
