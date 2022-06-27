@@ -133,6 +133,7 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
 void ftrace_display(){
     printf("%s\n",ASNI_FMT("Ftrace ...",ASNI_FG_CYAN));
     if(cnt_ftrace <= FRB_SIZE){
+        printf("sss\n");
         for(int i=0; i<cnt_ftrace; i++){
             printf(" %s\n",ftrace_ringbuf[i]);
         }
