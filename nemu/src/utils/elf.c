@@ -73,6 +73,7 @@ void init_elf(const char *elf_file){
            section,  this  member gives the size in bytes for each entry.  
            This member contains zero if the section does not hold a table of fixed-size entries.*/
     int num_sym = shdr_symtab->sh_size / shdr_symtab->sh_entsize; //
+    printf("num_sym:%d\n",num_sym);
     int j = 0;
     while(j < num_sym){
         if(ELF64_ST_TYPE(sym[j].st_info) == STT_FUNC){
@@ -85,7 +86,6 @@ void init_elf(const char *elf_file){
     }
 
     for(int i=0; i<cnt_trace_func; i++){
-        printf("22132");
         printf("elf_func_info has:%s\n",elf_func_info[i].name);
     }
     
