@@ -36,6 +36,7 @@ void init_elf(const char *elf_file){
     
     for(int i = 0; i < EI_NIDENT; ++i) printf("%02x ", ehdr->e_ident[i]);
         printf("\n类别:\t\t\t");
+    printf("number section num:%d\n",ehdr->e_shnum);
     
     //postion elf section header
     Elf64_Shdr *shdr = NULL;
