@@ -140,6 +140,7 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
     if(dnpc_func_index != pc_func_index){//happened to jump
         //call
         if( (pc_inst_opcode == 0x6f) && (dnpc == elf_func_info[dnpc_func_index].addr) ){
+            printf("call func: %s\n",elf_func_info[dnpc_func_index].name);
             sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE], "%lx: %scall [%s'-'%lx]", pc, blank, elf_func_info[dnpc_func_index].name, elf_func_info[dnpc_func_index].addr);
             cnt_ftrace++;
             func_dep ++;
