@@ -77,6 +77,7 @@ void init_elf(const char *elf_file){
     int j = 0;
     while(j < num_sym){
         if(ELF64_ST_TYPE(sym[j].st_info) == STT_FUNC){
+            printf("1\n");
             elf_func_info[cnt_trace_func].name = (char *)(sym + sym[j].st_name);
             elf_func_info[cnt_trace_func].addr = sym[j].st_value;
             elf_func_info[cnt_trace_func].size = sym[j].st_size;
