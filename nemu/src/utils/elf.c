@@ -142,7 +142,7 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3){
     int pc_func_index = -1;
     int dnpc_func_index = -1;
     
-    printf("pc:%lx, dnpc:%lx, inst_opcode:%x\n",pc, dnpc, pc_inst_opcode);
+    //printf("pc:%lx, dnpc:%lx, inst_opcode:%x\n",pc, dnpc, pc_inst_opcode);
     
     for(int i=0; i<cnt_trace_func; i++){
         if( (elf_func_info[i].addr <= pc) && (pc < (elf_func_info[i].addr + elf_func_info[i].size) ) ){
@@ -162,7 +162,7 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3){
         if( (pc_inst_opcode == 0x6f) && (dnpc == elf_func_info[dnpc_func_index].addr) ){
             printf("jal:dnpc_func_index:%d\n",dnpc_func_index);
             printf("call func: %s\n",elf_func_info[dnpc_func_index].name);
-            sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE], "%lx: %scall [%s'-'%lx]", pc, blank, elf_func_info[dnpc_func_index].name, elf_func_info[dnpc_func_index].addr);
+            sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE], "%lx: %scall [%s@%lx]", pc, blank, elf_func_info[dnpc_func_index].name, elf_func_info[dnpc_func_index].addr);
             cnt_ftrace++;
             func_dep ++;
         }
