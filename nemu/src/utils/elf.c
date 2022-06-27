@@ -33,17 +33,15 @@ void init_elf(const char *elf_file){
     Assert(ret_rd_ehdr != 0, "ELF header read error!\n");
 
     //postion elf section header
-    Elf64_Shdr *shdr = (Elf64_Shdr *)malloc(sizeof(Elf64_Shdr));
-    printf("111\n");
+    Elf64_Shdr shdr[64];
     fseek(fp, ehdr->e_shoff, SEEK_SET);    //Elf64_Ehdr->e_shoff: offset of elf section header
     int ret_rd_eshrd = fread(shdr, sizeof(Elf64_Shdr), ehdr->e_shnum, fp);
-    printf("222\n");
     Assert(ret_rd_eshrd != 0, "ELF section header read error");
 
     //postion .symtab
     //postion .strtab
-    Elf64_Shdr *shdr_symtab =(Elf64_Shdr *)malloc(sizeof(Elf64_Shdr));
-    Elf64_Shdr *shdr_strtab =(Elf64_Shdr *)malloc(sizeof(Elf64_Shdr));
+    Elf64_Shdr *shdr_symtab = NULL;
+    Elf64_Shdr *shdr_strtab = NULL;
 
     int i = 0;
     while( (shdr_symtab == NULL || shdr_strtab == NULL) && (i < ehdr->e_shnum) ){
