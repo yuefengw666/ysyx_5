@@ -66,7 +66,7 @@ void init_elf(const char *elf_file){
               index that gives the symbol name.  Otherwise, the symbol has no name.*/
     fseek(fp, shdr_symtab->sh_offset, 0);
     Elf64_Sym *sym = NULL;
-    int ret_rd_sym = fread(sym, shdr_strtab->sh_size, 1, fp);
+    int ret_rd_sym = fread(sym, 1, shdr_symtab->sh_size, fp);
     Assert(ret_rd_sym != 0, "ELF sym read error");
     
     //shdr->sh_entsize:
