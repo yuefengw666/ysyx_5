@@ -72,9 +72,7 @@ void init_elf(const char *elf_file){
               index that gives the symbol name.  Otherwise, the symbol has no name.*/
     fseek(fp, shdr_symtab->sh_offset, SEEK_SET);
     Elf64_Sym sym[999];
-    printf("111\n");
-    int ret_rd_sym = fread(sym, shdr_symtab->sh_size, 1, fp);
-    printf("222\n");
+    int ret_rd_sym = fread(sym, 1, shdr_symtab->sh_size, fp);
     Assert(ret_rd_sym != 0, "ELF sym read error");
     
     //shdr->sh_entsize:
@@ -89,7 +87,6 @@ void init_elf(const char *elf_file){
             elf_func_info[cnt_trace_func].name = (char *)(sym + sym[j].st_name);
             elf_func_info[cnt_trace_func].addr = sym[j].st_value;
             elf_func_info[cnt_trace_func].size = sym[j].st_size;
-            printf("111\n");
             printf("elf_func_info has %s\n",elf_func_info[j].name);
             cnt_trace_func++;
         }
@@ -115,7 +112,6 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
     int dnpc_func = -1;
     
     for(int i=0; i<cnt_trace_func; i++){
-        printf("elf_funcs:%s\n",elf_func_info[i].name);
         if( (pc >= elf_func_info[i].addr) && (pc < elf_func_info[i].addr + elf_func_info[i].size) ){
             pc_func = i;
         }
@@ -129,7 +125,6 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
     }
     //judge whether call or ret
     if(dnpc_func != pc_func){//happened to jump
-        printf("enter ftrace sprintf?\n");
         //call
         if( (pc_inst_opcode == 0x6f) && (dnpc == elf_func_info[dnpc_func].addr) ){
             sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE], "%lx: call [%s@%lx]", pc, elf_func_info[dnpc_func].name, elf_func_info[dnpc_func].addr);
