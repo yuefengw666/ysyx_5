@@ -131,9 +131,6 @@ static char blank[100]= {0};
 void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3){
     int pc_func_index = -1;
     int dnpc_func_index = -1;
-    for(int i=0; i<cnt_trace_func; i++){
-        printf("func name :%s, addr:%lx, size:%ld\n",elf_func_info[i].name, elf_func_info[i].addr,elf_func_info[i].size);
-    }
     printf("trace func number: %d\n", cnt_trace_func);
     printf("pc:%lx, dnpc:%lx, inst_opcode:%x\n",pc, dnpc, pc_inst_opcode);
     
