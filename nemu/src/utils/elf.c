@@ -181,7 +181,7 @@ void ftrace_display(){
     for(int i=0; i<cnt_trace_func; i++){
         printf("func name :%s, addr:%lx, size:%ld\n",elf_func_info[i].name, elf_func_info[i].addr,elf_func_info[i].size);
     }
-    /*
+    
     if(cnt_ftrace <= FRB_SIZE){
         for(int i=0; i<cnt_ftrace; i++){
             printf(" %s\n",ftrace_ringbuf[i]);
@@ -195,5 +195,5 @@ void ftrace_display(){
                 printf(" %s\n",ftrace_ringbuf[i]);
         }
     }
-    */
+    
 }
