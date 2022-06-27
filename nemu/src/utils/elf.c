@@ -38,9 +38,8 @@ void init_elf(const char *elf_file){
     printf("number section headers:%d\n",ehdr->e_shnum);
     
     //postion elf section header
-    Elf64_Shdr shdr[999];
+    Elf64_Shdr shdr[999];///******can not define NULL
     fseek(fp, ehdr->e_shoff, SEEK_SET);    //Elf64_Ehdr->e_shoff: offset of elf section header
-    printf("111\n");
     int ret_rd_eshrd = fread(shdr, sizeof(Elf64_Shdr), ehdr->e_shnum, fp);
     printf("ret_rd_eshrd:%d\n",ret_rd_eshrd);
     Assert(ret_rd_eshrd != 0, "ELF section header read error");
@@ -73,7 +72,9 @@ void init_elf(const char *elf_file){
               index that gives the symbol name.  Otherwise, the symbol has no name.*/
     fseek(fp, shdr_symtab->sh_offset, SEEK_SET);
     Elf64_Sym *sym = NULL;
+    printf("111\n");
     int ret_rd_sym = fread(sym, shdr_symtab->sh_size, 1, fp);
+    printf("222\n");
     Assert(ret_rd_sym != 0, "ELF sym read error");
     
     //shdr->sh_entsize:
