@@ -53,6 +53,7 @@ void init_elf(const char *elf_file){
         
         if(shdr[i].sh_type == SHT_SYMTAB){
             shdr_symtab = &shdr[i];
+            printf("%s\n",(char *)shdr_symtab);
             printf("symtab offset:%lx\n",shdr[i].sh_offset);
             printf("judge section header type == SYMTAB\n");
         }
