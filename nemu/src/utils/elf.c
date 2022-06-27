@@ -35,12 +35,12 @@ void init_elf(const char *elf_file){
     printf("can read elf header file \n");
     
     for(int i = 0; i < EI_NIDENT; ++i) printf("%02x ", ehdr->e_ident[i]);
-        printf("\n类别:\t\t\t");
-    printf("number section num:%d\n",ehdr->e_shnum);
+    printf("number section headers:%d\n",ehdr->e_shnum);
     
     //postion elf section header
     Elf64_Shdr *shdr = NULL;
     fseek(fp, ehdr->e_shoff, SEEK_SET);    //Elf64_Ehdr->e_shoff: offset of elf section header
+    printf("111\n");
     int ret_rd_eshrd = fread(shdr, sizeof(Elf64_Shdr), ehdr->e_shnum, fp);
     printf("ret_rd_eshrd:%d\n",ret_rd_eshrd);
     Assert(ret_rd_eshrd != 0, "ELF section header read error");
