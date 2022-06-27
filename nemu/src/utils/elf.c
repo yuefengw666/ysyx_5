@@ -45,7 +45,7 @@ void init_elf(const char *elf_file){
     //postion .strtab
     Elf64_Shdr *shdr_symtab = NULL;
     Elf64_Shdr *shdr_strtab = NULL;
-    
+    printf("111\n");
     int i = 0;
     while( (shdr_symtab == NULL || shdr_strtab == NULL) && (i < ehdr->e_shnum) ){
         
