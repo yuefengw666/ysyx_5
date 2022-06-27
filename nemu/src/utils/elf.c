@@ -143,14 +143,14 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
             sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE], "%lx: %scall [%s@%lx]", pc, blank, elf_func_info[dnpc_func_index].name, elf_func_info[dnpc_func_index].addr);
             cnt_ftrace++;
             func_dep ++;
-            printf("in call\n");
+            //printf("in call\n");
         }
         //ret
         else if(pc_inst_opcode == 0x67){
             sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE],"%lx: %sret [%s]", pc, blank, elf_func_info[dnpc_func_index].name);
             cnt_ftrace++;
             func_dep--;
-            printf("in ret\n");
+            //printf("in ret\n");
         }
     }
 
@@ -159,7 +159,7 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
 
 void ftrace_display(){
     printf("%s\n",ASNI_FMT("Ftrace ...",ASNI_FG_CYAN));
-    /*
+    
     if(cnt_ftrace <= FRB_SIZE){
         for(int i=0; i<cnt_ftrace; i++){
             printf(" %s\n",ftrace_ringbuf[i]);
@@ -173,5 +173,5 @@ void ftrace_display(){
                 printf(" %s\n",ftrace_ringbuf[i]);
         }
     }
-    */
+    
 }
