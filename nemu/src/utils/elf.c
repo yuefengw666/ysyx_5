@@ -30,7 +30,7 @@ void init_elf(const char *elf_file){
     
     fseek(fp, 0 , SEEK_SET);
     int ret_rd_ehdr = fread(ehdr, sizeof(Elf64_Ehdr), 1, fp);
-    Assert(ret_rd_ehdr == 0, "ELF header read error!\n");
+    Assert(ret_rd_ehdr != 0, "ELF header read error!\n");
 
     //postion elf section header
     Elf64_Shdr *shdr = (Elf64_Shdr *)malloc(sizeof(Elf64_Shdr));
