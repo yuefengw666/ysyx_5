@@ -99,14 +99,13 @@ void init_elf(const char *elf_file){
             elf_func_info[cnt_trace_func].name = strtable + sym[j].st_name;
             elf_func_info[cnt_trace_func].addr = sym[j].st_value;
             elf_func_info[cnt_trace_func].size = sym[j].st_size;
-            printf("elf_func_info has %s\n",elf_func_info[cnt_trace_func].name);
             cnt_trace_func++;
         }
         j++;
     }
 
     for(int i=0; i<cnt_trace_func; i++){
-        printf("elf_func_info has:%s\n",elf_func_info[i].name);
+        printf("func name :%s, addr:%lx, size:%ld\n",elf_func_info[i].name, elf_func_info[i].addr,elf_func_info[i].size);
     }
     
     return;
