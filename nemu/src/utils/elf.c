@@ -73,6 +73,7 @@ void init_elf(const char *elf_file){
     /*Some sections hold a table of fixed-sized entries, such as a symbol table.  For such  a  
            section,  this  member gives the size in bytes for each entry.  
            This member contains zero if the section does not hold a table of fixed-size entries.*/
+    printf("sh_entsize = %ld\n",shdr_symtab->sh_entsize);
     int num_sym = shdr_symtab->sh_size / shdr_symtab->sh_entsize; //
     int j = 0;
     while(j < num_sym){
