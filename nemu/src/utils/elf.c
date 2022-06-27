@@ -15,9 +15,10 @@ typedef struct{
 static ELF_Func_Info elf_func_info[max_num_func];
 int cnt_trace_func = 0;
 
-
+Elf64_Ehdr *ehdr = NULL;
 Elf64_Shdr shdr[999];///******can not define NULL
 Elf64_Sym sym[999];
+char strtable[999];
 
 void init_elf(const char *elf_file){
     if(elf_file == NULL){
@@ -31,7 +32,7 @@ void init_elf(const char *elf_file){
     printf("can open elf file\n");
 
     //postion elf header
-    Elf64_Ehdr *ehdr = (Elf64_Ehdr *)malloc(sizeof(Elf64_Ehdr));
+    ehdr = (Elf64_Ehdr *)malloc(sizeof(Elf64_Ehdr));
     
     fseek(fp, 0 , SEEK_SET);
     int ret_rd_ehdr = fread(ehdr, sizeof(Elf64_Ehdr), 1, fp);
@@ -41,7 +42,7 @@ void init_elf(const char *elf_file){
     printf("number section headers:%d\n",ehdr->e_shnum);
     
     //postion elf section header
-    Elf64_Shdr shdr[999];///******can not define NULL
+    //Elf64_Shdr shdr[999];///******can not define NULL
     fseek(fp, ehdr->e_shoff, SEEK_SET);    //Elf64_Ehdr->e_shoff: offset of elf section header
     int ret_rd_eshrd = fread(shdr, sizeof(Elf64_Shdr), ehdr->e_shnum, fp);
     Assert(ret_rd_eshrd != 0, "ELF section header read error");
@@ -50,6 +51,7 @@ void init_elf(const char *elf_file){
     
     //postion .symtab
     //postion .strtab
+    /*
     Elf64_Shdr *shdr_symtab = NULL;
     Elf64_Shdr *shdr_strtab = NULL;
     int i = 0;
@@ -68,7 +70,7 @@ void init_elf(const char *elf_file){
         }
         i++;
     }
-    
+    */
     //find func and its name
     //func name offset : shdr_strtab->shoffset + sym[i].st_name
     //sym->st_name:
@@ -84,7 +86,7 @@ void init_elf(const char *elf_file){
     printf("can read symtable\n");
 
     //postion strtable
-    char strtable[999];
+    //char strtable[999];
     fseek(fp, shdr[7].sh_offset, SEEK_SET);
     int ret_rd_str = fread(strtable,1,shdr[7].sh_size, fp);
     Assert(ret_rd_str != 0, "ELF str read error");
