@@ -119,15 +119,17 @@ static int func_dep = 0;//display blank
 static char blank[100]= {0};
 
 void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
-    int pc_func = -1;
-    int dnpc_func = -1;
+    int pc_func_index = -1;
+    int dnpc_func_index = -1;
+    printf("trace func number: %d\n", cnt_trace_func);
+    printf("pc:%lx, dnpc:%lx, inst_opcode:%d\n",pc, dnpc, pc_inst_opcode);
     
     for(int i=0; i<cnt_trace_func; i++){
         if( (pc >= elf_func_info[i].addr) && (pc < elf_func_info[i].addr + elf_func_info[i].size) ){
-            pc_func = i;
+            pc_func_index = i;
         }
         if( (dnpc >= elf_func_info[i].addr) && (dnpc < elf_func_info[i].addr + elf_func_info[i].size) ){
-            dnpc_func = i;
+            dnpc_func_index = i;
         }
     }
 
@@ -135,17 +137,17 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
         blank[i] = ' ';        
     }
     //judge whether call or ret
-    if(dnpc_func != pc_func){//happened to jump
+    if(dnpc_func_index != pc_func_index){//happened to jump
         //call
-        if( (pc_inst_opcode == 0x6f) && (dnpc == elf_func_info[dnpc_func].addr) ){
-            sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE], "%lx: %scall [%s@%lx]", pc, blank, elf_func_info[dnpc_func].name, elf_func_info[dnpc_func].addr);
+        if( (pc_inst_opcode == 0x6f) && (dnpc == elf_func_info[dnpc_func_index].addr) ){
+            sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE], "%lx: %scall [%s@%lx]", pc, blank, elf_func_info[dnpc_func_index].name, elf_func_info[dnpc_func_index].addr);
             cnt_ftrace++;
             func_dep ++;
             printf("in call\n");
         }
         //ret
         else if(pc_inst_opcode == 0x67){
-            sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE],"%lx: %sret [%s]", pc, blank, elf_func_info[dnpc_func].name);
+            sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE],"%lx: %sret [%s]", pc, blank, elf_func_info[dnpc_func_index].name);
             cnt_ftrace++;
             func_dep--;
             printf("in ret\n");
@@ -157,6 +159,7 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
 
 void ftrace_display(){
     printf("%s\n",ASNI_FMT("Ftrace ...",ASNI_FG_CYAN));
+    /*
     if(cnt_ftrace <= FRB_SIZE){
         for(int i=0; i<cnt_ftrace; i++){
             printf(" %s\n",ftrace_ringbuf[i]);
@@ -170,4 +173,5 @@ void ftrace_display(){
                 printf(" %s\n",ftrace_ringbuf[i]);
         }
     }
+    */
 }
