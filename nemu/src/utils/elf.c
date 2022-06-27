@@ -30,7 +30,6 @@ void init_elf(const char *elf_file){
     
     fseek(fp, 0 , SEEK_SET);
     int ret_rd_ehdr = fread(ehdr, sizeof(Elf64_Ehdr), 1, fp);
-    printf("ret_df_ehdr:%d\n",ret_rd_ehdr);
     Assert(ret_rd_ehdr != 0, "ELF header read error!\n");
 
     //postion elf section header
@@ -38,7 +37,7 @@ void init_elf(const char *elf_file){
 
     fseek(fp, ehdr->e_shoff, SEEK_SET);    //Elf64_Ehdr->e_shoff: offset of elf section header
     int ret_rd_eshrd = fread(shdr, sizeof(Elf64_Shdr), 1, fp);
-    Assert(ret_rd_eshrd == 0, "ELF section header read error");
+    Assert(ret_rd_eshrd != 0, "ELF section header read error");
 
     //postion .symtab
     //postion .strtab
@@ -68,7 +67,7 @@ void init_elf(const char *elf_file){
     fseek(fp, shdr_symtab->sh_offset, 0);
     Elf64_Sym *sym = (Elf64_Sym *)malloc(sizeof (Elf64_Sym));
     int ret_rd_sym = fread(sym, sizeof(Elf64_Sym), 1, fp);
-    Assert(ret_rd_sym == 0, "ELF sym read error");
+    Assert(ret_rd_sym != 0, "ELF sym read error");
     
     //shdr->sh_entsize:
     /*Some sections hold a table of fixed-sized entries, such as a symbol table.  For such  a  
