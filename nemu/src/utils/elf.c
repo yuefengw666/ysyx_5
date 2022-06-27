@@ -136,7 +136,7 @@ void init_elf(const char *elf_file){
 static char ftrace_ringbuf[FRB_SIZE][FRB_LENGTH];
 static int cnt_ftrace = 0;
 static int func_dep = 0;//display blank
-static char blank[100]= {0};
+//static char blank[100]= {0};
 
 void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3){
     //int pc_func_index = -1;
@@ -158,7 +158,8 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3){
             dnpc_func_index = i;
         }
     }
-    
+
+    char blank[100]={0};
     for(int i=0; i<func_dep; i++){
         blank[i] = ' ';        
     }
