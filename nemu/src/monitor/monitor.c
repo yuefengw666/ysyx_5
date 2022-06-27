@@ -5,6 +5,7 @@ void init_rand();
 void init_log(const char *log_file);
 void init_mem();
 void init_difftest(char *ref_so_file, long img_size, int port);
+void init_elf(const char *elf_file);
 void init_device();
 void init_sdb();
 void init_disasm(const char *triple);
@@ -102,11 +103,6 @@ void init_monitor(int argc, char *argv[]) {
   /* Initialize memory. */
   init_mem();
 
-  /* Initialize elf file.*/
-#ifdef CONFIG_FTRACE
-  init_elf(elf_file);
-#endif
-
   /* Initialize devices. */
   IFDEF(CONFIG_DEVICE, init_device());
 
@@ -119,6 +115,10 @@ void init_monitor(int argc, char *argv[]) {
   /* Initialize differential testing. */
   init_difftest(diff_so_file, img_size, difftest_port);
 
+  /* Initialize elf file.*/
+#ifdef CONFIG_FTRACE
+  init_elf(elf_file);
+#endif
   /* Initialize the simple debugger. */
   init_sdb();
 
