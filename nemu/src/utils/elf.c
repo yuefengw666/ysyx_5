@@ -32,17 +32,16 @@ void init_elf(const char *elf_file){
     fseek(fp, 0 , SEEK_SET);
     int ret_rd_ehdr = fread(ehdr, sizeof(Elf64_Ehdr), 1, fp);
     Assert(ret_rd_ehdr != 0, "ELF header read error!\n");
-    printf("can read elf header file \n");
     
-    for(int i = 0; i < EI_NIDENT; ++i) printf("%02x ", ehdr->e_ident[i]);
+    printf("can read elf header file \n");
     printf("number section headers:%d\n",ehdr->e_shnum);
     
     //postion elf section header
     Elf64_Shdr shdr[999];///******can not define NULL
     fseek(fp, ehdr->e_shoff, SEEK_SET);    //Elf64_Ehdr->e_shoff: offset of elf section header
     int ret_rd_eshrd = fread(shdr, sizeof(Elf64_Shdr), ehdr->e_shnum, fp);
-    printf("ret_rd_eshrd:%d\n",ret_rd_eshrd);
     Assert(ret_rd_eshrd != 0, "ELF section header read error");
+    
     printf("can read elf section header file \n");
 
     //postion .symtab
@@ -84,7 +83,7 @@ void init_elf(const char *elf_file){
     int j = 0;
     while(j < num_sym){
         if(ELF64_ST_TYPE(sym[j].st_info) == STT_FUNC){
-            elf_func_info[cnt_trace_func].name = (char *)(sym + sym[j].st_name);
+            elf_func_info[cnt_trace_func].name = (char *)(shdr_strtab->sh_offset + sym[j].st_name);
             elf_func_info[cnt_trace_func].addr = sym[j].st_value;
             elf_func_info[cnt_trace_func].size = sym[j].st_size;
             printf("elf_func_info has %s\n",elf_func_info[j].name);
