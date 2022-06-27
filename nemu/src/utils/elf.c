@@ -33,7 +33,7 @@ void init_elf(const char *elf_file){
     Assert(ret_rd_ehdr != 0, "ELF header read error!\n");
 
     //postion elf section header
-    Elf64_Shdr shdr[64];
+    Elf64_Shdr *shdr = NULL;
     fseek(fp, ehdr->e_shoff, SEEK_SET);    //Elf64_Ehdr->e_shoff: offset of elf section header
     int ret_rd_eshrd = fread(shdr, sizeof(Elf64_Shdr), ehdr->e_shnum, fp);
     Assert(ret_rd_eshrd != 0, "ELF section header read error");
@@ -48,11 +48,12 @@ void init_elf(const char *elf_file){
         
         if(shdr[i].sh_type == SHT_SYMTAB){
             shdr_symtab = &shdr[i];
+            printf("judge section header type == SYMTAB\n");
         }
         else if(shdr[i].sh_type == SHT_STRTAB){
             shdr_strtab = &shdr[i];
+            printf("judge section header type == SYMTAB\n");
         }
-
         i++;
     }
     
@@ -64,8 +65,8 @@ void init_elf(const char *elf_file){
               representations of the symbol names.  If the value is nonzero, it represents a  string  table
               index that gives the symbol name.  Otherwise, the symbol has no name.*/
     fseek(fp, shdr_symtab->sh_offset, 0);
-    Elf64_Sym *sym = (Elf64_Sym *)malloc(sizeof (Elf64_Sym));
-    int ret_rd_sym = fread(sym, sizeof(Elf64_Sym), 1, fp);
+    Elf64_Sym *sym = NULL;
+    int ret_rd_sym = fread(sym, shdr_strtab->sh_size, 1, fp);
     Assert(ret_rd_sym != 0, "ELF sym read error");
     
     //shdr->sh_entsize:
