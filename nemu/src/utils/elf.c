@@ -80,9 +80,8 @@ void init_elf(const char *elf_file){
             elf_func_info[cnt_trace_func].name = (char *)(sym + sym[j].st_name);
             elf_func_info[cnt_trace_func].addr = sym[j].st_value;
             elf_func_info[cnt_trace_func].size = sym[j].st_size;
-            
+            printf("111\n");
             printf("elf_func_info has %s\n",elf_func_info[j].name);
-            printf("111");
             cnt_trace_func++;
         }
         j++;
