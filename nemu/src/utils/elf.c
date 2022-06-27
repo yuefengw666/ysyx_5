@@ -71,7 +71,7 @@ void init_elf(const char *elf_file){
               representations of the symbol names.  If the value is nonzero, it represents a  string  table
               index that gives the symbol name.  Otherwise, the symbol has no name.*/
     fseek(fp, shdr_symtab->sh_offset, SEEK_SET);
-    Elf64_Sym *sym = NULL;
+    Elf64_Sym sym[999];
     printf("111\n");
     int ret_rd_sym = fread(sym, shdr_symtab->sh_size, 1, fp);
     printf("222\n");
