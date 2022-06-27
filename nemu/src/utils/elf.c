@@ -140,7 +140,7 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3){
     if(dnpc_func_index != pc_func_index){//happened to jump
         //call
         if( (pc_inst_opcode == 0x6f) && (dnpc == elf_func_info[dnpc_func_index].addr) ){
-            printf("dnpc_func_index:%d\n",dnpc_func_index);
+            printf("jal:dnpc_func_index:%d\n",dnpc_func_index);
             printf("call func: %s\n",elf_func_info[dnpc_func_index].name);
             sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE], "%lx: %scall [%s'-'%lx]", pc, blank, elf_func_info[dnpc_func_index].name, elf_func_info[dnpc_func_index].addr);
             cnt_ftrace++;
@@ -149,6 +149,8 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3){
         }
         //ret
         else if(pc_inst_opcode == 0x67 && pc_inst_funct3 == 0x00){
+            printf("jalr: dnpc_func_index:%d\n",dnpc_func_index);
+            printf("ret func: %s\n",elf_func_info[dnpc_func_index].name);
             sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE],"%lx: %sret [%s]", pc, blank, elf_func_info[dnpc_func_index].name);
             cnt_ftrace++;
             func_dep--;
