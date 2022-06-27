@@ -51,6 +51,16 @@ void init_elf(const char *elf_file){
     
     //postion .symtab
     //postion .strtab
+    int symtab_idx = -1;
+    int strtab_idx = -1;
+    for(int i=0; i<ehdr->e_shnum; i++){
+        if(shdr[i].sh_type == SHT_SYMTAB){
+            symtab_idx = i;
+        }
+        else if(shdr[i].sh_type == SHT_STRTAB){
+            strtab_idx = i; break;
+        }
+    }
     /*
     Elf64_Shdr *shdr_symtab = NULL;
     Elf64_Shdr *shdr_strtab = NULL;
@@ -78,17 +88,17 @@ void init_elf(const char *elf_file){
               This  member holds an index into the object file's symbol string table, which holds character
               representations of the symbol names.  If the value is nonzero, it represents a  string  table
               index that gives the symbol name.  Otherwise, the symbol has no name.*/
-    fseek(fp, shdr[6].sh_offset, SEEK_SET);
+    fseek(fp, shdr[symtab_idx].sh_offset, SEEK_SET);
     //Elf64_Sym sym[999];
-    int ret_rd_sym = fread(sym, 1, shdr[6].sh_size, fp);
+    int ret_rd_sym = fread(sym, 1, shdr[symtab_idx].sh_size, fp);
     Assert(ret_rd_sym != 0, "ELF sym read error");
     
     printf("can read symtable\n");
 
     //postion strtable
     //char strtable[999];
-    fseek(fp, shdr[7].sh_offset, SEEK_SET);
-    int ret_rd_str = fread(strtable,1,shdr[7].sh_size, fp);
+    fseek(fp, shdr[strtab_idx].sh_offset, SEEK_SET);
+    int ret_rd_str = fread(strtable,1,shdr[strtab_idx].sh_size, fp);
     Assert(ret_rd_str != 0, "ELF str read error");
     
     printf("can read strtable\n");
@@ -96,7 +106,7 @@ void init_elf(const char *elf_file){
     /*Some sections hold a table of fixed-sized entries, such as a symbol table.  For such  a  
            section,  this  member gives the size in bytes for each entry.  
            This member contains zero if the section does not hold a table of fixed-size entries.*/
-    int num_sym = shdr[6].sh_size / shdr[6].sh_entsize; //
+    int num_sym = shdr[symtab_idx].sh_size / shdr[symtab_idx].sh_entsize; //
     printf("num_sym:%d\n",num_sym);
     int j = 0;
     while(j < num_sym){
@@ -155,7 +165,6 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3){
             sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE], "%lx: %scall [%s'-'%lx]", pc, blank, elf_func_info[dnpc_func_index].name, elf_func_info[dnpc_func_index].addr);
             cnt_ftrace++;
             func_dep ++;
-            //printf("in call\n");
         }
         //ret
         else if(pc_inst_opcode == 0x67 && pc_inst_funct3 == 0x00){
@@ -164,7 +173,6 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3){
             sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE],"%lx: %sret [%s]", pc, blank, elf_func_info[dnpc_func_index].name);
             cnt_ftrace++;
             func_dep--;
-            //printf("in ret\n");
         }
     }
     
@@ -174,10 +182,6 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3){
 
 void ftrace_display(){
     printf("%s\n",ASNI_FMT("Ftrace ...",ASNI_FG_CYAN));
-    
-    for(int i=0; i<cnt_trace_func; i++){
-        printf("func name :%s, addr:%lx, size:%ld\n",elf_func_info[i].name, elf_func_info[i].addr,elf_func_info[i].size);
-    }
     
     if(cnt_ftrace <= FRB_SIZE){
         for(int i=0; i<cnt_ftrace; i++){
