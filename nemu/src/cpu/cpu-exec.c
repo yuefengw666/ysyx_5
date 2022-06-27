@@ -14,6 +14,7 @@
 #define MAX_INST_TO_PRINT 10
 
 #ifdef CONFIG_ITRACE
+
 #define IRB_SIZE 16
 #define IRB_LENGTH 128
 
@@ -47,6 +48,11 @@ static void iringbuf_display(){
 } 
 #endif
 
+#ifdef CONFIG_FTRACE
+  void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode);
+  void ftrace_display();
+#endif
+
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
@@ -76,6 +82,11 @@ static void exec_once(Decode *s, vaddr_t pc) {
   s->snpc = pc;
   isa_exec_once(s);
   cpu.pc = s->dnpc;
+
+#ifdef CONFIG_FTRACE
+  ftrace(s->pc,s->dnpc,BITS(s->isa.inst.val,6,0));
+#endif
+
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
   p += snprintf(p, sizeof(s->logbuf), FMT_WORD ":", s->pc);
@@ -147,6 +158,9 @@ void cpu_exec(uint64_t n) {
       iringbuf_display();
     #endif
     case NEMU_END:
+    #ifdef CONFIG_FTRACE
+      ftrace_display();
+    #endif
       Log("nemu: %s at pc = " FMT_WORD,
           (nemu_state.state == NEMU_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :
            (nemu_state.halt_ret == 0 ? ASNI_FMT("HIT GOOD TRAP", ASNI_FG_GREEN) :
