@@ -125,10 +125,10 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
     //printf("pc:%lx, dnpc:%lx, inst_opcode:%x\n",pc, dnpc, pc_inst_opcode);
     
     for(int i=0; i<cnt_trace_func; i++){
-        if( (pc >= elf_func_info[i].addr) && (pc < elf_func_info[i].addr + elf_func_info[i].size) ){
+        if( (pc >= elf_func_info[i].addr) && (pc < (elf_func_info[i].addr + elf_func_info[i].size) ) ){
             pc_func_index = i;
         }
-        if( (dnpc >= elf_func_info[i].addr) && (dnpc < elf_func_info[i].addr + elf_func_info[i].size) ){
+        if( (dnpc >= elf_func_info[i].addr) && (dnpc < (elf_func_info[i].addr + elf_func_info[i].size))){
             dnpc_func_index = i;
         }
     }
@@ -161,7 +161,7 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
 
 void ftrace_display(){
     printf("%s\n",ASNI_FMT("Ftrace ...",ASNI_FG_CYAN));
-    
+    /*
     if(cnt_ftrace <= FRB_SIZE){
         for(int i=0; i<cnt_ftrace; i++){
             printf(" %s\n",ftrace_ringbuf[i]);
@@ -175,5 +175,5 @@ void ftrace_display(){
                 printf(" %s\n",ftrace_ringbuf[i]);
         }
     }
-    
+    */
 }
