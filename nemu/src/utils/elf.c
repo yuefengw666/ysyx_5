@@ -16,9 +16,9 @@ static ELF_Func_Info elf_func_info[max_num_func];
 int cnt_trace_func = 0;
 
 Elf64_Ehdr *ehdr = NULL;
-Elf64_Shdr shdr[999];///******can not define NULL
-Elf64_Sym sym[999];
-char strtable[999];
+Elf64_Shdr *shdr = NULL;///******can not define NULL
+Elf64_Sym *sym = NULL;
+char *strtable = NULL;
 
 void init_elf(const char *elf_file){
     if(elf_file == NULL){
@@ -131,7 +131,7 @@ void init_elf(const char *elf_file){
     return;
 }
 
-#define FRB_SIZE 20
+#define FRB_SIZE 5000
 #define FRB_LENGTH 1024
 static char ftrace_ringbuf[FRB_SIZE][FRB_LENGTH];
 static int cnt_ftrace = 0;
