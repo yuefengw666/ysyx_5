@@ -72,23 +72,31 @@ void init_elf(const char *elf_file){
               This  member holds an index into the object file's symbol string table, which holds character
               representations of the symbol names.  If the value is nonzero, it represents a  string  table
               index that gives the symbol name.  Otherwise, the symbol has no name.*/
-    fseek(fp, shdr_symtab->sh_offset, SEEK_SET);
+    fseek(fp, shdr[6].sh_offset, SEEK_SET);
     Elf64_Sym sym[999];
-    int ret_rd_sym = fread(sym, 1, shdr_symtab->sh_size, fp);
+    int ret_rd_sym = fread(sym, 1, shdr[6].sh_size, fp);
     Assert(ret_rd_sym != 0, "ELF sym read error");
-
-    printf("can read symtable");
     
+    printf("can read symtable\n");
+
+    //postion strtable
+    char *strtable = NULL;
+    fseek(fp, shdr[7].sh_offset, SEEK_SET);
+    int ret_rd_str = fread(strtable,1,shdr[7].sh_size, fp);
+    Assert(ret_rd_str != 0, "ELF str read error");
+    
+    printf("can read strtable\n");
     //shdr->sh_entsize:
     /*Some sections hold a table of fixed-sized entries, such as a symbol table.  For such  a  
            section,  this  member gives the size in bytes for each entry.  
            This member contains zero if the section does not hold a table of fixed-size entries.*/
-    int num_sym = shdr_symtab->sh_size / shdr_symtab->sh_entsize; //
+    int num_sym = shdr[6].sh_size / shdr[6].sh_entsize; //
     printf("num_sym:%d\n",num_sym);
     int j = 0;
     while(j < num_sym){
         if(ELF64_ST_TYPE(sym[j].st_info) == STT_FUNC){
-            elf_func_info[cnt_trace_func].name = (char *)(shdr_strtab->sh_offset + sym[j].st_name);
+            //elf_func_info[cnt_trace_func].name = (char *)(shdr[7].sh_offset + sym[j].st_name);
+            elf_func_info[cnt_trace_func].name = strtable + sym[j].st_name;
             elf_func_info[cnt_trace_func].addr = sym[j].st_value;
             elf_func_info[cnt_trace_func].size = sym[j].st_size;
             printf("elf_func_info has %s\n",elf_func_info[j].name);
