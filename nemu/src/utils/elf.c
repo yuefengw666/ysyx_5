@@ -16,9 +16,9 @@ static ELF_Func_Info elf_func_info[max_num_func];
 int cnt_trace_func = 0;
 
 Elf64_Ehdr *ehdr = NULL;
-Elf64_Shdr *shdr = NULL;///******can not define NULL
-Elf64_Sym *sym = NULL;
-char *strtable = NULL;
+Elf64_Shdr shdr[999];///******can not define NULL
+Elf64_Sym symtab[999];
+char strtab[999];
 
 void init_elf(const char *elf_file){
     if(elf_file == NULL){
@@ -38,8 +38,8 @@ void init_elf(const char *elf_file){
     int ret_rd_ehdr = fread(ehdr, sizeof(Elf64_Ehdr), 1, fp);
     Assert(ret_rd_ehdr != 0, "ELF header read error!\n");
     
-    printf("can read elf header \n");
-    printf("number section headers:%d\n",ehdr->e_shnum);
+    //printf("can read elf header \n");
+    //printf("number section headers:%d\n",ehdr->e_shnum);
     
     //postion elf section header
     //Elf64_Shdr shdr[999];///******can not define NULL
@@ -47,10 +47,8 @@ void init_elf(const char *elf_file){
     int ret_rd_eshrd = fread(shdr, sizeof(Elf64_Shdr), ehdr->e_shnum, fp);
     Assert(ret_rd_eshrd != 0, "ELF section header read error");
     
-    printf("can read elf section header \n");
     
-    //postion .symtab
-    //postion .strtab
+    //find .symtab and .strtab index in shdr
     int symtab_idx = -1;
     int strtab_idx = -1;
     for(int i=0; i<ehdr->e_shnum; i++){
@@ -61,73 +59,43 @@ void init_elf(const char *elf_file){
             strtab_idx = i; break;
         }
     }
-    /*
-    Elf64_Shdr *shdr_symtab = NULL;
-    Elf64_Shdr *shdr_strtab = NULL;
-    int i = 0;
-    while( (shdr_symtab == NULL || shdr_strtab == NULL) && (i < ehdr->e_shnum) ){
-        
-        if(shdr[i].sh_type == SHT_SYMTAB){
-            shdr_symtab = &shdr[i];
-            printf("%s\n",(char *)shdr_symtab);
-            printf("symtab offset:%lx\n",shdr[i].sh_offset);
-            printf("judge section header type == SYMTAB\n");
-        }
-        else if(shdr[i].sh_type == SHT_STRTAB){
-            shdr_strtab = &shdr[i];
-            printf("strtab offset:%lx\n",shdr[i].sh_offset);
-            printf("judge section header type == SYMTAB\n");
-        }
-        i++;
-    }
-    */
-    //find func and its name
-    //func name offset : shdr_strtab->shoffset + sym[i].st_name
-    //sym->st_name:
+    
+    //***symtable->st_name: offset in strtable
     /*st_name
               This  member holds an index into the object file's symbol string table, which holds character
               representations of the symbol names.  If the value is nonzero, it represents a  string  table
               index that gives the symbol name.  Otherwise, the symbol has no name.*/
+    //postion symtable
     fseek(fp, shdr[symtab_idx].sh_offset, SEEK_SET);
-    //Elf64_Sym sym[999];
-    int ret_rd_sym = fread(sym, 1, shdr[symtab_idx].sh_size, fp);
+    int ret_rd_sym = fread(symtab, 1, shdr[symtab_idx].sh_size, fp);
     Assert(ret_rd_sym != 0, "ELF sym read error");
     
-    printf("can read symtable\n");
-
     //postion strtable
-    //char strtable[999];
     fseek(fp, shdr[strtab_idx].sh_offset, SEEK_SET);
-    int ret_rd_str = fread(strtable,1,shdr[strtab_idx].sh_size, fp);
+    int ret_rd_str = fread(strtab,1,shdr[strtab_idx].sh_size, fp);
     Assert(ret_rd_str != 0, "ELF str read error");
     
-    printf("can read strtable\n");
     //shdr->sh_entsize:
     /*Some sections hold a table of fixed-sized entries, such as a symbol table.  For such  a  
            section,  this  member gives the size in bytes for each entry.  
            This member contains zero if the section does not hold a table of fixed-size entries.*/
     int num_sym = shdr[symtab_idx].sh_size / shdr[symtab_idx].sh_entsize; //
-    printf("num_sym:%d\n",num_sym);
+    
     int j = 0;
     while(j < num_sym){
-        if(ELF64_ST_TYPE(sym[j].st_info) == STT_FUNC){
-            //elf_func_info[cnt_trace_func].name = (char *)(shdr[7].sh_offset + sym[j].st_name);
-            elf_func_info[cnt_trace_func].name = strtable + sym[j].st_name;
-            elf_func_info[cnt_trace_func].addr = sym[j].st_value;
-            elf_func_info[cnt_trace_func].size = sym[j].st_size;
+        if(ELF64_ST_TYPE(symtab[j].st_info) == STT_FUNC){
+            elf_func_info[cnt_trace_func].name = strtab + symtab[j].st_name;
+            elf_func_info[cnt_trace_func].addr = symtab[j].st_value;
+            elf_func_info[cnt_trace_func].size = symtab[j].st_size;
             cnt_trace_func++;
         }
         j++;
     }
-
+    /*
     for(int i=0; i<cnt_trace_func; i++){
         printf("func name :%s, addr:%lx, size:%ld\n",elf_func_info[i].name, elf_func_info[i].addr,elf_func_info[i].size);
     }
-    
-    for(int i=0; i<cnt_trace_func; i++){
-        printf("func name :%s, addr:%lx, size:%ld\n",elf_func_info[i].name, elf_func_info[i].addr,elf_func_info[i].size);
-    }
-    
+    */
     return;
 }
 
