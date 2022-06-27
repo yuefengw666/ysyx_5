@@ -80,7 +80,7 @@ void init_elf(const char *elf_file){
     printf("can read symtable\n");
 
     //postion strtable
-    char *strtable = NULL;
+    char strtable[999];
     fseek(fp, shdr[7].sh_offset, SEEK_SET);
     int ret_rd_str = fread(strtable,1,shdr[7].sh_size, fp);
     Assert(ret_rd_str != 0, "ELF str read error");
