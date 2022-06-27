@@ -131,7 +131,7 @@ void init_elf(const char *elf_file){
     return;
 }
 
-#define FRB_SIZE 1000
+#define FRB_SIZE 50
 #define FRB_LENGTH 1024
 static char ftrace_ringbuf[FRB_SIZE][FRB_LENGTH];
 static int cnt_ftrace = 0;
