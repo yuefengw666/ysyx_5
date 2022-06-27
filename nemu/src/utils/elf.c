@@ -43,7 +43,7 @@ void init_elf(const char *elf_file){
     Assert(ret_rd_eshrd != 0, "ELF section header read error");
     
     printf("can read elf section header file \n");
-
+    
     //postion .symtab
     //postion .strtab
     Elf64_Shdr *shdr_symtab = NULL;
@@ -59,6 +59,7 @@ void init_elf(const char *elf_file){
         }
         else if(shdr[i].sh_type == SHT_STRTAB){
             shdr_strtab = &shdr[i];
+            printf("strtab offset:%lx\n",shdr[i].sh_offset);
             printf("judge section header type == SYMTAB\n");
         }
         i++;
