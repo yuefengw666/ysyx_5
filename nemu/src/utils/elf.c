@@ -127,14 +127,14 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
     if(dnpc_func != pc_func){//happened to jump
         //call
         if( (pc_inst_opcode == 0x6f) && (dnpc == elf_func_info[dnpc_func].addr) ){
-            sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE], "%lx: call [%s@%lx]", pc, elf_func_info[dnpc_func].name, elf_func_info[dnpc_func].addr);
+            sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE], "%lx: %scall [%s@%lx]", pc, blank, elf_func_info[dnpc_func].name, elf_func_info[dnpc_func].addr);
             cnt_ftrace++;
             func_dep ++;
             printf("in call\n");
         }
         //ret
         else if(pc_inst_opcode == 0x67){
-            sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE],"%lx: ret [%s]", pc, elf_func_info[dnpc_func].name);
+            sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE],"%lx: %sret [%s]", pc, blank, elf_func_info[dnpc_func].name);
             cnt_ftrace++;
             func_dep--;
             printf("in ret\n");
