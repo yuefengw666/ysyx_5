@@ -117,6 +117,7 @@ void init_monitor(int argc, char *argv[]) {
 
   /* Initialize elf file.*/
 #ifdef CONFIG_FTRACE
+printf("111\n");
   init_elf(elf_file);
 #endif
   /* Initialize the simple debugger. */
