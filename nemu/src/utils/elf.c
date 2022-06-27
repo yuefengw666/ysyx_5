@@ -38,7 +38,7 @@ void init_elf(const char *elf_file){
     printf("number section headers:%d\n",ehdr->e_shnum);
     
     //postion elf section header
-    Elf64_Shdr *shdr = NULL;
+    Elf64_Shdr shdr[999];
     fseek(fp, ehdr->e_shoff, SEEK_SET);    //Elf64_Ehdr->e_shoff: offset of elf section header
     printf("111\n");
     int ret_rd_eshrd = fread(shdr, sizeof(Elf64_Shdr), ehdr->e_shnum, fp);
