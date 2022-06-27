@@ -118,7 +118,7 @@ static int cnt_ftrace = 0;
 static int func_dep = 0;//display blank
 static char blank[100]= {0};
 
-void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
+void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3){
     int pc_func_index = -1;
     int dnpc_func_index = -1;
     //printf("trace func number: %d\n", cnt_trace_func);
@@ -148,7 +148,7 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
             //printf("in call\n");
         }
         //ret
-        else if(pc_inst_opcode == 0x67){
+        else if(pc_inst_opcode == 0x67 && pc_inst_funct3 == 0x00){
             sprintf(ftrace_ringbuf[cnt_ftrace%FRB_SIZE],"%lx: %sret [%s]", pc, blank, elf_func_info[dnpc_func_index].name);
             cnt_ftrace++;
             func_dep--;

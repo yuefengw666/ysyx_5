@@ -49,7 +49,7 @@ static void iringbuf_display(){
 #endif
 
 #ifdef CONFIG_FTRACE
-  void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode);
+  void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3);
   void ftrace_display();
 #endif
 
@@ -84,7 +84,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   cpu.pc = s->dnpc;
 
 #ifdef CONFIG_FTRACE
-  ftrace(s->pc,s->dnpc,BITS(s->isa.inst.val,6,0));
+  ftrace(s->pc,s->dnpc,BITS(s->isa.inst.val,6,0), BITS(s->isa.inst.val,14,12));
 #endif
 
 #ifdef CONFIG_ITRACE
