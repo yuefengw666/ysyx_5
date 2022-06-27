@@ -160,6 +160,7 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3){
             //printf("in ret\n");
         }
     }
+    
 
     return;
 }
