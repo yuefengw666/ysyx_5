@@ -102,6 +102,7 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode){
         printf("elf_funcs:%s\n",elf_func_info[i].name);
         if( (pc >= elf_func_info[i].addr) && (pc < elf_func_info[i].addr + elf_func_info[i].size) ){
             pc_func = i;
+            printf(" pc whether in elf_func_info addr\n");
         }
         if( (dnpc >= elf_func_info[i].addr) && (dnpc < elf_func_info[i].addr + elf_func_info[i].size) ){
             dnpc_func = i;
