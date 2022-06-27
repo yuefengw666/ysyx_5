@@ -154,7 +154,7 @@ void ftrace_display(){
     else{
         for(int i=0; i<FRB_SIZE; i++){
             if(i == (cnt_ftrace % FRB_SIZE))
-                printf(">%s\n",ftrace_ringbuf[FRB_SIZE]);
+                printf(">%s\n",ftrace_ringbuf[i]);
             else 
                 printf(" %s\n",ftrace_ringbuf[i]);
         }
