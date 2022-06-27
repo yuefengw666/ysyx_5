@@ -84,6 +84,10 @@ void init_elf(const char *elf_file){
         j++;
     }
 
+    for(int i=0; i<cnt_trace_func; i++){
+        printf("elf_func_info has:%s\n",elf_func_info[i].name);
+    }
+    
     return;
 }
 
