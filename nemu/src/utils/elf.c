@@ -125,10 +125,10 @@ void ftrace(vaddr_t pc, vaddr_t dnpc, int pc_inst_opcode, int pc_inst_funct3){
     //printf("pc:%lx, dnpc:%lx, inst_opcode:%x\n",pc, dnpc, pc_inst_opcode);
     
     for(int i=0; i<cnt_trace_func; i++){
-        if( (pc >= elf_func_info[i].addr) && (pc < (elf_func_info[i].addr + elf_func_info[i].size) ) ){
+        if( (elf_func_info[i].addr <= pc) && (pc < (elf_func_info[i].addr + elf_func_info[i].size) ) ){
             pc_func_index = i;
         }
-        if( (dnpc >= elf_func_info[i].addr) && (dnpc < (elf_func_info[i].addr + elf_func_info[i].size))){
+        if( (elf_func_info[i].addr <= dnpc) && (dnpc < (elf_func_info[i].addr + elf_func_info[i].size))){
             dnpc_func_index = i;
         }
     }
