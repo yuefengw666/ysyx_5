@@ -24,7 +24,7 @@ void init_elf(const char *elf_file){
     FILE *fp = fopen(elf_file, "rb");
     Assert(fp, "Can not open %s'", elf_file);
 
-    printf("111\n");
+    printf("can open elf file\n");
 
     //postion elf header
     Elf64_Ehdr *ehdr = (Elf64_Ehdr *)malloc(sizeof(Elf64_Ehdr));
@@ -32,12 +32,14 @@ void init_elf(const char *elf_file){
     fseek(fp, 0 , SEEK_SET);
     int ret_rd_ehdr = fread(ehdr, sizeof(Elf64_Ehdr), 1, fp);
     Assert(ret_rd_ehdr != 0, "ELF header read error!\n");
+    printf("can read elf header file \n");
 
     //postion elf section header
     Elf64_Shdr *shdr = NULL;
     fseek(fp, ehdr->e_shoff, SEEK_SET);    //Elf64_Ehdr->e_shoff: offset of elf section header
     int ret_rd_eshrd = fread(shdr, sizeof(Elf64_Shdr), ehdr->e_shnum, fp);
     Assert(ret_rd_eshrd != 0, "ELF section header read error");
+    printf("can read elf section header file \n");
 
     //postion .symtab
     //postion .strtab
