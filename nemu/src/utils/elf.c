@@ -33,7 +33,7 @@ void init_elf(const char *elf_file){
     int ret_rd_ehdr = fread(ehdr, sizeof(Elf64_Ehdr), 1, fp);
     Assert(ret_rd_ehdr != 0, "ELF header read error!\n");
     
-    printf("can read elf header file \n");
+    printf("can read elf header \n");
     printf("number section headers:%d\n",ehdr->e_shnum);
     
     //postion elf section header
@@ -42,7 +42,7 @@ void init_elf(const char *elf_file){
     int ret_rd_eshrd = fread(shdr, sizeof(Elf64_Shdr), ehdr->e_shnum, fp);
     Assert(ret_rd_eshrd != 0, "ELF section header read error");
     
-    printf("can read elf section header file \n");
+    printf("can read elf section header \n");
     
     //postion .symtab
     //postion .strtab
@@ -74,8 +74,10 @@ void init_elf(const char *elf_file){
               index that gives the symbol name.  Otherwise, the symbol has no name.*/
     fseek(fp, shdr_symtab->sh_offset, SEEK_SET);
     Elf64_Sym sym[999];
-    int ret_rd_sym = fread(sym, sizeof(Elf64_Sym), 1, fp);
+    int ret_rd_sym = fread(sym, 1, shdr_symtab->sh_size, fp);
     Assert(ret_rd_sym != 0, "ELF sym read error");
+
+    printf("can read symtable");
     
     //shdr->sh_entsize:
     /*Some sections hold a table of fixed-sized entries, such as a symbol table.  For such  a  
