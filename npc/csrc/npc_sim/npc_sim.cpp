@@ -175,7 +175,7 @@ static void exec_once(NPC_CPU *s){
     
     s->inst_val = dut->inst_in;
     #ifdef CONFIG_ITRACE
-        itrace(&s);
+        itrace(s);
     #endif
     /*
     #ifdef CONFIG_ITRACE
