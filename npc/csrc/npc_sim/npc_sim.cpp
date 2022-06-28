@@ -121,7 +121,7 @@ static void exec_once(NPC_CPU *s){
 
 static void execute(uint64_t n){
     for(; n > 0; n--){
-        exec_once();
+        exec_once(&npc_cpu);
         g_nr_guest_inst ++;
         trace_and_difftest(&npc_cpu, npc_cpu.pc);//npc_cpu.pc should dnpc ,but this arg not used yet.
         if(npc_state.state != NPC_RUNNING) break;
