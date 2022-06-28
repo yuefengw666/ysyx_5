@@ -9,7 +9,7 @@ void init_monitor(int , char*[]);
 int main(int argc, char**argv, char** env){
 
     sim_init();
-    npc_cpu.pc = 0x80000;    
+    npc_cpu.pc = 0x80000000;    
     init_monitor(argc,argv);
     
     npc_reset();
