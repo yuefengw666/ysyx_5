@@ -332,7 +332,7 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root___settle__TOP__1(Vysyx_22040
     if ((1U == (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_opcode))) {
         vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__pc_jump_addr 
             = (vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__op1_jump 
-               - vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__op2_jump);
+               + vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__op2_jump);
         vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__rd_data 
             = (vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__op1 
                + vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__op2);
