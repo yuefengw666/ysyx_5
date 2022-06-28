@@ -57,6 +57,7 @@ VM_USER_CLASSES = \
 	npc_reg \
 	npc_sim \
 	single_core_tb \
+	log \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
@@ -67,6 +68,7 @@ VM_USER_DIR = \
 	/home/yfwu/ysyx-workbench/npc/csrc/monitor \
 	/home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb \
 	/home/yfwu/ysyx-workbench/npc/csrc/npc_sim \
+	/home/yfwu/ysyx-workbench/npc/csrc/utils \
 
 
 ### Default rules...
@@ -99,6 +101,8 @@ npc_reg.o: /home/yfwu/ysyx-workbench/npc/csrc/npc_sim/npc_reg.cpp
 npc_sim.o: /home/yfwu/ysyx-workbench/npc/csrc/npc_sim/npc_sim.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 single_core_tb.o: /home/yfwu/ysyx-workbench/npc/csrc/single_core_tb.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+log.o: /home/yfwu/ysyx-workbench/npc/csrc/utils/log.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
