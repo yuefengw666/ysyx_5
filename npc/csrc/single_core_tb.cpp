@@ -13,7 +13,7 @@ int main(int argc, char**argv, char** env){
 
     init_monitor(argc,argv);
     dut->inst_in = pmem_read(dut->pc);
-    printf("after reset, inst_in:%lx\n",dut->inst_in);
+    printf("after reset, inst_in:%x\n",dut->inst_in);
     #ifdef CONFIG_SDB
         npc_sdb_mainloop();
     #else
