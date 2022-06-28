@@ -62,7 +62,7 @@ $(BIN): $(VDEFINE) $(VSRCS) $(CSRCS)
 		--top $(TOP_DESIGN_NAME) $^ \
 		$(addprefix -CFLAGS , $(INC_FLAG)) \
 		$(RLFLGAS)\
-		$(addprefix -LDFLAGS , $(LDFLAGS)) \
+		$(addprefix --LDFLAGS , $(LDFLAGS)) \
 		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
 
 	@echo
