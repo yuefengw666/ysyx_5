@@ -63,7 +63,7 @@ $(BIN): $(VDEFINE) $(VSRCS) $(CSRCS)
 		$(addprefix -CFLAGS , $(INC_FLAG)) \
 		$(RLFLGAS)\
 		$(addprefix -LDFLAGS , $(LDFLAGS)) \
-		-CFLAGS -I/usr/lib/llvm-12/include
+		-CFLAGS -I/usr/lib/llvm-12/include\
 		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
 
 	@echo
