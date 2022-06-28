@@ -46,6 +46,7 @@ VM_USER_LDLIBS = \
 	-lSDL2 \
 	-fsanitize=address \
 	-ldl \
+	-CFLAGS \
 	-I/usr/lib/llvm-12/include \
 	-std=c++14 \
 	-fno-exceptions \
@@ -54,7 +55,6 @@ VM_USER_LDLIBS = \
 	-D__STDC_FORMAT_MACROS \
 	-D__STDC_LIMIT_MACROS \
 	-fPIE \
-	-CFLAGS \
 	-lLLVM-12 \
 
 # User .cpp files (from .cpp's on Verilator command line)
