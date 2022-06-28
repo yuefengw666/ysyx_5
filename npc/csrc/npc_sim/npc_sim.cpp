@@ -85,7 +85,7 @@ void sim_init(){
 void npc_reset(){
     pos_cnt = 0;
     dut->rst = 1;
-
+/*
     for(int i=0; i<4; i++){
         dut->clk ^= 1;
         dut->eval();
@@ -95,7 +95,7 @@ void npc_reset(){
         sim_time++;
     }
     dut->rst = 0;
-    /*
+*/    
     for(int n=0; n<5; n++){
         dut->clk ^= 1; 
         dut->eval();
@@ -114,7 +114,7 @@ void npc_reset(){
         #endif
         sim_time++;
     }
-    */
+    
 }
 
 void exit_npc(int exit_flag){
