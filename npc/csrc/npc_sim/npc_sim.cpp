@@ -52,6 +52,7 @@ static void trace_and_difftest(NPC_CPU *_this, vaddr_t dnpc){
 //ITRACE
 #ifdef CONFIG_ITRACE
     log_write("%s\n",_this->logbuf);
+    iringbuf_wr(_this->logbuf);
 #endif
 //DIFFTEST
 #ifdef CONFIG_DIFFTEST
