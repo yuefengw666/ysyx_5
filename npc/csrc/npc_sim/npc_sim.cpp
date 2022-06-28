@@ -8,8 +8,10 @@ static Vysyx_22040237_rv_single_cyc_cpu_top* dut;
 #ifdef CONFIG_VCD
   VerilatedVcdC* m_trace = NULL;
 #endif
+
 NPC_CPU npc_cpu;
 NPCstate npc_state = {.state = NPC_STOP};
+uint64_t g_nr_guest_inst = 0; //Number of instructions executed
 
 void difftest_step(vaddr_t pc, vaddr_t npc);
 
@@ -58,12 +60,12 @@ void exit_npc(int exit_flag){
     exit(exit_flag);
 }
 
-static void trace_and_difftest(){
+static void trace_and_difftest(NPC_CPU *_this, vaddr__t dnpc){
 //ITRACE
 
 //DIFFTEST
 #ifdef CONFIG_DIFFTEST
-    difftest_step(dut->pc, npc_cpu.pc);//npc_cpu.pc should dnpc ,and not used yet.
+    difftest_step(_this->pc, dnpc);//npc_cpu.pc should dnpc ,and not used yet.
 #endif
 
 #ifdef CONFIG_WATCHPOINT 
@@ -97,12 +99,14 @@ void npc_regs_display();
 static void exec_once(){
     npc_sim_once();
     //ITRACE
+
 }
 
 static void execute(uint64_t n){
     for(; n > 0; n--){
         exec_once();
-        trace_and_difftest();
+        g_nr_guest_inst ++;
+        trace_and_difftest(npc_cpu, npc_cpu.pc);
         if(npc_state.state != NPC_RUNNING) break;
     }
 }

@@ -10,7 +10,6 @@ void init_log(const char *log_file) {
     Assert(fp, "Can not open '%s'", log_file);
     log_fp = fp;
   }
-  printf("1. test stdout whether write to log_file\n");
   Log("Log is written to %s", log_file ? log_file : "stdout");
 }
 

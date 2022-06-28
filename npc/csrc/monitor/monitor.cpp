@@ -5,9 +5,11 @@
 #include "getopt.h"
 #include <unistd.h>
 
-void init_sdb();
+void init_log(const char *log_file);
 void init_difftest(char *ref_so_file, long img_size);
+void init_sdb();
 
+static char *log_file = NULL;
 static char *img_file = NULL;
 static long img_size = 0;
 static char *diff_so_file = NULL;
@@ -53,7 +55,7 @@ static int parse_args(int argc, char *argv[]) {
     switch (o) {
       //case 'b': sdb_set_batch_mode(); break;
       //case 'p': sscanf(optarg, "%d", &difftest_port); break;
-      //case 'l': log_file = optarg; break;
+      case 'l': log_file = optarg; break;
       case 'd': diff_so_file = optarg; break;
       case 1: img_file = optarg; return 0;
       default:
@@ -70,10 +72,19 @@ static int parse_args(int argc, char *argv[]) {
 }
 
 void init_monitor(int argc, char *argv[]) {
+    
+    /* Parse arguments. */
     parse_args(argc,argv);
     
+    /* Open the log file. */
+    init_log(log_file);
+    
+    /* Load the image to memory. This will overwrite the built-in image. */
     long img_size = load_img();
+
+    /* Initialize differential testing. */
     init_difftest(diff_so_file, img_size);//remove difftest_port
     
+    /* Initialize the simple debugger. */
     init_sdb();
 }

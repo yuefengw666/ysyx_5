@@ -7,6 +7,7 @@
 #include <stdint.h>
 #include <cstring>
 #include <cassert>
+#include <macro.h>
 
 //CONFIG
 //#define CONFIG_VCD 0
@@ -19,6 +20,9 @@
 #define CONFIG_PC_RESET_OFFSET 0x0
 #define RESET_VECTOR (CONFIG_MBASE + CONFIG_PC_RESET_OFFSET)
 
+#define CONFIG_ITRACE 0
+#define CONFIG_TRACE_START 0
+#define CONFIG_TRACE_END 10000
 
 typedef uint64_t word_t;
 typedef word_t vaddr_t;

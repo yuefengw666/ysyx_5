@@ -6,6 +6,7 @@
 typedef struct {
   word_t gpr[32];
   vaddr_t pc;
+  uint32_t val;
 } NPC_CPU;
 
 extern NPC_CPU npc_cpu;
