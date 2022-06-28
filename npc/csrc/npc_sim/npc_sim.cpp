@@ -85,7 +85,7 @@ void sim_init(){
 void npc_reset(){
     pos_cnt = 0;
     dut->rst = 1;
-    
+    /*
     for(int i=0; i<4; i++){
         dut->clk ^=1;
         dut->eval();
@@ -95,7 +95,7 @@ void npc_reset(){
         sim_time++;
     }
     dut->rst =0;
-    /*
+    */
     for(int n=0; n<5; n++){
         dut->clk ^= 1; 
         dut->eval();
@@ -103,19 +103,18 @@ void npc_reset(){
             pos_cnt++;
             if(pos_cnt >=3) dut->rst = 0;
         }
-        
+        /*
         if(dut->rst != 1){
             dut->inst_in = pmem_read(dut->pc);
             dut->eval();
         }
-        
+        */
         #ifdef CONFIG_VCD
         m_trace->dump(sim_time);
         #endif
         sim_time++;
     }
         pos_cnt=0;
-    */
 }
 
 void exit_npc(int exit_flag){
