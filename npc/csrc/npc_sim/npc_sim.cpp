@@ -96,7 +96,7 @@ void npc_reset(){
     }
     dut->rst = 0;
 */    
-    for(int n=0; n<5; n++){
+    for(int n=0; n<8; n++){
         dut->clk ^= 1; 
         dut->eval();
         if(dut->clk == 1){
@@ -108,12 +108,12 @@ void npc_reset(){
             dut->inst_in = pmem_read(dut->pc);
             dut->eval();
         }
-        pos_cnt=0;
         #ifdef CONFIG_VCD
         m_trace->dump(sim_time);
         #endif
         sim_time++;
     }
+        pos_cnt=0;
     
 }
 
