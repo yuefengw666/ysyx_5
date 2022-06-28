@@ -115,7 +115,7 @@ static void exec_once(NPC_CPU *s){
 
         void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
         disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
-            s->pc, (unit8_t *)&s->inst_val, ilen);
+            s->pc, (uint8_t *)&s->inst_val, ilen);
     #endif
 }
 

@@ -43,6 +43,15 @@ VM_USER_CFLAGS = \
 VM_USER_LDLIBS = \
 	/lib/x86_64-linux-gnu/libreadline.so \
 	-lpthread -LDFLAGS -lSDL2 -LDFLAGS -fsanitize=address -LDFLAGS -ldl \
+	-I/usr/lib/llvm-12/include \
+	-std=c++14 \
+	-fno-exceptions \
+	-D_GNU_SOURCE \
+	-D__STDC_CONSTANT_MACROS \
+	-D__STDC_FORMAT_MACROS \
+	-D__STDC_LIMIT_MACROS \
+	-fPIE \
+	-lLLVM-12 \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
@@ -57,6 +66,7 @@ VM_USER_CLASSES = \
 	npc_reg \
 	npc_sim \
 	single_core_tb \
+	disasm \
 	log \
 
 # User .cpp directories (from .cpp's on Verilator command line)
@@ -101,6 +111,8 @@ npc_reg.o: /home/yfwu/ysyx-workbench/npc/csrc/npc_sim/npc_reg.cpp
 npc_sim.o: /home/yfwu/ysyx-workbench/npc/csrc/npc_sim/npc_sim.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 single_core_tb.o: /home/yfwu/ysyx-workbench/npc/csrc/single_core_tb.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+disasm.o: /home/yfwu/ysyx-workbench/npc/csrc/utils/disasm.cc
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 log.o: /home/yfwu/ysyx-workbench/npc/csrc/utils/log.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
