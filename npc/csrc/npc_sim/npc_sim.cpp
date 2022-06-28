@@ -103,12 +103,11 @@ static void exec_once(NPC_CPU *s){
     s->inst_val = dut->inst_in;
     #ifdef CONFIG_ITRACE
         char *p = s->logbuf;
-        p += snprintf(p, sizeof(s->logbuf), "0x%016lx", s->pc);
+        p += snprintf(p, sizeof(s->logbuf), "0x%016lx: ", s->pc);
         int ilen = 4;
-        int i;
         uint8_t *inst = (uint8_t *)&s->inst_val;
-        for(i=0; i<ilen; i++){
-            p += snprintf(p, 4, "%02x", inst[i]);
+        for(int i=0; i<ilen; i++){
+            p += snprintf(p, 4, " %02x", inst[i]);
         }
         //int ilen_max = 4;
         int space_len = 1;
