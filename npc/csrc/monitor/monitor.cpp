@@ -1,4 +1,5 @@
 #include "npc_common.h"
+#include "npc_state.h"
 #include "mem.h"
 #include "getopt.h"
 #include <unistd.h>
@@ -81,6 +82,7 @@ void init_monitor(int argc, char *argv[]) {
     /* Load the image to memory. This will overwrite the built-in image. */
     long img_size = load_img();
 
+    npc_cpu.pc = 0x80000000;    
     /* Initialize differential testing. */
     init_difftest(diff_so_file, img_size);//remove difftest_port
     
