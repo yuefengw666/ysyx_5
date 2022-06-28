@@ -12,7 +12,7 @@ wire [31:0] inst;
 
 //regs  output 
 wire [63:0] rs1_data;
-//wire [63:0] rs2_data;
+wire [63:0] rs2_data;
 
 //idu output 
 wire inst_ebreak;
