@@ -31,8 +31,8 @@ LDFLAGS += -lpthread -lSDL2 -fsanitize=address -ldl
 #readline link
 RLFLGAS = /lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses
 #llvm link
-LDFLAGS += $(shell llvm-config --cxxflags) -fPIE 
-LDFLAGS += -CFLAGS $(shell llvm-config --libs)
+LDFLAGS += -CFLAGS $(shell llvm-config --cxxflags) -fPIE 
+LDFLAGS += $(shell llvm-config --libs)
 #---------NPC exec args--------------------
 IMG ?=
 DIFF_REF_SO = $(NEMU_HOME)/build/riscv64-nemu-interpreter-so
