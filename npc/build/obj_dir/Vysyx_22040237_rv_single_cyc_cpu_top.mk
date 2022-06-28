@@ -38,14 +38,6 @@ VM_USER_CFLAGS = \
 	-I/home/yfwu/ysyx-workbench/npc/csrc/include \
 	-lreadline \
 	-lncurses \
-
-# User LDLIBS (from -LDFLAGS on Verilator command line)
-VM_USER_LDLIBS = \
-	/lib/x86_64-linux-gnu/libreadline.so \
-	-lpthread \
-	-lSDL2 \
-	-fsanitize=address \
-	-ldl \
 	-CFLAGS \
 	-I/usr/lib/llvm-12/include \
 	-std=c++14 \
@@ -55,6 +47,14 @@ VM_USER_LDLIBS = \
 	-D__STDC_FORMAT_MACROS \
 	-D__STDC_LIMIT_MACROS \
 	-fPIE \
+
+# User LDLIBS (from -LDFLAGS on Verilator command line)
+VM_USER_LDLIBS = \
+	/lib/x86_64-linux-gnu/libreadline.so \
+	-lpthread \
+	-lSDL2 \
+	-fsanitize=address \
+	-ldl \
 	-lLLVM-12 \
 
 # User .cpp files (from .cpp's on Verilator command line)
