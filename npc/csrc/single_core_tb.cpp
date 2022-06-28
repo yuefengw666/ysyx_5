@@ -9,9 +9,12 @@ void init_monitor(int , char*[]);
 int main(int argc, char**argv, char** env){
 
     sim_init();
+    npc_cpu.pc = 0x80000;    
+    init_monitor(argc,argv);
+    
     npc_reset();
 
-    init_monitor(argc,argv);
+    //init_monitor(argc,argv);
     //dut->inst_in = pmem_read(dut->pc);
     //dut->eval();
     printf("after reset, inst_in:%x\n",dut->inst_in);
