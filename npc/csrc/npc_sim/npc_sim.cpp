@@ -94,7 +94,7 @@ void npc_reset(){
         #endif
         sim_time++;
     }
-
+    dut->rst =0;
     /*
     for(int n=0; n<5; n++){
         dut->clk ^= 1; 
