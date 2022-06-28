@@ -36,6 +36,11 @@ VM_MODPREFIX = Vysyx_22040237_rv_single_cyc_cpu_top
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
 	-I/home/yfwu/ysyx-workbench/npc/csrc/include \
+	-lreadline \
+	-lncurses \
+
+# User LDLIBS (from -LDFLAGS on Verilator command line)
+VM_USER_LDLIBS = \
 	-I/usr/lib/llvm-12/include \
 	-std=c++14 \
 	-fno-exceptions \
@@ -43,11 +48,6 @@ VM_USER_CFLAGS = \
 	-D__STDC_CONSTANT_MACROS \
 	-D__STDC_FORMAT_MACROS \
 	-D__STDC_LIMIT_MACROS \
-	-lreadline \
-	-lncurses \
-
-# User LDLIBS (from -LDFLAGS on Verilator command line)
-VM_USER_LDLIBS = \
 	/lib/x86_64-linux-gnu/libreadline.so \
 	-lpthread \
 	-lSDL2 \

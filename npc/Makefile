@@ -62,7 +62,7 @@ $(BIN): $(VDEFINE) $(VSRCS) $(CSRCS)
 	$(VERILATOR) $(VERILATOR_FLAGS) \
 		--top $(TOP_DESIGN_NAME) $^ \
 		$(addprefix -CFLAGS , $(INC_FLAG)) \
-		$(addprefix -LDFLAGS , $(LLVMLIB)) \
+		$(addprefix -CFLAGS , $(LLVMLIB)) \
 		$(RLLIB)\
 		$(addprefix -LDFLAGS , $(LDFLAGS)) \
 		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
