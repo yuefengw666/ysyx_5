@@ -86,7 +86,7 @@ void npc_reset(){
     pos_cnt = 0;
     dut->rst = 1;
     
-    for(int i=0; i<5; i++){
+    for(int i=0; i<4; i++){
         dut->clk ^=1;
         dut->eval();
         #ifdef CONFIG_VCD
