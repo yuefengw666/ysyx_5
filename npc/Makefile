@@ -31,8 +31,8 @@ LDFLAGS += -lpthread -lSDL2 -fsanitize=address -ldl
 #readline link
 RLLIB = /lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses
 #llvm link
-#-CFLAGS -I/usr/lib/llvm-12/include  --cxxflags
-LLVMLIB += $(shell llvm-config --cxxflags) 
+LLVMLIB += -I/usr/lib/llvm-12/include
+LDFLAGS += $(shell llvm-config --cxxflags) 
 LDFLAGS += -fPIE $(shell llvm-config --libs)
 #---------NPC exec args--------------------
 IMG ?=
