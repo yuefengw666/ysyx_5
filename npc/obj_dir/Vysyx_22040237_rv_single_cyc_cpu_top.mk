@@ -4,7 +4,7 @@
 # Execute this makefile from the object directory:
 #    make -f Vysyx_22040237_rv_single_cyc_cpu_top.mk
 
-default: /home/yfwu/ysyx-workbench/npc/build/top
+default: Vysyx_22040237_rv_single_cyc_cpu_top__ALL.a
 
 ### Constants...
 # Perl executable (from $PERL)
@@ -38,6 +38,7 @@ VM_USER_CFLAGS = \
 	-I/home/yfwu/ysyx-workbench/npc/csrc/include \
 	-lreadline \
 	-lncurses \
+	-I/usr/lib/llvm-12/include \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
@@ -89,40 +90,5 @@ VM_USER_DIR = \
 include Vysyx_22040237_rv_single_cyc_cpu_top_classes.mk
 # Include global rules
 include $(VERILATOR_ROOT)/include/verilated.mk
-
-### Executable rules... (from --exe)
-VPATH += $(VM_USER_DIR)
-
-dpi.o: /home/yfwu/ysyx-workbench/npc/csrc/DPI_C/dpi.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-difftest.o: /home/yfwu/ysyx-workbench/npc/csrc/difftest/difftest.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-mem.o: /home/yfwu/ysyx-workbench/npc/csrc/mem/mem.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-monitor.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/monitor.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-expr.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb/expr.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-sdb.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb/sdb.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-watchpoint.o: /home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb/watchpoint.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-interrupt.o: /home/yfwu/ysyx-workbench/npc/csrc/npc_sim/interrupt.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-npc_reg.o: /home/yfwu/ysyx-workbench/npc/csrc/npc_sim/npc_reg.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-npc_sim.o: /home/yfwu/ysyx-workbench/npc/csrc/npc_sim/npc_sim.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-single_core_tb.o: /home/yfwu/ysyx-workbench/npc/csrc/single_core_tb.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-disasm.o: /home/yfwu/ysyx-workbench/npc/csrc/utils/disasm.cc
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-log.o: /home/yfwu/ysyx-workbench/npc/csrc/utils/log.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-
-### Link rules... (from --exe)
-/home/yfwu/ysyx-workbench/npc/build/top: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
-	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) $(LIBS) $(SC_LIBS) -o $@
-
 
 # Verilated -*- Makefile -*-
