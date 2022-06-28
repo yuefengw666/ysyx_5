@@ -46,6 +46,7 @@ VM_USER_LDLIBS = \
 	-lSDL2 \
 	-fsanitize=address \
 	-ldl \
+	-CFLAGS \
 	-I/usr/lib/llvm-12/include \
 	-std=c++14 \
 	-fno-exceptions \
