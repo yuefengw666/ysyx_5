@@ -62,7 +62,9 @@ void exit_npc(int exit_flag){
 
 static void trace_and_difftest(NPC_CPU *_this, vaddr_t dnpc){
 //ITRACE
-
+#ifdef CONFIG_ITRACE
+    log_write("%s\n",_this->logbuf);
+#endif
 //DIFFTEST
 #ifdef CONFIG_DIFFTEST
     difftest_step(_this->pc, dnpc);
