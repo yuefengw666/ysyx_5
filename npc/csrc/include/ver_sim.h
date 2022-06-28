@@ -23,4 +23,7 @@ void npc_reset();
 void npc_run(uint64_t n);
 void exit_npc(int exit_flag);
 
+
+Vysyx_22040237_rv_single_cyc_cpu_top* dut;
+
 #endif
