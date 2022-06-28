@@ -11,7 +11,7 @@ void init_log(const char *log_file){
         if(fp == NULL) printf("Can not open '%s'\n",log_file);
         log_fp = fp;
     }
-    Log("Log is written to %s", log_file ? log_file : "stdout");
+    //Log("Log is written to %s", log_file ? log_file : "stdout");
 }
 
 bool log_enable(){
