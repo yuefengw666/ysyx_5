@@ -67,6 +67,27 @@ static void trace_and_difftest(NPC_CPU *_this, vaddr_t dnpc){
 #endif
 }
 
+void itrace(NPC_CPU *s){
+    #ifdef CONFIG_ITRACE
+        char *p = s->logbuf;
+        p += snprintf(p, sizeof(s->logbuf), "0x%016lx: ", s->pc);
+        int ilen = 4;
+        uint8_t *inst = (uint8_t *)&s->inst_val;
+        for(int i=0; i<ilen; i++){
+            p += snprintf(p, 4, " %02x", inst[i]);
+        }
+        //int ilen_max = 4;
+        int space_len = 1;
+        memset(p, ' ', space_len);
+        p += space_len;
+
+        void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
+        disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
+            s->pc, (uint8_t *)&s->inst_val, ilen);
+    #endif 
+
+}
+
 void sim_init(){
     //instantiate top module
     dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
@@ -107,6 +128,9 @@ void npc_reset(){
         if(dut->rst != 1){
             dut->inst_in = pmem_read(dut->pc);
             dut->eval();
+            //itrace
+
+            //difftest
         }
         
         #ifdef CONFIG_VCD
@@ -151,6 +175,10 @@ static void exec_once(NPC_CPU *s){
     
     s->inst_val = dut->inst_in;
     #ifdef CONFIG_ITRACE
+        itrace(&s);
+    #endif
+    /*
+    #ifdef CONFIG_ITRACE
         char *p = s->logbuf;
         p += snprintf(p, sizeof(s->logbuf), "0x%016lx: ", s->pc);
         int ilen = 4;
@@ -167,6 +195,7 @@ static void exec_once(NPC_CPU *s){
         disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
             s->pc, (uint8_t *)&s->inst_val, ilen);
     #endif
+    */
 }
 
 static void execute(uint64_t n){
