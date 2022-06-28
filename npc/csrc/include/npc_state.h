@@ -6,7 +6,7 @@
 typedef struct {
   word_t gpr[32];
   vaddr_t pc;
-  uint32_t val;
+  uint32_t inst_val;
   IFDEF(CONFIG_ITRACE, char logbuf[128]);
 } NPC_CPU;
 

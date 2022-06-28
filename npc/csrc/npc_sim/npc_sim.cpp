@@ -65,7 +65,7 @@ static void trace_and_difftest(NPC_CPU *_this, vaddr_t dnpc){
 
 //DIFFTEST
 #ifdef CONFIG_DIFFTEST
-    difftest_step(_this->pc, dnpc);//npc_cpu.pc should dnpc ,and not used yet.
+    difftest_step(_this->pc, dnpc);
 #endif
 
 #ifdef CONFIG_WATCHPOINT 
@@ -96,17 +96,34 @@ static void npc_sim_once(){
 }
 void npc_regs_display();
 
-static void exec_once(){
+static void exec_once(NPC_CPU *s){
     npc_sim_once();
-    //ITRACE
+    s->inst_val = dut->inst_in;
+    #ifdef CONFIG_ITRACE
+        char *p = s->logbuf;
+        p += snprintf(p, sizeof(s->logbuf), "0x%016lx", s->pc);
+        int ilen = 4;
+        int i;
+        uint8_t *inst = (uint8_t *)&s->inst_val;
+        for(i=0; i<ilen; i++){
+            p += snprintf(p, 4, "%02x", inst[i]);
+        }
+        //int ilen_max = 4;
+        int space_len = 1;
+        memset(p, ' ', space_len);
+        p += space_len;
 
+        void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
+        disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
+            s->pc, (unit8_t *)&s->inst_val, ilen);
+    #endif
 }
 
 static void execute(uint64_t n){
     for(; n > 0; n--){
         exec_once();
         g_nr_guest_inst ++;
-        trace_and_difftest(&npc_cpu, npc_cpu.pc);
+        trace_and_difftest(&npc_cpu, npc_cpu.pc);//npc_cpu.pc should dnpc ,but this arg not used yet.
         if(npc_state.state != NPC_RUNNING) break;
     }
 }

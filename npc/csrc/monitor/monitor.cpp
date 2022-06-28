@@ -1,13 +1,12 @@
 #include "npc_common.h"
 #include "mem.h"
-#include <cassert>
-#include <cstring>
 #include "getopt.h"
 #include <unistd.h>
 
 void init_log(const char *log_file);
 void init_difftest(char *ref_so_file, long img_size);
 void init_sdb();
+void init_disasm(const char *triple);
 
 static char *log_file = NULL;
 static char *img_file = NULL;
@@ -87,4 +86,7 @@ void init_monitor(int argc, char *argv[]) {
     
     /* Initialize the simple debugger. */
     init_sdb();
+
+    /* Initialize the disasm. */
+    IFDEF(CONFIG_ITRACE, init_disasm("riscv64-pc-linux-gnu"));
 }

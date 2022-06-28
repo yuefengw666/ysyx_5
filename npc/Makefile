@@ -14,6 +14,7 @@ INC_FLAG = $(addprefix -I, $(INC_PATH))
 
 VSRCS += $(shell find $(abspath $(VSRC_PATH)) -name "*.v")
 CSRCS += $(shell find $(abspath ./csrc) -name "*.cpp")
+CSRCS += $(shell find $(abspath ./csrc) -name "*.cc")
 
 TOP_DESIGN_NAME = ysyx_22040237_rv_single_cyc_cpu_top
 TOP = top
