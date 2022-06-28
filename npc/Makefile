@@ -25,9 +25,9 @@ VERILATOR = verilator
 VERILATOR_FLAGS += -Wall -MMD --trace -cc --build
 #High performance optimizations
 VERILATOR_FLAGS += -O3
-#-lpehread
+
 #---------G++ Compilation flags-------------
-LDFLAGS += -threads -lSDL2 -fsanitize=address -ldl
+LDFLAGS += -lpthread -lSDL2 -fsanitize=address -ldl
 #readline link
 RLFLGAS = /lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses
 #llvm link
