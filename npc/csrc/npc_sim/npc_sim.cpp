@@ -106,7 +106,7 @@ static void execute(uint64_t n){
     for(; n > 0; n--){
         exec_once();
         g_nr_guest_inst ++;
-        trace_and_difftest(npc_cpu, npc_cpu.pc);
+        trace_and_difftest(&npc_cpu, npc_cpu.pc);
         if(npc_state.state != NPC_RUNNING) break;
     }
 }
