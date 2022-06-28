@@ -108,7 +108,7 @@ void npc_reset(){
             dut->inst_in = pmem_read(dut->pc);
             dut->eval();
         }
-        
+        pos_cnt=0;
         #ifdef CONFIG_VCD
         m_trace->dump(sim_time);
         #endif
