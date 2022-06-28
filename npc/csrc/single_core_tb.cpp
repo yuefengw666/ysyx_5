@@ -12,8 +12,8 @@ int main(int argc, char**argv, char** env){
     npc_reset();
 
     init_monitor(argc,argv);
-    dut->inst_in = pmem_read(dut->pc);
-    dut->eval();
+    //dut->inst_in = pmem_read(dut->pc);
+    //dut->eval();
     printf("after reset, inst_in:%x\n",dut->inst_in);
     #ifdef CONFIG_SDB
         npc_sdb_mainloop();
