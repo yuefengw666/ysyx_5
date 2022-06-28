@@ -13,7 +13,58 @@ NPC_CPU npc_cpu;
 NPCstate npc_state = {.state = NPC_STOP};
 uint64_t g_nr_guest_inst = 0; //Number of instructions executed
 
+
+
+#ifdef CONFIG_ITRACE
+
+#define IRB_SIZE 16
+#define IRB_LENGTH 128
+
+char iringbuf[IRB_SIZE][IRB_LENGTH];
+int tail=0;
+
+static void iringbuf_wr(char *data_wr){
+  strncpy(iringbuf[tail%IRB_SIZE], data_wr, IRB_LENGTH);
+  tail++;
+}
+
+static void iringbuf_display(){
+  printf("%s\n",ASNI_FMT("Error instruction apper in ...",ASNI_FG_CYAN));
+  int error_inst_pos = ( tail - 1 ) % IRB_SIZE; 
+  if( tail < (IRB_SIZE + 1) ){
+    for(int i=0; i<= (tail-1); i++){
+      if(i == error_inst_pos) printf("%s%s\n", ASNI_FMT("E*->",ASNI_FG_RED),iringbuf[i]);
+      else printf("    %s\n",iringbuf[i]);
+    }
+  }
+  else{
+    for(int j=0; j<=IRB_SIZE; j++){
+      if(j == error_inst_pos) printf("%s%s\n", ASNI_FMT("E*->",ASNI_FG_RED),iringbuf[j]);
+      else printf("    %s\n",iringbuf[j]);
+    }
+  }
+} 
+#endif
+
 void difftest_step(vaddr_t pc, vaddr_t npc);
+
+static void trace_and_difftest(NPC_CPU *_this, vaddr_t dnpc){
+//ITRACE
+#ifdef CONFIG_ITRACE
+    log_write("%s\n",_this->logbuf);
+#endif
+//DIFFTEST
+#ifdef CONFIG_DIFFTEST
+    difftest_step(_this->pc, dnpc);
+#endif
+
+#ifdef CONFIG_WATCHPOINT 
+  bool changed;
+  changed = scan_wp();
+  if(changed)
+    npc_state.state = NPC_STOP;
+#endif
+}
 
 void sim_init(){
     //instantiate top module
@@ -60,24 +111,6 @@ void exit_npc(int exit_flag){
     #endif
     delete dut;
     exit(exit_flag);
-}
-
-static void trace_and_difftest(NPC_CPU *_this, vaddr_t dnpc){
-//ITRACE
-#ifdef CONFIG_ITRACE
-    log_write("%s\n",_this->logbuf);
-#endif
-//DIFFTEST
-#ifdef CONFIG_DIFFTEST
-    difftest_step(_this->pc, dnpc);
-#endif
-
-#ifdef CONFIG_WATCHPOINT 
-  bool changed;
-  changed = scan_wp();
-  if(changed)
-    npc_state.state = NPC_STOP;
-#endif
 }
 
 static void npc_sim_half(){
@@ -145,6 +178,9 @@ void npc_run(uint64_t n){
     switch(npc_state.state){
         case NPC_RUNNING: npc_state.state = NPC_STOP;break;
         case NPC_ABORT:
+        #ifdef CONFIG_ITRACE
+            iringbuf_display();
+        #endif
         case NPC_END:
           printf("%s %s at pc = %lx\n",ASNI_FMT("npc:",ASNI_FG_CYAN),
               (npc_state.state == NPC_ABORT ? ASNI_FMT("ABORT", ASNI_FG_RED) :

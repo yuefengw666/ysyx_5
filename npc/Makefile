@@ -83,7 +83,7 @@ run: $(BIN)
 	@echo
 	@echo "-- RUN ---------------------"
 	@rm -rf $(BUILD_DIR)/wave.vcd
-	@$^ $(ARGS) $(DIFF_ARGS) $(IMG)
+	@$^ $(ARGS) $(IMG)
 
 	@echo
 	@echo "-- DONE --------------------"
