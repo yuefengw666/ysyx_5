@@ -92,7 +92,7 @@ void npc_reset(){
         #ifdef CONFIG_VCD
             m_trace->dump(sim_time);
         #endif
-        sim_time++
+        sim_time++;
     }
     dut->rst = 0;
     /*
