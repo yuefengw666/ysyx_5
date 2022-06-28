@@ -4,7 +4,7 @@
 vluint64_t sim_time;
 vluint64_t pos_cnt;
 
-static Vysyx_22040237_rv_single_cyc_cpu_top* dut;
+Vysyx_22040237_rv_single_cyc_cpu_top* dut;
 #ifdef CONFIG_VCD
   VerilatedVcdC* m_trace = NULL;
 #endif
