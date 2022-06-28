@@ -36,8 +36,9 @@ LDFLAGS += $(shell llvm-config --cxxflags)
 LDFLAGS += -fPIE $(shell llvm-config --libs)
 #---------NPC exec args--------------------
 IMG ?=
-DIFF_REF_SO = $(NEMU_HOME)/build/riscv64-nemu-interpreter-so
-ARGS += --diff=$(DIFF_REF_SO) #/ -d $(DIFF_REF_SO)
+ARGS ?=
+#DIFF_REF_SO = $(NEMU_HOME)/build/riscv64-nemu-interpreter-so
+#DIFF_ARGS += --diff=$(DIFF_REF_SO) #/ -d $(DIFF_REF_SO)
 
 #---------Build director--------------------
 BUILD_DIR = ./build
@@ -82,7 +83,7 @@ run: $(BIN)
 	@echo
 	@echo "-- RUN ---------------------"
 	@rm -rf $(BUILD_DIR)/wave.vcd
-	@$^ $(ARGS) $(IMG)
+	@$^ $(ARGS) $(DIFF_ARGS) $(IMG)
 
 	@echo
 	@echo "-- DONE --------------------"
