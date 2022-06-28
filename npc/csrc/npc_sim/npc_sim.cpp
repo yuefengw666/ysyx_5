@@ -60,7 +60,7 @@ void exit_npc(int exit_flag){
     exit(exit_flag);
 }
 
-static void trace_and_difftest(NPC_CPU *_this, vaddr__t dnpc){
+static void trace_and_difftest(NPC_CPU *_this, vaddr_t dnpc){
 //ITRACE
 
 //DIFFTEST
