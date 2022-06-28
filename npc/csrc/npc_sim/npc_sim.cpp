@@ -86,7 +86,7 @@ void npc_reset(){
     pos_cnt = 0;
     dut->rst = 1;
     
-    for(int n=0; n<5; n++){
+    for(int n=0; n<4; n++){
         dut->clk ^= 1; 
         dut->eval();
         if(dut->clk == 1){
