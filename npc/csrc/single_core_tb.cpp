@@ -12,6 +12,8 @@ int main(int argc, char**argv, char** env){
     npc_reset();
     
     init_monitor(argc,argv);
+    npc_reset();
+
     
     #ifdef CONFIG_SDB
         npc_sdb_mainloop();
