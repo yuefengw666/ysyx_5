@@ -1,7 +1,7 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
-#include "npc_conmon.h"
+#include "npc_common.h"
 // ----------- timer -----------
 
 //uint64_t get_time();
