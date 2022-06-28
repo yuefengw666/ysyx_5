@@ -89,6 +89,8 @@ void npc_reset(){
     for(int i=0; i<3; i++){
         dut->clk ^=1;
         dut->eval();
+        dut->clk ^=1;
+        dut->eval();
         #ifdef CONFIG_VCD
         m_trace->dump(sim_time);
         #endif
