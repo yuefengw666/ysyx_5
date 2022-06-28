@@ -103,11 +103,12 @@ void npc_reset(){
             pos_cnt++;
             if(pos_cnt >=3) dut->rst = 0;
         }
-        
+        /*
         if(dut->rst != 1){
             dut->inst_in = pmem_read(dut->pc);
             dut->eval();
         }
+        */
         #ifdef CONFIG_VCD
         m_trace->dump(sim_time);
         #endif
