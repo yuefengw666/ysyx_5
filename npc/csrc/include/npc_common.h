@@ -7,6 +7,7 @@
 #include <stdint.h>
 #include <cstring>
 #include <cassert>
+#include <macro.h>
 
 //CONFIG
 //#define CONFIG_VCD 0
