@@ -99,6 +99,8 @@ static void npc_sim_once(){
 void npc_regs_display();
 
 static void exec_once(NPC_CPU *s){
+    npc_sim_once();
+    
     s->inst_val = dut->inst_in;
     #ifdef CONFIG_ITRACE
         char *p = s->logbuf;
@@ -117,8 +119,6 @@ static void exec_once(NPC_CPU *s){
         disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
             s->pc, (uint8_t *)&s->inst_val, ilen);
     #endif
-    
-    npc_sim_once();
 }
 
 static void execute(uint64_t n){
