@@ -42,8 +42,18 @@ VM_USER_CFLAGS = \
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
 	/lib/x86_64-linux-gnu/libreadline.so \
-	-lpthread -LDFLAGS -lSDL2 -LDFLAGS -fsanitize=address -LDFLAGS -ldl \
-	-I/usr/lib/llvm-12/include -LDFLAGS -std=c++14 -LDFLAGS -fno-exceptions -LDFLAGS -D_GNU_SOURCE -LDFLAGS -D__STDC_CONSTANT_MACROS -LDFLAGS -D__STDC_FORMAT_MACROS -LDFLAGS -D__STDC_LIMIT_MACROS -LDFLAGS -fPIE -LDFLAGS  \
+	-lpthread \
+	-lSDL2 \
+	-fsanitize=address \
+	-ldl \
+	-I/usr/lib/llvm-12/include \
+	-std=c++14 \
+	-fno-exceptions \
+	-D_GNU_SOURCE \
+	-D__STDC_CONSTANT_MACROS \
+	-D__STDC_FORMAT_MACROS \
+	-D__STDC_LIMIT_MACROS \
+	-fPIE \
 	-lLLVM-12 \
 
 # User .cpp files (from .cpp's on Verilator command line)
