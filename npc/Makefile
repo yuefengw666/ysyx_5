@@ -31,7 +31,7 @@ LDFLAGS += -lpthread -lSDL2 -fsanitize=address -ldl
 #readline link
 RLFLGAS = /lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses
 #llvm link
-LDFLAGS += -ldl $(shell llvm-config --cxxflags) -fPIE 
+LDFLAGS += $(shell llvm-config --cxxflags) -fPIE 
 LDFLAGS += $(shell llvm-config --libs)
 #---------NPC exec args--------------------
 IMG ?=
@@ -62,7 +62,7 @@ $(BIN): $(VDEFINE) $(VSRCS) $(CSRCS)
 		--top $(TOP_DESIGN_NAME) $^ \
 		$(addprefix -CFLAGS , $(INC_FLAG)) \
 		$(RLFLGAS)\
-		$(addprefix -LDFLAGS , $(LDFLAGS)) \
+		-CFLAGS $(addprefix -LDFLAGS , $(LDFLAGS)) \
 		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
 
 	@echo
