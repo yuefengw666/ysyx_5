@@ -129,6 +129,7 @@ void npc_reset(){
             dut->inst_in = pmem_read(dut->pc);
             dut->eval();
             //itrace
+            npc_cpu.inst_val = dut->inst_in;
             itrace(&npc_cpu);
             g_nr_guest_inst ++;
             trace_and_difftest(&npc_cpu, npc_cpu.pc);
