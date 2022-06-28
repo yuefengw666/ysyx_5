@@ -10,5 +10,6 @@ void host_write(void *addr, word_t data);
 word_t pmem_read(paddr_t addr);
 void pmem_write(paddr_t addr, word_t data);
 
+extern uint8_t pmem[CONFIG_MSIZE];
 
 #endif

@@ -27,14 +27,16 @@ VERILATOR_FLAGS += -Wall -MMD --trace -cc --build
 VERILATOR_FLAGS += -O3
 
 #---------G++ Compilation flags-------------
-LDFLAGS = "-lpthread -lSDL2 -fsanitize=address -ldl"
+LDFLAGS += "-lpthread -lSDL2 -fsanitize=address -ldl"
 #readline link
 RLFLGAS = /lib/x86_64-linux-gnu/libreadline.so -CFLAGS -lreadline -CFLAGS -lncurses
-
+#llvm link
+LDFLAGS += $(shell llvm-config --cxxflags) -fPIE
+LDFLAGS += $(shell llvm-config --libs)
 #---------NPC exec args--------------------
 IMG ?=
 DIFF_REF_SO = $(NEMU_HOME)/build/riscv64-nemu-interpreter-so
-ARGS_DIFF = --diff=$(DIFF_REF_SO) #/ -d $(DIFF_REF_SO)
+ARGS += --diff=$(DIFF_REF_SO) #/ -d $(DIFF_REF_SO)
 
 #---------Build director--------------------
 BUILD_DIR = ./build
@@ -78,7 +80,7 @@ run: $(BIN)
 	@echo
 	@echo "-- RUN ---------------------"
 	@rm -rf $(BUILD_DIR)/wave.vcd
-	@$^ $(ARGS_DIFF) $(IMG)
+	@$^ $(ARGS) $(IMG)
 
 	@echo
 	@echo "-- DONE --------------------"
