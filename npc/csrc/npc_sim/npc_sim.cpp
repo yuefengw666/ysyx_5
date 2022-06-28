@@ -86,6 +86,16 @@ void npc_reset(){
     pos_cnt = 0;
     dut->rst = 1;
     
+    for(int i=0; i<3; i++){
+        dut->clk ^=1;
+        dut->eval();
+        #ifdef CONFIG_VCD
+        m_trace->dump(sim_time);
+        #endif
+        sim_time++;
+    }
+
+    /*
     for(int n=0; n<5; n++){
         dut->clk ^= 1; 
         dut->eval();
@@ -105,7 +115,7 @@ void npc_reset(){
         sim_time++;
     }
         pos_cnt=0;
-    
+    */
 }
 
 void exit_npc(int exit_flag){
