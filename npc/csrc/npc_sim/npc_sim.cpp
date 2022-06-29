@@ -30,7 +30,7 @@ static void iringbuf_wr(char *data_wr){
 
 static void iringbuf_display(){
   printf("%s\n",ASNI_FMT("Error instruction apper in ...",ASNI_FG_CYAN));
-  int error_inst_pos = ( tail - 1 ) % IRB_SIZE; 
+  int error_inst_pos = ( tail - 1 ) % IRB_SIZE -1; //npc difftest is last inst,  
   if( tail < (IRB_SIZE + 1) ){
     for(int i=0; i<= (tail-1); i++){
       if(i == error_inst_pos) printf("%s%s\n", ASNI_FMT("E*->",ASNI_FG_RED),iringbuf[i]);
