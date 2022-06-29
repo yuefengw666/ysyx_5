@@ -128,16 +128,16 @@ void npc_reset(){
         if(dut->rst != 1){
             dut->inst_in = pmem_read(dut->pc);
             dut->eval();
-            /*
+            
             //itrace
             printf("after reset pc:%lx\n",dut->pc);
             printf("after inst: %x\n",dut->inst_in);
             npc_cpu.inst_val = dut->inst_in;
-            itrace(&npc_cpu);
-            g_nr_guest_inst ++;
-            trace_and_difftest(&npc_cpu, npc_cpu.pc);
+            //itrace(&npc_cpu);
+            //g_nr_guest_inst ++;
+            //trace_and_difftest(&npc_cpu, npc_cpu.pc);
             //difftest
-            */
+            
         }
         
         #ifdef CONFIG_VCD
