@@ -28,7 +28,7 @@ void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
 void difftest_regcpy(void *dut, bool direction) {
     CPU_state *reg_state = (CPU_state *)dut;
     if (direction == DIFFTEST_TO_DUT){//ref regs to dut
-      reg_state->pc = cpu.pc -0x4;
+      reg_state->pc = cpu.pc;
       for(int i=0; i<32; i++){
         reg_state->gpr[i] = cpu.gpr[i];
       }
