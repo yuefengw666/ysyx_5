@@ -91,7 +91,7 @@ ysyx_22040237_exu ysyx_22040237_exu_u0(
   .invalid_inst (invalid_inst)
 );
 
-ysyx_22040237_reg_file ysyx_22040237_reg_file_u0(
+ysyx_22040237_regs ysyx_22040237_regs_u0(
   .clk (clk),
   .rst (rst),
   .pc (pc),

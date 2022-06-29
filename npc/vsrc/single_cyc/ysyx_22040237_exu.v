@@ -35,16 +35,18 @@ always@(*)begin
   endcase
 end
 
-//**********************************sim end*************************
+/*************************DPI_C sim end***************************************/
 always@(posedge clk)begin
   if(inst_ebreak) ebreak();
 end
+/*****************************************************************************/
 
-//***********************************identify invalid inst, sim stop************
+/*************************DPI_C identify invalid inst, sim stop***************/
 always@(posedge clk)begin
   if((!rst) && invalid_inst)begin
     invalid_inst_o(); 
   end
 end
+/******************************************************************************/
 
 endmodule

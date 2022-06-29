@@ -1,12 +1,12 @@
 import "DPI-C" function void set_gpr_ptr(input logic [63:0] a []);
 
-module ysyx_22040237_reg_file(
+module ysyx_22040237_regs(
   input clk,
   input rst,
   
-  //----------------------transfer pc value to sim for dpi_c;
+  /*----------transfer pc value to sim for dpi_c;------------*/
   input [63:0] pc,
-  //-----------------------
+  /*---------------------------------------------------------*/
   input reg_wr_en,
   input [4:0] wr_addr,
   input [63:0] wr_data,
@@ -22,7 +22,7 @@ module ysyx_22040237_reg_file(
 reg [63:0] regs[0:31];
 wire r_wr_en;
 
-//!!---------------------for DPI_C--------------------------!!
+/*--------DPI_C to get gpr state ot simulation  environment--------------*/
 integer i;
 
 reg [63:0] rf[0:32];
@@ -37,7 +37,7 @@ end
 always@(*)begin
   set_gpr_ptr(rf);
 end
-//!!--------------------------------------------------------!!
+/*-----------------------------------------------------------------------*/
 
 assign reg1_rd_data = reg1_rd_en ? regs[reg1_rd_addr] : `ysyx_22040237_REGS_INIT;
 assign reg2_rd_data = reg2_rd_en ? regs[reg2_rd_addr] : `ysyx_22040237_REGS_INIT;

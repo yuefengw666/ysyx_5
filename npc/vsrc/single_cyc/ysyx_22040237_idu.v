@@ -14,12 +14,13 @@ module ysyx_22040237_idu(
   //jal pc offset;
   output jump_flag,
 
-  //no encode for ebreak for now
+  /***************DPI_C to end sim************************************/
   output inst_ebreak,
+  /*******************************************************************/
 
-  //**************identify invalid inst for sim*****************
+  //**************DPI_C identify invalid inst for sim*****************/
   output invalid_inst,
-
+  /*******************************************************************/
   output reg rs1_r_en,
   output reg [4:0] rs1_r_addr,
   output reg rs2_r_en,
