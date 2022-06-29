@@ -48,13 +48,7 @@ VL_INLINE_OPT void Vysyx_22040237_rv_single_cyc_cpu_top___024root___sequent__TOP
     if (vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_ebreak) {
         Vysyx_22040237_rv_single_cyc_cpu_top___024unit____Vdpiimwrap_ebreak_TOP____024unit();
     }
-    if ((1U & ((~ (IData)(vlSelf->rst)) & (~ ((((((
-                                                   ((~ (IData)(
-                                                               (0U 
-                                                                != 
-                                                                (0x7fU 
-                                                                 & vlSelf->inst_in)))) 
-                                                    | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi)) 
+    if ((1U & ((~ (IData)(vlSelf->rst)) & (~ (((((((IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi) 
                                                    | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_ebreak)) 
                                                   | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_auipc)) 
                                                  | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_lui)) 

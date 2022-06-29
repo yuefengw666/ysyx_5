@@ -227,12 +227,7 @@ void Vysyx_22040237_rv_single_cyc_cpu_top___024root__traceFullSub0(Vysyx_2204023
         tracep->fullIData(oldp+99,(vlSelf->inst_in),32);
         tracep->fullQData(oldp+100,(vlSelf->pc),64);
         tracep->fullQData(oldp+102,(vlSelf->rs2_data),64);
-        tracep->fullBit(oldp+104,((1U & (~ ((((((((~ (IData)(
-                                                             (0U 
-                                                              != 
-                                                              (0x7fU 
-                                                               & vlSelf->inst_in)))) 
-                                                  | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi)) 
+        tracep->fullBit(oldp+104,((1U & (~ (((((((IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_addi) 
                                                  | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__inst_ebreak)) 
                                                 | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_auipc)) 
                                                | (IData)(vlSelf->ysyx_22040237_rv_single_cyc_cpu_top__DOT__ysyx_22040237_idu_u0__DOT__inst_lui)) 
