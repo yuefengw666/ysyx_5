@@ -127,7 +127,7 @@ void difftest_step(vaddr_t pc, vaddr_t npc) {
     is_skip_ref = false;
     return;
   }
-
+  printf("ref exec pc: %lx\n",ref_r.pc);
   ref_difftest_exec(1);
   printf("after diff exec :%lx\n",ref_r.pc );
   ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
