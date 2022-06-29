@@ -136,7 +136,7 @@ void npc_reset(){
             itrace(&npc_cpu);
             g_nr_guest_inst ++;
             trace_and_difftest(&npc_cpu, npc_cpu.pc);
-            printf("");
+            printf("111111111111");
             //difftest
             
         }
