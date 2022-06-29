@@ -136,7 +136,7 @@ void npc_reset(){
                 itrace(&npc_cpu);
                 g_nr_guest_inst ++;
                 log_write("%s\n",npc_cpu.logbuf);
-                iringbuf_wr(npc_cpu.gpr);
+                iringbuf_wr(npc_cpu.logbuf);
             #endif
             //trace_and_difftest(&npc_cpu, npc_cpu.pc);
             //printf("111111111111");
