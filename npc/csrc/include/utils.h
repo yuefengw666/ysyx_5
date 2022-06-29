@@ -49,10 +49,10 @@
 
 /*
 #define Log(format, ...) \
-    _Log(ASNI_FMT("[%s] ", ASNI_FG_BLUE) "\n", \
+    _Log(ASNI_FMT( format, ASNI_FG_BLUE) "\n", \
         __VA_ARGS__)
-#endif
 */
+
 
 #define Log(format, ...) \
     _Log(ASNI_FMT("[%s:%d %s] " format, ASNI_FG_BLUE) "\n", \

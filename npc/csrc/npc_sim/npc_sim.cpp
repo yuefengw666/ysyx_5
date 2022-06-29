@@ -106,17 +106,7 @@ void sim_init(){
 void npc_reset(){
     pos_cnt = 0;
     dut->rst = 1;
-    /*
-    for(int i=0; i<4; i++){
-        dut->clk ^=1;
-        dut->eval();
-        #ifdef CONFIG_VCD
-        m_trace->dump(sim_time);
-        #endif
-        sim_time++;
-    }
-    dut->rst =0;
-    */
+    
     for(int n=0; n<5; n++){
         dut->clk ^= 1; 
         dut->eval();
@@ -184,25 +174,6 @@ static void exec_once(NPC_CPU *s){
     #ifdef CONFIG_ITRACE
         itrace(s);
     #endif
-    /*
-    #ifdef CONFIG_ITRACE
-        char *p = s->logbuf;
-        p += snprintf(p, sizeof(s->logbuf), "0x%016lx: ", s->pc);
-        int ilen = 4;
-        uint8_t *inst = (uint8_t *)&s->inst_val;
-        for(int i=0; i<ilen; i++){
-            p += snprintf(p, 4, " %02x", inst[i]);
-        }
-        //int ilen_max = 4;
-        int space_len = 1;
-        memset(p, ' ', space_len);
-        p += space_len;
-
-        void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
-        disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
-            s->pc, (uint8_t *)&s->inst_val, ilen);
-    #endif
-    */
 }
 
 static void execute(uint64_t n){
