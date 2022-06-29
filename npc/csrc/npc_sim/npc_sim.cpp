@@ -138,10 +138,6 @@ void npc_reset(){
                 log_write("%s\n",npc_cpu.logbuf);
                 iringbuf_wr(npc_cpu.logbuf);
             #endif
-            //trace_and_difftest(&npc_cpu, npc_cpu.pc);
-            //printf("111111111111");
-            //difftest
-            
         }
         
         #ifdef CONFIG_VCD
@@ -214,7 +210,6 @@ static void execute(uint64_t n){
         exec_once(&npc_cpu);
         g_nr_guest_inst ++;
         trace_and_difftest(&npc_cpu, npc_cpu.pc);//npc_cpu.pc should dnpc ,but this arg not used yet.
-        printf("1111111111111111\n");
         if(npc_state.state != NPC_RUNNING) break;
     }
 }
