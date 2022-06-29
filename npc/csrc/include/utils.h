@@ -43,15 +43,16 @@
 
 #define _Log(...) \
   do { \
-    printf(__VA_ARGS__); \
+    printf(ASNI_FMT("%s \n", ASNI_FG_BLUE), __VA_ARGS__); \
     log_write(__VA_ARGS__); \
   } while (0)
 
-
+/*
 #define Log(format, ...) \
-    _Log(ASNI_FMT("[%s:%d %s] " format, ASNI_FG_BLUE) "\n", \
-        __FILE__, __LINE__, ## __VA_ARGS__)
+    _Log(ASNI_FMT("[%s] ", ASNI_FG_BLUE) "\n", \
+        __VA_ARGS__)
 #endif
+*/
 /*
 #define Log(format, ...) \
     _Log(ASNI_FMT("[%s:%d %s] " format, ASNI_FG_BLUE) "\n", \
