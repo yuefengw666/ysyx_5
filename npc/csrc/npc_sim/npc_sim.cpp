@@ -54,6 +54,7 @@ static void trace_and_difftest(NPC_CPU *_this, vaddr_t dnpc){
     log_write("%s\n",_this->logbuf);
     iringbuf_wr(_this->logbuf);
 #endif
+printf("difftest_step this->pc:%lx\n",_this->pc);
 //DIFFTEST
 #ifdef CONFIG_DIFFTEST
     difftest_step(_this->pc, dnpc);
@@ -135,9 +136,9 @@ void npc_reset(){
             printf("after reset npc_cpu pc:%lx\n",npc_cpu.pc);
             npc_cpu.inst_val = dut->inst_in;
             
-            //itrace(&npc_cpu);
-            //g_nr_guest_inst ++;
-            //trace_and_difftest(&npc_cpu, npc_cpu.pc);
+            itrace(&npc_cpu);
+            g_nr_guest_inst ++;
+            trace_and_difftest(&npc_cpu, npc_cpu.pc);
             //difftest
             
         }
