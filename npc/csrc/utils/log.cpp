@@ -12,6 +12,7 @@ void init_log(const char *log_file){
         log_fp = fp;
     }
     Log("Log is written to %s", log_file ? log_file : "stdout");
+
 }
 
 bool log_enable(){
