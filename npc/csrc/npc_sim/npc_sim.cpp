@@ -132,12 +132,12 @@ void npc_reset(){
             //itrace
             printf("after reset pc:%lx\n",dut->pc);
             printf("after reset inst: %x\n",dut->inst_in);
-            
+            printf("after reset npc_cpu pc:%lx\n",npc_cpu.pc);
             npc_cpu.inst_val = dut->inst_in;
             
-            itrace(&npc_cpu);
-            g_nr_guest_inst ++;
-            trace_and_difftest(&npc_cpu, npc_cpu.pc);
+            //itrace(&npc_cpu);
+            //g_nr_guest_inst ++;
+            //trace_and_difftest(&npc_cpu, npc_cpu.pc);
             //difftest
             
         }
