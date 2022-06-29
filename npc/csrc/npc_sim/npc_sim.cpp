@@ -131,14 +131,12 @@ void npc_reset(){
             dut->eval();
             
             //itrace
-            printf("after reset pc:%lx\n",dut->pc);
-            printf("after reset inst: %x\n",dut->inst_in);
-            printf("after reset npc_cpu pc:%lx\n",npc_cpu.pc);
             npc_cpu.inst_val = dut->inst_in;
             
             itrace(&npc_cpu);
             g_nr_guest_inst ++;
             trace_and_difftest(&npc_cpu, npc_cpu.pc);
+            printf("")
             //difftest
             
         }
@@ -213,6 +211,7 @@ static void execute(uint64_t n){
         exec_once(&npc_cpu);
         g_nr_guest_inst ++;
         trace_and_difftest(&npc_cpu, npc_cpu.pc);//npc_cpu.pc should dnpc ,but this arg not used yet.
+        printf("1111111111111111\n");
         if(npc_state.state != NPC_RUNNING) break;
     }
 }
