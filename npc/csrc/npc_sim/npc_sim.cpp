@@ -129,7 +129,7 @@ void npc_reset(){
         if(dut->rst != 1){
             dut->inst_in = pmem_read(dut->pc);
             dut->eval();
-            
+           /* 
             //itrace
             npc_cpu.inst_val = dut->inst_in;
             
@@ -138,7 +138,7 @@ void npc_reset(){
             trace_and_difftest(&npc_cpu, npc_cpu.pc);
             //printf("111111111111");
             //difftest
-            
+            */
         }
         
         #ifdef CONFIG_VCD
