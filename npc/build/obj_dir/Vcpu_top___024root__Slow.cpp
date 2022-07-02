@@ -217,6 +217,8 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
     Vcpu_top___024unit____Vdpiimwrap_mem_read_TOP____024unit(vlSelf->cpu_top__DOT__pc_to_ifu, vlSelf->__Vtask_mem_read__0__rdata);
     vlSelf->cpu_top__DOT__ifu_u0__DOT__rdata = vlSelf->__Vtask_mem_read__0__rdata;
     Vcpu_top___024unit____Vdpiimwrap_set_gpr_ptr__Vdpioc2_TOP____024unit(vlSelf->cpu_top__DOT__ysyx_22040237_regs_u0__DOT__rf);
+    vlSelf->rdata_63_32 = (0U != (IData)((vlSelf->cpu_top__DOT__ifu_u0__DOT__rdata 
+                                          >> 0x20U)));
     vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_L = (IData)(
                                                         (3ULL 
                                                          == 
@@ -663,6 +665,7 @@ void Vcpu_top___024root___ctor_var_reset(Vcpu_top___024root* vlSelf) {
     // Body
     vlSelf->clk = VL_RAND_RESET_I(1);
     vlSelf->rst = VL_RAND_RESET_I(1);
+    vlSelf->rdata_63_32 = VL_RAND_RESET_I(1);
     vlSelf->cpu_top__DOT__pc_to_ifu = VL_RAND_RESET_Q(64);
     vlSelf->cpu_top__DOT__op1_to_exu = VL_RAND_RESET_Q(64);
     vlSelf->cpu_top__DOT__op2_to_exu = VL_RAND_RESET_Q(64);

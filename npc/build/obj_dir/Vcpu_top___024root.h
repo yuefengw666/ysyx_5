@@ -24,6 +24,7 @@ VL_MODULE(Vcpu_top___024root) {
     // PORTS
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
+    VL_OUT8(rdata_63_32,0,0);
 
     // LOCAL SIGNALS
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64_R;

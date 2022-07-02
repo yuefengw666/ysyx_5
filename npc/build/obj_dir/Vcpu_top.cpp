@@ -13,6 +13,7 @@ Vcpu_top::Vcpu_top(VerilatedContext* _vcontextp__, const char* _vcname__)
     : vlSymsp{new Vcpu_top__Syms(_vcontextp__, _vcname__, this)}
     , clk{vlSymsp->TOP.clk}
     , rst{vlSymsp->TOP.rst}
+    , rdata_63_32{vlSymsp->TOP.rdata_63_32}
     , __PVT____024unit{vlSymsp->TOP.__PVT____024unit}
     , rootp{&(vlSymsp->TOP)}
 {
