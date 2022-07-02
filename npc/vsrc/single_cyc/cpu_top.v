@@ -1,6 +1,7 @@
 module cpu_top(
   input clk,
-  input rst
+  input rst,
+  output rdata_63_32
 
 );
 
@@ -20,6 +21,7 @@ wire [`ysyx_22040237_REG_WIDTH-1:0] pc_to_idu;
 wire [`ysyx_22040237_INST_WIDTH -1:0] inst_to_idu;
 
 ysyx_22040237_ifu ifu_u0(
+  .rdata_63_32 (rdata_63_32),
   .pc_i (pc_to_ifu),
   .pc_o (pc_to_idu),
   .inst_o (inst_to_idu)
