@@ -5,6 +5,8 @@
 
 
 uint8_t* guest_to_host(paddr_t paddr);
+uint8_t* npc_guest_mem(long long addr);
+
 word_t host_read(void *addr);
 void host_write(void *addr, word_t data);
 word_t pmem_read(paddr_t addr);

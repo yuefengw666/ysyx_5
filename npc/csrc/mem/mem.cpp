@@ -3,6 +3,8 @@
 uint8_t pmem[CONFIG_MSIZE] = {0};
 
 uint8_t* guest_to_host(paddr_t paddr) { return pmem + paddr - CONFIG_MBASE; }
+uint8_t* npc_guest_mem(long long addr) { return pmem + addr - CONFIG_MBASE; }
+
 
 static inline word_t host_read(void *addr){
     return *((uint64_t *)addr);

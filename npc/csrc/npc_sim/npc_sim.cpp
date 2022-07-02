@@ -4,7 +4,7 @@
 vluint64_t sim_time;
 vluint64_t pos_cnt;
 
-Vysyx_22040237_rv_single_cyc_cpu_top* dut;
+Vcpu_top* dut;
 #ifdef CONFIG_VCD
   VerilatedVcdC* m_trace = NULL;
 #endif
@@ -90,7 +90,7 @@ void itrace(NPC_CPU *s){
 
 void sim_init(){
     //instantiate top module
-    dut = new Vysyx_22040237_rv_single_cyc_cpu_top;
+    dut = new Vcpu_top;
     sim_time = 0;
 
     #ifdef CONFIG_VCD

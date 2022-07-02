@@ -17,7 +17,7 @@ extern "C" {
     extern void ebreak();
     // DPI import at /home/yfwu/ysyx-workbench/npc/vsrc/single_cyc/ysyx_22040237_exu.v:2:30
     extern void invalid_inst_o();
-    // DPI import at /home/yfwu/ysyx-workbench/npc/vsrc/single_cyc/ysyx_22040237_reg_file.v:1:30
+    // DPI import at /home/yfwu/ysyx-workbench/npc/vsrc/single_cyc/ysyx_22040237_regs.v:1:30
     extern void set_gpr_ptr(const svOpenArrayHandle a);
 
 #ifdef __cplusplus

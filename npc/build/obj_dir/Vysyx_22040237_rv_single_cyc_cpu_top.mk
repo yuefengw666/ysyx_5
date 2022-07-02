@@ -59,8 +59,8 @@ VM_USER_LDLIBS = \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
-	dpi \
 	difftest \
+	dpi \
 	mem \
 	monitor \
 	expr \
@@ -76,8 +76,8 @@ VM_USER_CLASSES = \
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
 	/home/yfwu/ysyx-workbench/npc/csrc \
-	/home/yfwu/ysyx-workbench/npc/csrc/DPI_C \
 	/home/yfwu/ysyx-workbench/npc/csrc/difftest \
+	/home/yfwu/ysyx-workbench/npc/csrc/dpi_c \
 	/home/yfwu/ysyx-workbench/npc/csrc/mem \
 	/home/yfwu/ysyx-workbench/npc/csrc/monitor \
 	/home/yfwu/ysyx-workbench/npc/csrc/monitor/sdb \
@@ -94,9 +94,9 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
-dpi.o: /home/yfwu/ysyx-workbench/npc/csrc/DPI_C/dpi.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 difftest.o: /home/yfwu/ysyx-workbench/npc/csrc/difftest/difftest.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+dpi.o: /home/yfwu/ysyx-workbench/npc/csrc/dpi_c/dpi.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 mem.o: /home/yfwu/ysyx-workbench/npc/csrc/mem/mem.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<

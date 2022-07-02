@@ -1,15 +1,42 @@
+
+`define ysyx_22040237_INST_WIDTH 32
+`define ysyx_22040237_REG_WIDTH 64
 `define ysyx_22040237_PC_RESET_ADDR 64'h80000000
+`define ysyx_22040237_ZERO_REG 5'b0_0000
+`define ysyx_22040237_REG_RESET 64'b0
 
-//inst opcode 
-`define ysyx_22040237_INST_ADD 8'h01
+//different type of inst_info_bus 
+`define ysyx_22040237_EXU_INFO_ALU 3'b000;
+`define ysyx_22040237_EXU_INFO_BJP 3'b001;
+`define ysyx_22040237_EXU_INFO_LS  3'b011;
 
-//regs.v
-`define ysyx_22040237_REGS_INIT 64'h0
+//alu_info_bus has
+`define ysyx_22040237_EXU_INFO_ALU_ADD     3
+`define ysyx_22040237_EXU_INFO_ALU_SUB     4
+`define ysyx_22040237_EXU_INFO_ALU_SLL     5
+`define ysyx_22040237_EXU_INFO_ALU_SLT     6
+`define ysyx_22040237_EXU_INFO_ALU_SLTU    7
+`define ysyx_22040237_EXU_INFO_ALU_XOR     8
+`define ysyx_22040237_EXU_INFO_ALU_SRL     9
+`define ysyx_22040237_EXU_INFO_ALU_SRA     10
+`define ysyx_22040237_EXU_INFO_ALU_OR      11
+`define ysyx_22040237_EXU_INFO_ALU_AND     12
+`define ysyx_22040237_EXU_INFO_ALU_LUI     13
+`define ysyx_22040237_EXU_INFO_ALU_EBREAK     14
 
-//inst type
-`define ysyx_22040237_INST_R 6'b000001
-`define ysyx_22040237_INST_I 6'b000010
-`define ysyx_22040237_INST_S 6'b000100
-`define ysyx_22040237_INST_B 6'b001000
-`define ysyx_22040237_INST_U 6'b010000
-`define ysyx_22040237_INST_J 6'b100000
+//bjp_info_bus has
+`define ysyx_22040237_EXU_INFO_BJP_JAL 3
+`define ysyx_22040237_EXU_INFO_BJP_JALR 4
+`define ysyx_22040237_EXU_INFO_BJP_BEQ  5
+`define ysyx_22040237_EXU_INFO_BJP_BNE  6
+`define ysyx_22040237_EXU_INFO_BJP_BLT  7
+`define ysyx_22040237_EXU_INFO_BJP_BGE  8
+`define ysyx_22040237_EXU_INFO_BJP_BLTU 9
+`define ysyx_22040237_EXU_INFO_BJP_BGEU 10
+
+//ls_info_bus
+`define ysyx_22040237_EXU_INFO_LS_LOAD     3
+`define ysyx_22040237_EXU_INFO_LS_STORE    4
+
+
+
