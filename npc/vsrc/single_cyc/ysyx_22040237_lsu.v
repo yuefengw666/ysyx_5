@@ -1,5 +1,5 @@
-import "DPI-C" function void mem_read(
-  input longint raddr, output longint rdata);
+//import "DPI-C" function void mem_read(
+//  input longint raddr, output longint rdata);
 
 module ysyx_22040237_lsu(
   //input clk,

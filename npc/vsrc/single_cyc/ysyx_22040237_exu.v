@@ -40,7 +40,7 @@ end
 
 /*************************DPI_C identify invalid inst, sim stop***************/
 always@(posedge clk)begin
-  if((!rst) && invalid_inst)begin
+  if((!rst) && invalid_inst_i)begin
     invalid_inst_o(); 
   end
 end
@@ -50,17 +50,17 @@ assign rd_wr_en_o = rd_wr_en_i;
 assign rd_idx_o = rd_idx_i;
 
 //**********identify alu bjp...**********//
-wire alu_req = exu_info_bus[2:0] == `ysyx_22040237_EXU_INFO_ALU;
-wire bjp_req = exu_info_bus[2:0] == `ysyx_22040237_EXU_INFO_BJP;
+wire alu_req = exu_info_bus_i[2:0] == `ysyx_22040237_EXU_INFO_ALU;
+wire bjp_req = exu_info_bus_i[2:0] == `ysyx_22040237_EXU_INFO_BJP;
 
 //**********alu req**********//
 //add
-wire op_add = ( ( alu_req & exu_info_bus[`ysyx_22040237_EXU_INFO_ALU_ADD] ) | 
+wire op_add = ( ( alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_ADD] ) | 
                 op_jal |
                 op_jalr
               );
 
-wire op_sub = ( ( alu_req & exu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SUB] ) | 
+wire op_sub = ( ( alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SUB] ) | 
                  op_slt_sltu |
                  op_beq |
                  op_bne |
@@ -94,15 +94,15 @@ assign sll_res = op1_i << op2_i[5:0];
 
 //slt sltu
 wire [`ysyx_22040237_REG_WIDTH-1:0] slt_sltu_res;
-wire op_slt_sltu = alu_req & ( exu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLT] |
-                               exu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLTU]  );
+wire op_slt_sltu = alu_req & ( exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SLT] |
+                               exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SLTU]  );
 wire slt_sltu_cmp_res = op_slt_sltu & adder_res[`ysyx_22040237_REG_WIDTH];
 
 assign slt_sltu_res = slt_sltu_cmp_res ? 64'h1 : 64'h0;
 
 //xor
 wire [`ysyx_22040237_REG_WIDTH-1:0] xor_res;
-wire op_xor = alu_req && exu_info_bus[`ysyx_22040237_EXU_INFO_ALU_XOR]; 
+wire op_xor = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_XOR]; 
 wire [`ysyx_22040237_REG_WIDTH-1:0] xor_in1 = op1_i;
 wire [`ysyx_22040237_REG_WIDTH-1:0] xor_in2 = op2_i;
 
@@ -110,73 +110,73 @@ assign xor_res = xor_in1 ^ xor_in2;
 
 //srl 
 wire [`ysyx_22040237_REG_WIDTH-1:0] srl_res;
-wire op_srl = alu_req && exu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SRL];
+wire op_srl = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SRL];
 
 assign srl_res = op1_i >> op2_i[5:0];
 
 //sra
 wire [`ysyx_22040237_REG_WIDTH-1:0] sra_res;
-wire op_sra = alu_req && exu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SRA];
+wire op_sra = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SRA];
 wire [`ysyx_22040237_REG_WIDTH-1:0] sra_shift_mask = 64'b1 >> op2_i[5:0];
 
-assign sra_res = srl_res | (~sra_mask);
+assign sra_res = srl_res | (~sra_shift_mask);
 
 //or
 wire [`ysyx_22040237_REG_WIDTH-1:0] or_res;
-wire op_or = alu_req && exu_info_bus[`ysyx_22040237_EXU_INFO_ALU_OR];
+wire op_or = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_OR];
 
 assign or_res = op1_i | op2_i;
 
 //and
 wire [`ysyx_22040237_REG_WIDTH-1:0] and_res;
-wire op_and = alu_req && exu_info_bus[`ysyx_22040237_EXU_INFO_ALU_AND];
+wire op_and = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_AND];
 
 assign and_res = op1_i & op2_i;
 
 //lui
 wire [`ysyx_22040237_REG_WIDTH-1:0] lui_res;
-wire op_lui = alu_req && exu_info_bus[`ysyx_22040237_EXU_INFO_ALU_LUI];
+wire op_lui = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_LUI];
 
 assign lui_res = op2_i;
 
 
 
 //**************bjp req***************//
-assign pc_jump_flag = op_jal | op_jalr | beq_res | bne_res | blt_res | bge_res | bltu_res | bgeu_res;
-assign pc_jump_addr = op1_jp_i + op2_jp_i;
+assign pc_jump_flag_o = op_jal | op_jalr | beq_res | bne_res | blt_res | bge_res | bltu_res | bgeu_res;
+assign pc_jump_addr_o = op1_jp_i + op2_jp_i;
 
 //jal
-wire op_jal = bjp_req && exu_info_bus[`ysyx_22040237_EXU_INFO_BJP_JAL];
+wire op_jal = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_JAL];
 
 //jalr
-wire op_jalr = bjp_req && exu_info_bus[`ysyx_22040237_EXU_INFO_BJP_JALR];
+wire op_jalr = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_JALR];
 
 //beq judge sub result 
 wire [`ysyx_22040237_REG_WIDTH:0] bjp_sub_res = adder_res;
 
 //beq
-wire op_beq = bjp_req && exu_info_bus[`ysyx_22040237_EXU_INFO_BJP_BEQ];
+wire op_beq = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BEQ];
 wire beq_res = adder_res == `ysyx_22040237_REG_WIDTH'b0;
 
 //bne
-wire op_bne = bjp_req && exu_info_bus[`ysyx_22040237_EXU_INFO_BJP_BNE];
+wire op_bne = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BNE];
 wire bne_res = !beq_res;
 
 //blt
-wire op_blt = bjp_req && exu_info_bus[`ysyx_22040237_EXU_INFO_BJP_BLT];
+wire op_blt = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BLT];
 wire blt_res = adder_res[`ysyx_22040237_REG_WIDTH];
 
 //bge
-wire op_bge = bjp_req && exu_info_bus[`ysyx_22040237_EXU_INFO_BJP_BGE];
+wire op_bge = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BGE];
 wire bge_res = !blt_res;
 
 //bltu
-wire op_bltu = bjp_req && exu_info_bus[`ysyx_22040237_EXU_INFO_BJP_BLTU];
+wire op_bltu = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BLTU];
 wire bltu_res = adder_res[`ysyx_22040237_REG_WIDTH];
 
 //bgeu
-wire op_bgeu = bjp_req && exu_info_bus[`ysyx_22040237_EXU_INFO_BJP_BGEU];
-wire bgeu_res = !bltu;
+wire op_bgeu = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BGEU];
+wire bgeu_res = !bltu_res;
 
 
 //alu result

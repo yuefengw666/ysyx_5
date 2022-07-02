@@ -42,7 +42,7 @@ end
 assign rs1_data_o = rs1_read_en_i ? regs[rs1_idx_i] : `ysyx_22040237_REG_RESET;
 assign rs2_data_o = rs2_read_en_i ? regs[rs2_idx_i] : `ysyx_22040237_REG_RESET;
 
-assign regs_wr_en = rd_wr_en && (rd_idx !=5'b0);
+assign regs_wr_en = rd_wr_en_i && (rd_idx_i !=5'b0);
 
 always@(posedge clk)begin
   if(rst)begin

@@ -20,12 +20,13 @@ wire [`ysyx_22040237_INST_WIDTH-1:0] pc_to_idu;
 wire [`ysyx_22040237_INST_WIDTH -1:0] inst_to_idu;
 
 ysyx_22040237_ifu ifu_u0(
-  .pc_i (pc_to_idu),
+  .pc_i (pc_to_ifu),
+  .pc_o (pc_to_idu),
   .inst_o (inst_to_idu)
 );
 
 //idu
-wire rd_wr_en_to_idu;
+wire rd_wr_en_to_exu;
 wire rs1_read_en_to_regs;
 wire rs2_read_en_to_regs;
 wire [4:0] rd_idx_to_exu;
@@ -46,12 +47,12 @@ ysyx_22040237_idu idu_u0(
   .rs1_data_i (rs1_data_to_idu),
   .rs2_data_i (rs2_data_to_idu),
   
-  .rd_wr_en (rd_wr_en_to_exu),
-  .rs1_read_en (rs1_read_en_to_regs),
-  .rs2_read_en  (rs2_read_en_to_regs),
-  .rd_idx (rd_idx_to_exu),
-  .rs1_idx (rs1_idx_to_regs),
-  .rs2_idx (rs2_idx_to_regs),
+  .rd_wr_en_o (rd_wr_en_to_exu),
+  .rs1_read_en_o (rs1_read_en_to_regs),
+  .rs2_read_en_o  (rs2_read_en_to_regs),
+  .rd_idx_o (rd_idx_to_exu),
+  .rs1_idx_o (rs1_idx_to_regs),
+  .rs2_idx_o (rs2_idx_to_regs),
 
   .op1_o (op1_to_exu),
   .op2_o (op2_to_exu),
@@ -105,7 +106,7 @@ ysyx_22040237_lsu lsu_u0(
 
   .rd_wr_en_o (rd_wr_en_to_wbu),
   .rd_idx_o (rd_idx_to_wbu),
-  .rd_data_o (rd_data_to_wbu),
+  .rd_data_o (rd_data_to_wbu)
 );
 
 //wbu
@@ -115,7 +116,7 @@ wire [63:0] rd_data_to_regs;
 ysyx_22040237_wbu wbu_u0(
   .rd_wr_en_i (rd_wr_en_to_wbu),
   .rd_idx_i (rd_idx_to_wbu),
-  .rd_data_i (alu_res_to_wbu),
+  .rd_data_i (rd_data_to_wbu),
 
   .rd_wr_en_o (rd_wr_en_to_regs),
   .rd_idx_o (rd_idx_to_regs),

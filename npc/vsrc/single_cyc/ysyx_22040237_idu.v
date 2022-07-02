@@ -1,6 +1,4 @@
 module ysyx_22040237_idu(
-  input clk,
-  input rst,
   input [31:0] inst_i,
   input [63:0] pc_i,
   
@@ -45,38 +43,38 @@ assign rs2_idx_o = rs2;
 
 /*************decode inst opcode**********/
 //RV64I Rtype  and  RV64M Rtype   0110011
-wire rv64_R = !opcode[6] & opcode[5] & opdcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
+wire rv64_R = !opcode[6] & opcode[5] & opcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
 
 //RV64I Itype   0010011
-wire rv64_I = !opcode[6] & !opcode[5] & opdcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
+wire rv64_I = !opcode[6] & !opcode[5] & opcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
 
 //RV64I load type 0000011
-wire rv64_L = !opcode[6] & !opcode[5] & !opdcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
+wire rv64_L = !opcode[6] & !opcode[5] & !opcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
 
 //RV64I Stype 0100011
-wire rv64_S = !opcode[6] & opcode[5] & !opdcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
+wire rv64_S = !opcode[6] & opcode[5] & !opcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
 
 //RV64I Btype 1100011
-wire rv64_B = opcode[6] & opcode[5] & !opdcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
+wire rv64_B = opcode[6] & opcode[5] & !opcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
 
 //RV64I jump    JAL:1101111    JALR:1100111
-wire rv64_JAL = opcode[6] & opcode[5] & !opdcode[4] & opcode[3] & opcode[2] & opcode[1] & opcode[0];
-wire rv64_JALR = opcode[6] & opcode[5] & !opdcode[4] & !opcode[3] & opcode[2] & opcode[1] & opcode[0];
+wire rv64_JAL = opcode[6] & opcode[5] & !opcode[4] & opcode[3] & opcode[2] & opcode[1] & opcode[0];
+wire rv64_JALR = opcode[6] & opcode[5] & !opcode[4] & !opcode[3] & opcode[2] & opcode[1] & opcode[0];
 
 //RV64I Utype   lui:0110111    auipc:0010111
-wire rv64_LUI = !opcode[6] & opcode[5] & opdcode[4] & !opcode[3] & opcode[2] & opcode[1] & opcode[0];
-wire rv64_AUIPC = !opcode[6] & !opcode[5] & opdcode[4] & !opcode[3] & opcode[2] & opcode[1] & opcode[0];
+wire rv64_LUI = !opcode[6] & opcode[5] & opcode[4] & !opcode[3] & opcode[2] & opcode[1] & opcode[0];
+wire rv64_AUIPC = !opcode[6] & !opcode[5] & opcode[4] & !opcode[3] & opcode[2] & opcode[1] & opcode[0];
 
 //RV64I environment call(1110011) and break(1110011)
-//wire inst_type_ECALL = opcode[6] & opcode[5] & opdcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
-wire rv64_EBREAK = opcode[6] & opcode[5] & opdcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
+//wire inst_type_ECALL = opcode[6] & opcode[5] & opcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
+wire rv64_EBREAK = opcode[6] & opcode[5] & opcode[4] & !opcode[3] & !opcode[2] & opcode[1] & opcode[0];
 
 /*************decode imm****************/
-wire [63:0] imm_i = { { 52{inst[31]} }, inst[31:20] };
-wire [63:0] imm_s = { { 52{inst[31]} }, inst[31:25], inst[11:7] };
-wire [63:0] imm_b = { { 51{isnt[31]} }, inst[31], inst[7], inst[30:25], inst[11:8], 1'b0 };
-wire [63:0] imm_u = { { 32{inst[31]} }, inst[31:12], 12'b0 };
-wire [63:0] imm_j = { { 43{inst[31]} }, inst[31], inst[19:12], inst[20], inst[30:21], 1'b0 };
+wire [63:0] imm_i = { { 52{inst_i[31]} }, inst_i[31:20] };
+wire [63:0] imm_s = { { 52{inst_i[31]} }, inst_i[31:25], inst_i[11:7] };
+wire [63:0] imm_b = { { 51{inst_i[31]} }, inst_i[31], inst_i[7], inst_i[30:25], inst_i[11:8], 1'b0 };
+wire [63:0] imm_u = { { 32{inst_i[31]} }, inst_i[31:12], 12'b0 };
+wire [63:0] imm_j = { { 43{inst_i[31]} }, inst_i[31], inst_i[19:12], inst_i[20], inst_i[30:21], 1'b0 };
 
 wire [63:0] imm_u_sl = imm_u << 12;
 
@@ -186,12 +184,12 @@ assign op1_o = ( ( {64{op1_rs1_need}} & rs1_data_i) |
 
 assign op2_o = ( ( {64{op2_rs2_need}} & rs2_data_i ) |
                  ( {64{op2_imm_need}} & imm ) |
-                 ( {64{op2_0x4}} & 64'h4 ) );
+                 ( {64{op2_0x4_need}} & 64'h4 ) );
 
 assign op1_jp_o = ( ( {64{op1_jp_rs1_need}} & rs1_data_i) | 
                       ( {64{op1_jp_pc_need}} & pc_i) );
 
-assign op2_jump_o = ( {64{op2_jp_imm_need}} & imm ); 
+assign op2_jp_o = ( {64{op2_jp_imm_need}} & imm ); 
 
 
 //operation need alu

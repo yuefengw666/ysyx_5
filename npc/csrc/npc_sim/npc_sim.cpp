@@ -116,11 +116,11 @@ void npc_reset(){
         }
         
         if(dut->rst != 1){
-            dut->inst_in = pmem_read(dut->pc);
-            dut->eval();
+            //dut->inst_in = pmem_read(dut->pc);
+            //dut->eval();
             
             //itrace
-            npc_cpu.inst_val = dut->inst_in;
+            //npc_cpu.inst_val = dut->inst_in;
             
             #ifdef CONFIG_ITRACE
                 itrace(&npc_cpu);
@@ -151,10 +151,12 @@ static void npc_sim_half(){
 
     dut->clk ^= 1;
     dut->eval();
+    /*
     if( dut->clk == 1 && dut->rst != 1){
         dut->inst_in = pmem_read(dut->pc);
         dut->eval();
     }
+    */
     #ifdef CONFIG_VCD
         m_trace->dump(sim_time);
     #endif
@@ -170,7 +172,7 @@ void npc_regs_display();
 static void exec_once(NPC_CPU *s){
     npc_sim_once();
     
-    s->inst_val = dut->inst_in;
+    //s->inst_val = dut->inst_in;
     #ifdef CONFIG_ITRACE
         itrace(s);
     #endif
