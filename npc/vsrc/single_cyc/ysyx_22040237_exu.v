@@ -67,7 +67,7 @@ wire op_sub = ( ( alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SUB] ) |
                  op_blt |
                  op_bge |
                  op_bltu |
-                 op_bge
+                 op_bgeu
               );
 
 wire op_add_sub = op_add | op_sub;
@@ -152,7 +152,7 @@ wire op_jal = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_JAL];
 wire op_jalr = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_JALR];
 
 //beq judge sub result 
-wire [`ysyx_22040237_REG_WIDTH:0] bjp_sub_res = adder_res;
+//wire [`ysyx_22040237_REG_WIDTH:0] bjp_sub_res = adder_res;
 
 //beq
 wire op_beq = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BEQ];

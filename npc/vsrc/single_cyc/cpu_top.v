@@ -16,7 +16,7 @@ ysyx_22040237_pc_reg pc_reg_u0(
 );
 
 //ifu
-wire [`ysyx_22040237_INST_WIDTH-1:0] pc_to_idu;
+wire [`ysyx_22040237_REG_WIDTH-1:0] pc_to_idu;
 wire [`ysyx_22040237_INST_WIDTH -1:0] inst_to_idu;
 
 ysyx_22040237_ifu ifu_u0(
