@@ -25,7 +25,7 @@ module ysyx_22040237_exu(
 
 
 /*************************DPI_C sim end***************************************/
-  input invalid_inst_i
+  input invalid_inst
 /*****************************************************************************/
 
 );
@@ -40,7 +40,7 @@ end
 
 /*************************DPI_C identify invalid inst, sim stop***************/
 always@(posedge clk)begin
-  if((!rst) && invalid_inst_i)begin
+  if((!rst) && invalid_inst)begin
     invalid_inst_o(); 
   end
 end

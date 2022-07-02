@@ -20,7 +20,7 @@ module ysyx_22040237_idu(
   output [14:0] exu_info_bus_o,
 
   //**************DPI_C identify invalid inst for sim*****************/
-  output invalid_inst_o
+  output invalid_inst
   /*******************************************************************/
 );
 

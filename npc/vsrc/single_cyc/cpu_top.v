@@ -59,7 +59,7 @@ ysyx_22040237_idu idu_u0(
   .op1_jp_o (op1_jp_to_exu),
   .op2_jp_o (op2_jp_to_exu),
   .exu_info_bus_o (exu_info_bus_to_exu),
-  .invalid_inst_o (invalid_inst_to_exu)
+  .invalid_inst (invalid_inst_to_exu)
 );
 
 //exu
@@ -91,7 +91,7 @@ ysyx_22040237_exu exu_u0(
 
 
 /*************************DPI_C sim end***************************************/
-  .invalid_inst_i (invalid_inst_to_exu)
+  .invalid_inst (invalid_inst_to_exu)
 /*****************************************************************************/
 );
 

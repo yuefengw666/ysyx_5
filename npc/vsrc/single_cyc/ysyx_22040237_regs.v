@@ -20,7 +20,7 @@ module ysyx_22040237_regs(
 );
 
 reg [`ysyx_22040237_REG_WIDTH-1:0] regs[0:31];
-wire r_wr_en;
+wire regs_wr_en;
 
 /*--------DPI_C to get gpr state ot simulation  environment--------------*/
 integer i;
@@ -81,7 +81,7 @@ always@(posedge clk)begin
   end
   else begin
     if(regs_wr_en)begin
-      regs[rd_idx] <= rd_wr_data_i;
+      regs[rd_idx_i] <= rd_wr_data_i;
     end
   end
 end
