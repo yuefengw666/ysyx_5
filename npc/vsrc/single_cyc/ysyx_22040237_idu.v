@@ -185,11 +185,11 @@ assign op1_o = ( ( {64{op1_rs1_need}} & rs1_data_i) |
                  ( {64{op1_pc_need}} & pc_i ));
 
 assign op2_o = ( ( {64{op2_rs2_need}} & rs2_data_i ) |
-                 ( {64{op2_imm_need} & imm} ) |
-                 ( {64{op2_0x4} & 64'h4} ) );
+                 ( {64{op2_imm_need}} & imm ) |
+                 ( {64{op2_0x4}} & 64'h4 ) );
 
 assign op1_jp_o = ( ( {64{op1_jp_rs1_need}} & rs1_data_i) | 
-                      ( {64{op1_jp_pc_need} & pc_i}) );
+                      ( {64{op1_jp_pc_need}} & pc_i) );
 
 assign op2_jump_o = ( {64{op2_jp_imm_need}} & imm ); 
 
