@@ -20,7 +20,7 @@ word_t pmem_read(paddr_t addr){
       word_t ret = host_read(guest_to_host(addr));
       return ret;
     }
-    printf("read address = %llx is out of bound of pmem.\n",addr);
+    printf("read address = %x is out of bound of pmem.\n",addr);
     return 0;
 }
 
@@ -29,5 +29,5 @@ void pmem_write(paddr_t addr, word_t data){
         host_write(guest_to_host(addr), data);
         return;
     }
-    printf("write address = %llx is out of bound of pmem.", addr);
+    printf("write address = %x is out of bound of pmem.", addr);
 }
