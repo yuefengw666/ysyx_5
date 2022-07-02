@@ -10,7 +10,7 @@ module ysyx_22040237_wbu(
 
   output rd_wr_en_o,
   output [4:0] rd_idx_o,
-  output [`ysyx_22040237_REG_WIDTH-1:0] rd_data_o,
+  output [`ysyx_22040237_REG_WIDTH-1:0] rd_data_o
   
   //input mem_wr_en_i,
   //input [63:0] mem_wr_addr_i,

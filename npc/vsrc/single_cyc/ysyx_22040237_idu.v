@@ -5,7 +5,7 @@ module ysyx_22040237_idu(
   input [63:0] pc_i,
   
   input [63:0] rs1_data_i,
-  input [63:0] rs2_data_i;
+  input [63:0] rs2_data_i,
 
   output rd_wr_en_o,
   output rs1_read_en_o,
@@ -149,11 +149,12 @@ wire ebreak = rv64_EBREAK & funct3_0x0 & (imm_i == 'b1);
 
 
 // confirm imm
-assign imm = ( ( {64{rv64_I |  rv64_L | jalr} } & imm_i ) | 
-             ( {64{rv64_S}} & imm_s ) | 
-             ( {64{rv64_B}} & imm_b ) |
-             ( {64{jal}} & imm_j) | 
-             ( {64{auipc | lui}} & imm_u_sl ));
+wire [`ysyx_22040237_REG_WIDTH-1:0] imm = ( ( {64{rv64_I |  rv64_L | jalr} } & imm_i ) | 
+                                          ( {64{rv64_S}} & imm_s ) | 
+                                          ( {64{rv64_B}} & imm_b ) |
+                                          ( {64{jal}} & imm_j) | 
+                                          ( {64{auipc | lui}} & imm_u_sl ) 
+                                          );
 
 //---------------------------------------------------------------
 //wire rs1_0x = rs1 == 5'b00000;

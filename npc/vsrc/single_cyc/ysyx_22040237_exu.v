@@ -67,7 +67,7 @@ wire op_sub = ( ( alu_req & exu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SUB] ) |
                  op_blt |
                  op_bge |
                  op_bltu |
-                 op_bge |
+                 op_bge
               );
 
 wire op_add_sub = op_add | op_sub;
@@ -183,14 +183,14 @@ wire bgeu_res = !bltu;
 
 assign alu_res_o = ( ( {64{op_add_sub}} & adder_res[`ysyx_22040237_REG_WIDTH-1 : 0] ) | 
                    ( {64{op_sll}} & sll_res ) |
-                   ( {64{op_slt_sltu} & slt_sltu_res } ) |
-                   ( {64{op_xor} & xor_res} ) |
-                   ( {64{op_srl} & srl_res} ) |
-                   ( {64{op_sra} & sra_res} ) |
-                   ( {64{op_or} & or_res}) | 
+                   ( {64{op_slt_sltu}} & slt_sltu_res ) |
+                   ( {64{op_xor}} & xor_res ) |
+                   ( {64{op_srl}} & srl_res ) |
+                   ( {64{op_sra}} & sra_res ) |
+                   ( {64{op_or}} & or_res ) | 
                    ( {64{op_and}} & and_res) |
-                   ( {64{op_lui}} & lui_res) | 
-                  );
+                   ( {64{op_lui}} & lui_res)  
+                );
 
 
 endmodule
