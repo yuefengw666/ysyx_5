@@ -192,7 +192,6 @@ assign op1_jp_o = ( ( {64{op1_jp_rs1_need}} & rs1_data_i) |
 assign op2_jp_o = ( {64{op2_jp_imm_need}} & imm ); 
 
 
-/* verilator lint_off WIDTH */
 //operation need alu
 wire alu_op = rv64_R | rv64_I | auipc | lui;
 
@@ -246,5 +245,5 @@ assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_SIZE] =  1'b0;
 
 
 assign exu_info_bus_o = ( ( {15{alu_op}} & alu_info_bus) | ( {15{bjp_op}} & bjp_info_bus) );
-/* verilator lint_on WIDTH */
+
 endmodule
