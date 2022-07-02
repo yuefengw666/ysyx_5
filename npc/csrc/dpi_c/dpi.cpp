@@ -32,7 +32,7 @@ void invalid_inst_o(){
 
 extern "C" void mem_read(long long raddr, long long *rdata){
   if( raddr < CONFIG_MBASE && raddr >= CONFIG_MBASE + CONFIG_MSIZE) {
-    printf("Read mem address = %lx is out of bound of mem.\n", raddr);
+    printf("Read mem address = %llx is out of bound of mem.\n", raddr);
     return;
   }
   
@@ -42,7 +42,7 @@ extern "C" void mem_read(long long raddr, long long *rdata){
 
 extern "C" void mem_write(long long waddr, long long wdata, char wmask){
   if( waddr < CONFIG_MBASE && waddr >= CONFIG_MBASE + CONFIG_MSIZE) {
-    printf("Write mem address = %lx is out of bound of mem.\n", waddr);
+    printf("Write mem address = %llx is out of bound of mem.\n", waddr);
     return;
   }
 
