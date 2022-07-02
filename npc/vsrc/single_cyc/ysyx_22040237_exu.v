@@ -88,7 +88,7 @@ assign adder_res = adder_in1 + adder_in2 + adder_cin;
 
 //sll slli
 wire sll_res[`ysyx_22040237_REG_WIDTH-1 :0];
-wire op_sll = alu_req && enx_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLL];
+wire op_sll = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SLL];
 
 assign sll_res = op1_i << op2_i[5:0];
 

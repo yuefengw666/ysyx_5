@@ -8,7 +8,7 @@ module ysyx_22040237_regs(
   input [63:0] pc_i,
   /*---------------------------------------------------------*/
   input rd_wr_en_i,
-  input [4:0] rd_wr_idx_i,
+  input [4:0] rd_idx_i,
   input [`ysyx_22040237_REG_WIDTH -1 :0] rd_wr_data_i,
   
   input rs1_read_en_i,

@@ -133,7 +133,7 @@ ysyx_22040237_regs ysyx_22040237_regs_u0(
   .pc_i (pc_to_idu),
   
   .rd_wr_en_i (rd_wr_en_to_regs),
-  .rd_wr_idx_i (rd_idx_to_regs),
+  .rd_idx_i (rd_idx_to_regs),
   .rd_wr_data_i (rd_data_to_regs),
   .rs1_read_en_i (rs1_read_en_to_regs),
   .rs2_read_en_i (rs2_read_en_to_regs),
