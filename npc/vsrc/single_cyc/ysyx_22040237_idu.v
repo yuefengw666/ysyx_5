@@ -216,6 +216,18 @@ assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_EBREAK] = ebreak;
 //bjp_info_bus
 wire bjp_op = rv64_B | jal | jalr;
 wire bjp_info_bus[14:0];
+assign bjp_info_bus = { 4'b0, 
+                        bgeu,
+                        bltu,
+                        bge,
+                        blt,
+                        bne,
+                        beq,
+                        jalr,
+                        jal,
+                        3'b001
+                        };
+/*
 assign bjp_info_bus[0] = 1'b1;
 assign bjp_info_bus[1] = 1'b0;
 assign bjp_info_bus[2] = 1'b0;
@@ -231,7 +243,7 @@ assign bjp_info_bus[11] = 1'b0;
 assign bjp_info_bus[12] = 1'b0;
 assign bjp_info_bus[13] = 1'b0;
 assign bjp_info_bus[14] = 1'b0;
-
+*/
 /*
 //ls_info_bus
 wire ls_info_bus[];
