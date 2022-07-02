@@ -7,8 +7,8 @@
 
 //different type of inst_info_bus 
 `define ysyx_22040237_EXU_INFO_ALU 3'd0;
-`define ysyx_22040237_EXU_INFO_BJP 3'b001;
-`define ysyx_22040237_EXU_INFO_LS  3'b011;
+`define ysyx_22040237_EXU_INFO_BJP 3'd1;
+`define ysyx_22040237_EXU_INFO_LS  3'd2;
 
 //alu_info_bus has
 `define ysyx_22040237_EXU_INFO_ALU_ADD     3

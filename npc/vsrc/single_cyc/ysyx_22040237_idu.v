@@ -244,11 +244,9 @@ assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_SIZE] =  1'b0;
 */
 
 
-//  14 inst_inst_bus width
-/*
+// verilator lint_off UNSIGNED
 assign exu_info_bus_o = ( ( {15{alu_op}} & alu_info_bus) |
                          ( {15{bjp_op}} & bjp_info_bus) );
-*/
-assign exu_info_bus_o = alu_op ? alu_info_bus : bjp_info_bus;
+// verilator lint_on UNSIGNED
 
 endmodule
