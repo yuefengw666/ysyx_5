@@ -82,15 +82,16 @@ wire [`ysyx_22040237_REG_WIDTH : 0] adder_op2 = { op2_i[`ysyx_22040237_REG_WIDTH
 
 assign adder_in1 = adder_op1; //{64{op_add_sub}} & op1_i;
 assign adder_in2 = (op_sub ? ~adder_op2 : adder_op2); //{64{op_add_sub}} & (op_sub ? ~op2_i : op2_i);
-assign adder_cin = op_sub;
+assign adder_cin = op_sub ? 64'h1 : 64'h0;
 
 assign adder_res = adder_in1 + adder_in2 + adder_cin;
 
 //sll slli
-wire sll_res[`ysyx_22040237_REG_WIDTH-1 :0];
+//wire sll_res[`ysyx_22040237_REG_WIDTH-1 :0];
 wire op_sll = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SLL];
 
-assign sll_res = op1_i << op2_i[5:0];
+wire sll_res[`ysyx_22040237_REG_WIDTH-1 :0] = op1_i << op2_i[5:0];
+//assign sll_res = op1_i << op2_i[5:0];
 
 //slt sltu
 wire [`ysyx_22040237_REG_WIDTH-1:0] slt_sltu_res;
@@ -156,7 +157,7 @@ wire op_jalr = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_JALR];
 
 //beq
 wire op_beq = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BEQ];
-wire beq_res = adder_res == `ysyx_22040237_REG_WIDTH'b0;
+wire beq_res = adder_res == 65'b0;
 
 //bne
 wire op_bne = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BNE];

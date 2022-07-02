@@ -6,7 +6,7 @@
 `define ysyx_22040237_REG_RESET 64'b0
 
 //different type of inst_info_bus 
-`define ysyx_22040237_EXU_INFO_ALU 3'b000;
+`define ysyx_22040237_EXU_INFO_ALU 3'd0;
 `define ysyx_22040237_EXU_INFO_BJP 3'b001;
 `define ysyx_22040237_EXU_INFO_LS  3'b011;
 
