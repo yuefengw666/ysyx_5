@@ -46,7 +46,7 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
     return;
   }
 
-  uint8_t *mem_wr_pt = npc_guest_mem(long long waddr);
+  uint8_t *mem_wr_pt = npc_guest_mem(waddr);
 
   for(int i=0; i<8; i++){
     if( wmask & 1) {
