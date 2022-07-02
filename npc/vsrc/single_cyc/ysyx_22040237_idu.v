@@ -216,7 +216,6 @@ assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_EBREAK] = ebreak;
 //bjp_info_bus
 wire bjp_op = rv64_B | jal | jalr;
 reg bjp_info_bus[14:0];
-assign 
 always@(*) begin
   bjp_info_bus = { 4'b0, 
                         bgeu,
