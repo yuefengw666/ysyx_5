@@ -74,7 +74,7 @@ wire op_add_sub = op_add | op_sub;
 
 wire [`ysyx_22040237_REG_WIDTH : 0] adder_in1;
 wire [`ysyx_22040237_REG_WIDTH : 0] adder_in2;
-wire adder_cin;
+wire [`ysyx_22040237_REG_WIDTH : 0]adder_cin;
 wire [`ysyx_22040237_REG_WIDTH : 0] adder_res;
 
 wire [`ysyx_22040237_REG_WIDTH : 0] adder_op1 = { op1_i[`ysyx_22040237_REG_WIDTH-1], op1_i};
@@ -82,7 +82,7 @@ wire [`ysyx_22040237_REG_WIDTH : 0] adder_op2 = { op2_i[`ysyx_22040237_REG_WIDTH
 
 assign adder_in1 = adder_op1; //{64{op_add_sub}} & op1_i;
 assign adder_in2 = (op_sub ? ~adder_op2 : adder_op2); //{64{op_add_sub}} & (op_sub ? ~op2_i : op2_i);
-assign adder_cin = op_sub ? 64'h1 : 64'h0;
+assign adder_cin = op_sub ? 65'h1 : 65'h0;
 
 assign adder_res = adder_in1 + adder_in2 + adder_cin;
 
