@@ -195,7 +195,7 @@ assign op2_jp_o = ( {64{op2_jp_imm_need}} & imm );
 //operation need alu
 wire alu_op = rv64_R | rv64_I | auipc | lui;
 
-wire alu_info_bus[14:0];
+wire [14:0] alu_info_bus;
 /*
 assign alu_info_bus[0] = 1'b0;
 assign alu_info_bus[1] = 1'b0;
@@ -230,7 +230,7 @@ assign alu_info_bus[13] = lui;
 assign alu_info_bus[14] = ebreak;
 //bjp_info_bus
 wire bjp_op = rv64_B | jal | jalr;
-wire bjp_info_bus[14:0];
+wire [14:0] bjp_info_bus[14:0];
 
 /*
 assign bjp_info_bus[0] = 1'b1;
