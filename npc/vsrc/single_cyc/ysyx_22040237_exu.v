@@ -31,7 +31,7 @@ module ysyx_22040237_exu(
 );
 
 /*************************DPI_C sim end***************************************/
-wire ebreak = exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_EBREAK];
+wire ebreak = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_EBREAK];
 
 always@(posedge clk)begin
   if(ebreak) sim_ebreak();

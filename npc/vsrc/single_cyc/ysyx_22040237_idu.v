@@ -193,7 +193,7 @@ assign op2_jp_o = ( {64{op2_jp_imm_need}} & imm );
 
 
 //operation need alu
-wire alu_op = rv64_R | rv64_I | auipc | lui;
+wire alu_op = rv64_R | rv64_I | auipc | lui | ebreak;
 
 wire [14:0] alu_info_bus;
 /*
