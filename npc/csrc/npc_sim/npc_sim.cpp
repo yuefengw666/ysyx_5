@@ -121,7 +121,7 @@ void npc_reset(){
             //dut->eval();
             
             //itrace
-            //npc_cpu.inst_val = dut->inst_in;
+            npc_cpu.inst_val = dut->inst_val;
             
             #ifdef CONFIG_ITRACE
                 itrace(&npc_cpu);
