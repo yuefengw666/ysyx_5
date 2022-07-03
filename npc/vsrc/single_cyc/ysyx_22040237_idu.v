@@ -196,23 +196,23 @@ assign op2_jp_o = ( {64{op2_jp_imm_need}} & imm );
 wire alu_op = rv64_R | rv64_I | auipc | lui;
 
 wire alu_info_bus[14:0];
-assign alu_info_bus[0] = 1'b0;
-assign alu_info_bus[1] = 1'b0;
-assign alu_info_bus[2] = 1'b0;
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_ADD] = (add | addi | auipc  );
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SUB] = (sub);                 
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLL] = (sll | slli);                 
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLT] = (slt | slti);                 
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLTU] = (sltu | sltiu);                
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_XOR] = (xor_ | xori);                
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SRL] = (srl | srli);
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SRA] = (sra | srai);
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_OR] = (or_ | ori);
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_AND] = (and_ | andi);
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_LUI] = lui;
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_EBREAK] = ebreak;
+assign alu_info_bus[0] = alu_op ? 1'b0 ; 1'b0;
+assign alu_info_bus[1] = alu_op ? 1'b0 : 1'b0;
+assign alu_info_bus[2] = alu_op ? 1'b0 : 1'b0;
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_ADD] = alu_op ? (add | addi | auipc  ) : 1'b0;
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SUB] = alu_op ? (sub) : 1'b0;                 
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLL] = alu_op ? (sll | slli) : 1'b0;                 
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLT] = alu_op ? (slt | slti) : 1'b0;                 
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLTU] = alu_op ? (sltu | sltiu) : 1'b0;                
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_XOR] = alu_op ? (xor_ | xori): 1'b0;                
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SRL] = alu_op ? (srl | srli) :1'b0;
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SRA] = alu_op ? (sra | srai): 1'b0;
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_OR] = alu_op ? (or_ | ori) :1'b0;
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_AND] = alu_op ? (and_ | andi) : 1'b0;
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_LUI] = alu_op ? lui : 1'b0;
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_EBREAK] = alu_op ? ebreak : 1'b0;
 
-/*
+
 //bjp_info_bus
 wire bjp_op = rv64_B | jal | jalr;
 wire bjp_info_bus[14:0];
@@ -233,7 +233,7 @@ assign bjp_info_bus[11] = 1'b0;
 assign bjp_info_bus[12] = 1'b0;
 assign bjp_info_bus[13] = 1'b0;
 assign bjp_info_bus[14] = 1'b0;
-*/
+
 /*
 //ls_info_bus
 wire ls_info_bus[];

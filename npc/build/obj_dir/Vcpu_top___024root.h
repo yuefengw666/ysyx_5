@@ -41,7 +41,6 @@ VL_MODULE(Vcpu_top___024root) {
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_slt_sltu;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_jal;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_jalr;
-    SData/*14:0*/ cpu_top__DOT__exu_info_bus_to_exu;
     VlWide<3>/*64:0*/ cpu_top__DOT__exu_u0__DOT__adder_res;
     VlWide<3>/*64:0*/ cpu_top__DOT__exu_u0__DOT__adder_op2;
     QData/*63:0*/ cpu_top__DOT__pc_to_ifu;
@@ -54,7 +53,6 @@ VL_MODULE(Vcpu_top___024root) {
     QData/*63:0*/ cpu_top__DOT__idu_u0__DOT__imm;
     QData/*63:0*/ cpu_top__DOT__exu_u0__DOT__srl_res;
     VlUnpacked<CData/*0:0*/, 15> cpu_top__DOT__idu_u0__DOT__alu_info_bus;
-    VlUnpacked<CData/*0:0*/, 15> cpu_top__DOT__idu_u0__DOT__bjp_info_bus;
     VlUnpacked<QData/*63:0*/, 32> cpu_top__DOT__ysyx_22040237_regs_u0__DOT__regs;
     VlUnpacked<QData/*63:0*/, 33> cpu_top__DOT__ysyx_22040237_regs_u0__DOT__rf;
 
