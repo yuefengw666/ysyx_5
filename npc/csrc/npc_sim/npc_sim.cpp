@@ -106,7 +106,18 @@ void sim_init(){
 void npc_reset(){
     pos_cnt = 0;
     dut->rst = 1;
+
+    dut->clk^=1;
+    dut->eval();
     
+    dut->clk^=1;
+    dut->eval();
+    
+    dut->clk^=1;
+    dut->eval();
+
+    dut->rst = 0;
+    /*
     for(int n=0; n<5; n++){
         dut->clk ^= 1; 
         dut->eval();
@@ -130,7 +141,7 @@ void npc_reset(){
                 iringbuf_wr(npc_cpu.logbuf);
             #endif
         }
-        
+        */
         #ifdef CONFIG_VCD
         m_trace->dump(sim_time);
         #endif
