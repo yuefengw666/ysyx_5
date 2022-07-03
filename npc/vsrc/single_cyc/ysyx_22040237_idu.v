@@ -196,7 +196,7 @@ assign op2_jp_o = ( {64{op2_jp_imm_need}} & imm );
 wire alu_op = rv64_R | rv64_I | auipc | lui;
 
 wire alu_info_bus[14:0];
-assign alu_info_bus[0] = alu_op ? 1'b0 ; 1'b0;
+assign alu_info_bus[0] = alu_op ? 1'b0 : 1'b0;
 assign alu_info_bus[1] = alu_op ? 1'b0 : 1'b0;
 assign alu_info_bus[2] = alu_op ? 1'b0 : 1'b0;
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_ADD] = alu_op ? (add | addi | auipc  ) : 1'b0;
