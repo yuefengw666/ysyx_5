@@ -42,6 +42,7 @@ VL_MODULE(Vcpu_top___024root) {
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_slt_sltu;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_jal;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_jalr;
+    SData/*14:0*/ cpu_top__DOT__exu_info_bus_to_exu;
     VlWide<3>/*64:0*/ cpu_top__DOT__exu_u0__DOT__adder_res;
     VlWide<3>/*64:0*/ cpu_top__DOT__exu_u0__DOT__adder_op2;
     QData/*63:0*/ cpu_top__DOT__pc_to_ifu;

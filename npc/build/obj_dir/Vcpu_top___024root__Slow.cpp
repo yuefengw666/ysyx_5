@@ -42,6 +42,9 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
     VlWide<3>/*95:0*/ __Vtemp10;
     QData/*63:0*/ cpu_top__DOT__ysyx_22040237_regs_u0__DOT____Vlvbound1;
     // Body
+    vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus[0U] = 0U;
+    vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus[1U] = 0U;
+    vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus[2U] = 0U;
     vlSelf->cpu_top__DOT__idu_u0__DOT__bjp_info_bus[0U] = 1U;
     vlSelf->cpu_top__DOT__idu_u0__DOT__bjp_info_bus[1U] = 0U;
     vlSelf->cpu_top__DOT__idu_u0__DOT__bjp_info_bus[2U] = 0U;
@@ -49,9 +52,6 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
     vlSelf->cpu_top__DOT__idu_u0__DOT__bjp_info_bus[0xcU] = 0U;
     vlSelf->cpu_top__DOT__idu_u0__DOT__bjp_info_bus[0xdU] = 0U;
     vlSelf->cpu_top__DOT__idu_u0__DOT__bjp_info_bus[0xeU] = 0U;
-    vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus[0U] = 0U;
-    vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus[1U] = 0U;
-    vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus[2U] = 0U;
     cpu_top__DOT__ysyx_22040237_regs_u0__DOT____Vlvbound1 
         = vlSelf->cpu_top__DOT__ysyx_22040237_regs_u0__DOT__regs
         [0U];
@@ -239,11 +239,6 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
                                                            == 
                                                            (0x7fULL 
                                                             & vlSelf->cpu_top__DOT__ifu_u0__DOT__rdata)));
-    vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_B = (IData)(
-                                                        (0x63ULL 
-                                                         == 
-                                                         (0x7fULL 
-                                                          & vlSelf->cpu_top__DOT__ifu_u0__DOT__rdata)));
     vlSelf->cpu_top__DOT__idu_u0__DOT__imm_i = (((- (QData)((IData)(
                                                                     (1U 
                                                                      & (IData)(
@@ -255,6 +250,11 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
                                                                    & (IData)(
                                                                              (vlSelf->cpu_top__DOT__ifu_u0__DOT__rdata 
                                                                               >> 0x14U))))));
+    vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_B = (IData)(
+                                                        (0x63ULL 
+                                                         == 
+                                                         (0x7fULL 
+                                                          & vlSelf->cpu_top__DOT__ifu_u0__DOT__rdata)));
     vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_LUI = (IData)(
                                                           (0x37ULL 
                                                            == 
@@ -279,6 +279,13 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
         = vlSelf->cpu_top__DOT__idu_u0__DOT__jalr;
     vlSelf->cpu_top__DOT__idu_u0__DOT__bjp_info_bus[3U] 
         = vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_JAL;
+    vlSelf->cpu_top__DOT__idu_u0__DOT__ebreak = ((IData)(
+                                                         (0x73ULL 
+                                                          == 
+                                                          (0x707fULL 
+                                                           & vlSelf->cpu_top__DOT__ifu_u0__DOT__rdata))) 
+                                                 & (1ULL 
+                                                    == vlSelf->cpu_top__DOT__idu_u0__DOT__imm_i));
     vlSelf->cpu_top__DOT__idu_u0__DOT__bjp_info_bus[5U] 
         = ((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_B) 
            & (0U == (7U & (IData)((vlSelf->cpu_top__DOT__ifu_u0__DOT__rdata 
@@ -303,13 +310,6 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
         = ((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_B) 
            & (7U == (7U & (IData)((vlSelf->cpu_top__DOT__ifu_u0__DOT__rdata 
                                    >> 0xcU)))));
-    vlSelf->cpu_top__DOT__idu_u0__DOT__ebreak = ((IData)(
-                                                         (0x73ULL 
-                                                          == 
-                                                          (0x707fULL 
-                                                           & vlSelf->cpu_top__DOT__ifu_u0__DOT__rdata))) 
-                                                 & (1ULL 
-                                                    == vlSelf->cpu_top__DOT__idu_u0__DOT__imm_i));
     vlSelf->cpu_top__DOT__idu_u0__DOT__imm = ((((((- (QData)((IData)(
                                                                      (((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_I) 
                                                                        | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_L)) 
@@ -557,60 +557,67 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
     vlSelf->cpu_top__DOT__exu_u0__DOT__adder_op2[2U] 
         = (1U & (IData)((vlSelf->cpu_top__DOT__op2_to_exu 
                          >> 0x3fU)));
-    vlSelf->cpu_top__DOT__exu_u0__DOT__op_jal = (IData)(
-                                                        (9U 
-                                                         == 
-                                                         (0xfU 
-                                                          & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus))));
-    vlSelf->cpu_top__DOT__exu_u0__DOT__op_jalr = (IData)(
-                                                         (0x11U 
-                                                          == 
-                                                          (0x17U 
-                                                           & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus))));
-    vlSelf->cpu_top__DOT__exu_u0__DOT__op_slt_sltu 
-        = ((0U == (7U & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus))) 
-           & (IData)((0U != (0xc0U & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus)))));
+    vlSelf->cpu_top__DOT__exu_info_bus_to_exu = (((- (IData)((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_op))) 
+                                                  & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus)) 
+                                                 | ((- (IData)(
+                                                               (((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_B) 
+                                                                 | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_JAL)) 
+                                                                | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__jalr)))) 
+                                                    & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__bjp_info_bus)));
     vlSelf->cpu_top__DOT__exu_u0__DOT__srl_res = (vlSelf->cpu_top__DOT__op1_to_exu 
                                                   >> 
                                                   (0x3fU 
                                                    & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)));
+    vlSelf->cpu_top__DOT__exu_u0__DOT__op_jal = (IData)(
+                                                        (9U 
+                                                         == 
+                                                         (0xfU 
+                                                          & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))));
+    vlSelf->cpu_top__DOT__exu_u0__DOT__op_jalr = (IData)(
+                                                         (0x11U 
+                                                          == 
+                                                          (0x17U 
+                                                           & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))));
+    vlSelf->cpu_top__DOT__exu_u0__DOT__op_slt_sltu 
+        = ((0U == (7U & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))) 
+           & (IData)((0U != (0xc0U & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))));
     vlSelf->cpu_top__DOT__exu_u0__DOT__op_sub = (((
                                                    (((((IData)(
                                                                (0x10U 
                                                                 == 
                                                                 (0x17U 
-                                                                 & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus)))) 
+                                                                 & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))) 
                                                        | (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_slt_sltu)) 
                                                       | (IData)(
                                                                 (0x21U 
                                                                  == 
                                                                  (0x27U 
-                                                                  & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus))))) 
+                                                                  & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))))) 
                                                      | (IData)(
                                                                (0x41U 
                                                                 == 
                                                                 (0x47U 
-                                                                 & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus))))) 
+                                                                 & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))))) 
                                                     | (IData)(
                                                               (0x81U 
                                                                == 
                                                                (0x87U 
-                                                                & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus))))) 
+                                                                & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))))) 
                                                    | (IData)(
                                                              (0x101U 
                                                               == 
                                                               (0x107U 
-                                                               & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus))))) 
+                                                               & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))))) 
                                                   | (IData)(
                                                             (0x201U 
                                                              == 
                                                              (0x207U 
-                                                              & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus))))) 
+                                                              & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))))) 
                                                  | (IData)(
                                                            (0x401U 
                                                             == 
                                                             (0x407U 
-                                                             & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus)))));
+                                                             & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))));
     __Vtemp3[0U] = (IData)(vlSelf->cpu_top__DOT__op1_to_exu);
     __Vtemp3[1U] = (IData)((vlSelf->cpu_top__DOT__op1_to_exu 
                             >> 0x20U));
@@ -675,6 +682,7 @@ void Vcpu_top___024root___ctor_var_reset(Vcpu_top___024root* vlSelf) {
     vlSelf->cpu_top__DOT__op1_to_exu = VL_RAND_RESET_Q(64);
     vlSelf->cpu_top__DOT__op2_to_exu = VL_RAND_RESET_Q(64);
     vlSelf->cpu_top__DOT__op1_jp_to_exu = VL_RAND_RESET_Q(64);
+    vlSelf->cpu_top__DOT__exu_info_bus_to_exu = VL_RAND_RESET_I(15);
     vlSelf->cpu_top__DOT__rs1_data_to_idu = VL_RAND_RESET_Q(64);
     vlSelf->cpu_top__DOT__ifu_u0__DOT__rdata = VL_RAND_RESET_Q(64);
     vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_R = VL_RAND_RESET_I(1);
