@@ -37,7 +37,6 @@ VL_MODULE(Vcpu_top___024root) {
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64_AUIPC;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__jalr;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__ebreak;
-    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__alu_op;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_sub;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_slt_sltu;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_jal;

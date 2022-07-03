@@ -507,7 +507,10 @@ void Vcpu_top___024root__traceChgSub0(Vcpu_top___024root* vlSelf, VerilatedVcd* 
             tracep->chgBit(oldp+103,((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_JAL) 
                                        | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__jalr)) 
                                       | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_B))));
-            tracep->chgBit(oldp+104,(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_op));
+            tracep->chgBit(oldp+104,(((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_R) 
+                                        | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_I)) 
+                                       | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_AUIPC)) 
+                                      | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_LUI))));
             tracep->chgBit(oldp+105,(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus[0]));
             tracep->chgBit(oldp+106,(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus[1]));
             tracep->chgBit(oldp+107,(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus[2]));

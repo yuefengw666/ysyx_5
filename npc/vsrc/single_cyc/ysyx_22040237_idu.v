@@ -232,7 +232,7 @@ assign alu_info_bus[14] = ebreak;
 wire bjp_op = rv64_B | jal | jalr;
 wire bjp_info_bus[14:0];
 
-
+/*
 assign bjp_info_bus[0] = 1'b1;
 assign bjp_info_bus[1] = 1'b0;
 assign bjp_info_bus[2] = 1'b0;
@@ -248,7 +248,22 @@ assign bjp_info_bus[11] = 1'b0;
 assign bjp_info_bus[12] = 1'b0;
 assign bjp_info_bus[13] = 1'b0;
 assign bjp_info_bus[14] = 1'b0;
-
+*/
+assign bjp_info_bus[0] = 1'b1;
+assign bjp_info_bus[1] = 1'b0;
+assign bjp_info_bus[2] = 1'b0;
+assign bjp_info_bus[3]  = jal;
+assign bjp_info_bus[4] = jalr;
+assign bjp_info_bus[5] = beq;
+assign bjp_info_bus[6] = bne;
+assign bjp_info_bus[7] = blt;
+assign bjp_info_bus[8] = bge;
+assign bjp_info_bus[9] = bltu;
+assign bjp_info_bus[10] = bgeu;
+assign bjp_info_bus[11] = 1'b0;
+assign bjp_info_bus[12] = 1'b0;
+assign bjp_info_bus[13] = 1'b0;
+assign bjp_info_bus[14] = 1'b0;
 /*
 //ls_info_bus
 wire ls_info_bus[];
