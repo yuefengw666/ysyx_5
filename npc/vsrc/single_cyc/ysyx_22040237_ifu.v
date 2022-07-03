@@ -21,8 +21,6 @@ assign rdata_63_32 = |rdata[63:32];
 always @(*) begin
   if(!rst)
     mem_read(pc_i, rdata);
-  else 
-    rdata = 'b0;
 end
 
 assign pc_o = pc_i;
