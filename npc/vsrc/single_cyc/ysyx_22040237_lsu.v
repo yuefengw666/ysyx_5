@@ -1,5 +1,5 @@
-import "DPI-C" function void mem_read(
-  input longint raddr, output longint rdata);
+//import "DPI-C" function void mem_read(
+  //input longint raddr, output longint rdata);
 
 module ysyx_22040237_lsu(
   //input clk,
@@ -42,12 +42,13 @@ wire ls_db    = ls_info_bus_i[4];
 wire ls_word  = ls_info_bus_i[5];
 wire ls_dw    = ls_info_bus_i[6];
 
-wire [63:0] mem_raddr = ls_load ? alu_res_i : 'b0;
 
+wire mem_ren = ls_load;
+wire [63:0] mem_raddr = ls_load ? alu_res_i : 'b0;
 wire [63:0] mem_rdata;
 //memory read
 always@(*)begin
-  if(mem_rd_en)
+  if(mem_ren)
     mem_read(mem_raddr,mem_rdata);
 end
 
@@ -60,9 +61,9 @@ wire lbu = ls_load && ls_usign && ls_byte;
 wire lhu = ls_load && ls_usign && ls_word;
 
 wire [63:0] load_data;
-assign load_data = ( {64{lb}} & { {56{rdata[7]}}, mem_rdata[7:0] } ) |
-                   ( {64{lh}} & { {48{rdata[15]}}, mem_rdata[15:0] } ) |
-                   ( {64{lw}} & { {32{rdata[31]}}, mem_rdata[31:0] } ) | 
+assign load_data = ( {64{lb}} & { {56{mem_rdata[7]}}, mem_rdata[7:0] } ) |
+                   ( {64{lh}} & { {48{mem_rdata[15]}}, mem_rdata[15:0] } ) |
+                   ( {64{lw}} & { {32{mem_rdata[31]}}, mem_rdata[31:0] } ) | 
                    ( {64{ld}} & mem_rdata[63:0] ) | 
                    ( {64{lbu}} & { 56'b0, mem_rdata[7:0]}) | 
                    ( {64{lhu}} & { 45'b0, mem_rdata[15:0]});
