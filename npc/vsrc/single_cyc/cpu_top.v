@@ -1,7 +1,8 @@
 module cpu_top(
   input clk,
   input rst,
-  output [`ysyx_22040237_INST_WIDTH -1:0] inst_val;
+  //for sim
+  output [`ysyx_22040237_INST_WIDTH -1:0] inst_val,
   output rdata_63_32
 
 );
