@@ -8,7 +8,7 @@ module ysyx_22040237_lsu(
   input [4:0] rd_idx_i,
   input [`ysyx_22040237_REG_WIDTH-1:0] alu_res_i,
   input [6:0] ls_info_bus_i,
-  input [`ysyx_22040237_REG_RESET-1:0] rs2_store_i,
+  input [`ysyx_22040237_REG_WIDTH-1:0] rs2_store_i,
 
   output rd_wr_en_o,
   output [5:0] rd_idx_o,
