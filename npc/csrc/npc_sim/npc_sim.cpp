@@ -114,10 +114,9 @@ void npc_reset(){
     dut->eval();
     
     dut->clk^=1;
+    dut->rst=0;
     dut->eval();
 
-    dut->rst = 0;
-    dut->eval();
     /*
     for(int n=0; n<5; n++){
         dut->clk ^= 1; 
