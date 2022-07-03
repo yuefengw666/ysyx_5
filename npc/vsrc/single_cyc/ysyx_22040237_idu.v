@@ -76,7 +76,7 @@ wire [63:0] imm_b = { { 51{inst_i[31]} }, inst_i[31], inst_i[7], inst_i[30:25], 
 wire [63:0] imm_u = { { 32{inst_i[31]} }, inst_i[31:12], 12'b0 };
 wire [63:0] imm_j = { { 43{inst_i[31]} }, inst_i[31], inst_i[19:12], inst_i[20], inst_i[30:21], 1'b0 };
 
-wire [63:0] imm_u_sl = imm_u << 12;
+//wire [63:0] imm_u_sl = imm_u << 12;
 
 wire imm_11_5_0x00 = imm_i[11:5] == 7'b0;
 wire imm_11_5_0x20 = imm_i[11:5] == 7'b010_0000;
@@ -151,7 +151,7 @@ wire [`ysyx_22040237_REG_WIDTH-1:0] imm = ( ( {64{rv64_I |  rv64_L | jalr} } & i
                                           ( {64{rv64_S}} & imm_s ) | 
                                           ( {64{rv64_B}} & imm_b ) |
                                           ( {64{jal}} & imm_j) | 
-                                          ( {64{auipc | lui}} & imm_u_sl ) 
+                                          ( {64{auipc | lui}} & imm_u ) 
                                           );
 
 //---------------------------------------------------------------
