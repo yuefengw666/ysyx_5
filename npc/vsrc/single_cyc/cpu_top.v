@@ -122,7 +122,7 @@ ysyx_22040237_lsu lsu_u0(
 
   .rd_wr_en_o (rd_wr_en_to_wbu),
   .rd_idx_o (rd_idx_to_wbu),
-  .rd_data_o (rd_data_to_wbu)
+  .rd_data_o (rd_data_to_wbu),
 
   .mem_wen_o (mem_wen_to_wbu),
   .mem_wmask_o (mem_wmask_to_wbu),

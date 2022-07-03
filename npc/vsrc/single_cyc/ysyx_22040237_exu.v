@@ -193,9 +193,9 @@ wire op_load = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_LOAD];
 wire op_store = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_STORE];
 wire ls_usign = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_USIGN];
 wire ls_byte = ls_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_BYTE];
-wire ls_db = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_DB;
-wire ls_word = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_WORD;
-wire ls_dw = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_DW;
+wire ls_db = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_DB];
+wire ls_word = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_WORD];
+wire ls_dw = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_DW];
 
 
 //alu result
