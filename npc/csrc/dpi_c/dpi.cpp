@@ -31,7 +31,7 @@ void invalid_inst_o(){
 }
 
 extern "C" void mem_read(long long raddr, long long *rdata){
-  if( raddr < CONFIG_MBASE && raddr >= CONFIG_MBASE + CONFIG_MSIZE) {
+  if( raddr < CONFIG_MBASE || raddr >= CONFIG_MBASE + CONFIG_MSIZE) {
     printf("Read mem address = %llx is out of bound of mem.\n", raddr);
     return;
   }
