@@ -244,7 +244,7 @@ wire [1:0] ls_size = ({2{lb | lbu | sb}} & 2'b00) |
                      ({2{lw |       sw}} & 2'b10) |
                      ({2{ld |       sd}} & 2'b11);
 */
-wire ls_op = rv64_L | rv64_I;
+wire ls_op = rv64_L | rv64_S;
 wire ls_usign = lbu | lhu;
 
 wire [14:0] ls_info_bus;
