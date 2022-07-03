@@ -47,7 +47,7 @@ wire invalid_inst_to_exu;
 
 ysyx_22040237_idu idu_u0(
   .pc_i (pc_to_idu),
-  .inst_i (inst_to_idu),
+  .inst_i (inst_val),
 
   .rs1_data_i (rs1_data_to_idu),
   .rs2_data_i (rs2_data_to_idu),
