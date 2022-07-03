@@ -113,6 +113,7 @@ void npc_reset(){
         if(dut->clk == 1){
             pos_cnt++;
             if(pos_cnt >=3) dut->rst = 0;
+            dut->eval();
         }
         
         if(dut->rst != 1){
