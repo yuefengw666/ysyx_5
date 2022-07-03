@@ -116,6 +116,7 @@ void npc_reset(){
     sim_time++;
 
     dut->clk^=1;
+    dut->rst=0;
     dut->eval();
     #ifdef CONFIG_VCD
         m_trace->dump(sim_time);
@@ -124,7 +125,6 @@ void npc_reset(){
     
     
     dut->clk^=1;
-    dut->rst=0;
     dut->eval();
     #ifdef CONFIG_VCD
         m_trace->dump(sim_time);
