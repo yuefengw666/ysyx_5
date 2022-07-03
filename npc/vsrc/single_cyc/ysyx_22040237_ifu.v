@@ -18,10 +18,12 @@ wire [63:0] rdata;
 
 assign rdata_63_32 = |rdata[63:32];
 
+/* verilator lint_off LATCH */
 always @(*) begin
   if(!rst)
     mem_read(pc_i, rdata);
 end
+/* verilator lint_on LATCH */
 
 assign pc_o = pc_i;
 assign inst_o = rdata[`ysyx_22040237_INST_WIDTH-1:0];
