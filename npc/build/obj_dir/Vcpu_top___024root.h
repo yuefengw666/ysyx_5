@@ -28,7 +28,6 @@ VL_MODULE(Vcpu_top___024root) {
     VL_OUT(inst_val,31,0);
 
     // LOCAL SIGNALS
-    CData/*0:0*/ cpu_top__DOT__inst_to_idu;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64_R;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64_I;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64_L;

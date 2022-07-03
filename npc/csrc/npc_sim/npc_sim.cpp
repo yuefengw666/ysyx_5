@@ -172,7 +172,7 @@ void npc_regs_display();
 static void exec_once(NPC_CPU *s){
     npc_sim_once();
     
-    //s->inst_val = dut->inst_in;
+    s->inst_val = dut->inst_val;
     #ifdef CONFIG_ITRACE
         itrace(s);
     #endif
