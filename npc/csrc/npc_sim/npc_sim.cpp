@@ -146,7 +146,7 @@ void npc_reset(){
         m_trace->dump(sim_time);
         #endif
         sim_time++;
-    }
+    //}
         //pos_cnt=0;
 }
 
