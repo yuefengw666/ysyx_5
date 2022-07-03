@@ -48,12 +48,12 @@ wire [63:0] mem_raddr = ls_load ? alu_res_i : 'b0;
 wire [63:0] mem_rdata;
 
 //memory read
-/* verilator lint_off UNUSED */
+/* verilator lint_off LATCH */
 always@(*)begin
   if(mem_ren)
     mem_read(mem_raddr,mem_rdata);
 end
-/* verilator lint_on UNUSED */
+/* verilator lint_on LATCH */
 
 // identify load type
 wire lb = ls_load && !ls_usign && ls_byte;
