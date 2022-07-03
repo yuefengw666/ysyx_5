@@ -244,6 +244,7 @@ wire [1:0] ls_size = ({2{lb | lbu | sb}} & 2'b00) |
                      ({2{lw |       sw}} & 2'b10) |
                      ({2{ld |       sd}} & 2'b11);
 */
+wire ls_op = rv64_L | rv64_I;
 wire ls_usign = lbu | lhu;
 
 wire [14:0] ls_info_bus;
@@ -258,6 +259,8 @@ assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_DW] = ld | sd;
 assign ls_info_bus[14:10] = 'b0;
 
 
-assign exu_info_bus_o = ({15{alu_op}} & alu_info_bus) | ({15{bjp_op}} & bjp_info_bus);
+assign exu_info_bus_o = ({15{alu_op}} & alu_info_bus) | 
+                        ({15{bjp_op}} & bjp_info_bus) |
+                        ({15{ls_op}}  & ls_info_bus) ;
 
 endmodule
