@@ -3,7 +3,7 @@ import "DPI-C" function void mem_read(
 
 module ysyx_22040237_ifu(
   //input clk,
-  input rst,
+  //input rst,
   input [`ysyx_22040237_REG_WIDTH-1:0] pc_i,
 
   output [`ysyx_22040237_REG_WIDTH-1:0] pc_o,
@@ -20,8 +20,7 @@ assign rdata_63_32 = |rdata[63:32];
 
 /* verilator lint_off LATCH */
 always @(*) begin
-  if(!rst)
-    mem_read(pc_i, rdata);
+  mem_read(pc_i, rdata);
 end
 /* verilator lint_on LATCH */
 
