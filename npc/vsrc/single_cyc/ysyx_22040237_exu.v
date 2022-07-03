@@ -17,6 +17,8 @@ module ysyx_22040237_exu(
   output rd_wr_en_o,
   output [4:0] rd_idx_o,
   output [`ysyx_22040237_REG_WIDTH-1:0] alu_res_o,
+  output [6:0] ls_info_bus_o,
+  output [`ysyx_22040237_REG_WIDTH-1:0] rs2_store_o,
 
   output pc_jump_flag_o,
   output [`ysyx_22040237_REG_WIDTH-1:0] pc_jump_addr_o,
@@ -52,12 +54,14 @@ assign rd_idx_o = rd_idx_i;
 //**********identify alu bjp...**********//
 wire alu_req = exu_info_bus_i[2:0] == `ysyx_22040237_EXU_INFO_ALU;
 wire bjp_req = exu_info_bus_i[2:0] == `ysyx_22040237_EXU_INFO_BJP;
+wire ls_req = exu_info_bus_i[2:0] == `ysyx_22040237_EXU_INFO_LS;
 
 //**********alu req**********//
 //add
 wire op_add = ( ( alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_ADD] ) | 
                 op_jal |
-                op_jalr
+                op_jalr | 
+                ls_req
               );
 
 wire op_sub = ( ( alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SUB] ) | 
@@ -178,6 +182,20 @@ wire bltu_res = op_bltu & (adder_res[`ysyx_22040237_REG_WIDTH]);
 //bgeu
 wire op_bgeu = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BGEU];
 wire bgeu_res = op_bgeu & (!bltu_res);
+
+
+//ls req
+
+assign ls_info_bus_o = { ls_dw, ls_word, ls_db, ls_byte, ls_usign, op_store, op_load };
+assign rs2_store_o = op_store ? op2_jp_i : 'b0;
+
+wire op_load = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_LOAD];
+wire op_store = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_STORE];
+wire ls_usign = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_USIGN];
+wire ls_byte = ls_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_BYTE];
+wire ls_db = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_DB;
+wire ls_word = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_WORD;
+wire ls_dw = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_DW;
 
 
 //alu result

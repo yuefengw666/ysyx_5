@@ -120,7 +120,13 @@ wire ori = rv64_I & funct3_0x6;
 wire andi = rv64_I & funct3_0x7;
 
 //****RV64I load inst*****/
-//wire lw = rv64_L & funct3_0x2;
+wire lb = rv64_L & funct3_0x0;
+wire lh = rv64_L & funct3_0x1;
+wire lw = rv64_L & funct3_0x2;
+wire ld = rv64_L & funct3_0x3;
+wire lbu = rv64_L & funct3_0x4;
+wire lhu = rv64_L & funct3_0x5;
+
 
 //RV64I B type inst
 wire beq = rv64_B & funct3_0x0;
@@ -131,8 +137,10 @@ wire bltu = rv64_B & funct3_0x6;
 wire bgeu = rv64_B & funct3_0x7;
 
 //RV64I Stype inst
-//wire sb = rv64_S & funct3_0x0;
-//wire sd = rv64_S & funct3_0x3;
+wire sb = rv64_S & funct3_0x0;
+wire sh = rv64_S & funct3_0x1;
+wire sw = rv64_S & funct3_0x2;
+wire sd = rv64_S & funct3_0x3;
 
 //RV64I jump inst
 wire jal = rv64_JAL;
@@ -178,18 +186,20 @@ wire op1_jp_rs1_need = jalr;
 wire op1_jp_pc_need = rv64_B | jal;
 
 wire op2_jp_imm_need = jal | jalr | rv64_B;
+wire op2_jp_rs2_need = rv64_S;
 
-assign op1_o = ( ( {64{op1_rs1_need}} & rs1_data_i) |   
-                 ( {64{op1_pc_need}} & pc_i ));
+assign op1_o =  ( {64{op1_rs1_need}} & rs1_data_i ) |   
+                ( {64{op1_pc_need}} & pc_i );
 
-assign op2_o = ( ( {64{op2_rs2_need}} & rs2_data_i ) |
-                 ( {64{op2_imm_need}} & imm ) |
-                 ( {64{op2_0x4_need}} & 64'h4 ) );
+assign op2_o =  ( {64{op2_rs2_need}} & rs2_data_i ) |
+                ( {64{op2_imm_need}} & imm ) |
+                ( {64{op2_0x4_need}} & 64'h4 ) ;
 
-assign op1_jp_o = ( ( {64{op1_jp_rs1_need}} & rs1_data_i) | 
-                      ( {64{op1_jp_pc_need}} & pc_i) );
+assign op1_jp_o = ( {64{op1_jp_rs1_need}} & rs1_data_i) | 
+                  ( {64{op1_jp_pc_need}} & pc_i);
 
-assign op2_jp_o = ( {64{op2_jp_imm_need}} & imm ); 
+assign op2_jp_o = ( {64{op2_jp_imm_need}} & imm) |
+                  ( {64{op2_jp_rs2_need}} & rs2_data_i); 
 
 
 //operation need alu
@@ -211,23 +221,6 @@ assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_AND] = (and_ | andi);
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_LUI] = lui;
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_EBREAK] = ebreak;
 
-/*
-assign alu_info_bus[0] = 1'b0;
-assign alu_info_bus[1] = 1'b0;
-assign alu_info_bus[2] = 1'b0;
-assign alu_info_bus[3] = (add | addi | auipc  );
-assign alu_info_bus[4] = (sub);                 
-assign alu_info_bus[5] = (sll | slli);                 
-assign alu_info_bus[6] = (slt | slti);                 
-assign alu_info_bus[7] = (sltu | sltiu);                
-assign alu_info_bus[8] = (xor_ | xori);                
-assign alu_info_bus[9] = (srl | srli);
-assign alu_info_bus[10] = (sra | srai);
-assign alu_info_bus[11] = (or_ | ori);
-assign alu_info_bus[12] = (and_ | andi);
-assign alu_info_bus[13] = lui;
-assign alu_info_bus[14] = ebreak;
-*/
 //bjp_info_bus
 wire bjp_op = rv64_B | jal | jalr;
 wire [14:0] bjp_info_bus;
@@ -243,30 +236,26 @@ assign bjp_info_bus[`ysyx_22040237_EXU_INFO_BJP_BLTU] = bltu;
 assign bjp_info_bus[`ysyx_22040237_EXU_INFO_BJP_BGEU] = bgeu;
 assign bjp_info_bus[14:11] = 4'b0;
 
-/*
-assign bjp_info_bus[0] = 1'b1;
-assign bjp_info_bus[1] = 1'b0;
-assign bjp_info_bus[2] = 1'b0;
-assign bjp_info_bus[3]  = jal;
-assign bjp_info_bus[4] = jalr;
-assign bjp_info_bus[5] = beq;
-assign bjp_info_bus[6] = bne;
-assign bjp_info_bus[7] = blt;
-assign bjp_info_bus[8] = bge;
-assign bjp_info_bus[9] = bltu;
-assign bjp_info_bus[10] = bgeu;
-assign bjp_info_bus[11] = 1'b0;
-assign bjp_info_bus[12] = 1'b0;
-assign bjp_info_bus[13] = 1'b0;
-assign bjp_info_bus[14] = 1'b0;
-/*
 //ls_info_bus
-wire ls_info_bus[];
+//00->1byte,  01->2byte,  10->4byte    11->8byte
+/*
+wire [1:0] ls_size = ({2{lb | lbu | sb}} & 2'b00) | 
+                     ({2{lh | lhu | sh}} & 2'b01) |
+                     ({2{lw |       sw}} & 2'b10) |
+                     ({2{ld |       sd}} & 2'b11);
+*/
+wire ls_usign = lbu | lhu;
+
+wire [14:0] ls_info_bus;
 assign ls_info_bus[2:0] = `ysyx_22040237_EXU_INFO_LS;
 assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_LOAD] = rv64_L;
 assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_STORE] = rv64_S;
-assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_SIZE] =  1'b0;
-*/
+assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_USIGN] = ls_usign;
+assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_BYTE] = lb | lbu | sb;
+assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_DB] = lh | lhu | sh;
+assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_WORD] = lw | sw;
+assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_DW] = ld | sd;
+assign ls_info_bus[14:10] = 'b0;
 
 
 assign exu_info_bus_o = ({15{alu_op}} & alu_info_bus) | ({15{bjp_op}} & bjp_info_bus);

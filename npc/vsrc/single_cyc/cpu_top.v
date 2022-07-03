@@ -64,6 +64,7 @@ ysyx_22040237_idu idu_u0(
   .op1_jp_o (op1_jp_to_exu),
   .op2_jp_o (op2_jp_to_exu),
   .exu_info_bus_o (exu_info_bus_to_exu),
+
   .invalid_inst (invalid_inst_to_exu)
 );
 
@@ -74,6 +75,8 @@ wire [4:0] rd_idx_to_lsu;
 wire [63:0] alu_res_to_lsu;
 wire pc_jump_flag_to_pc_reg;
 wire [63:0] pc_jump_addr_to_pc_reg;
+wire [6:0] ls_info_bus_to_isu;
+wire [63:0] rs2_store_to_isu;
 ysyx_22040237_exu exu_u0(
   .clk (clk),
   .rst (rst),
@@ -90,6 +93,8 @@ ysyx_22040237_exu exu_u0(
   .rd_wr_en_o (rd_wr_en_to_lsu),
   .rd_idx_o (rd_idx_to_lsu),
   .alu_res_o (alu_res_to_lsu),
+  .ls_info_bus_o (ls_info_bus_to_isu),
+  .rs2_store_o (rs2_store_to_isu),
 
   .pc_jump_flag_o (pc_jump_flag_to_pc_reg),
   .pc_jump_addr_o (pc_jump_addr_to_pc_reg),
@@ -104,14 +109,25 @@ ysyx_22040237_exu exu_u0(
 wire rd_wr_en_to_wbu;
 wire [4:0] rd_idx_to_wbu;
 wire [63:0] rd_data_to_wbu;
+wire mem_wen_to_wbu;
+wire [7:0] mem_wmask_to_wbu;
+wire [63:0] mem_waddr_to_wbu;
+wire [63:0] mem_wdata_to_wbu;
 ysyx_22040237_lsu lsu_u0(
   .rd_wr_en_i (rd_wr_en_to_lsu),
   .rd_idx_i (rd_idx_to_lsu),
   .alu_res_i (alu_res_to_lsu),
+  .ls_info_bus_i (ls_info_bus_to_isu),
+  .rs2_store_i (rs2_store_to_isu),
 
   .rd_wr_en_o (rd_wr_en_to_wbu),
   .rd_idx_o (rd_idx_to_wbu),
   .rd_data_o (rd_data_to_wbu)
+
+  .mem_wen_o (mem_wen_to_wbu),
+  .mem_wmask_o (mem_wmask_to_wbu),
+  .mem_waddr_o (mem_waddr_to_wbu),
+  .mem_wdata_o (mem_wdata_to_wbu)  
 );
 
 //wbu
@@ -122,6 +138,11 @@ ysyx_22040237_wbu wbu_u0(
   .rd_wr_en_i (rd_wr_en_to_wbu),
   .rd_idx_i (rd_idx_to_wbu),
   .rd_data_i (rd_data_to_wbu),
+
+  .mem_wen_i (mem_wen_to_wbu),
+  .mem_wmask_i (mem_wmask_to_wbu),
+  .mem_waddr_i (mem_waddr_to_wbu),
+  .mem_wdata_i (mem_wdata_to_wbu),
 
   .rd_wr_en_o (rd_wr_en_to_regs),
   .rd_idx_o (rd_idx_to_regs),

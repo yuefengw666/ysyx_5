@@ -37,6 +37,14 @@
 //ls_info_bus
 `define ysyx_22040237_EXU_INFO_LS_LOAD     3
 `define ysyx_22040237_EXU_INFO_LS_STORE    4
+`define ysyx_22040237_EXU_INFO_LS_USIGN    5
+`define ysyx_22040237_EXU_INFO_LS_BYTE     6
+`define ysyx_22040237_EXU_INFO_LS_DB       7
+`define ysyx_22040237_EXU_INFO_LS_WORD     8
+`define ysyx_22040237_EXU_INFO_LS_DW       9
+
+
+
 
 
 
