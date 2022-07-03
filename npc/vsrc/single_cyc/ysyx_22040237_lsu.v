@@ -11,7 +11,7 @@ module ysyx_22040237_lsu(
   input [`ysyx_22040237_REG_WIDTH-1:0] rs2_store_i,
 
   output rd_wr_en_o,
-  output [5:0] rd_idx_o,
+  output [4:0] rd_idx_o,
   output [`ysyx_22040237_REG_WIDTH-1:0] rd_data_o,
 
   output mem_wen_o,
@@ -27,10 +27,10 @@ assign rd_data_o = ls_load ? load_data : alu_res_i;
 //store decode
 assign mem_wen_o = ls_store;
 assign mem_waddr_o = ls_store ? alu_res_i : 'b0;
-assign mem_wmask_o = ( {8{ls_byte}} && 8'b0000_0001) | 
-                   ( {8{ls_db}}   && 8'b0000_0011) | 
-                   ( {8{ls_word}} && 8'b0000_1111) |
-                   ( {8{ls_dw}}   && 8'b1111_1111) ;
+assign mem_wmask_o = ( {8{ls_byte}} & 8'b0000_0001) | 
+                   ( {8{ls_db}}   & 8'b0000_0011) | 
+                   ( {8{ls_word}} & 8'b0000_1111) |
+                   ( {8{ls_dw}}   & 8'b1111_1111) ;
 assign mem_wdata_o = rs2_store_i;
 
 //load
@@ -66,7 +66,7 @@ assign load_data = ( {64{lb}} & { {56{mem_rdata[7]}}, mem_rdata[7:0] } ) |
                    ( {64{lw}} & { {32{mem_rdata[31]}}, mem_rdata[31:0] } ) | 
                    ( {64{ld}} & mem_rdata[63:0] ) | 
                    ( {64{lbu}} & { 56'b0, mem_rdata[7:0]}) | 
-                   ( {64{lhu}} & { 45'b0, mem_rdata[15:0]});
+                   ( {64{lhu}} & { 48'b0, mem_rdata[15:0]});
 
 
 endmodule

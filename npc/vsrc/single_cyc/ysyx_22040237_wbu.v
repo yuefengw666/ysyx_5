@@ -11,7 +11,7 @@ module ysyx_22040237_wbu(
   input mem_wen_i,
   input [7:0] mem_wmask_i,
   input [`ysyx_22040237_REG_WIDTH-1:0] mem_waddr_i,
-  input [`ysyx_22040237_REG_RESET-1:0] mem_wdata_i,
+  input [`ysyx_22040237_REG_WIDTH-1:0] mem_wdata_i,
 
   output rd_wr_en_o,
   output [4:0] rd_idx_o,
