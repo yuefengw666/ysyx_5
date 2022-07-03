@@ -86,7 +86,7 @@ bool isa_difftest_checkregs(NPC_CPU *ref_r, vaddr_t pc) {
   
   for(int i=0; i<32; i++){
     if(ref_r->gpr[i] != npc_cpu.gpr[i]) {
-      printf("%s gpr:[%s] is different!\n",ASNI_FMT("DIFFTEST E*-->",ASNI_FG_RED),npc_regs[i]);
+      printf("%s gpr[%d]:%s is different!\n",ASNI_FMT("DIFFTEST E*-->",ASNI_FG_RED),i,npc_regs[i]);
       printf("%s:0x%08lx\n",ASNI_FMT("REF",ASNI_FG_GREEN),ref_r->gpr[i]);
       printf("%s:0x%08lx\n",ASNI_FMT("NPC",ASNI_FG_RED),npc_cpu.gpr[i]);
       return false;
