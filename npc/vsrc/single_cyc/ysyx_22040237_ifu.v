@@ -3,7 +3,7 @@ import "DPI-C" function void mem_read(
 
 module ysyx_22040237_ifu(
   //input clk,
-  //input rst,
+  input rst,
   input [`ysyx_22040237_REG_WIDTH-1:0] pc_i,
 
   output [`ysyx_22040237_REG_WIDTH-1:0] pc_o,
@@ -19,7 +19,10 @@ wire [63:0] rdata;
 assign rdata_63_32 = |rdata[63:32];
 
 always @(*) begin
-  mem_read(pc_i, rdata);
+  if(!rst)
+    mem_read(pc_i, rdata);
+  else 
+    rdata = 'b0;
 end
 
 assign pc_o = pc_i;

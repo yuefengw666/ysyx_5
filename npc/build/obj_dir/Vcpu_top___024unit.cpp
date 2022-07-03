@@ -48,10 +48,10 @@ VL_INLINE_OPT void Vcpu_top___024unit____Vdpiimwrap_mem_read_TOP____024unit(QDat
     rdata = rdata__Vcvt;
 }
 
-extern "C" void pmem_write(long long waddr, long long wdata, char wmask);
+extern "C" void mem_write(long long waddr, long long wdata, char wmask);
 
-VL_INLINE_OPT void Vcpu_top___024unit____Vdpiimwrap_pmem_write_TOP____024unit(QData/*63:0*/ waddr, QData/*63:0*/ wdata, CData/*7:0*/ wmask) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+        Vcpu_top___024unit____Vdpiimwrap_pmem_write_TOP____024unit\n"); );
+VL_INLINE_OPT void Vcpu_top___024unit____Vdpiimwrap_mem_write_TOP____024unit(QData/*63:0*/ waddr, QData/*63:0*/ wdata, CData/*7:0*/ wmask) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+        Vcpu_top___024unit____Vdpiimwrap_mem_write_TOP____024unit\n"); );
     // Body
     long long waddr__Vcvt;
     for (size_t waddr__Vidx = 0; waddr__Vidx < 1; ++waddr__Vidx) waddr__Vcvt = waddr;
@@ -59,5 +59,5 @@ VL_INLINE_OPT void Vcpu_top___024unit____Vdpiimwrap_pmem_write_TOP____024unit(QD
     for (size_t wdata__Vidx = 0; wdata__Vidx < 1; ++wdata__Vidx) wdata__Vcvt = wdata;
     char wmask__Vcvt;
     for (size_t wmask__Vidx = 0; wmask__Vidx < 1; ++wmask__Vidx) wmask__Vcvt = wmask;
-    pmem_write(waddr__Vcvt, wdata__Vcvt, wmask__Vcvt);
+    mem_write(waddr__Vcvt, wdata__Vcvt, wmask__Vcvt);
 }
