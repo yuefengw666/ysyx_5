@@ -230,7 +230,7 @@ assign alu_info_bus[13] = lui;
 assign alu_info_bus[14] = ebreak;
 //bjp_info_bus
 wire bjp_op = rv64_B | jal | jalr;
-wire [14:0] bjp_info_bus[14:0];
+wire [14:0] bjp_info_bus;
 
 /*
 assign bjp_info_bus[0] = 1'b1;
