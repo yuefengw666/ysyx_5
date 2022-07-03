@@ -41,7 +41,7 @@ extern "C" void mem_read(long long raddr, long long *rdata){
 }
 
 extern "C" void mem_write(long long waddr, long long wdata, char wmask){
-  if( waddr < CONFIG_MBASE && waddr >= CONFIG_MBASE + CONFIG_MSIZE) {
+  if( waddr < CONFIG_MBASE || waddr >= CONFIG_MBASE + CONFIG_MSIZE) {
     printf("Write mem address = %llx is out of bound of mem.\n", waddr);
     return;
   }
