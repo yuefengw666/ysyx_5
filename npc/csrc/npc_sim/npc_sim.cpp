@@ -105,6 +105,7 @@ void sim_init(){
 
 void npc_reset(){
     pos_cnt = 0;
+    dut->clk = 0;
     dut->rst = 1;
 
     dut->clk^=1;
