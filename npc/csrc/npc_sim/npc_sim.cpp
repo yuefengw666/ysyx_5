@@ -147,7 +147,7 @@ void npc_reset(){
         #endif
         sim_time++;
     }
-        pos_cnt=0;
+        //pos_cnt=0;
 }
 
 void exit_npc(int exit_flag){
