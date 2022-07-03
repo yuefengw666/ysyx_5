@@ -129,7 +129,7 @@ ysyx_22040237_wbu wbu_u0(
 //regs
 wire [`ysyx_22040237_REG_WIDTH-1:0] rs1_data_to_idu;
 wire [`ysyx_22040237_REG_WIDTH-1:0] rs2_data_to_idu;
-ysyx_22040237_regs ysyx_22040237_regs_u0(
+ysyx_22040237_regs regs_u0(
   .clk (clk),
   .rst (rst),
 

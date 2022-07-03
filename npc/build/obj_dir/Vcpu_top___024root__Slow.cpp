@@ -571,10 +571,11 @@ void Vcpu_top___024root___settle__TOP__2(Vcpu_top___024root* vlSelf) {
                                                                | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__jalr))))) 
                                            & vlSelf->cpu_top__DOT__pc_to_ifu));
     vlSelf->cpu_top__DOT__exu_info_bus_to_exu = (((- (IData)(
-                                                             ((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_R) 
-                                                                | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_I)) 
-                                                               | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_AUIPC)) 
-                                                              | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_LUI)))) 
+                                                             (((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_R) 
+                                                                 | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_I)) 
+                                                                | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_AUIPC)) 
+                                                               | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_LUI)) 
+                                                              | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__ebreak)))) 
                                                   & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus)) 
                                                  | ((- (IData)(
                                                                (((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_B) 

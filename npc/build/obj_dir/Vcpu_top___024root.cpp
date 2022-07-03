@@ -32,7 +32,7 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__1(Vcpu_top___024root* vlSe
     // Body
     __Vdlyvset__cpu_top__DOT__ysyx_22040237_regs_u0__DOT__regs__v0 = 0U;
     __Vdlyvset__cpu_top__DOT__ysyx_22040237_regs_u0__DOT__regs__v32 = 0U;
-    if ((0x4000U & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))) {
+    if ((IData)((0x4000U == (0x4007U & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))))) {
         Vcpu_top___024unit____Vdpiimwrap_sim_ebreak_TOP____024unit();
     }
     if ((1U & ((~ (IData)(vlSelf->rst)) & (~ ((((((
@@ -703,10 +703,11 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__1(Vcpu_top___024root* vlSe
                                                                | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__jalr))))) 
                                            & vlSelf->cpu_top__DOT__pc_to_ifu));
     vlSelf->cpu_top__DOT__exu_info_bus_to_exu = (((- (IData)(
-                                                             ((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_R) 
-                                                                | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_I)) 
-                                                               | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_AUIPC)) 
-                                                              | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_LUI)))) 
+                                                             (((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_R) 
+                                                                 | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_I)) 
+                                                                | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_AUIPC)) 
+                                                               | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_LUI)) 
+                                                              | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__ebreak)))) 
                                                   & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus)) 
                                                  | ((- (IData)(
                                                                (((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_B) 

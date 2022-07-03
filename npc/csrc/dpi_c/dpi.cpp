@@ -35,7 +35,6 @@ extern "C" void mem_read(long long raddr, long long *rdata){
     printf("Read mem address = %llx is out of bound of mem.\n", raddr);
     return;
   }
-  printf("11111111111111111111111111111111\n");
   *rdata = *(long long *)npc_guest_mem(raddr);
   return;
 }
