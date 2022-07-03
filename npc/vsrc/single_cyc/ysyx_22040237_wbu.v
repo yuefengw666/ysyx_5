@@ -1,4 +1,4 @@
-import "DPI-C" function void pmem_write(
+import "DPI-C" function void mem_write(
   input longint waddr, input longint wdata, input byte wmask);
 
 module ysyx_22040237_wbu(
