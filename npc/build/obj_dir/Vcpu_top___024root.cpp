@@ -429,11 +429,10 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__1(Vcpu_top___024root* vlSe
                                                                      (- (IData)(
                                                                                 (vlSelf->inst_val 
                                                                                 >> 0x1fU))))) 
-                                                     << 0x2cU) 
-                                                    | ((QData)((IData)(
-                                                                       (0xfffff000U 
-                                                                        & vlSelf->inst_val))) 
-                                                       << 0xcU))));
+                                                     << 0x20U) 
+                                                    | (QData)((IData)(
+                                                                      (0xfffff000U 
+                                                                       & vlSelf->inst_val))))));
     vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus 
         = ((0x7f8fU & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus)) 
            | ((((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_R) 
