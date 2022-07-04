@@ -163,29 +163,35 @@ wire op_jalr = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_JALR];
 //beq judge sub result 
 //wire [`ysyx_22040237_REG_WIDTH:0] bjp_sub_res = adder_res;
 
+wire beq_cmp  = | adder_res;
+wire bne_cmp  = ! beq_cmp_neq;
+wire blt_cmp  =   slt_cmp_res;
+wire bge_cmp  = ! beq_cmp_lt;
+wire bltu_cmp =   sltu_cmp_res;
+wire bgeu_cmp = ! bltu_cmp;
 //beq
 wire op_beq = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BEQ];
-wire beq_res = op_beq && (adder_res == 65'b0);
+wire beq_res = op_beq && beq_cmp;
 
 //bne
 wire op_bne = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BNE];
-wire bne_res = op_bne & (!beq_res);
+wire bne_res = op_bne & beq_cmp;
 
 //blt
 wire op_blt = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BLT];
-wire blt_res = op_blt & (!adder_res[`ysyx_22040237_REG_WIDTH]);
+wire blt_res = op_blt & blt_cmp;
 
 //bge
 wire op_bge = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BGE];
-wire bge_res = op_bge & (!blt_res);
+wire bge_res = op_bge & bge_cmp;
 
 //bltu
 wire op_bltu = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BLTU];
-wire bltu_res = op_bltu & (adder_res[`ysyx_22040237_REG_WIDTH]);
+wire bltu_res = op_bltu & bltu_cmp;
 
 //bgeu
 wire op_bgeu = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BGEU];
-wire bgeu_res = op_bgeu & (!bltu_res);
+wire bgeu_res = op_bgeu & bltu_cmp;
 
 
 //ls req
