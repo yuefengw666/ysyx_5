@@ -119,9 +119,8 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__1(Vcpu_top___024root* vlSe
                                                                  (0U 
                                                                   != vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res))))) 
                                                 | ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_bne) 
-                                                   & (~ (IData)(
-                                                                (0U 
-                                                                 != vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res))))) 
+                                                   & (0U 
+                                                      != vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res))) 
                                                | ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_blt) 
                                                   & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__slt_cmp_res))) 
                                               | ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_bge) 
@@ -129,7 +128,7 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__1(Vcpu_top___024root* vlSe
                                              | ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_bltu) 
                                                 & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__adder_cout)))) 
                                             | ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_bgeu) 
-                                               & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__adder_cout))))
+                                               & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__adder_cout)))
                                             ? (vlSelf->cpu_top__DOT__op1_jp_to_exu 
                                                + vlSelf->cpu_top__DOT__op2_jp_to_exu)
                                             : (4ULL 
