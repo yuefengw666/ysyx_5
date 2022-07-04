@@ -77,8 +77,8 @@ wire op_add_sub = op_add_need | op_sub_need;
 
 wire [63 : 0] adder_in1;
 wire [63 : 0] adder_in2;
-wire adder_cin;
-wire adder_cout;
+wire [63 : 0] adder_cin;
+wire          adder_cout;
 wire [63 : 0] adder_res;
 wire [63 : 0] add_sub_res;
 
@@ -91,7 +91,7 @@ assign {adder_cout, adder_res} = adder_in1 + adder_in2 + adder_cin;
 assign add_sub_res = adder_res;
 
 //sll slli
-wire sll_res[`ysyx_22040237_REG_WIDTH-1 :0];
+wire [`ysyx_22040237_REG_WIDTH-1:0] sll_res;
 wire op_sll = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SLL];
 
 assign sll_res = op1_i << op2_i[5:0];
@@ -101,13 +101,13 @@ wire [`ysyx_22040237_REG_WIDTH-1:0] slt_res;
 wire op_slt = alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SLT];
 wire slt_cmp_res = ( op1_i[63] & !op2_i[63]) | ( ~(op1_i[63] ^ op2_i[63]) & adder_res[63]);
 
-assign slt_res = {62'b0, slt_cmp_res};
+assign slt_res = {63'b0, slt_cmp_res};
 
 //sltu
 wire [`ysyx_22040237_REG_WIDTH-1:0] sltu_res;
 wire op_sltu = alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SLTU];
 wire sltu_cmp_res = !adder_cout;
-assign sltu_res = {62'b0, sltu_cmp_res};
+assign sltu_res = {63'b0, sltu_cmp_res};
 
 //xor
 wire [`ysyx_22040237_REG_WIDTH-1:0] xor_res;
