@@ -153,8 +153,6 @@ void Vcpu_top___024root___settle__TOP__2(Vcpu_top___024root* vlSelf) {
                                                 | (QData)((IData)(
                                                                   (vlSelf->inst_val 
                                                                    >> 0x14U))));
-    vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_4_2_011 
-        = (IData)((0xcU == (0x1cU & vlSelf->inst_val)));
     vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_4_2_101 
         = (IData)((0x14U == (0x1cU & vlSelf->inst_val)));
     vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_6_5_11 
@@ -181,7 +179,11 @@ void Vcpu_top___024root___settle__TOP__2(Vcpu_top___024root* vlSelf) {
                                                  & (1ULL 
                                                     == vlSelf->cpu_top__DOT__idu_u0__DOT__imm_i));
     vlSelf->cpu_top__DOT__idu_u0__DOT__jalr = ((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_6_5_11) 
-                                                 & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_4_2_011)) 
+                                                 & (IData)(
+                                                           (4U 
+                                                            == 
+                                                            (0x1cU 
+                                                             & vlSelf->inst_val)))) 
                                                 & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_1_0_11)) 
                                                & (0U 
                                                   == 
@@ -198,7 +200,7 @@ void Vcpu_top___024root___settle__TOP__2(Vcpu_top___024root* vlSelf) {
            & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_1_0_11));
     vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_JAL = 
         (((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_6_5_11) 
-          & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_4_2_011)) 
+          & (IData)((0xcU == (0x1cU & vlSelf->inst_val)))) 
          & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_1_0_11));
     vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_S = (((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_6_5_01) 
                                                    & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_4_2_000)) 
@@ -844,7 +846,6 @@ void Vcpu_top___024root___ctor_var_reset(Vcpu_top___024root* vlSelf) {
     vlSelf->cpu_top__DOT__ifu_u0__DOT__rdata = VL_RAND_RESET_Q(64);
     vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_1_0_11 = VL_RAND_RESET_I(1);
     vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_4_2_000 = VL_RAND_RESET_I(1);
-    vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_4_2_011 = VL_RAND_RESET_I(1);
     vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_4_2_100 = VL_RAND_RESET_I(1);
     vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_4_2_101 = VL_RAND_RESET_I(1);
     vlSelf->cpu_top__DOT__idu_u0__DOT__opcode_6_5_00 = VL_RAND_RESET_I(1);

@@ -31,7 +31,6 @@ VL_MODULE(Vcpu_top___024root) {
     CData/*6:0*/ cpu_top__DOT__ls_info_bus_to_isu;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_1_0_11;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_4_2_000;
-    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_4_2_011;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_4_2_100;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_4_2_101;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_6_5_00;

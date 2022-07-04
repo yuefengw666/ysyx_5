@@ -15,7 +15,7 @@ module ysyx_22040237_idu(
   output [63:0] op1_o,
   output [63:0] op2_o,
   output [63:0] op1_jp_o,
-  output [63:0] op2_jp_o,
+  output [63:0] op2_jp_s_o,
 
   output [14:0] exu_info_bus_o,
 
@@ -26,7 +26,9 @@ module ysyx_22040237_idu(
 
   //**************DPI_C identify invalid inst for sim*****************/
 assign invalid_inst = ~( rv64I_RM | rv64I_I | rv64I_L | rv64I_S | rv64I_B | 
-                        rv64I_JAL | rv64I_JALR | rv64I_AUIPC | rv64I_LUI | rv64I_EBREAK);
+                         rv64I_JAL | rv64I_JALR | rv64I_AUIPC | rv64I_LUI | rv64I_EBREAK 
+                         rv64IW_RM | rv64IW_I
+                       );
   /*******************************************************************/
 
 
@@ -37,11 +39,7 @@ wire [6:0] funct7 = inst_i[31:25];
 wire [4:0] rs1    = inst_i[19:15];
 wire [4:0] rs2    = inst_i[24:20];
 
-assign rd_idx_o = rd;
-assign rs1_idx_o = rs1;
-assign rs2_idx_o = rs2;
-
-//decode inst opcode
+//--------------------decode inst opcode--------------------//
 //wire opcode_1_0_00 = !opcode[1] & !opcode[0];
 //wire opcode_1_0_01 = !opcode[1] &  opcode[0];
 //wire opcode_1_0_10 =  opcode[1] & !opcode[0];
@@ -53,7 +51,7 @@ wire opcode_4_2_001 = !opcode[4] & !opcode[3] &  opcode[2];
 wire opcode_4_2_011 = !opcode[4] &  opcode[3] &  opcode[2];
 wire opcode_4_2_100 =  opcode[4] & !opcode[3] & !opcode[2];
 wire opcode_4_2_101 =  opcode[4] & !opcode[3] &  opcode[2];
-//wire opcode_4_2_110 =  opcode[4] &  opcode[3] & !opcode[2];
+wire opcode_4_2_110 =  opcode[4] &  opcode[3] & !opcode[2];
 //wire opcode_4_2_111 =  opcode[4] &  opcode[3] &  opcode[2];
 
 wire opcode_6_5_00 = !opcode[6] & !opcode[5];
@@ -61,13 +59,13 @@ wire opcode_6_5_01 = !opcode[6] &  opcode[5];
 //wire opcode_6_5_10 =  opcode[6] & !opcode[5];
 wire opcode_6_5_11 =  opcode[6] &  opcode[5];
 
-//I base type
+//--------------------base type--------------------//
+
 wire rv64I_RM = opcode_6_5_01 && opcode_4_2_100 && opcode_1_0_11;
 wire rv64I_I  = opcode_6_5_00 && opcode_4_2_100 && opcode_1_0_11;
 wire rv64I_L  = opcode_6_5_00 && opcode_4_2_000 && opcode_1_0_11;
 wire rv64I_S  = opcode_6_5_01 && opcode_4_2_000 && opcode_1_0_11;
 wire rv64I_B  = opcode_6_5_11 && opcode_4_2_000 && opcode_1_0_11;
-
 
 wire rv64I_LUI    = opcode_6_5_01 && opcode_4_2_101 && opcode_1_0_11;
 wire rv64I_AUIPC  = opcode_6_5_00 && opcode_4_2_101 && opcode_1_0_11;
@@ -75,6 +73,8 @@ wire rv64I_JAL    = opcode_6_5_11 && opcode_4_2_011 && opcode_1_0_11;
 wire rv64I_JALR   = opcode_6_5_11 && opcode_4_2_001 && opcode_1_0_11;
 wire rv64I_EBREAK = opcode_6_5_11 && opcode_4_2_100 && opcode_1_0_11;
 
+wire rv64IW_RM = opcode_6_5_01 && opcode_4_2_110 && opcode_1_0_11;
+wire rv64IW_I  = opcode_6_5_00 && opcode_4_2_110 && opcode_1_0_11;
 
 //decode imm
 wire [63:0] imm_i = { { 52{inst_i[31]} }, inst_i[31:20] };
@@ -101,8 +101,6 @@ wire funct7_0x00 = funct7 == 7'b000_0000;
 wire funct7_0x20 = funct7 == 7'b010_0000;
 
 //sllw slliw srlw srliw sraw sraiw
-//addw addiw subw
-// lwu sd
 
 //----------------------------identify inst--------------------------------------//
 //RV64I R
@@ -116,6 +114,12 @@ wire srl  = rv64I_RM & funct3_0x5 & funct7_0x00;
 wire sra  = rv64I_RM & funct3_0x5 & funct7_0x20;
 wire or_  = rv64I_RM & funct3_0x6 & funct7_0x00;
 wire and_ = rv64I_RM & funct3_0x7 & funct7_0x00;
+//RV64IW R +++
+wire addw = rv64IW_RM & funct3_0x0 & funct7_0x00;
+wire subw = rv64IW_RM & funct3_0x0 & funct7_0x20;
+wire sllw = rv64IW_RM & funct3_0x1 & funct7_0x00;
+wire srlw = rv64IW_RM & funct3_0x5 & funct7_0x00;
+wire sraw = rv64IW_RM & funct3_0x5 & funct7_0x20;
 
 //RV64I I
 wire addi  = rv64I_I & funct3_0x0;
@@ -127,6 +131,15 @@ wire srli  = rv64I_I & funct3_0x5 & imm_11_5_0x00;
 wire srai  = rv64I_I & funct3_0x5 & imm_11_5_0x20;
 wire ori   = rv64I_I & funct3_0x6;
 wire andi  = rv64I_I & funct3_0x7;
+//RV64IW I +++
+wire addiw = rv64IW_I & funct3_0x0;
+wire slliw = rv64IW_I & funct3_0x1 & imm_11_5_0x00;
+wire srliw = rv64IW_I & funct3_0x5 & imm_11_5_0x00;
+wire sraiw = rv64IW_I & funct3_0x1 & imm_11_5_0x20;
+
+
+//RV64IW I
+wire addiw = rv64IW_I & 
 
 //RV64I L
 wire lb  = rv64I_L & funct3_0x0;
@@ -135,6 +148,8 @@ wire lw  = rv64I_L & funct3_0x2;
 wire ld  = rv64I_L & funct3_0x3;
 wire lbu = rv64I_L & funct3_0x4;
 wire lhu = rv64I_L & funct3_0x5;
+//+++
+wire lwu = rv64I_L & funct3_0x6;
 
 //RV64I B
 wire beq  = rv64I_B & funct3_0x0;
@@ -162,24 +177,29 @@ wire jalr = rv64I_JALR & funct3_0x0;
 wire ebreak = rv64I_EBREAK & funct3_0x0 & (imm_i == 'b1);
 
 
-// confirm imm
+//-------------------------confirm imm-------------------------//
 wire [63:0] imm = ( {64{rv64I_I | rv64I_L | jalr}} & imm_i ) | 
                   ( {64{rv64I_S}}                  & imm_s ) | 
                   ( {64{rv64I_B}}                  & imm_b ) |
                   ( {64{rv64I_JAL}}                & imm_j ) | 
                   ( {64{auipc | lui}}              & imm_u );
 
-//---------------------------------------------------------------
+
+//-------------------------confirm rd rs1 rs2---------------------//
 wire rd_idx_0x = rd == 5'b00000;
+wire rd_need = (~rd_idx_0x) & ( ~( rv64I_S | rv64I_B | ebreak));
 wire rs1_need = ~( jal | lui | auipc | ebreak ); 
 wire rs2_need = ( rv64I_RM | rv64I_S | rv64I_B );
-wire rd_need = (~rd_idx_0x) & ( ~( rv64I_S | rv64I_B | ebreak));
+
+assign rd_idx_o = rd;
+assign rs1_idx_o = rs1;
+assign rs2_idx_o = rs2;
 
 assign rs1_read_en_o = rs1_need;
 assign rs2_read_en_o = rs2_need;
 assign rd_wr_en_o = rd_need;
 
-//identify operation data
+//identify operation
 wire op1_rs1_need = ~( jal | jalr | lui | auipc |  ebreak );
 wire op1_pc_need = auipc | jal | jalr;
 
@@ -194,27 +214,27 @@ wire op2_jp_imm_need = jal | jalr | rv64I_B;
 wire op2_jp_rs2_need = rv64I_S;
 
 assign op1_o =  ( {64{op1_rs1_need}} & rs1_data_i ) |   
-                ( {64{op1_pc_need}} & pc_i );
+                ( {64{op1_pc_need}}  & pc_i );
 
 assign op2_o =  ( {64{op2_rs2_need}} & rs2_data_i ) |
-                ( {64{op2_imm_need}} & imm ) |
-                ( {64{op2_0x4_need}} & 64'h4 ) ;
+                ( {64{op2_imm_need}} & imm        ) |
+                ( {64{op2_0x4_need}} & 64'h4      ) ;
 
 assign op1_jp_o = ( {64{op1_jp_rs1_need}} & rs1_data_i) | 
-                  ( {64{op1_jp_pc_need}} & pc_i);
+                  ( {64{op1_jp_pc_need}}  & pc_i);
 
-assign op2_jp_o = ( {64{op2_jp_imm_need}} & imm) |
-                  ( {64{op2_jp_rs2_need}} & rs2_data_i); 
-
+assign op2_jp_s_o = ( {64{op2_jp_imm_need}} & imm ) |
+                    ( {64{op2_jp_rs2_need}} & rs2_data_i );
 
 //operation need alu
-wire alu_op = rv64I_RM | rv64I_I | auipc | lui | ebreak;
 
-wire [14:0] alu_info_bus;
+wire alu_op = rv64I_RM | rv64I_I | auipc | lui | ebreak | rv64IW_RM | rv64IW_I;
+wire alu_wop = rv64IW_RM | rv64IW_I;
+wire [15:0] alu_info_bus;
 
 assign alu_info_bus[2:0] = `ysyx_22040237_EXU_INFO_ALU;
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_ADD] = (add | addi | auipc  );
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SUB] = (sub);                 
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_ADD] = (add | addi | auipc | addw | addiw);
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SUB] = (sub | subw);                 
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLL] = (sll | slli);                 
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLT] = (slt | slti);                 
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLTU] = (sltu | sltiu);                
@@ -225,10 +245,12 @@ assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_OR] = (or_ | ori);
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_AND] = (and_ | andi);
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_LUI] = lui;
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_EBREAK] = ebreak;
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_WOP] = alu_wop;
+
 
 //bjp_info_bus
 wire bjp_op = rv64I_B | jal | jalr;
-wire [14:0] bjp_info_bus;
+wire [15:0] bjp_info_bus;
 
 assign bjp_info_bus[2:0] = `ysyx_22040237_EXU_INFO_BJP;
 assign bjp_info_bus[`ysyx_22040237_EXU_INFO_BJP_JAL]  = jal;
@@ -239,7 +261,7 @@ assign bjp_info_bus[`ysyx_22040237_EXU_INFO_BJP_BLT] = blt;
 assign bjp_info_bus[`ysyx_22040237_EXU_INFO_BJP_BGE] = bge;
 assign bjp_info_bus[`ysyx_22040237_EXU_INFO_BJP_BLTU] = bltu;
 assign bjp_info_bus[`ysyx_22040237_EXU_INFO_BJP_BGEU] = bgeu;
-assign bjp_info_bus[14:11] = 4'b0;
+assign bjp_info_bus[15:11] = 4'b0;
 
 //ls_info_bus
 //00->1byte,  01->2byte,  10->4byte    11->8byte
@@ -250,22 +272,22 @@ wire [1:0] ls_size = ({2{lb | lbu | sb}} & 2'b00) |
                      ({2{ld |       sd}} & 2'b11);
 */
 wire ls_op = rv64I_L | rv64I_S;
-wire ls_usign = lbu | lhu;
+wire ls_usign = lbu | lhu | lwu;
 
-wire [14:0] ls_info_bus;
+wire [15:0] ls_info_bus;
 assign ls_info_bus[2:0] = `ysyx_22040237_EXU_INFO_LS;
 assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_LOAD] = rv64I_L;
 assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_STORE] = rv64I_S;
 assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_USIGN] = ls_usign;
 assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_BYTE] = lb | lbu | sb;
 assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_DB] = lh | lhu | sh;
-assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_WORD] = lw | sw;
+assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_WORD] = lw | sw | lwu;
 assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_DW] = ld | sd;
-assign ls_info_bus[14:10] = 'b0;
+assign ls_info_bus[15:10] = 'b0;
 
 
-assign exu_info_bus_o = ({15{alu_op}} & alu_info_bus) | 
-                        ({15{bjp_op}} & bjp_info_bus) |
-                        ({15{ls_op}}  & ls_info_bus) ;
+assign exu_info_bus_o = ({16{alu_op}} & alu_info_bus) | 
+                        ({16{bjp_op}} & bjp_info_bus) |
+                        ({16{ls_op}}  & ls_info_bus) ;
 
 endmodule

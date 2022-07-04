@@ -61,15 +61,18 @@ wire lh = ls_load && !ls_usign && ls_db;
 wire lw = ls_load && !ls_usign && ls_word;
 wire ld = ls_load && !ls_usign && ls_dw;
 wire lbu = ls_load && ls_usign && ls_byte;
-wire lhu = ls_load && ls_usign && ls_word;
+wire lhu = ls_load && ls_usign && ls_db;
+wire lwu = ls_load && ls_usign && ls_word;
+
 
 wire [63:0] load_data;
-assign load_data = ( {64{lb}} & { {56{mem_rdata[7]}}, mem_rdata[7:0] } ) |
+assign load_data = ( {64{lb}} & { {56{mem_rdata[7]}}, mem_rdata[7:0] } )   |
                    ( {64{lh}} & { {48{mem_rdata[15]}}, mem_rdata[15:0] } ) |
                    ( {64{lw}} & { {32{mem_rdata[31]}}, mem_rdata[31:0] } ) | 
-                   ( {64{ld}} & mem_rdata[63:0] ) | 
-                   ( {64{lbu}} & { 56'b0, mem_rdata[7:0]}) | 
-                   ( {64{lhu}} & { 48'b0, mem_rdata[15:0]});
+                   ( {64{ld}} & mem_rdata[63:0] )                          | 
+                   ( {64{lbu}} & { 56'b0, mem_rdata[7:0]})                 | 
+                   ( {64{lhu}} & { 48'b0, mem_rdata[15:0]})                |
+                   ( {64{lwu}} & { 32'b0, mem_rdata[31:0]}) ;
 
 
 endmodule

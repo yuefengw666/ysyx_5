@@ -22,7 +22,9 @@
 `define ysyx_22040237_EXU_INFO_ALU_OR      11
 `define ysyx_22040237_EXU_INFO_ALU_AND     12
 `define ysyx_22040237_EXU_INFO_ALU_LUI     13
-`define ysyx_22040237_EXU_INFO_ALU_EBREAK     14
+`define ysyx_22040237_EXU_INFO_ALU_EBREAK  14
+`define ysyx_22040237_EXU_INFO_ALU_WOP     15
+
 
 //bjp_info_bus has
 `define ysyx_22040237_EXU_INFO_BJP_JAL 3
