@@ -59,7 +59,7 @@ wire ls_req = exu_info_bus_i[2:0] == `ysyx_22040237_EXU_INFO_LS;
 //**********alu req**********//
 //add
 wire op_add = alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_ADD];
-//wire op_add_need = op_add | op_jal  |  op_jalr |  ls_req;
+wire op_add_need = op_add | op_jal  |  op_jalr |  ls_req;
 
 wire op_sub = alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SUB];
 wire op_sub_need = op_sub  |
@@ -207,7 +207,7 @@ wire ls_dw = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_DW];
 
 //alu result
 
-assign alu_res_o =( ( {64{op_add | op_sub}}  & add_sub_res ) | 
+assign alu_res_o =( ( {64{op_add_need | op_sub}}  & add_sub_res ) | 
                     ( {64{op_sll}}      & sll_res     ) |
                     ( {64{op_slt}}      & slt_res     ) |
                     ( {64{op_sltu}}     & sltu_res    ) |
