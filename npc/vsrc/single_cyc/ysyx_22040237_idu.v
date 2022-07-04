@@ -26,7 +26,7 @@ module ysyx_22040237_idu(
 
   //**************DPI_C identify invalid inst for sim*****************/
 assign invalid_inst = ~( rv64I_RM | rv64I_I | rv64I_L | rv64I_S | rv64I_B | 
-                         rv64I_JAL | rv64I_JALR | rv64I_AUIPC | rv64I_LUI | rv64I_EBREAK 
+                         rv64I_JAL | rv64I_JALR | rv64I_AUIPC | rv64I_LUI | rv64I_EBREAK |
                          rv64IW_RM | rv64IW_I
                        );
   /*******************************************************************/
@@ -137,10 +137,6 @@ wire slliw = rv64IW_I & funct3_0x1 & imm_11_5_0x00;
 wire srliw = rv64IW_I & funct3_0x5 & imm_11_5_0x00;
 wire sraiw = rv64IW_I & funct3_0x1 & imm_11_5_0x20;
 
-
-//RV64IW I
-wire addiw = rv64IW_I & 
-
 //RV64I L
 wire lb  = rv64I_L & funct3_0x0;
 wire lh  = rv64I_L & funct3_0x1;
@@ -148,7 +144,6 @@ wire lw  = rv64I_L & funct3_0x2;
 wire ld  = rv64I_L & funct3_0x3;
 wire lbu = rv64I_L & funct3_0x4;
 wire lhu = rv64I_L & funct3_0x5;
-//+++
 wire lwu = rv64I_L & funct3_0x6;
 
 //RV64I B
