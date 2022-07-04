@@ -82,20 +82,19 @@ wire adder_cout;
 wire [63 : 0] adder_res;
 wire [63 : 0] add_sub_res;
 
-assign adder_in1 = op1_i; //{64{op_add_sub}} & op1_i;
-assign adder_in2 = (op_sub ? ~op2_i : op2_i); //{64{op_add_sub}} & (op_sub ? ~op2_i : op2_i);
-assign adder_cin = (op_sub | op_slt | )? 1'b1 : 1'b0;
+assign adder_in1 = op1_i;
+assign adder_in2 = op_sub ? ~op2_i : op2_i;
+assign adder_cin = op_sub_need ? 1'b1 : 1'b0;
 
 assign {adder_cout, adder_res} = adder_in1 + adder_in2 + adder_cin;
 
 assign add_sub_res = adder_res;
 
 //sll slli
-//wire sll_res[`ysyx_22040237_REG_WIDTH-1 :0];
+wire sll_res[`ysyx_22040237_REG_WIDTH-1 :0];
 wire op_sll = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SLL];
 
-wire [63:0] sll_res = op1_i << op2_i[5:0];
-//assign sll_res = op1_i << op2_i[5:0];
+assign sll_res = op1_i << op2_i[5:0];
 
 //slt
 wire [`ysyx_22040237_REG_WIDTH-1:0] slt_res;
