@@ -62,7 +62,7 @@ ysyx_22040237_idu idu_u0(
   .op1_o (op1_to_exu),
   .op2_o (op2_to_exu),
   .op1_jp_o (op1_jp_to_exu),
-  .op2_jp_o (op2_jp_s_to_exu),
+  .op2_jp_s_o (op2_jp_s_to_exu),
   .exu_info_bus_o (exu_info_bus_to_exu),
 
   .invalid_inst (invalid_inst_to_exu)
@@ -87,7 +87,7 @@ ysyx_22040237_exu exu_u0(
   .op1_i (op1_to_exu),
   .op2_i (op2_to_exu),
   .op1_jp_i (op1_jp_to_exu),
-  .op2_jp_i (op2_jp_s_to_exu),
+  .op2_jp_s_i (op2_jp_s_to_exu),
   .exu_info_bus_i (exu_info_bus_to_exu),
 
   .rd_wr_en_o (rd_wr_en_to_lsu),
