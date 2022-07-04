@@ -17,7 +17,7 @@ module ysyx_22040237_idu(
   output [63:0] op1_jp_o,
   output [63:0] op2_jp_s_o,
 
-  output [14:0] exu_info_bus_o,
+  output [15:0] exu_info_bus_o,
 
   //**************DPI_C identify invalid inst for sim*****************/
   output invalid_inst
@@ -230,12 +230,12 @@ wire [15:0] alu_info_bus;
 assign alu_info_bus[2:0] = `ysyx_22040237_EXU_INFO_ALU;
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_ADD] = (add | addi | auipc | addw | addiw);
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SUB] = (sub | subw);                 
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLL] = (sll | slli);                 
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLL] = (sll | slli | sllw | slliw);                 
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLT] = (slt | slti);                 
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SLTU] = (sltu | sltiu);                
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_XOR] = (xor_ | xori);                
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SRL] = (srl | srli);
-assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SRA] = (sra | srai);
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SRL] = (srl | srli | srlw | srliw);
+assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_SRA] = (sra | srai | sraw | sriw );
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_OR] = (or_ | ori);
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_AND] = (and_ | andi);
 assign alu_info_bus[`ysyx_22040237_EXU_INFO_ALU_LUI] = lui;
@@ -256,7 +256,7 @@ assign bjp_info_bus[`ysyx_22040237_EXU_INFO_BJP_BLT] = blt;
 assign bjp_info_bus[`ysyx_22040237_EXU_INFO_BJP_BGE] = bge;
 assign bjp_info_bus[`ysyx_22040237_EXU_INFO_BJP_BLTU] = bltu;
 assign bjp_info_bus[`ysyx_22040237_EXU_INFO_BJP_BGEU] = bgeu;
-assign bjp_info_bus[15:11] = 4'b0;
+assign bjp_info_bus[15:11] = 'b0;
 
 //ls_info_bus
 //00->1byte,  01->2byte,  10->4byte    11->8byte

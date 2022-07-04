@@ -12,7 +12,7 @@ module ysyx_22040237_exu(
   input [63:0] op2_i,
   input [63:0] op1_jp_i,
   input [63:0] op2_jp_s_i,
-  input [14:0] exu_info_bus_i,
+  input [15:0] exu_info_bus_i,
 
   output rd_wr_en_o,
   output [4:0] rd_idx_o,

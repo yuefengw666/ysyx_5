@@ -39,10 +39,9 @@ wire [4:0] rs1_idx_to_regs;
 wire [4:0] rs2_idx_to_regs;
 wire [63:0] op1_to_exu;
 wire [63:0] op2_to_exu;
-wire [63:0] op1_jp_s_to_exu;
-wire [63:0] op2_jp_to_exu;
-wire [14:0] exu_info_bus_to_exu;
-wire [14:0] exu_info_bus_to_exu;
+wire [63:0] op1_jp_to_exu;
+wire [63:0] op2_jp_s_to_exu;
+wire [15:0] exu_info_bus_to_exu;
 wire invalid_inst_to_exu;
 
 ysyx_22040237_idu idu_u0(
