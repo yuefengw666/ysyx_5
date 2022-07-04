@@ -58,23 +58,22 @@ wire ls_req = exu_info_bus_i[2:0] == `ysyx_22040237_EXU_INFO_LS;
 
 //**********alu req**********//
 //add
-wire op_add = ( ( alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_ADD] ) | 
-                op_jal |
-                op_jalr | 
-                ls_req
-              );
+wire op_add = alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_ADD];
+wire op_add_need = op_add | op_jal  |  op_jalr |  ls_req;
 
-wire op_sub = ( ( alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SUB] ) | 
-                 op_slt_sltu |
-                 op_beq |
-                 op_bne |
-                 op_blt |
-                 op_bge |
-                 op_bltu |
-                 op_bgeu
-              );
+wire op_sub = alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SUB];
+wire op_sub_need = op_sub  |
+                   op_slt  | 
+                   op_sltu |
+                   op_beq  |
+                   op_bne  |
+                   op_blt  |
+                   op_bge  |
+                   op_bltu |
+                   op_bgeu;
+              
 
-wire op_add_sub = op_add | op_sub;
+wire op_add_sub = op_add_need | op_sub_need;
 
 wire [63 : 0] adder_in1;
 wire [63 : 0] adder_in2;
@@ -85,7 +84,7 @@ wire [63 : 0] add_sub_res;
 
 assign adder_in1 = op1_i; //{64{op_add_sub}} & op1_i;
 assign adder_in2 = (op_sub ? ~op2_i : op2_i); //{64{op_add_sub}} & (op_sub ? ~op2_i : op2_i);
-assign adder_cin = op_sub ? 1'b1 : 1'b0;
+assign adder_cin = (op_sub | op_slt | )? 1'b1 : 1'b0;
 
 assign {adder_cout, adder_res} = adder_in1 + adder_in2 + adder_cin;
 
@@ -101,7 +100,7 @@ wire [63:0] sll_res = op1_i << op2_i[5:0];
 //slt
 wire [`ysyx_22040237_REG_WIDTH-1:0] slt_res;
 wire op_slt = alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SLT];
-wire slt_cmp_res = ( op1[63] & !op2[63]) | ( ~(op1[63] ^ op2[63]) & adder_res[63]);
+wire slt_cmp_res = ( op1_i[63] & !op2_i[63]) | ( ~(op1_i[63] ^ op2_i[63]) & adder_res[63]);
 
 assign slt_res = {62'b0, slt_cmp_res};
 
