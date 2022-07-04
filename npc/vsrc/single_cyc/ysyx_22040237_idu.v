@@ -48,7 +48,7 @@ assign rs2_idx_o = rs2;
 wire opcode_1_0_11 =  opcode[1] &  opcode[0];
 
 wire opcode_4_2_000 = !opcode[4] & !opcode[3] & !opcode[2];
-//wire opcode_4_2_001 = !opcode[4] & !opcode[3] &  opcode[2];
+wire opcode_4_2_001 = !opcode[4] & !opcode[3] &  opcode[2];
 //wire opcode_4_2_010 = !opcode[4] &  opcode[3] & !opcode[2];
 wire opcode_4_2_011 = !opcode[4] &  opcode[3] &  opcode[2];
 wire opcode_4_2_100 =  opcode[4] & !opcode[3] & !opcode[2];
@@ -72,7 +72,7 @@ wire rv64I_B  = opcode_6_5_11 && opcode_4_2_000 && opcode_1_0_11;
 wire rv64I_LUI    = opcode_6_5_01 && opcode_4_2_101 && opcode_1_0_11;
 wire rv64I_AUIPC  = opcode_6_5_00 && opcode_4_2_101 && opcode_1_0_11;
 wire rv64I_JAL    = opcode_6_5_11 && opcode_4_2_011 && opcode_1_0_11;
-wire rv64I_JALR   = opcode_6_5_11 && opcode_4_2_011 && opcode_1_0_11;
+wire rv64I_JALR   = opcode_6_5_11 && opcode_4_2_001 && opcode_1_0_11;
 wire rv64I_EBREAK = opcode_6_5_11 && opcode_4_2_100 && opcode_1_0_11;
 
 
