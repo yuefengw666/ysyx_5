@@ -72,9 +72,6 @@ wire op_sub_need = op_sub  |
                    op_bltu |
                    op_bgeu;
               
-
-wire op_add_sub = op_add_need | op_sub_need;
-
 wire [63 : 0] adder_in1;
 wire [63 : 0] adder_in2;
 wire [63 : 0] adder_cin;
@@ -175,7 +172,7 @@ wire beq_res = op_beq && beq_cmp;
 
 //bne
 wire op_bne = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BNE];
-wire bne_res = op_bne & beq_cmp;
+wire bne_res = op_bne & bne_cmp;
 
 //blt
 wire op_blt = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BLT];
@@ -191,7 +188,7 @@ wire bltu_res = op_bltu & bltu_cmp;
 
 //bgeu
 wire op_bgeu = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BGEU];
-wire bgeu_res = op_bgeu & bltu_cmp;
+wire bgeu_res = op_bgeu & bgeu_cmp;
 
 
 //ls req
