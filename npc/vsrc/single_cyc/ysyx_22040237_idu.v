@@ -42,23 +42,23 @@ assign rs1_idx_o = rs1;
 assign rs2_idx_o = rs2;
 
 //decode inst opcode
-wire opcode_1_0_00 = !opcode[1] & !opcode[0];
-wire opcode_1_0_01 = !opcode[1] &  opcode[0];
-wire opcode_1_0_10 =  opcode[1] & !opcode[0];
+//wire opcode_1_0_00 = !opcode[1] & !opcode[0];
+//wire opcode_1_0_01 = !opcode[1] &  opcode[0];
+//wire opcode_1_0_10 =  opcode[1] & !opcode[0];
 wire opcode_1_0_11 =  opcode[1] &  opcode[0];
 
 wire opcode_4_2_000 = !opcode[4] & !opcode[3] & !opcode[2];
-wire opcode_4_2_001 = !opcode[4] & !opcode[3] &  opcode[2];
-wire opcode_4_2_010 = !opcode[4] &  opcode[3] & !opcode[2];
+//wire opcode_4_2_001 = !opcode[4] & !opcode[3] &  opcode[2];
+//wire opcode_4_2_010 = !opcode[4] &  opcode[3] & !opcode[2];
 wire opcode_4_2_011 = !opcode[4] &  opcode[3] &  opcode[2];
 wire opcode_4_2_100 =  opcode[4] & !opcode[3] & !opcode[2];
 wire opcode_4_2_101 =  opcode[4] & !opcode[3] &  opcode[2];
-wire opcode_4_2_110 =  opcode[4] &  opcode[3] & !opcode[2];
-wire opcode_4_2_111 =  opcode[4] &  opcode[3] &  opcode[2];
+//wire opcode_4_2_110 =  opcode[4] &  opcode[3] & !opcode[2];
+//wire opcode_4_2_111 =  opcode[4] &  opcode[3] &  opcode[2];
 
 wire opcode_6_5_00 = !opcode[6] & !opcode[5];
 wire opcode_6_5_01 = !opcode[6] &  opcode[5];
-wire opcode_6_5_10 =  opcode[6] & !opcode[5];
+//wire opcode_6_5_10 =  opcode[6] & !opcode[5];
 wire opcode_6_5_11 =  opcode[6] &  opcode[5];
 
 //I base type

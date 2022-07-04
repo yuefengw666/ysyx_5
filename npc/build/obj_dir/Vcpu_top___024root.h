@@ -29,14 +29,22 @@ VL_MODULE(Vcpu_top___024root) {
 
     // LOCAL SIGNALS
     CData/*6:0*/ cpu_top__DOT__ls_info_bus_to_isu;
-    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64_R;
-    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64_I;
-    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64_L;
-    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64_S;
-    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64_B;
-    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64_JAL;
-    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64_LUI;
-    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64_AUIPC;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_1_0_11;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_4_2_000;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_4_2_011;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_4_2_100;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_4_2_101;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_6_5_00;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_6_5_01;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__opcode_6_5_11;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64I_RM;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64I_I;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64I_L;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64I_S;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64I_B;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64I_LUI;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64I_AUIPC;
+    CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__rv64I_JAL;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__lbu;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__lhu;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__jalr;
