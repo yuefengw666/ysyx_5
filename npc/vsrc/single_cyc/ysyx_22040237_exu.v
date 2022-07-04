@@ -163,10 +163,10 @@ wire op_jalr = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_JALR];
 //beq judge sub result 
 //wire [`ysyx_22040237_REG_WIDTH:0] bjp_sub_res = adder_res;
 
-wire beq_cmp  = | adder_res;
-wire bne_cmp  = ! beq_cmp_neq;
+wire beq_cmp  = ! bne_cmp;
+wire bne_cmp  = | adder_res;
 wire blt_cmp  =   slt_cmp_res;
-wire bge_cmp  = ! beq_cmp_lt;
+wire bge_cmp  = ! blt_cmp;
 wire bltu_cmp =   sltu_cmp_res;
 wire bgeu_cmp = ! bltu_cmp;
 //beq
