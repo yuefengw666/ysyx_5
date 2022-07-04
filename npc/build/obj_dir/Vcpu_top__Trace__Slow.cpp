@@ -536,7 +536,7 @@ void Vcpu_top___024root__traceFullSub0(Vcpu_top___024root* vlSelf, VerilatedVcd*
                                   | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__jalr))));
         tracep->fullSData(oldp+62,(vlSelf->cpu_top__DOT__idu_u0__DOT__bjp_info_bus),15);
         tracep->fullBit(oldp+63,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_L) 
-                                  | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_I))));
+                                  | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_S))));
         tracep->fullBit(oldp+64,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__lbu) 
                                   | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__lhu))));
         tracep->fullSData(oldp+65,(vlSelf->cpu_top__DOT__idu_u0__DOT__ls_info_bus),15);

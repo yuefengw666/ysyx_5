@@ -538,7 +538,7 @@ void Vcpu_top___024root___settle__TOP__2(Vcpu_top___024root* vlSelf) {
                                                      & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__bjp_info_bus))) 
                                                  | ((- (IData)(
                                                                ((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_L) 
-                                                                | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_I)))) 
+                                                                | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64_S)))) 
                                                     & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__ls_info_bus)));
     vlSelf->cpu_top__DOT__exu_u0__DOT__srl_res = (vlSelf->cpu_top__DOT__op1_to_exu 
                                                   >> 
