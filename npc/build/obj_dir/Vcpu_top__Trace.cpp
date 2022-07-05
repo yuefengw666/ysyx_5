@@ -285,12 +285,11 @@ void Vcpu_top___024root__traceChgSub0(Vcpu_top___024root* vlSelf, VerilatedVcd* 
                                                 (0x8007U 
                                                  & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))));
             tracep->chgQData(oldp+96,((((QData)((IData)(
-                                                        (0x7fffffffU 
-                                                         & (- (IData)(
-                                                                      (1U 
-                                                                       & (IData)(
-                                                                                (vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res 
-                                                                                >> 0x1fU)))))))) 
+                                                        (- (IData)(
+                                                                   (1U 
+                                                                    & (IData)(
+                                                                              (vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res 
+                                                                               >> 0x1fU))))))) 
                                         << 0x20U) | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res)))),64);
             tracep->chgQData(oldp+98,((vlSelf->cpu_top__DOT__op1_to_exu 
                                        << (0x3fU & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)))),64);

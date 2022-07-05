@@ -212,7 +212,7 @@ wire ls_dw = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_DW];
 
 //alu result
 
-assign alu_res_o =( ( {64{op_add_sub}}  & add_sub_res )    |
+assign alu_res_o =( ( {64{op_add_sub & !wop_add_sub}}  & add_sub_res )    |
                     ( {64{wop_add_sub}} & wop_add_sub_res) |
                     ( {64{op_sll}}      & sll_res     )    |
                     ( {64{op_slt}}      & slt_res     )    |
