@@ -45,7 +45,9 @@ wire ls_dw    = ls_info_bus_i[6];
 
 wire mem_ren = ls_load;
 wire [63:0] mem_raddr = ls_load ? alu_res_i : 'b0;
+/* verilator lint_off UNUSED */
 wire [63:0] mem_rdata;
+/* verilator lint_off UNUSED */
 
 //memory read
 /* verilator lint_off LATCH */
