@@ -198,8 +198,8 @@ assign rd_wr_en_o = rd_need;
 wire op1_rs1_need = ~( jal | jalr | lui | auipc |  ebreak );
 wire op1_pc_need = auipc | jal | jalr;
 
-wire op2_rs2_need = rv64I_RM | rv64I_B;
-wire op2_imm_need = rv64I_I | rv64I_L | rv64I_S | auipc | lui;
+wire op2_rs2_need = rv64I_RM | rv64I_B | rv64IW_RM;
+wire op2_imm_need = rv64I_I | rv64I_L | rv64I_S | auipc | lui | rv64IW_I;
 wire op2_0x4_need = jal | jalr;
 
 wire op1_jp_rs1_need = jalr; 
