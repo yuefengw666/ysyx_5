@@ -233,8 +233,8 @@ assign alu_res_o =( ( {64{op_add_sub & !wop}}   & add_sub_res )    |
                     ( {64{op_xor}}              & xor_res     )    |
                     ( {64{op_srl     & !wop}}   & srl_res     )    |
                     ( {64{op_srl     &  wop}}   & wop_srl_res )    |
-                    ( {64{op_sra}}              & sra_res     )    |
-                    ( {64{op_sra     & !wop}}   & wop_sra_res )    |
+                    ( {64{op_sra     & !wop}}   & sra_res     )    |
+                    ( {64{op_sra     &  wop}}   & wop_sra_res )    |
                     ( {64{op_or}}               & or_res      )    | 
                     ( {64{op_and}}              & and_res     )    |
                     ( {64{op_lui}}              & lui_res     )  
