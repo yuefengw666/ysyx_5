@@ -606,11 +606,13 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
             = ((IData)(vlSelf->cpu_top__DOT__op1_to_exu) 
                >> (0x3fU & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)));
         vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res 
-            = ((IData)(vlSelf->cpu_top__DOT__op1_to_exu) 
-               >> (0x3fU & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)));
+            = VL_SHIFTRS_III(32,32,6, (IData)(vlSelf->cpu_top__DOT__op1_to_exu), 
+                             (0x3fU & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)));
     } else {
         vlSelf->cpu_top__DOT__exu_u0__DOT__srlw_res = 0U;
-        vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res = 0U;
+        vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res 
+            = (- ((IData)(vlSelf->cpu_top__DOT__op1_to_exu) 
+                  >> 0x1fU));
     }
     vlSelf->cpu_top__DOT__exu_info_bus_to_exu = (((
                                                    (- (IData)(
@@ -852,10 +854,9 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
                                                 | ((- (QData)((IData)(
                                                                       ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sra) 
                                                                        & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__wop)))))) 
-                                                   & (vlSelf->cpu_top__DOT__op1_to_exu 
-                                                      >> 
-                                                      (0x3fU 
-                                                       & (IData)(vlSelf->cpu_top__DOT__op2_to_exu))))) 
+                                                   & VL_SHIFTRS_QQI(64,64,6, vlSelf->cpu_top__DOT__op1_to_exu, 
+                                                                    (0x3fU 
+                                                                     & (IData)(vlSelf->cpu_top__DOT__op2_to_exu))))) 
                                                | ((- (QData)((IData)(
                                                                      ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sra) 
                                                                       & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__wop))))) 
