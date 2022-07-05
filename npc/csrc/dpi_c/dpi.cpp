@@ -38,7 +38,7 @@ extern "C" void mem_read(long long raddr, long long *rdata){
   *rdata = *(long long *)npc_guest_mem(raddr);
   #ifdef CONFIG_MTRACE
     printf("%s",ASNI_FMT("Mtrace-load->",ASNI_FG_CYAN));
-    printf("raddr:%llx, rdata:%llx,\n",raddr,rdata);
+    printf("raddr:%llx, rdata:%llx,\n",raddr,(*rdata));
   #endif
   return;
 }
