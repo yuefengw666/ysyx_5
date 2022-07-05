@@ -106,7 +106,7 @@ assign wop_sll_res = { {32{sll_res[31]}}, sll_res[31:0] };
 
 //srl 
 wire [`ysyx_22040237_REG_WIDTH-1:0] srl_res;
-wire op_srl = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SRL];
+wire op_srl = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SRL] && !wop;
 
 assign srl_res = op1_i >> op2_i[5:0];
 //srl word op
