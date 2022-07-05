@@ -663,16 +663,15 @@ void Vcpu_top___024root__traceFullSub0(Vcpu_top___024root* vlSelf, VerilatedVcd*
                                    & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__wop))));
         tracep->fullQData(oldp+105,(vlSelf->cpu_top__DOT__exu_u0__DOT__srl_res),64);
         tracep->fullBit(oldp+107,(vlSelf->cpu_top__DOT__exu_u0__DOT__op_srl));
-        tracep->fullQData(oldp+108,((((QData)((IData)(
-                                                      (- (IData)(
-                                                                 (1U 
-                                                                  & (IData)(
-                                                                            (vlSelf->cpu_top__DOT__exu_u0__DOT__wop_srl_res_t 
-                                                                             >> 0x1fU))))))) 
-                                      << 0x20U) | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__wop_srl_res_t)))),64);
+        tracep->fullQData(oldp+108,((QData)((IData)(
+                                                    (vlSelf->cpu_top__DOT__op1_to_exu 
+                                                     >> 
+                                                     (0x1fU 
+                                                      & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)))))),64);
         tracep->fullBit(oldp+110,(((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_srl) 
                                    & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__wop))));
-        tracep->fullQData(oldp+111,(vlSelf->cpu_top__DOT__exu_u0__DOT__wop_srl_res_t),64);
+        tracep->fullQData(oldp+111,((vlSelf->cpu_top__DOT__op1_to_exu 
+                                     >> (0x1fU & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)))),64);
         tracep->fullQData(oldp+113,((QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__slt_cmp_res))),64);
         tracep->fullBit(oldp+115,(vlSelf->cpu_top__DOT__exu_u0__DOT__op_slt));
         tracep->fullBit(oldp+116,(vlSelf->cpu_top__DOT__exu_u0__DOT__slt_cmp_res));

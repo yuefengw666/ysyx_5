@@ -92,11 +92,10 @@ VL_MODULE(Vcpu_top___024root) {
         QData/*63:0*/ cpu_top__DOT__exu_u0__DOT__adder_res;
         QData/*63:0*/ cpu_top__DOT__exu_u0__DOT__sll_res;
         QData/*63:0*/ cpu_top__DOT__exu_u0__DOT__srl_res;
-        QData/*63:0*/ cpu_top__DOT__exu_u0__DOT__wop_srl_res_t;
         QData/*63:0*/ cpu_top__DOT__exu_u0__DOT__sra_res;
+        QData/*63:0*/ cpu_top__DOT__lsu_u0__DOT__mem_rdata;
     };
     struct {
-        QData/*63:0*/ cpu_top__DOT__lsu_u0__DOT__mem_rdata;
         VlUnpacked<QData/*63:0*/, 32> cpu_top__DOT__regs_u0__DOT__regs;
         VlUnpacked<QData/*63:0*/, 33> cpu_top__DOT__regs_u0__DOT__rf;
     };

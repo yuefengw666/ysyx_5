@@ -113,10 +113,7 @@ assign srl_res = op1_i >> op2_i[5:0];
 //srl word op
 wire [`ysyx_22040237_REG_WIDTH-1:0] wop_srl_res;
 wire wop_srl = op_srl && wop;
-/* verilator lint_off UNUSED */
-wire [63:0] wop_srl_res_t = op1_i >> op2_i[4:0];
-/* verilator lint_on UNUSED */
-assign wop_srl_res = { {32'b0}, wop_srl_res_t[31:0] };
+assign wop_srl_res = { {32{wop_srl_res[31]}}, wop_srl_res_t[31:0] };
 
 //slt
 wire [`ysyx_22040237_REG_WIDTH-1:0] slt_res;
