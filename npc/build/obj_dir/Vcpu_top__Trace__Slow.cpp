@@ -1098,9 +1098,11 @@ void Vcpu_top___024root__traceFullSub0(Vcpu_top___024root* vlSelf, VerilatedVcd*
         tracep->fullBit(oldp+294,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I) 
                                    & (4U == (7U & (vlSelf->inst_val 
                                                    >> 0xcU))))));
-        tracep->fullBit(oldp+295,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I) 
-                                   & (5U == (7U & (vlSelf->inst_val 
-                                                   >> 0xcU))))));
+        tracep->fullBit(oldp+295,((IData)(((1U == (1U 
+                                                   & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I))) 
+                                           & (0x5000U 
+                                              == (0x40007000U 
+                                                  & vlSelf->inst_val))))));
         tracep->fullBit(oldp+296,((IData)(((1U == (1U 
                                                    & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I))) 
                                            & (0x40005000U 
@@ -1118,12 +1120,14 @@ void Vcpu_top___024root__traceFullSub0(Vcpu_top___024root* vlSelf, VerilatedVcd*
         tracep->fullBit(oldp+300,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_I) 
                                    & (1U == (7U & (vlSelf->inst_val 
                                                    >> 0xcU))))));
-        tracep->fullBit(oldp+301,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_I) 
-                                   & (5U == (7U & (vlSelf->inst_val 
-                                                   >> 0xcU))))));
+        tracep->fullBit(oldp+301,((IData)(((1U == (1U 
+                                                   & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_I))) 
+                                           & (0x5000U 
+                                              == (0x40007000U 
+                                                  & vlSelf->inst_val))))));
         tracep->fullBit(oldp+302,((IData)(((1U == (1U 
                                                    & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_I))) 
-                                           & (0x40001000U 
+                                           & (0x40005000U 
                                               == (0x40007000U 
                                                   & vlSelf->inst_val))))));
         tracep->fullBit(oldp+303,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_L) 

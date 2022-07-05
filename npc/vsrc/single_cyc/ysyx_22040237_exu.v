@@ -109,11 +109,11 @@ wire [`ysyx_22040237_REG_WIDTH-1:0] srl_res;
 wire op_srl = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SRL];
 
 assign srl_res = op1_i >> op2_i[5:0];
-
 //srl word op
+wire [31:0] srlw_res = op1_i[31:0] >> op2_i[5:0];
 wire [`ysyx_22040237_REG_WIDTH-1:0] wop_srl_res;
 wire wop_srl = op_srl && wop;
-assign wop_srl_res = { {32{srl_res[31]}}, srl_res[31:0] };
+assign wop_srl_res = { {32{srlw_res[31]}}, srlw_res };
 
 //slt
 wire [`ysyx_22040237_REG_WIDTH-1:0] slt_res;

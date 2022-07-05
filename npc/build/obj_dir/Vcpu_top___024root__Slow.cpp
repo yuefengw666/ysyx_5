@@ -379,18 +379,19 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
                                                   == 
                                                   (vlSelf->inst_val 
                                                    >> 0x19U))) 
-                 | ((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I) 
+                 | (IData)(((1U == (1U & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I))) 
+                            & (0x5000U == (0x40007000U 
+                                           & vlSelf->inst_val))))) 
+                | (((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_RM) 
                     & (5U == (7U & (vlSelf->inst_val 
-                                    >> 0xcU))))) | 
-                (((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_RM) 
-                  & (5U == (7U & (vlSelf->inst_val 
-                                  >> 0xcU)))) & (0U 
-                                                 == 
-                                                 (vlSelf->inst_val 
-                                                  >> 0x19U)))) 
-               | ((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_I) 
-                  & (5U == (7U & (vlSelf->inst_val 
-                                  >> 0xcU))))) << 9U));
+                                    >> 0xcU)))) & (0U 
+                                                   == 
+                                                   (vlSelf->inst_val 
+                                                    >> 0x19U)))) 
+               | (IData)(((1U == (1U & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_I))) 
+                          & (0x5000U == (0x40007000U 
+                                         & vlSelf->inst_val))))) 
+              << 9U));
     vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus 
         = ((0xfbffU & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus)) 
            | (((((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_RM) 
@@ -409,7 +410,7 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
                                                    (vlSelf->inst_val 
                                                     >> 0x19U)))) 
                | (IData)(((1U == (1U & (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_I))) 
-                          & (0x40001000U == (0x40007000U 
+                          & (0x40005000U == (0x40007000U 
                                              & vlSelf->inst_val))))) 
               << 0xaU));
     vlSelf->cpu_top__DOT__idu_u0__DOT__alu_info_bus 
