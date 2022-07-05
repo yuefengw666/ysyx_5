@@ -127,8 +127,8 @@ wire slli  = rv64I_I & funct3_0x1;
 wire slti  = rv64I_I & funct3_0x2;
 wire sltiu = rv64I_I & funct3_0x3;
 wire xori  = rv64I_I & funct3_0x4;
-wire srli  = rv64I_I & funct3_0x5 & imm_11_5_0x00;
-wire srai  = rv64I_I & funct3_0x5;
+wire srli  = rv64I_I & funct3_0x5;
+wire srai  = rv64I_I & funct3_0x5 & imm_11_5_0x20;
 wire ori   = rv64I_I & funct3_0x6;
 wire andi  = rv64I_I & funct3_0x7;
 //RV64IW I +++
