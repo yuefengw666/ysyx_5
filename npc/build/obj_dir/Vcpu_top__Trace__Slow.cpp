@@ -253,8 +253,8 @@ void Vcpu_top___024root__traceInitSub0(Vcpu_top___024root* vlSelf, VerilatedVcd*
         tracep->declBit(c+114,"cpu_top exu_u0 sltu_cmp_res", false,-1);
         tracep->declQuad(c+115,"cpu_top exu_u0 sra_res", false,-1, 63,0);
         tracep->declBit(c+117,"cpu_top exu_u0 op_sra", false,-1);
-        tracep->declQuad(c+118,"cpu_top exu_u0 sra_shift_mask", false,-1, 63,0);
-        tracep->declQuad(c+120,"cpu_top exu_u0 wop_sra_res", false,-1, 63,0);
+        tracep->declQuad(c+118,"cpu_top exu_u0 wop_sra_res", false,-1, 63,0);
+        tracep->declQuad(c+120,"cpu_top exu_u0 sraw_res", false,-1, 63,0);
         tracep->declQuad(c+122,"cpu_top exu_u0 xor_res", false,-1, 63,0);
         tracep->declBit(c+124,"cpu_top exu_u0 op_xor", false,-1);
         tracep->declQuad(c+5,"cpu_top exu_u0 xor_in1", false,-1, 63,0);
@@ -642,7 +642,8 @@ void Vcpu_top___024root__traceFullSub0(Vcpu_top___024root* vlSelf, VerilatedVcd*
                                                                            (vlSelf->cpu_top__DOT__exu_u0__DOT__sll_res 
                                                                             >> 0x1fU))))))) 
                                      << 0x20U) | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__sll_res)))),64);
-        tracep->fullQData(oldp+101,(vlSelf->cpu_top__DOT__exu_u0__DOT__srl_res),64);
+        tracep->fullQData(oldp+101,((vlSelf->cpu_top__DOT__op1_to_exu 
+                                     >> (0x3fU & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)))),64);
         tracep->fullBit(oldp+103,(vlSelf->cpu_top__DOT__exu_u0__DOT__op_srl));
         tracep->fullIData(oldp+104,(vlSelf->cpu_top__DOT__exu_u0__DOT__srlw_res),32);
         tracep->fullQData(oldp+105,((((QData)((IData)(
@@ -658,17 +659,17 @@ void Vcpu_top___024root__traceFullSub0(Vcpu_top___024root* vlSelf, VerilatedVcd*
                                                      & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__adder_cout)))))),64);
         tracep->fullBit(oldp+113,(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sltu));
         tracep->fullBit(oldp+114,((1U & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__adder_cout)))));
-        tracep->fullQData(oldp+115,(vlSelf->cpu_top__DOT__exu_u0__DOT__sra_res),64);
+        tracep->fullQData(oldp+115,((vlSelf->cpu_top__DOT__op1_to_exu 
+                                     >> (0x3fU & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)))),64);
         tracep->fullBit(oldp+117,(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sra));
-        tracep->fullQData(oldp+118,((1ULL >> (0x3fU 
-                                              & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)))),64);
-        tracep->fullQData(oldp+120,((((QData)((IData)(
+        tracep->fullQData(oldp+118,((((QData)((IData)(
                                                       (- (IData)(
                                                                  (1U 
                                                                   & (IData)(
-                                                                            (vlSelf->cpu_top__DOT__exu_u0__DOT__sra_res 
+                                                                            (vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res 
                                                                              >> 0x1fU))))))) 
-                                      << 0x20U) | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__sra_res)))),64);
+                                      << 0x20U) | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res)))),64);
+        tracep->fullQData(oldp+120,(vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res),64);
         tracep->fullQData(oldp+122,((vlSelf->cpu_top__DOT__op1_to_exu 
                                      ^ vlSelf->cpu_top__DOT__op2_to_exu)),64);
         tracep->fullBit(oldp+124,((IData)((0x100U == 

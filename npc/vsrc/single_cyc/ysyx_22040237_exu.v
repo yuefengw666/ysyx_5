@@ -134,7 +134,7 @@ assign sra_res = ($signed(op1_i)) >> op2_i[5:0];
 
 //word sra op
 wire [`ysyx_22040237_REG_WIDTH-1:0] wop_sra_res;
-wire [`ysyx_22040237_REG_WIDTH-1:0] sraw_res = ($signed(op1_i[31:0])) >> op2_i[5:0];
+wire [31:0] sraw_res = ($signed(op1_i[31:0])) >> op2_i[5:0];
 assign wop_sra_res = { {32{sraw_res[31]}}, sraw_res[31:0] };
 
 //xor
