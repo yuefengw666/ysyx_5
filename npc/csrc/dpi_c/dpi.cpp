@@ -36,12 +36,12 @@ extern "C" void mem_read(long long raddr, long long *rdata){
     return;
   }
   *rdata = *(long long *)npc_guest_mem(raddr);
-  /*
+  
   #ifdef CONFIG_MTRACE
     printf("%s",ASNI_FMT("Mtrace-l -> ",ASNI_FG_CYAN));
     printf("raddr:%016llx, rdata:%016llx,\n",raddr,(*rdata));
   #endif
-  */
+  
   return;
 }
 
