@@ -85,7 +85,7 @@ wire [63:0] imm_j = { { 43{inst_i[31]} }, inst_i[31], inst_i[19:12], inst_i[20],
 
 
 wire imm_11_5_0x00 = imm_i[11:5] == 7'b0;
-wire imm_11_5_0x20 = imm_i[11:5] == 7'b010_0000;
+//wire imm_11_5_0x20 = imm_i[11:5] == 7'b010_0000;
 
 //decode funct
 wire funct3_0x0 = funct3 == 3'b000;
@@ -133,7 +133,7 @@ wire ori   = rv64I_I & funct3_0x6;
 wire andi  = rv64I_I & funct3_0x7;
 //RV64IW I +++
 wire addiw = rv64IW_I & funct3_0x0;
-wire slliw = rv64IW_I & funct3_0x1 & imm_11_5_0x00;
+wire slliw = rv64IW_I & funct3_0x1;
 wire srliw = rv64IW_I & funct3_0x5;
 wire sraiw = rv64IW_I & funct3_0x1 & inst_i[30];
 
