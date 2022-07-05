@@ -51,6 +51,11 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
     return;
   }
 
+  #ifdef CONFIG_MTRACE
+    printf("%s",ASNI_FMT("Mtrace-s -> ",ASNI_FG_CYAN));
+    printf("waddr:%016llx, wdata:%016llx, wlen_byte:%u \n",waddr,wdata,wlen_byte);
+  #endif
+
   uint8_t *mem_wr_pt = npc_guest_mem(waddr);
   int wlen_byte = 0;
   for(int i=0; i<8; i++){
@@ -63,9 +68,6 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
     }
   }
   printf("mem_wr_data:%016lx\n",(*(uint64_t *)(pmem + waddr - CONFIG_MBASE)));
-  #ifdef CONFIG_MTRACE
-    printf("%s",ASNI_FMT("Mtrace-s -> ",ASNI_FG_CYAN));
-    printf("waddr:%016llx, wdata:%016llx, wlen_byte:%u \n",waddr,wdata,wlen_byte);
-  #endif
+  
   return;
 }
