@@ -38,7 +38,7 @@ extern "C" void mem_read(long long raddr, long long *rdata){
   *rdata = *(long long *)npc_guest_mem(raddr);
   #ifdef CONFIG_MTRACE
     printf("%s",ASNI_FMT("Mtrace-load->",ASNI_FG_CYAN));
-    printf("raddr:%llx, rdata:%llx,\n",raddr,(*rdata));
+    printf("raddr:%016llx, rdata:%016llx,\n",raddr,(*rdata));
   #endif
   return;
 }
@@ -50,18 +50,19 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
   }
 
   uint8_t *mem_wr_pt = npc_guest_mem(waddr);
-
+  int wlen_byte = 0;
   for(int i=0; i<8; i++){
     if( wmask & 1) {
       *mem_wr_pt = wdata & 0xFF;
       wmask >> 1;
       wdata >> 8;
       mem_wr_pt++;
+      wlen_byte++;
     }
   }
   #ifdef CONFIG_MTRACE
     printf("%s",ASNI_FMT("Mtrace-store->",ASNI_FG_CYAN));
-    printf("waddr:%016llx, wdata:%016llx, wmask:%08d \n",waddr,wdata,wmask);
+    printf("waddr:%016llx, wdata:%016llx, wlen_byte:%u \n",waddr,wdata,wlen_byte);
   #endif
   return;
 }
