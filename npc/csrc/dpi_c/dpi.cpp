@@ -60,5 +60,6 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
   }
   #ifdef CONFIG_MTRACE
     printf("%s",ASNI_FMT("Mtrace:",ASNI_FG_CYAN));
+  #endif
   return;
 }
