@@ -14,7 +14,7 @@
 //#define CONFIG_SDB 0
 //#define CONFIG_WATCHPOINT 0
 #define CONFIG_DIFFTEST 0
-//#define CONFIG_MTRACE   0
+#define CONFIG_MTRACE   0
 
 #define CONFIG_ITRACE 0
 #define CONFIG_TRACE_START 0
