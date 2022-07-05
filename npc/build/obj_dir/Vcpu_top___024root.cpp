@@ -812,11 +812,6 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
                                                                           == 
                                                                           (0xfU 
                                                                            & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))))))))));
-    vlSelf->cpu_top__DOT__exu_u0__DOT__wop = (IData)(
-                                                     (0x8000U 
-                                                      == 
-                                                      (0x8007U 
-                                                       & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))));
     vlSelf->cpu_top__DOT__exu_u0__DOT__op_add = (IData)(
                                                         (8U 
                                                          == 
@@ -826,11 +821,6 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
                                                         (0x20U 
                                                          == 
                                                          (0x27U 
-                                                          & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))));
-    vlSelf->cpu_top__DOT__exu_u0__DOT__op_srl = (IData)(
-                                                        (0x200U 
-                                                         == 
-                                                         (0x207U 
                                                           & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))));
     vlSelf->cpu_top__DOT__exu_u0__DOT__op_sra = (IData)(
                                                         (0x400U 
@@ -847,6 +837,11 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
                                                           == 
                                                           (0x17U 
                                                            & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))));
+    vlSelf->cpu_top__DOT__exu_u0__DOT__wop = (IData)(
+                                                     (0x8000U 
+                                                      == 
+                                                      (0x8007U 
+                                                       & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))));
     vlSelf->cpu_top__DOT__exu_u0__DOT__op_beq = (IData)(
                                                         (0x21U 
                                                          == 
@@ -892,6 +887,12 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
                                                           == 
                                                           (0x87U 
                                                            & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu))));
+    vlSelf->cpu_top__DOT__exu_u0__DOT__op_srl = ((IData)(
+                                                         (0x200U 
+                                                          == 
+                                                          (0x207U 
+                                                           & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))) 
+                                                 & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__wop)));
     vlSelf->cpu_top__DOT__exu_u0__DOT__op_sub_need 
         = (((((((((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sub) 
                   | (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_slt)) 

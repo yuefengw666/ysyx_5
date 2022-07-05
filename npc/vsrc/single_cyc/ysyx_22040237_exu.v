@@ -70,7 +70,7 @@ wire op_sub_need = op_sub  |
                    op_bge  |
                    op_bltu |
                    op_bgeu;
-wire op_add_sub =(op_add_need | op_sub ) & !wop;
+wire op_add_sub = op_add_need | op_sub ;
              
 wire [63 : 0] adder_in1;
 wire [63 : 0] adder_in2;
@@ -88,7 +88,6 @@ assign {adder_cout, adder_res} = adder_in1 + adder_in2 + adder_cin;
 assign add_sub_res = adder_res;
 
 //add word op
-wire wop_add_sub = (op_add | op_sub) & wop;
 wire [`ysyx_22040237_REG_WIDTH-1:0] wop_add_sub_res;
 assign wop_add_sub_res = { {32{add_sub_res[31]}}, add_sub_res[31:0]};
 
@@ -100,19 +99,17 @@ assign sll_res = op1_i << op2_i[5:0];
 
 //sll word op
 wire [`ysyx_22040237_REG_WIDTH-1:0] wop_sll_res;
-wire wop_sll = op_sll && wop;
-
 assign wop_sll_res = { {32{sll_res[31]}}, sll_res[31:0] };
 
 //srl 
 wire [`ysyx_22040237_REG_WIDTH-1:0] srl_res;
-wire op_srl = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SRL] && !wop;
+wire op_srl = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SRL];
 
 assign srl_res = op1_i >> op2_i[5:0];
-//srl word op
+
+//srl word op ???????????????????????????????????????????
 wire [31:0] srlw_res = op1_i[31:0] >> op2_i[5:0];
 wire [`ysyx_22040237_REG_WIDTH-1:0] wop_srl_res;
-wire wop_srl = op_srl && wop;
 assign wop_srl_res = { {32{srlw_res[31]}}, srlw_res };
 
 //slt
@@ -137,8 +134,6 @@ assign sra_res = srl_res | (~sra_shift_mask);
 
 //word sra op
 wire [`ysyx_22040237_REG_WIDTH-1:0] wop_sra_res;
-wire wop_sra = op_sra && wop;
-
 assign wop_sra_res = { {32{sra_res[31]}}, sra_res[31:0] };
 
 //xor
@@ -229,20 +224,20 @@ wire ls_dw = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_DW];
 
 //alu result
 
-assign alu_res_o =( ( {64{op_add_sub}}  & add_sub_res )    |
-                    ( {64{wop_add_sub}} & wop_add_sub_res) |
-                    ( {64{op_sll}}      & sll_res     )    |
-                    ( {64{wop_sll}}     & wop_sll_res )    |
-                    ( {64{op_slt}}      & slt_res     )    |
-                    ( {64{op_sltu}}     & sltu_res    )    |
-                    ( {64{op_xor}}      & xor_res     )    |
-                    ( {64{op_srl}}      & srl_res     )    |
-                    ( {64{wop_srl}}     & wop_srl_res )    |
-                    ( {64{op_sra}}      & sra_res     )    |
-                    ( {64{wop_sra}}     & wop_sra_res )    |
-                    ( {64{op_or}}       & or_res      )    | 
-                    ( {64{op_and}}      & and_res     )    |
-                    ( {64{op_lui}}      & lui_res     )  
+assign alu_res_o =( ( {64{op_add_sub & !wop}}   & add_sub_res )    |
+                    ( {64{op_add_sub &  wop}}   & wop_add_sub_res) |
+                    ( {64{op_sll     & !wop}}   & sll_res     )    |
+                    ( {64{op_sll     &  wop}}   & wop_sll_res )    |
+                    ( {64{op_slt}}              & slt_res     )    |
+                    ( {64{op_sltu}}             & sltu_res    )    |
+                    ( {64{op_xor}}              & xor_res     )    |
+                    ( {64{op_srl     & !wop}}   & srl_res     )    |
+                    ( {64{op_srl     &  wop}}   & wop_srl_res )    |
+                    ( {64{op_sra}}              & sra_res     )    |
+                    ( {64{op_sra     & !wop}}   & wop_sra_res )    |
+                    ( {64{op_or}}               & or_res      )    | 
+                    ( {64{op_and}}              & and_res     )    |
+                    ( {64{op_lui}}              & lui_res     )  
                   );
 
 assign rd_wr_en_o = rd_wr_en_i;
