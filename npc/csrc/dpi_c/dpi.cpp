@@ -50,24 +50,23 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
     printf("Write mem address = %llx is out of bound of mem.\n", waddr);
     return;
   }
-
-  #ifdef CONFIG_MTRACE
-    printf("%s",ASNI_FMT("Mtrace-s -> ",ASNI_FG_CYAN));
-    printf("waddr:%016llx, wdata:%016llx, wlen_byte:%u \n",waddr,wdata,wlen_byte);
-  #endif
-
+  
   uint8_t *mem_wr_pt = npc_guest_mem(waddr);
   int wlen_byte = 0;
   for(int i=0; i<8; i++){
     if( wmask & 1) {
-      *mem_wr_pt = wdata & 0xFF;
-      wmask = wmask >>1;
-      wdata = wdata >> 8;//wdata >>=8;
+      *mem_wr_pt = (wdata >> (8*i)) & 0xFF;
+      wmask = wmask >>1;//wmask >>=1;
+      //wdata_sr = wdata_sr >> 8;//wdata >>=8;
       mem_wr_pt++;
       wlen_byte++;
     }
   }
   printf("mem_wr_data:%016lx\n",(*(uint64_t *)(pmem + waddr - CONFIG_MBASE)));
+  #ifdef CONFIG_MTRACE
+    printf("%s",ASNI_FMT("Mtrace-s -> ",ASNI_FG_CYAN));
+    printf("waddr:%016llx, wdata:%016llx, wlen_byte:%u \n",waddr,wdata,wlen_byte);
+  #endif
   
   return;
 }
