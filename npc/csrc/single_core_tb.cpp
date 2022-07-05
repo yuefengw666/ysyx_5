@@ -13,7 +13,7 @@ int main(int argc, char**argv, char** env){
     init_monitor(argc,argv);
     
     npc_reset();
-    return 0;
+    return 1;
     #ifdef CONFIG_SDB
         npc_sdb_mainloop();
     #else
