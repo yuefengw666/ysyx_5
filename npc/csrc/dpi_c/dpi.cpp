@@ -36,6 +36,9 @@ extern "C" void mem_read(long long raddr, long long *rdata){
     return;
   }
   *rdata = *(long long *)npc_guest_mem(raddr);
+  #ifdef CONFIG_MTRACE
+
+  #endif
   return;
 }
 
@@ -55,6 +58,7 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
       mem_wr_pt++;
     }
   }
-
+  #ifdef CONFIG_MTRACE
+    printf("%s",ASNI_FMT("Mtrace:",ASNI_FG_CYAN));
   return;
 }

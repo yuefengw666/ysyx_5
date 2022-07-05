@@ -52,11 +52,11 @@ VL_MODULE(Vcpu_top___024root) {
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__lwu;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__jalr;
     CData/*0:0*/ cpu_top__DOT__idu_u0__DOT__ebreak;
+    CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__wop;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_add;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_sub;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_sub_need;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__adder_cout;
-    CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__wop_add_sub;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_slt;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__slt_cmp_res;
     CData/*0:0*/ cpu_top__DOT__exu_u0__DOT__op_sltu;
