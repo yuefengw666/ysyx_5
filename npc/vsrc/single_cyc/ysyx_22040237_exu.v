@@ -140,7 +140,7 @@ assign sra_res = srl_res | (~sra_shift_mask);
 wire [`ysyx_22040237_REG_WIDTH-1:0] wop_sra_res;
 wire wop_sra = op_sra && wop;
 
-assign wop_sra_res = { 32{sra_res[31]}, sra_res[31:0] };
+assign wop_sra_res = { {32{sra_res[31]}}, sra_res[31:0] };
 
 //xor
 wire [`ysyx_22040237_REG_WIDTH-1:0] xor_res;
