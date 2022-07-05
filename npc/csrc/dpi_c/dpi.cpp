@@ -56,7 +56,6 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
   for(int i=0; i<8; i++){
     if( wmask & 1) {
       *mem_wr_pt = wdata & 0xFF;
-      printf("mem_wr_pc:%x\n",(*mem_wr_pt));
       wmask = wmask >>1;
       wdata = wdata >> 8;//wdata >>=8;
       mem_wr_pt++;
