@@ -965,14 +965,17 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
                                                               | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res))))) 
                                                        | ((- (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sll))) 
                                                           & vlSelf->cpu_top__DOT__exu_u0__DOT__sll_res)) 
-                                                      | (((QData)((IData)(
-                                                                          (- (IData)(
+                                                      | ((- (QData)((IData)(
+                                                                            ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sll) 
+                                                                             & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__wop))))) 
+                                                         & (((QData)((IData)(
+                                                                             (- (IData)(
                                                                                 (1U 
                                                                                 & (IData)(
                                                                                 (vlSelf->cpu_top__DOT__exu_u0__DOT__sll_res 
                                                                                 >> 0x1fU))))))) 
-                                                          << 0x20U) 
-                                                         | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__sll_res)))) 
+                                                             << 0x20U) 
+                                                            | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__sll_res))))) 
                                                      | ((- (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_slt))) 
                                                         & (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__slt_cmp_res)))) 
                                                     | ((- (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sltu))) 

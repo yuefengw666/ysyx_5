@@ -123,7 +123,7 @@ wire sraw = rv64IW_RM & funct3_0x5 & funct7_0x20;
 
 //RV64I I
 wire addi  = rv64I_I & funct3_0x0;
-wire slli  = rv64I_I & funct3_0x1 & imm_11_5_0x00;
+wire slli  = rv64I_I & funct3_0x1;
 wire slti  = rv64I_I & funct3_0x2;
 wire sltiu = rv64I_I & funct3_0x3;
 wire xori  = rv64I_I & funct3_0x4;
