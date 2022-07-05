@@ -379,17 +379,15 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
                                                   == 
                                                   (vlSelf->inst_val 
                                                    >> 0x19U))) 
-                 | (((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I) 
-                     & (1U == (7U & (vlSelf->inst_val 
-                                     >> 0xcU)))) & 
-                    (0U == (0x7fU & (IData)((vlSelf->cpu_top__DOT__idu_u0__DOT__imm_i 
-                                             >> 5U)))))) 
-                | (((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_RM) 
+                 | ((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I) 
                     & (1U == (7U & (vlSelf->inst_val 
-                                    >> 0xcU)))) & (0U 
-                                                   == 
-                                                   (vlSelf->inst_val 
-                                                    >> 0x19U)))) 
+                                    >> 0xcU))))) | 
+                (((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_RM) 
+                  & (1U == (7U & (vlSelf->inst_val 
+                                  >> 0xcU)))) & (0U 
+                                                 == 
+                                                 (vlSelf->inst_val 
+                                                  >> 0x19U)))) 
                | (((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_I) 
                    & (1U == (7U & (vlSelf->inst_val 
                                    >> 0xcU)))) & (0U 
