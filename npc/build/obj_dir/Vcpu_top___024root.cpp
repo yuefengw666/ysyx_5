@@ -13,6 +13,7 @@ void Vcpu_top___024unit____Vdpiimwrap_sim_ebreak_TOP____024unit();
 void Vcpu_top___024unit____Vdpiimwrap_invalid_inst_o_TOP____024unit();
 void Vcpu_top___024unit____Vdpiimwrap_mem_read_TOP____024unit(QData/*63:0*/ raddr, QData/*63:0*/ &rdata);
 void Vcpu_top___024unit____Vdpiimwrap_set_gpr_ptr__Vdpioc2_TOP____024unit(const VlUnpacked<QData/*63:0*/, 33> &a);
+void Vcpu_top___024unit____Vdpiimwrap_mem_write_TOP____024unit(QData/*63:0*/ waddr, QData/*63:0*/ wdata, CData/*7:0*/ wmask);
 
 VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -22,11 +23,11 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
     CData/*0:0*/ __Vdlyvset__cpu_top__DOT__regs_u0__DOT__regs__v0;
     CData/*4:0*/ __Vdlyvdim0__cpu_top__DOT__regs_u0__DOT__regs__v32;
     CData/*0:0*/ __Vdlyvset__cpu_top__DOT__regs_u0__DOT__regs__v32;
+    VlWide<3>/*95:0*/ __Vtemp10;
     VlWide<3>/*95:0*/ __Vtemp11;
     VlWide<3>/*95:0*/ __Vtemp12;
     VlWide<3>/*95:0*/ __Vtemp13;
     VlWide<3>/*95:0*/ __Vtemp14;
-    VlWide<3>/*95:0*/ __Vtemp15;
     QData/*63:0*/ cpu_top__DOT__regs_u0__DOT____Vlvbound1;
     QData/*63:0*/ __Vdlyvval__cpu_top__DOT__regs_u0__DOT__regs__v32;
     // Body
@@ -905,14 +906,14 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
     vlSelf->cpu_top__DOT__exu_u0__DOT__adder_in2 = 
         ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sub_need)
           ? (~ vlSelf->cpu_top__DOT__op2_to_exu) : vlSelf->cpu_top__DOT__op2_to_exu);
-    VL_EXTEND_WQ(65,64, __Vtemp11, vlSelf->cpu_top__DOT__op1_to_exu);
-    VL_EXTEND_WQ(65,64, __Vtemp12, vlSelf->cpu_top__DOT__exu_u0__DOT__adder_in2);
-    VL_ADD_W(3, __Vtemp13, __Vtemp11, __Vtemp12);
-    VL_EXTEND_WQ(65,64, __Vtemp14, ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sub_need)
+    VL_EXTEND_WQ(65,64, __Vtemp10, vlSelf->cpu_top__DOT__op1_to_exu);
+    VL_EXTEND_WQ(65,64, __Vtemp11, vlSelf->cpu_top__DOT__exu_u0__DOT__adder_in2);
+    VL_ADD_W(3, __Vtemp12, __Vtemp10, __Vtemp11);
+    VL_EXTEND_WQ(65,64, __Vtemp13, ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sub_need)
                                      ? 1ULL : 0ULL));
-    VL_ADD_W(3, __Vtemp15, __Vtemp13, __Vtemp14);
+    VL_ADD_W(3, __Vtemp14, __Vtemp12, __Vtemp13);
     vlSelf->cpu_top__DOT__exu_u0__DOT__adder_cout = 
-        (1U & __Vtemp15[2U]);
+        (1U & __Vtemp14[2U]);
     vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res = 
         ((vlSelf->cpu_top__DOT__op1_to_exu + vlSelf->cpu_top__DOT__exu_u0__DOT__adder_in2) 
          + ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sub_need)
@@ -928,20 +929,6 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
                                                        >> 0x3fU)))) 
                     & (IData)((vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res 
                                >> 0x3fU)))));
-}
-
-void Vcpu_top___024unit____Vdpiimwrap_mem_write_TOP____024unit(QData/*63:0*/ waddr, QData/*63:0*/ wdata, CData/*7:0*/ wmask);
-
-VL_INLINE_OPT void Vcpu_top___024root___combo__TOP__3(Vcpu_top___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vcpu_top__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vcpu_top___024root___combo__TOP__3\n"); );
-    // Body
-    vlSelf->cpu_top__DOT__exu_u0__DOT__wop_srl_res 
-        = (((QData)((IData)((- (IData)((1U & (IData)(
-                                                     (vlSelf->cpu_top__DOT__exu_u0__DOT__wop_srl_res 
-                                                      >> 0x1fU))))))) 
-            << 0x20U) | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__srl_res)));
     vlSelf->cpu_top__DOT__alu_res_to_lsu = ((((((((
                                                    (((((((- (QData)((IData)(
                                                                             ((((((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_add) 
@@ -997,7 +984,14 @@ VL_INLINE_OPT void Vcpu_top___024root___combo__TOP__3(Vcpu_top___024root* vlSelf
                                                  | ((- (QData)((IData)(
                                                                        ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_srl) 
                                                                         & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__wop))))) 
-                                                    & vlSelf->cpu_top__DOT__exu_u0__DOT__wop_srl_res)) 
+                                                    & (((QData)((IData)(
+                                                                        (- (IData)(
+                                                                                (1U 
+                                                                                & (IData)(
+                                                                                (vlSelf->cpu_top__DOT__exu_u0__DOT__srl_res 
+                                                                                >> 0x1fU))))))) 
+                                                        << 0x20U) 
+                                                       | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__srl_res))))) 
                                                 | ((- (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sra))) 
                                                    & vlSelf->cpu_top__DOT__exu_u0__DOT__sra_res)) 
                                                | ((- (QData)((IData)(
@@ -1085,8 +1079,6 @@ void Vcpu_top___024root___eval(Vcpu_top___024root* vlSelf) {
         Vcpu_top___024root___sequent__TOP__2(vlSelf);
         vlSelf->__Vm_traceActivity[1U] = 1U;
     }
-    Vcpu_top___024root___combo__TOP__3(vlSelf);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
     // Final
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
 }
@@ -1108,11 +1100,6 @@ VL_INLINE_OPT QData Vcpu_top___024root___change_request_1(Vcpu_top___024root* vl
     // Body
     // Change detection
     QData __req = false;  // Logically a bool
-    __req |= ((vlSelf->cpu_top__DOT__exu_u0__DOT__wop_srl_res ^ vlSelf->__Vchglast__TOP__cpu_top__DOT__exu_u0__DOT__wop_srl_res));
-    VL_DEBUG_IF( if(__req && ((vlSelf->cpu_top__DOT__exu_u0__DOT__wop_srl_res ^ vlSelf->__Vchglast__TOP__cpu_top__DOT__exu_u0__DOT__wop_srl_res))) VL_DBG_MSGF("        CHANGE: /home/yfwu/ysyx-workbench/npc/vsrc/single_cyc/ysyx_22040237_exu.v:114: cpu_top.exu_u0.wop_srl_res\n"); );
-    // Final
-    vlSelf->__Vchglast__TOP__cpu_top__DOT__exu_u0__DOT__wop_srl_res 
-        = vlSelf->cpu_top__DOT__exu_u0__DOT__wop_srl_res;
     return __req;
 }
 

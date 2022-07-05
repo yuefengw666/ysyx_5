@@ -128,14 +128,14 @@ wire slti  = rv64I_I & funct3_0x2;
 wire sltiu = rv64I_I & funct3_0x3;
 wire xori  = rv64I_I & funct3_0x4;
 wire srli  = rv64I_I & funct3_0x5;
-wire srai  = rv64I_I & funct3_0x5 & imm_11_5_0x20;
+wire srai  = rv64I_I & funct3_0x5 & inst_i[30];
 wire ori   = rv64I_I & funct3_0x6;
 wire andi  = rv64I_I & funct3_0x7;
 //RV64IW I +++
 wire addiw = rv64IW_I & funct3_0x0;
 wire slliw = rv64IW_I & funct3_0x1 & imm_11_5_0x00;
 wire srliw = rv64IW_I & funct3_0x5;
-wire sraiw = rv64IW_I & funct3_0x1 & imm_11_5_0x20;
+wire sraiw = rv64IW_I & funct3_0x1 & inst_i[30];
 
 //RV64I L
 wire lb  = rv64I_L & funct3_0x0;
