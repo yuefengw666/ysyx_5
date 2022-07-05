@@ -90,7 +90,7 @@ assign add_sub_res = adder_res;
 //add word op
 wire wop_add_sub = (op_add | op_sub) & wop;
 wire [`ysyx_22040237_REG_WIDTH-1:0] wop_add_sub_res;
-assign wop_add_sub_res = { {31{add_sub_res[31]}}, add_sub_res[31:0]};
+assign wop_add_sub_res = { {32{add_sub_res[31]}}, add_sub_res[31:0]};
 
 //---sll op---//
 wire [`ysyx_22040237_REG_WIDTH-1:0] sll_res;
