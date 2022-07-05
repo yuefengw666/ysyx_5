@@ -745,15 +745,16 @@ void Vcpu_top___024root__traceChgSub0(Vcpu_top___024root* vlSelf, VerilatedVcd* 
         tracep->chgBit(oldp+295,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I) 
                                   & (4U == (7U & (vlSelf->inst_val 
                                                   >> 0xcU))))));
-        tracep->chgBit(oldp+296,((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I) 
-                                   & (5U == (7U & (vlSelf->inst_val 
-                                                   >> 0xcU)))) 
-                                  & (0U == (0x7fU & (IData)(
-                                                            (vlSelf->cpu_top__DOT__idu_u0__DOT__imm_i 
-                                                             >> 5U)))))));
-        tracep->chgBit(oldp+297,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I) 
+        tracep->chgBit(oldp+296,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I) 
                                   & (5U == (7U & (vlSelf->inst_val 
                                                   >> 0xcU))))));
+        tracep->chgBit(oldp+297,((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I) 
+                                   & (5U == (7U & (vlSelf->inst_val 
+                                                   >> 0xcU)))) 
+                                  & (0x20U == (0x7fU 
+                                               & (IData)(
+                                                         (vlSelf->cpu_top__DOT__idu_u0__DOT__imm_i 
+                                                          >> 5U)))))));
         tracep->chgBit(oldp+298,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I) 
                                   & (6U == (7U & (vlSelf->inst_val 
                                                   >> 0xcU))))));

@@ -134,7 +134,7 @@ wire andi  = rv64I_I & funct3_0x7;
 //RV64IW I +++
 wire addiw = rv64IW_I & funct3_0x0;
 wire slliw = rv64IW_I & funct3_0x1 & imm_11_5_0x00;
-wire srliw = rv64IW_I & funct3_0x5 & imm_11_5_0x00;
+wire srliw = rv64IW_I & funct3_0x5;
 wire sraiw = rv64IW_I & funct3_0x1 & imm_11_5_0x20;
 
 //RV64I L
