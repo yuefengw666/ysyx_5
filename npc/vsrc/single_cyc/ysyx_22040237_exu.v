@@ -70,7 +70,7 @@ wire op_sub_need = op_sub  |
                    op_bge  |
                    op_bltu |
                    op_bgeu;
-wire op_add_sub = op_add_need | op_sub;
+wire op_add_sub =(op_add_need | op_sub ) & !wop;
              
 wire [63 : 0] adder_in1;
 wire [63 : 0] adder_in2;
@@ -212,7 +212,7 @@ wire ls_dw = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_DW];
 
 //alu result
 
-assign alu_res_o =( ( {64{op_add_sub & !wop_add_sub}}  & add_sub_res )    |
+assign alu_res_o =( ( {64{op_add_sub}}  & add_sub_res )    |
                     ( {64{wop_add_sub}} & wop_add_sub_res) |
                     ( {64{op_sll}}      & sll_res     )    |
                     ( {64{op_slt}}      & slt_res     )    |

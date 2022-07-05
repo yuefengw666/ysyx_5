@@ -634,11 +634,7 @@ void Vcpu_top___024root__traceFullSub0(Vcpu_top___024root* vlSelf, VerilatedVcd*
                                      ? 1ULL : 0ULL)),64);
         tracep->fullBit(oldp+93,(vlSelf->cpu_top__DOT__exu_u0__DOT__adder_cout));
         tracep->fullQData(oldp+94,(vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res),64);
-        tracep->fullBit(oldp+96,((((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_add) 
-                                   | (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sub)) 
-                                  & (IData)((0x8000U 
-                                             == (0x8007U 
-                                                 & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))));
+        tracep->fullBit(oldp+96,(vlSelf->cpu_top__DOT__exu_u0__DOT__wop_add_sub));
         tracep->fullQData(oldp+97,((((QData)((IData)(
                                                      (- (IData)(
                                                                 (1U 
