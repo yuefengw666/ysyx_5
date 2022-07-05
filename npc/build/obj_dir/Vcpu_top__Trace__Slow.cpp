@@ -571,13 +571,15 @@ void Vcpu_top___024root__traceFullSub0(Vcpu_top___024root* vlSelf, VerilatedVcd*
         tracep->fullBit(oldp+65,((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_AUIPC) 
                                    | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_JAL)) 
                                   | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__jalr))));
-        tracep->fullBit(oldp+66,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_RM) 
-                                  | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_B))));
-        tracep->fullBit(oldp+67,((((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I) 
-                                     | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_L)) 
-                                    | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_S)) 
-                                   | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_AUIPC)) 
-                                  | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_LUI))));
+        tracep->fullBit(oldp+66,((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_RM) 
+                                   | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_B)) 
+                                  | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_RM))));
+        tracep->fullBit(oldp+67,(((((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_I) 
+                                      | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_L)) 
+                                     | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_S)) 
+                                    | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_AUIPC)) 
+                                   | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_LUI)) 
+                                  | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_I))));
         tracep->fullBit(oldp+68,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_JAL) 
                                   | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__jalr))));
         tracep->fullBit(oldp+69,(((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_B) 

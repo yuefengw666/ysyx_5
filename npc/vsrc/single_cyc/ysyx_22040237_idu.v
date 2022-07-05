@@ -173,18 +173,18 @@ wire ebreak = rv64I_EBREAK & funct3_0x0 & (imm_i == 'b1);
 
 
 //-------------------------confirm imm-------------------------//
-wire [63:0] imm = ( {64{rv64I_I | rv64I_L | jalr}} & imm_i ) | 
-                  ( {64{rv64I_S}}                  & imm_s ) | 
-                  ( {64{rv64I_B}}                  & imm_b ) |
-                  ( {64{rv64I_JAL}}                & imm_j ) | 
-                  ( {64{auipc | lui}}              & imm_u );
+wire [63:0] imm = ( {64{rv64I_I | rv64I_L | jalr | rv64IW_I} } & imm_i ) | 
+                  ( {64{rv64I_S}}                              & imm_s ) | 
+                  ( {64{rv64I_B}}                              & imm_b ) |
+                  ( {64{rv64I_JAL}}                            & imm_j ) | 
+                  ( {64{auipc | lui}}                          & imm_u );
 
 
 //-------------------------confirm rd rs1 rs2---------------------//
 wire rd_idx_0x = rd == 5'b00000;
 wire rd_need = (~rd_idx_0x) & ( ~( rv64I_S | rv64I_B | ebreak));
 wire rs1_need = ~( jal | lui | auipc | ebreak ); 
-wire rs2_need = ( rv64I_RM | rv64I_S | rv64I_B );
+wire rs2_need = ( rv64I_RM | rv64I_S | rv64I_B | rv64IW_RM);
 
 assign rd_idx_o = rd;
 assign rs1_idx_o = rs1;
