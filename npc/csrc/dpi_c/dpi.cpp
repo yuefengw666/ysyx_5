@@ -62,7 +62,7 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
       wlen_byte++;
     }
   }
-  printf("mem_wr_data:%016lx\n",(*(uint64_t *)(pmem + waddr - CONFIG_MBASE)));
+  //printf("real mem_wr_data:%016lx\n",(*(uint64_t *)(pmem + waddr - CONFIG_MBASE)));
   #ifdef CONFIG_MTRACE
     printf("%s",ASNI_FMT("Mtrace-s -> ",ASNI_FG_CYAN));
     printf("waddr:%016llx, wdata:%016llx, wlen_byte:%u \n",waddr,wdata,wlen_byte);
