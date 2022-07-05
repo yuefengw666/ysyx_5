@@ -29,9 +29,10 @@ void Vcpu_top___024root__traceChgSub0(Vcpu_top___024root* vlSelf, VerilatedVcd* 
                                                | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_LUI)) 
                                               | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_AUIPC)) 
                                              | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__ebreak))))));
-            tracep->chgBit(oldp+3,((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_RM) 
-                                     | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_S)) 
-                                    | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_B))));
+            tracep->chgBit(oldp+3,(((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_RM) 
+                                      | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_S)) 
+                                     | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_B)) 
+                                    | (IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64IW_RM))));
             tracep->chgQData(oldp+4,(vlSelf->cpu_top__DOT__op1_to_exu),64);
             tracep->chgQData(oldp+6,(vlSelf->cpu_top__DOT__op2_to_exu),64);
             tracep->chgQData(oldp+8,((((- (QData)((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__jalr))) 
