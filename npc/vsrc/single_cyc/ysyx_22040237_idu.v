@@ -84,7 +84,7 @@ wire [63:0] imm_u = { { 32{inst_i[31]} }, inst_i[31:12], 12'b0 };
 wire [63:0] imm_j = { { 43{inst_i[31]} }, inst_i[31], inst_i[19:12], inst_i[20], inst_i[30:21], 1'b0 };
 
 
-wire imm_11_5_0x00 = imm_i[11:5] == 7'b0;
+//wire imm_11_5_0x00 = imm_i[11:5] == 7'b0;
 //wire imm_11_5_0x20 = imm_i[11:5] == 7'b010_0000;
 
 //decode funct
