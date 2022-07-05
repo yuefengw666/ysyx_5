@@ -731,22 +731,17 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
                                                   << 
                                                   (0x3fU 
                                                    & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)));
-    vlSelf->cpu_top__DOT__exu_u0__DOT__srlw_res = (
-                                                   (0x1fU 
-                                                    >= 
-                                                    (0x3fU 
-                                                     & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)))
-                                                    ? 
-                                                   ((IData)(vlSelf->cpu_top__DOT__op1_to_exu) 
-                                                    >> 
-                                                    (0x3fU 
-                                                     & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)))
-                                                    : 0U);
-    vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res = (
-                                                   VL_EXTENDS_QI(64,32, (IData)(vlSelf->cpu_top__DOT__op1_to_exu)) 
-                                                   >> 
-                                                   (0x3fU 
-                                                    & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)));
+    if ((0x1fU >= (0x3fU & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)))) {
+        vlSelf->cpu_top__DOT__exu_u0__DOT__srlw_res 
+            = ((IData)(vlSelf->cpu_top__DOT__op1_to_exu) 
+               >> (0x3fU & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)));
+        vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res 
+            = ((IData)(vlSelf->cpu_top__DOT__op1_to_exu) 
+               >> (0x3fU & (IData)(vlSelf->cpu_top__DOT__op2_to_exu)));
+    } else {
+        vlSelf->cpu_top__DOT__exu_u0__DOT__srlw_res = 0U;
+        vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res = 0U;
+    }
     vlSelf->cpu_top__DOT__exu_info_bus_to_exu = (((
                                                    (- (IData)(
                                                               (((((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_RM) 
@@ -996,10 +991,8 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
                                                                       & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__wop))))) 
                                                   & (((QData)((IData)(
                                                                       (- (IData)(
-                                                                                (1U 
-                                                                                & (IData)(
                                                                                 (vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res 
-                                                                                >> 0x1fU))))))) 
+                                                                                >> 0x1fU))))) 
                                                       << 0x20U) 
                                                      | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res))))) 
                                               | ((- (QData)((IData)(

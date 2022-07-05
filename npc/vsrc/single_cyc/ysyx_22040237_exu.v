@@ -128,13 +128,13 @@ assign sltu_res = {63'b0, sltu_cmp_res};
 //sra
 wire [`ysyx_22040237_REG_WIDTH-1:0] sra_res;
 wire op_sra = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SRA];
-assign sra_res = ($signed(op1_i)) >> op2_i[5:0];
+assign sra_res = ($signed(op1_i)) >>> op2_i[5:0];
 //wire [`ysyx_22040237_REG_WIDTH-1:0] sra_shift_mask = 64'b1 >> op2_i[5:0];
 //assign sra_res = srl_res | (~sra_shift_mask);
 
 //word sra op
 wire [`ysyx_22040237_REG_WIDTH-1:0] wop_sra_res;
-wire [31:0] sraw_res = ($signed(op1_i[31:0])) >> op2_i[5:0];
+wire [31:0] sraw_res = ($signed(op1_i[31:0])) >>> op2_i[5:0];
 assign wop_sra_res = { {32{sraw_res[31]}}, sraw_res[31:0] };
 
 //xor
