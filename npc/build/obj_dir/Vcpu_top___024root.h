@@ -84,7 +84,7 @@ VL_MODULE(Vcpu_top___024root) {
         IData/*31:0*/ cpu_top__DOT__exu_u0__DOT__mulw_res_t;
         IData/*31:0*/ cpu_top__DOT__exu_u0__DOT__divw_res_t;
         IData/*31:0*/ cpu_top__DOT__exu_u0__DOT__remw_res_t;
-        IData/*31:0*/ cpu_top__DOT__exu_u0__DOT__remuw_res_t;
+        VlWide<3>/*64:0*/ cpu_top__DOT__exu_u0__DOT__remuw_res_t;
         QData/*63:0*/ cpu_top__DOT__pc_to_ifu;
         QData/*63:0*/ cpu_top__DOT__op1_to_exu;
         QData/*63:0*/ cpu_top__DOT__op2_to_exu;

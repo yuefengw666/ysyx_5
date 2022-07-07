@@ -301,7 +301,7 @@ assign remw_res = { {32{remw_res_t[31]}}, remw_res_t[31:0]};
 //remuw
 wire wop_remuw = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_REMU] && mdu_wop;
 wire [`ysyx_22040237_REG_WIDTH-1:0] remuw_res;
-wire [64:0] remuw_res_t = ($unsigned(op1_i)) % ($unsigned(op2_i));
+wire [63:0] remuw_res_t = ($unsigned(op1_i)) % ($unsigned(op2_i));
 assign remuw_res = { {32{remuw_res_t[31]}}, remuw_res_t[31:0]};
 
 
