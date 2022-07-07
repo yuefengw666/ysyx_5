@@ -720,16 +720,16 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
     vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t[3U] 
         = __Vtemp3[3U];
     vlSelf->cpu_top__DOT__exu_u0__DOT__mulw_res_t = 
-        ((QData)((IData)(vlSelf->cpu_top__DOT__op1_to_exu)) 
-         * (QData)((IData)(vlSelf->cpu_top__DOT__op2_to_exu)));
+        ((IData)(vlSelf->cpu_top__DOT__op1_to_exu) 
+         * (IData)(vlSelf->cpu_top__DOT__op2_to_exu));
     vlSelf->cpu_top__DOT__exu_u0__DOT__divw_res_t = 
-        VL_DIV_QQQ(64, (QData)((IData)(vlSelf->cpu_top__DOT__op1_to_exu)), (QData)((IData)(vlSelf->cpu_top__DOT__op2_to_exu)));
+        VL_DIV_III(32, (IData)(vlSelf->cpu_top__DOT__op1_to_exu), (IData)(vlSelf->cpu_top__DOT__op2_to_exu));
     vlSelf->cpu_top__DOT__exu_u0__DOT__divuw_res_t 
-        = VL_DIV_QQQ(64, vlSelf->cpu_top__DOT__op1_to_exu, vlSelf->cpu_top__DOT__op2_to_exu);
+        = (IData)(VL_DIV_QQQ(64, vlSelf->cpu_top__DOT__op1_to_exu, vlSelf->cpu_top__DOT__op2_to_exu));
     vlSelf->cpu_top__DOT__exu_u0__DOT__remw_res_t = 
-        VL_MODDIV_QQQ(64, (QData)((IData)(vlSelf->cpu_top__DOT__op1_to_exu)), (QData)((IData)(vlSelf->cpu_top__DOT__op2_to_exu)));
+        VL_MODDIV_III(32, (IData)(vlSelf->cpu_top__DOT__op1_to_exu), (IData)(vlSelf->cpu_top__DOT__op2_to_exu));
     vlSelf->cpu_top__DOT__exu_u0__DOT__remuw_res_t 
-        = VL_MODDIV_QQQ(64, vlSelf->cpu_top__DOT__op1_to_exu, vlSelf->cpu_top__DOT__op2_to_exu);
+        = (IData)(VL_MODDIV_QQQ(64, vlSelf->cpu_top__DOT__op1_to_exu, vlSelf->cpu_top__DOT__op2_to_exu));
     vlSelf->cpu_top__DOT__exu_info_bus_to_exu = (((
                                                    ((- (IData)(
                                                                (((((((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_RM) 
@@ -1091,12 +1091,9 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
                                                                        (0x1fU 
                                                                         & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
                                                    & (((QData)((IData)(
-                                                                       (0x7fffffffU 
-                                                                        & (- (IData)(
-                                                                                (1U 
-                                                                                & (IData)(
+                                                                       (- (IData)(
                                                                                 (vlSelf->cpu_top__DOT__exu_u0__DOT__mulw_res_t 
-                                                                                >> 0x1fU)))))))) 
+                                                                                >> 0x1fU))))) 
                                                        << 0x20U) 
                                                       | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__mulw_res_t))))) 
                                                | ((- (QData)((IData)(
@@ -1105,12 +1102,9 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
                                                                       (0x10fU 
                                                                        & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
                                                   & (((QData)((IData)(
-                                                                      (0x7fffffffU 
-                                                                       & (- (IData)(
-                                                                                (1U 
-                                                                                & (IData)(
+                                                                      (- (IData)(
                                                                                 (vlSelf->cpu_top__DOT__exu_u0__DOT__divw_res_t 
-                                                                                >> 0x1fU)))))))) 
+                                                                                >> 0x1fU))))) 
                                                       << 0x20U) 
                                                      | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__divw_res_t))))) 
                                               | ((- (QData)((IData)(
@@ -1119,12 +1113,9 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
                                                                      (0x20fU 
                                                                       & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
                                                  & (((QData)((IData)(
-                                                                     (0x7fffffffU 
-                                                                      & (- (IData)(
-                                                                                (1U 
-                                                                                & (IData)(
+                                                                     (- (IData)(
                                                                                 (vlSelf->cpu_top__DOT__exu_u0__DOT__divuw_res_t 
-                                                                                >> 0x1fU)))))))) 
+                                                                                >> 0x1fU))))) 
                                                      << 0x20U) 
                                                     | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__divuw_res_t))))) 
                                              | ((- (QData)((IData)(
@@ -1133,12 +1124,9 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
                                                                     (0x40fU 
                                                                      & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
                                                 & (((QData)((IData)(
-                                                                    (0x7fffffffU 
-                                                                     & (- (IData)(
-                                                                                (1U 
-                                                                                & (IData)(
-                                                                                (vlSelf->cpu_top__DOT__exu_u0__DOT__remw_res_t 
-                                                                                >> 0x1fU)))))))) 
+                                                                    (- (IData)(
+                                                                               (vlSelf->cpu_top__DOT__exu_u0__DOT__remw_res_t 
+                                                                                >> 0x1fU))))) 
                                                     << 0x20U) 
                                                    | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__remw_res_t))))) 
                                             | ((- (QData)((IData)(
@@ -1147,12 +1135,9 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
                                                                    (0x80fU 
                                                                     & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
                                                & (((QData)((IData)(
-                                                                   (0x7fffffffU 
-                                                                    & (- (IData)(
-                                                                                (1U 
-                                                                                & (IData)(
-                                                                                (vlSelf->cpu_top__DOT__exu_u0__DOT__remuw_res_t 
-                                                                                >> 0x1fU)))))))) 
+                                                                   (- (IData)(
+                                                                              (vlSelf->cpu_top__DOT__exu_u0__DOT__remuw_res_t 
+                                                                               >> 0x1fU))))) 
                                                    << 0x20U) 
                                                   | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__remuw_res_t)))));
     if ((2U & (IData)(vlSelf->cpu_top__DOT__ls_info_bus_to_isu))) {
@@ -1298,11 +1283,11 @@ void Vcpu_top___024root___ctor_var_reset(Vcpu_top___024root* vlSelf) {
     vlSelf->cpu_top__DOT__exu_u0__DOT__op_bltu = VL_RAND_RESET_I(1);
     vlSelf->cpu_top__DOT__exu_u0__DOT__op_bgeu = VL_RAND_RESET_I(1);
     VL_RAND_RESET_W(128, vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t);
-    vlSelf->cpu_top__DOT__exu_u0__DOT__mulw_res_t = VL_RAND_RESET_Q(64);
-    vlSelf->cpu_top__DOT__exu_u0__DOT__divw_res_t = VL_RAND_RESET_Q(64);
-    vlSelf->cpu_top__DOT__exu_u0__DOT__divuw_res_t = VL_RAND_RESET_Q(64);
-    vlSelf->cpu_top__DOT__exu_u0__DOT__remw_res_t = VL_RAND_RESET_Q(64);
-    vlSelf->cpu_top__DOT__exu_u0__DOT__remuw_res_t = VL_RAND_RESET_Q(64);
+    vlSelf->cpu_top__DOT__exu_u0__DOT__mulw_res_t = VL_RAND_RESET_I(32);
+    vlSelf->cpu_top__DOT__exu_u0__DOT__divw_res_t = VL_RAND_RESET_I(32);
+    vlSelf->cpu_top__DOT__exu_u0__DOT__divuw_res_t = VL_RAND_RESET_I(32);
+    vlSelf->cpu_top__DOT__exu_u0__DOT__remw_res_t = VL_RAND_RESET_I(32);
+    vlSelf->cpu_top__DOT__exu_u0__DOT__remuw_res_t = VL_RAND_RESET_I(32);
     vlSelf->cpu_top__DOT__lsu_u0__DOT__mem_rdata = VL_RAND_RESET_Q(64);
     for (int __Vi0=0; __Vi0<32; ++__Vi0) {
         vlSelf->cpu_top__DOT__regs_u0__DOT__regs[__Vi0] = VL_RAND_RESET_Q(64);

@@ -289,7 +289,7 @@ assign divw_res = { {32{divw_res_t[31]}}, divw_res_t[31:0]};
 //divuw
 wire wop_divuw = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIVU] && mdu_wop;
 wire [`ysyx_22040237_REG_WIDTH-1:0] divuw_res;
-wire [31:0] divuw_res_t = ($unsigned(op1_i)) / ($unsigned(op2_i));
+wire [63:0] divuw_res_t = ($unsigned(op1_i)) / ($unsigned(op2_i));
 assign divuw_res = { {32{divuw_res_t[31]}}, divuw_res_t[31:0]};
 
 //remw
