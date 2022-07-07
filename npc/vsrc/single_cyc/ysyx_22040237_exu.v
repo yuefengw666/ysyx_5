@@ -246,8 +246,11 @@ assign mulsu_res_t = ($signed(op1_i)) * ($unsigned(op2_i));
 assign mulhsu_res = mulsu_res_t[127:64];
 
 //mulhu
-//wire op_mulhu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MULHU] && !mdu_wop;
-
+wire op_mulhu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MULHU] && !mdu_wop;
+wire [`ysyx_22040237_REG_WIDTH-1:0] mulhu_res;
+wire [127:0] muluu_res_t;
+wire muluu_res_t = ($unsigned(op1_i)) * ($unsigned(op2_i));
+assign mulhu_res = muluu_res_t[127:64];
 //div
 //wire op_div = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIV] && !mdu_wop;
 
@@ -278,7 +281,8 @@ assign alu_res_o =( ( {64{op_add_sub & !alu_wop}}   & add_sub_res )    |
                     ( {64{op_lui}}              & lui_res     )    |
                     ( {64{op_mul}}              & mul_res     )    |  
                     ( {64{op_mulh}}             & mulh_res    )    |
-                    ( {64{op_mulhsu}}           & mulhsu_res  )     
+                    ( {64{op_mulhsu}}           & mulhsu_res  )    |
+                    ( {64{op_mulhu}}            & mulhu_res)
                   );
 
 assign rd_wr_en_o = rd_wr_en_i;
