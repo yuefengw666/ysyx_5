@@ -23,17 +23,20 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
     CData/*0:0*/ __Vdlyvset__cpu_top__DOT__regs_u0__DOT__regs__v0;
     CData/*4:0*/ __Vdlyvdim0__cpu_top__DOT__regs_u0__DOT__regs__v32;
     CData/*0:0*/ __Vdlyvset__cpu_top__DOT__regs_u0__DOT__regs__v32;
-    VlWide<4>/*127:0*/ __Vtemp15;
-    VlWide<4>/*127:0*/ __Vtemp16;
-    VlWide<4>/*127:0*/ __Vtemp17;
-    VlWide<3>/*95:0*/ __Vtemp19;
-    VlWide<3>/*95:0*/ __Vtemp20;
-    VlWide<3>/*95:0*/ __Vtemp21;
+    VlWide<4>/*127:0*/ __Vtemp18;
+    VlWide<4>/*127:0*/ __Vtemp19;
+    VlWide<4>/*127:0*/ __Vtemp20;
     VlWide<3>/*95:0*/ __Vtemp22;
     VlWide<3>/*95:0*/ __Vtemp23;
-    VlWide<4>/*127:0*/ __Vtemp25;
-    VlWide<4>/*127:0*/ __Vtemp26;
-    VlWide<4>/*127:0*/ __Vtemp27;
+    VlWide<3>/*95:0*/ __Vtemp24;
+    VlWide<3>/*95:0*/ __Vtemp25;
+    VlWide<3>/*95:0*/ __Vtemp26;
+    VlWide<4>/*127:0*/ __Vtemp28;
+    VlWide<4>/*127:0*/ __Vtemp29;
+    VlWide<4>/*127:0*/ __Vtemp30;
+    VlWide<4>/*127:0*/ __Vtemp31;
+    VlWide<4>/*127:0*/ __Vtemp32;
+    VlWide<4>/*127:0*/ __Vtemp33;
     QData/*63:0*/ cpu_top__DOT__regs_u0__DOT____Vlvbound1;
     QData/*63:0*/ __Vdlyvval__cpu_top__DOT__regs_u0__DOT__regs__v32;
     // Body
@@ -835,17 +838,17 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
             = (- ((IData)(vlSelf->cpu_top__DOT__op1_to_exu) 
                   >> 0x1fU));
     }
-    VL_EXTEND_WQ(128,64, __Vtemp15, vlSelf->cpu_top__DOT__op1_to_exu);
-    VL_EXTEND_WQ(128,64, __Vtemp16, vlSelf->cpu_top__DOT__op2_to_exu);
-    VL_MUL_W(4, __Vtemp17, __Vtemp15, __Vtemp16);
+    VL_EXTEND_WQ(128,64, __Vtemp18, vlSelf->cpu_top__DOT__op1_to_exu);
+    VL_EXTEND_WQ(128,64, __Vtemp19, vlSelf->cpu_top__DOT__op2_to_exu);
+    VL_MUL_W(4, __Vtemp20, __Vtemp18, __Vtemp19);
     vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t[0U] 
-        = __Vtemp17[0U];
+        = __Vtemp20[0U];
     vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t[1U] 
-        = __Vtemp17[1U];
+        = __Vtemp20[1U];
     vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t[2U] 
-        = __Vtemp17[2U];
+        = __Vtemp20[2U];
     vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t[3U] 
-        = __Vtemp17[3U];
+        = __Vtemp20[3U];
     vlSelf->cpu_top__DOT__exu_info_bus_to_exu = (((
                                                    ((- (IData)(
                                                                (((((((((IData)(vlSelf->cpu_top__DOT__idu_u0__DOT__rv64I_RM) 
@@ -1013,14 +1016,14 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
     vlSelf->cpu_top__DOT__exu_u0__DOT__adder_in2 = 
         ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sub_need)
           ? (~ vlSelf->cpu_top__DOT__op2_to_exu) : vlSelf->cpu_top__DOT__op2_to_exu);
-    VL_EXTEND_WQ(65,64, __Vtemp19, vlSelf->cpu_top__DOT__op1_to_exu);
-    VL_EXTEND_WQ(65,64, __Vtemp20, vlSelf->cpu_top__DOT__exu_u0__DOT__adder_in2);
-    VL_ADD_W(3, __Vtemp21, __Vtemp19, __Vtemp20);
-    VL_EXTEND_WQ(65,64, __Vtemp22, ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sub_need)
+    VL_EXTEND_WQ(65,64, __Vtemp22, vlSelf->cpu_top__DOT__op1_to_exu);
+    VL_EXTEND_WQ(65,64, __Vtemp23, vlSelf->cpu_top__DOT__exu_u0__DOT__adder_in2);
+    VL_ADD_W(3, __Vtemp24, __Vtemp22, __Vtemp23);
+    VL_EXTEND_WQ(65,64, __Vtemp25, ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sub_need)
                                      ? 1ULL : 0ULL));
-    VL_ADD_W(3, __Vtemp23, __Vtemp21, __Vtemp22);
+    VL_ADD_W(3, __Vtemp26, __Vtemp24, __Vtemp25);
     vlSelf->cpu_top__DOT__exu_u0__DOT__adder_cout = 
-        (1U & __Vtemp23[2U]);
+        (1U & __Vtemp26[2U]);
     vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res = 
         ((vlSelf->cpu_top__DOT__op1_to_exu + vlSelf->cpu_top__DOT__exu_u0__DOT__adder_in2) 
          + ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sub_need)
@@ -1036,134 +1039,147 @@ VL_INLINE_OPT void Vcpu_top___024root___sequent__TOP__2(Vcpu_top___024root* vlSe
                                                        >> 0x3fU)))) 
                     & (IData)((vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res 
                                >> 0x3fU)))));
-    VL_EXTEND_WQ(128,64, __Vtemp25, vlSelf->cpu_top__DOT__op1_to_exu);
-    VL_EXTEND_WQ(128,64, __Vtemp26, vlSelf->cpu_top__DOT__op2_to_exu);
-    VL_MUL_W(4, __Vtemp27, __Vtemp25, __Vtemp26);
+    VL_EXTEND_WQ(128,64, __Vtemp28, vlSelf->cpu_top__DOT__op1_to_exu);
+    VL_EXTEND_WQ(128,64, __Vtemp29, vlSelf->cpu_top__DOT__op2_to_exu);
+    VL_MUL_W(4, __Vtemp30, __Vtemp28, __Vtemp29);
+    VL_EXTEND_WQ(128,64, __Vtemp31, vlSelf->cpu_top__DOT__op1_to_exu);
+    VL_EXTEND_WQ(128,64, __Vtemp32, vlSelf->cpu_top__DOT__op2_to_exu);
+    VL_MUL_W(4, __Vtemp33, __Vtemp31, __Vtemp32);
     vlSelf->cpu_top__DOT__alu_res_to_lsu = ((((((((
-                                                   ((((((((((- (QData)((IData)(
-                                                                               ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_add_sub) 
+                                                   (((((((((((- (QData)((IData)(
+                                                                                ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_add_sub) 
                                                                                 & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__alu_wop)))))) 
-                                                            & vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res) 
-                                                           | ((- (QData)((IData)(
+                                                             & vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res) 
+                                                            | ((- (QData)((IData)(
                                                                                 ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_add_sub) 
                                                                                 & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__alu_wop))))) 
-                                                              & (((QData)((IData)(
+                                                               & (((QData)((IData)(
                                                                                 (- (IData)(
                                                                                 (1U 
                                                                                 & (IData)(
                                                                                 (vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res 
                                                                                 >> 0x1fU))))))) 
-                                                                  << 0x20U) 
-                                                                 | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res))))) 
-                                                          | ((- (QData)((IData)(
+                                                                   << 0x20U) 
+                                                                  | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__adder_res))))) 
+                                                           | ((- (QData)((IData)(
                                                                                 ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sll) 
                                                                                 & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__alu_wop)))))) 
-                                                             & vlSelf->cpu_top__DOT__exu_u0__DOT__sll_res)) 
-                                                         | ((- (QData)((IData)(
-                                                                               ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sll) 
+                                                              & vlSelf->cpu_top__DOT__exu_u0__DOT__sll_res)) 
+                                                          | ((- (QData)((IData)(
+                                                                                ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sll) 
                                                                                 & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__alu_wop))))) 
-                                                            & (((QData)((IData)(
+                                                             & (((QData)((IData)(
                                                                                 (- (IData)(
                                                                                 (1U 
                                                                                 & (IData)(
                                                                                 (vlSelf->cpu_top__DOT__exu_u0__DOT__sll_res 
                                                                                 >> 0x1fU))))))) 
-                                                                << 0x20U) 
-                                                               | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__sll_res))))) 
-                                                        | ((- (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_slt))) 
-                                                           & (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__slt_cmp_res)))) 
-                                                       | ((- (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sltu))) 
-                                                          & (QData)((IData)(
-                                                                            (1U 
-                                                                             & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__adder_cout))))))) 
+                                                                 << 0x20U) 
+                                                                | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__sll_res))))) 
+                                                         | ((- (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_slt))) 
+                                                            & (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__slt_cmp_res)))) 
+                                                        | ((- (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sltu))) 
+                                                           & (QData)((IData)(
+                                                                             (1U 
+                                                                              & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__adder_cout))))))) 
+                                                       | ((- (QData)((IData)(
+                                                                             (0x100U 
+                                                                              == 
+                                                                              (0x107U 
+                                                                               & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
+                                                          & (vlSelf->cpu_top__DOT__op1_to_exu 
+                                                             ^ vlSelf->cpu_top__DOT__op2_to_exu))) 
                                                       | ((- (QData)((IData)(
-                                                                            (0x100U 
-                                                                             == 
-                                                                             (0x107U 
-                                                                              & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
+                                                                            ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_srl) 
+                                                                             & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__alu_wop)))))) 
                                                          & (vlSelf->cpu_top__DOT__op1_to_exu 
-                                                            ^ vlSelf->cpu_top__DOT__op2_to_exu))) 
+                                                            >> 
+                                                            (0x3fU 
+                                                             & (IData)(vlSelf->cpu_top__DOT__op2_to_exu))))) 
                                                      | ((- (QData)((IData)(
                                                                            ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_srl) 
-                                                                            & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__alu_wop)))))) 
-                                                        & (vlSelf->cpu_top__DOT__op1_to_exu 
-                                                           >> 
-                                                           (0x3fU 
-                                                            & (IData)(vlSelf->cpu_top__DOT__op2_to_exu))))) 
-                                                    | ((- (QData)((IData)(
-                                                                          ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_srl) 
-                                                                           & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__alu_wop))))) 
-                                                       & (((QData)((IData)(
-                                                                           (- (IData)(
+                                                                            & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__alu_wop))))) 
+                                                        & (((QData)((IData)(
+                                                                            (- (IData)(
                                                                                 (vlSelf->cpu_top__DOT__exu_u0__DOT__srlw_res 
                                                                                 >> 0x1fU))))) 
-                                                           << 0x20U) 
-                                                          | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__srlw_res))))) 
+                                                            << 0x20U) 
+                                                           | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__srlw_res))))) 
+                                                    | ((- (QData)((IData)(
+                                                                          ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sra) 
+                                                                           & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__alu_wop)))))) 
+                                                       & VL_SHIFTRS_QQI(64,64,6, vlSelf->cpu_top__DOT__op1_to_exu, 
+                                                                        (0x3fU 
+                                                                         & (IData)(vlSelf->cpu_top__DOT__op2_to_exu))))) 
                                                    | ((- (QData)((IData)(
                                                                          ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sra) 
-                                                                          & (~ (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__alu_wop)))))) 
-                                                      & VL_SHIFTRS_QQI(64,64,6, vlSelf->cpu_top__DOT__op1_to_exu, 
-                                                                       (0x3fU 
-                                                                        & (IData)(vlSelf->cpu_top__DOT__op2_to_exu))))) 
-                                                  | ((- (QData)((IData)(
-                                                                        ((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__op_sra) 
-                                                                         & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__alu_wop))))) 
-                                                     & (((QData)((IData)(
-                                                                         (- (IData)(
+                                                                          & (IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__alu_wop))))) 
+                                                      & (((QData)((IData)(
+                                                                          (- (IData)(
                                                                                 (vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res 
                                                                                 >> 0x1fU))))) 
-                                                         << 0x20U) 
-                                                        | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res))))) 
+                                                          << 0x20U) 
+                                                         | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__sraw_res))))) 
+                                                  | ((- (QData)((IData)(
+                                                                        (0x800U 
+                                                                         == 
+                                                                         (0x807U 
+                                                                          & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
+                                                     & (vlSelf->cpu_top__DOT__op1_to_exu 
+                                                        | vlSelf->cpu_top__DOT__op2_to_exu))) 
                                                  | ((- (QData)((IData)(
-                                                                       (0x800U 
+                                                                       (0x1000U 
                                                                         == 
-                                                                        (0x807U 
+                                                                        (0x1007U 
                                                                          & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
                                                     & (vlSelf->cpu_top__DOT__op1_to_exu 
-                                                       | vlSelf->cpu_top__DOT__op2_to_exu))) 
+                                                       & vlSelf->cpu_top__DOT__op2_to_exu))) 
                                                 | ((- (QData)((IData)(
-                                                                      (0x1000U 
+                                                                      (0x2000U 
                                                                        == 
-                                                                       (0x1007U 
+                                                                       (0x2007U 
                                                                         & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
-                                                   & (vlSelf->cpu_top__DOT__op1_to_exu 
-                                                      & vlSelf->cpu_top__DOT__op2_to_exu))) 
+                                                   & vlSelf->cpu_top__DOT__op2_to_exu)) 
                                                | ((- (QData)((IData)(
-                                                                     (0x2000U 
+                                                                     (0x13U 
                                                                       == 
-                                                                      (0x2007U 
+                                                                      (0x1fU 
                                                                        & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
-                                                  & vlSelf->cpu_top__DOT__op2_to_exu)) 
+                                                  & (((QData)((IData)(
+                                                                      vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t[1U])) 
+                                                      << 0x20U) 
+                                                     | (QData)((IData)(
+                                                                       vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t[0U]))))) 
                                               | ((- (QData)((IData)(
-                                                                    (0x13U 
+                                                                    (0x23U 
                                                                      == 
-                                                                     (0x1fU 
+                                                                     (0x2fU 
                                                                       & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
                                                  & (((QData)((IData)(
-                                                                     vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t[1U])) 
+                                                                     vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t[3U])) 
                                                      << 0x20U) 
                                                     | (QData)((IData)(
-                                                                      vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t[0U]))))) 
+                                                                      vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t[2U]))))) 
                                              | ((- (QData)((IData)(
-                                                                   (0x23U 
+                                                                   (0x43U 
                                                                     == 
-                                                                    (0x2fU 
+                                                                    (0x4fU 
                                                                      & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
                                                 & (((QData)((IData)(
-                                                                    vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t[3U])) 
+                                                                    __Vtemp30[3U])) 
                                                     << 0x20U) 
                                                    | (QData)((IData)(
-                                                                     vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t[2U]))))) 
+                                                                     __Vtemp30[2U]))))) 
                                             | ((- (QData)((IData)(
-                                                                  (0x43U 
+                                                                  (0x83U 
                                                                    == 
-                                                                   (0x4fU 
+                                                                   (0x8fU 
                                                                     & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
                                                & (((QData)((IData)(
-                                                                   __Vtemp27[3U])) 
+                                                                   __Vtemp33[3U])) 
                                                    << 0x20U) 
                                                   | (QData)((IData)(
-                                                                    __Vtemp27[2U])))));
+                                                                    __Vtemp33[2U])))));
     if ((2U & (IData)(vlSelf->cpu_top__DOT__ls_info_bus_to_isu))) {
         Vcpu_top___024unit____Vdpiimwrap_mem_write_TOP____024unit(
                                                                   ((2U 

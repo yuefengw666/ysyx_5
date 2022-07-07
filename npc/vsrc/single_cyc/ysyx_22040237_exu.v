@@ -248,7 +248,9 @@ assign mulhsu_res = mulsu_res_t[127:64];
 //mulhu
 wire op_mulhu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MULHU] && !mdu_wop;
 wire [`ysyx_22040237_REG_WIDTH-1:0] mulhu_res;
+/* verilator lint_off UNUSED */
 wire [127:0] muluu_res_t;
+/* verilator lint_on UNUSED */
 wire muluu_res_t = ($unsigned(op1_i)) * ($unsigned(op2_i));
 assign mulhu_res = muluu_res_t[127:64];
 //div
