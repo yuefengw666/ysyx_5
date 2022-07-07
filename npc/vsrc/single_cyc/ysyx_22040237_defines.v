@@ -9,7 +9,7 @@
 `define ysyx_22040237_EXU_INFO_ALU 3'd0;
 `define ysyx_22040237_EXU_INFO_BJP 3'd1;
 `define ysyx_22040237_EXU_INFO_LS  3'd2;
-`define ysyx_22040237_EXU_INFO_MD  3'd3;
+`define ysyx_22040237_EXU_INFO_MDU  3'd3;
 
 
 //alu_info_bus has
