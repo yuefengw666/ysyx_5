@@ -9,9 +9,8 @@ module ysyx_22040237_ifu(
   output [`ysyx_22040237_REG_WIDTH-1:0] pc_o,
   output [`ysyx_22040237_INST_WIDTH-1:0] inst_o,
 
-  output rdata_63_32
-
 );
+
 wire [63:0] rdata;
 
 //!!!!!!!!!!!!!!!!!!!exclude warning!!!!!!!!!!!!!!!!!!//
