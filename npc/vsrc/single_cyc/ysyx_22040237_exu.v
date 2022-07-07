@@ -253,17 +253,26 @@ wire [127:0] muluu_res_t;
 /* verilator lint_on UNUSED */
 wire muluu_res_t = ($unsigned(op1_i)) * ($unsigned(op2_i));
 assign mulhu_res = muluu_res_t[127:64];
+
 //div
-//wire op_div = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIV] && !mdu_wop;
+wire op_div = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIV] && !mdu_wop;
+wire [`ysyx_22040237_REG_WIDTH-1:0] div_res;
+assign div_res = op1_i / op2_i;
 
 //divu
-//wire op_divu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIVU] && !mdu_wop;
+wire op_divu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIVU] && !mdu_wop;
+wire [`ysyx_22040237_REG_WIDTH-1:0] divu_res;
+assign divu_res = ($unsigned(op1_i)) / ($unsigned(op2_i));
 
 //rem
-//wire op_rem = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_REM] && !mdu_wop;
+wire op_rem = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_REM] && !mdu_wop;
+wire [`ysyx_22040237_REG_WIDTH-1:0] rem_res;
+assign rem_res = op1_i % op2_i;
 
 //remu
-//wire op_remu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_REMU] && !mdu_wop;
+wire op_remu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_REMU] && !mdu_wop;
+wire [`ysyx_22040237_REG_WIDTH-1:0] remu_res;
+assign remu_res = ($unsigned(op1_i)) % ($unsigned(op2_i));
 
 //--------------------alu result-------------------//
 
@@ -284,7 +293,11 @@ assign alu_res_o =( ( {64{op_add_sub & !alu_wop}}   & add_sub_res )    |
                     ( {64{op_mul}}              & mul_res     )    |  
                     ( {64{op_mulh}}             & mulh_res    )    |
                     ( {64{op_mulhsu}}           & mulhsu_res  )    |
-                    ( {64{op_mulhu}}            & mulhu_res)
+                    ( {64{op_mulhu}}            & mulhu_res)       |
+                    ( {64{op_div}}              & div_res)         |
+                    ( {64{op_divu}}             & divu_res)        |
+                    ( {64{op_rem}}              & rem_res)         |
+                    ( {64{op_remu}}             & remu_res)        
                   );
 
 assign rd_wr_en_o = rd_wr_en_i;
