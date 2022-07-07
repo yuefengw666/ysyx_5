@@ -10,8 +10,9 @@ module ysyx_22040237_ifu(
   output [`ysyx_22040237_INST_WIDTH-1:0] inst_o
 
 );
-
+/* verilator lint_off UNUSED */
 wire [63:0] rdata;
+/* verilator lint_on UNUSED */
 
 /* verilator lint_off LATCH */
 always @(*) begin
