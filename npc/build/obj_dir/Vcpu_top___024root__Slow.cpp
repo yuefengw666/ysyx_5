@@ -725,7 +725,7 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
     vlSelf->cpu_top__DOT__exu_u0__DOT__divw_res_t = 
         VL_DIV_III(32, (IData)(vlSelf->cpu_top__DOT__op1_to_exu), (IData)(vlSelf->cpu_top__DOT__op2_to_exu));
     vlSelf->cpu_top__DOT__exu_u0__DOT__divuw_res_t 
-        = (IData)(VL_DIV_QQQ(64, vlSelf->cpu_top__DOT__op1_to_exu, vlSelf->cpu_top__DOT__op2_to_exu));
+        = VL_DIV_QQQ(64, vlSelf->cpu_top__DOT__op1_to_exu, vlSelf->cpu_top__DOT__op2_to_exu);
     vlSelf->cpu_top__DOT__exu_u0__DOT__remw_res_t = 
         VL_MODDIV_III(32, (IData)(vlSelf->cpu_top__DOT__op1_to_exu), (IData)(vlSelf->cpu_top__DOT__op2_to_exu));
     vlSelf->cpu_top__DOT__exu_u0__DOT__remuw_res_t 
@@ -1114,8 +1114,10 @@ void Vcpu_top___024root___settle__TOP__1(Vcpu_top___024root* vlSelf) {
                                                                       & (IData)(vlSelf->cpu_top__DOT__exu_info_bus_to_exu)))))) 
                                                  & (((QData)((IData)(
                                                                      (- (IData)(
+                                                                                (1U 
+                                                                                & (IData)(
                                                                                 (vlSelf->cpu_top__DOT__exu_u0__DOT__divuw_res_t 
-                                                                                >> 0x1fU))))) 
+                                                                                >> 0x1fU))))))) 
                                                      << 0x20U) 
                                                     | (QData)((IData)(vlSelf->cpu_top__DOT__exu_u0__DOT__divuw_res_t))))) 
                                              | ((- (QData)((IData)(
@@ -1285,7 +1287,7 @@ void Vcpu_top___024root___ctor_var_reset(Vcpu_top___024root* vlSelf) {
     VL_RAND_RESET_W(128, vlSelf->cpu_top__DOT__exu_u0__DOT__mul_res_t);
     vlSelf->cpu_top__DOT__exu_u0__DOT__mulw_res_t = VL_RAND_RESET_I(32);
     vlSelf->cpu_top__DOT__exu_u0__DOT__divw_res_t = VL_RAND_RESET_I(32);
-    vlSelf->cpu_top__DOT__exu_u0__DOT__divuw_res_t = VL_RAND_RESET_I(32);
+    vlSelf->cpu_top__DOT__exu_u0__DOT__divuw_res_t = VL_RAND_RESET_Q(64);
     vlSelf->cpu_top__DOT__exu_u0__DOT__remw_res_t = VL_RAND_RESET_I(32);
     vlSelf->cpu_top__DOT__exu_u0__DOT__remuw_res_t = VL_RAND_RESET_I(32);
     vlSelf->cpu_top__DOT__lsu_u0__DOT__mem_rdata = VL_RAND_RESET_Q(64);

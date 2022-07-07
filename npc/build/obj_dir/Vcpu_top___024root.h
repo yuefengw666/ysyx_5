@@ -83,7 +83,6 @@ VL_MODULE(Vcpu_top___024root) {
         VlWide<4>/*127:0*/ cpu_top__DOT__exu_u0__DOT__mul_res_t;
         IData/*31:0*/ cpu_top__DOT__exu_u0__DOT__mulw_res_t;
         IData/*31:0*/ cpu_top__DOT__exu_u0__DOT__divw_res_t;
-        IData/*31:0*/ cpu_top__DOT__exu_u0__DOT__divuw_res_t;
         IData/*31:0*/ cpu_top__DOT__exu_u0__DOT__remw_res_t;
         IData/*31:0*/ cpu_top__DOT__exu_u0__DOT__remuw_res_t;
         QData/*63:0*/ cpu_top__DOT__pc_to_ifu;
@@ -94,14 +93,15 @@ VL_MODULE(Vcpu_top___024root) {
         QData/*63:0*/ cpu_top__DOT__alu_res_to_lsu;
         QData/*63:0*/ cpu_top__DOT__rs1_data_to_idu;
         QData/*63:0*/ cpu_top__DOT__rs2_data_to_idu;
+        QData/*63:0*/ cpu_top__DOT__ifu_u0__DOT__rdata;
     };
     struct {
-        QData/*63:0*/ cpu_top__DOT__ifu_u0__DOT__rdata;
         QData/*63:0*/ cpu_top__DOT__idu_u0__DOT__imm_i;
         QData/*63:0*/ cpu_top__DOT__idu_u0__DOT__imm;
         QData/*63:0*/ cpu_top__DOT__exu_u0__DOT__adder_in2;
         QData/*63:0*/ cpu_top__DOT__exu_u0__DOT__adder_res;
         QData/*63:0*/ cpu_top__DOT__exu_u0__DOT__sll_res;
+        QData/*63:0*/ cpu_top__DOT__exu_u0__DOT__divuw_res_t;
         QData/*63:0*/ cpu_top__DOT__lsu_u0__DOT__mem_rdata;
         VlUnpacked<QData/*63:0*/, 32> cpu_top__DOT__regs_u0__DOT__regs;
         VlUnpacked<QData/*63:0*/, 33> cpu_top__DOT__regs_u0__DOT__rf;
