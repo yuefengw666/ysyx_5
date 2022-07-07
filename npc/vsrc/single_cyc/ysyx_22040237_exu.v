@@ -271,7 +271,7 @@ assign alu_res_o =( ( {64{op_add_sub & !alu_wop}}   & add_sub_res )    |
                     ( {64{op_and}}              & and_res     )    |
                     ( {64{op_lui}}              & lui_res     )    |
                     ( {64{op_mul}}              & mul_res     )    |  
-                    ( {64{op_mulh}})            & mulh_res    )
+                    ( {64{op_mulh}}             & mulh_res    )
                   );
 
 assign rd_wr_en_o = rd_wr_en_i;
