@@ -13,10 +13,6 @@ module ysyx_22040237_ifu(
 
 wire [63:0] rdata;
 
-//!!!!!!!!!!!!!!!!!!!exclude warning!!!!!!!!!!!!!!!!!!//
-
-assign rdata_63_32 = |rdata[63:32];
-
 /* verilator lint_off LATCH */
 always @(*) begin
   mem_read(pc_i, rdata);
