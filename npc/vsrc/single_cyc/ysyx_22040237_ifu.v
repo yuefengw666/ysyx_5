@@ -7,7 +7,7 @@ module ysyx_22040237_ifu(
   input [`ysyx_22040237_REG_WIDTH-1:0] pc_i,
 
   output [`ysyx_22040237_REG_WIDTH-1:0] pc_o,
-  output [`ysyx_22040237_INST_WIDTH-1:0] inst_o,
+  output [`ysyx_22040237_INST_WIDTH-1:0] inst_o
 
 );
 

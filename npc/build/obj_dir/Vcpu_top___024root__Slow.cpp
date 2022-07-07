@@ -1219,7 +1219,6 @@ void Vcpu_top___024root___ctor_var_reset(Vcpu_top___024root* vlSelf) {
     vlSelf->clk = VL_RAND_RESET_I(1);
     vlSelf->rst = VL_RAND_RESET_I(1);
     vlSelf->inst_val = VL_RAND_RESET_I(32);
-    vlSelf->__pinNumber4 = VL_RAND_RESET_I(1);
     vlSelf->cpu_top__DOT__pc_to_ifu = VL_RAND_RESET_Q(64);
     vlSelf->cpu_top__DOT__op1_to_exu = VL_RAND_RESET_Q(64);
     vlSelf->cpu_top__DOT__op2_to_exu = VL_RAND_RESET_Q(64);

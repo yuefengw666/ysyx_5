@@ -1360,7 +1360,5 @@ void Vcpu_top___024root___eval_debug_assertions(Vcpu_top___024root* vlSelf) {
         Verilated::overWidthError("clk");}
     if (VL_UNLIKELY((vlSelf->rst & 0xfeU))) {
         Verilated::overWidthError("rst");}
-    if (VL_UNLIKELY((vlSelf->__pinNumber4 & 0xfeU))) {
-        Verilated::overWidthError("__pinNumber4");}
 }
 #endif  // VL_DEBUG

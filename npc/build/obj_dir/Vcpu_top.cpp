@@ -14,7 +14,6 @@ Vcpu_top::Vcpu_top(VerilatedContext* _vcontextp__, const char* _vcname__)
     , clk{vlSymsp->TOP.clk}
     , rst{vlSymsp->TOP.rst}
     , inst_val{vlSymsp->TOP.inst_val}
-    , __pinNumber4{vlSymsp->TOP.__pinNumber4}
     , __PVT____024unit{vlSymsp->TOP.__PVT____024unit}
     , rootp{&(vlSymsp->TOP)}
 {

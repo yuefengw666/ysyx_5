@@ -24,7 +24,6 @@ VL_MODULE(Vcpu_top___024root) {
     // PORTS
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
-    VL_IN8(__pinNumber4,0,0);
     VL_OUT(inst_val,31,0);
 
     // LOCAL SIGNALS
