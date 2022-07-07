@@ -300,7 +300,7 @@ assign ls_info_bus[15:10] = 'b0;
 
 
 //mdu_info_bus_o
-wire mdu_op = (rv64I_RM | rv64IW_RM |) & funct7_0x01;
+wire mdu_op = (rv64I_RM | rv64IW_RM) & funct7_0x01;
 wire mdu_wop = rv64IW_RM;
 wire [15:0] mdu_info_bus;
 assign mdu_info_bus[2:0] = `ysyx_22040237_EXU_INFO_MDU;
