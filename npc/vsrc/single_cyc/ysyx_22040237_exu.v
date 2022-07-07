@@ -52,9 +52,10 @@ end
 wire alu_req = exu_info_bus_i[2:0] == `ysyx_22040237_EXU_INFO_ALU;
 wire bjp_req = exu_info_bus_i[2:0] == `ysyx_22040237_EXU_INFO_BJP;
 wire ls_req = exu_info_bus_i[2:0] == `ysyx_22040237_EXU_INFO_LS;
+wire mdu_req = exu_info_bus_i[2:0] == `ysyx_22040237_EXU_INFO_MDU;
 
 //----------alu req----------//
-wire wop = alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_WOP];
+wire alu_wop = alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_WOP];
 
 //---add sub op---//
 wire op_add = alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_ADD];
@@ -87,7 +88,7 @@ assign {adder_cout, adder_res} = adder_in1 + adder_in2 + adder_cin;
 
 assign add_sub_res = adder_res;
 
-//add word op
+//---add word op---//
 wire [`ysyx_22040237_REG_WIDTH-1:0] wop_add_sub_res;
 assign wop_add_sub_res = { {32{add_sub_res[31]}}, add_sub_res[31:0]};
 
@@ -112,6 +113,16 @@ wire [31:0] srlw_res = op1_i[31:0] >> op2_i[5:0];
 wire [`ysyx_22040237_REG_WIDTH-1:0] wop_srl_res;
 assign wop_srl_res = { {32{srlw_res[31]}}, srlw_res };
 
+//sra
+wire [`ysyx_22040237_REG_WIDTH-1:0] sra_res;
+wire op_sra = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SRA];
+assign sra_res = ($signed(op1_i)) >>> op2_i[5:0];
+
+//word sra op
+wire [`ysyx_22040237_REG_WIDTH-1:0] wop_sra_res;
+wire [31:0] sraw_res = ($signed(op1_i[31:0])) >>> op2_i[5:0];
+assign wop_sra_res = { {32{sraw_res[31]}}, sraw_res[31:0] };
+
 //slt
 wire [`ysyx_22040237_REG_WIDTH-1:0] slt_res;
 wire op_slt = alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SLT];
@@ -124,18 +135,6 @@ wire [`ysyx_22040237_REG_WIDTH-1:0] sltu_res;
 wire op_sltu = alu_req & exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SLTU];
 wire sltu_cmp_res = !adder_cout;
 assign sltu_res = {63'b0, sltu_cmp_res};
-
-//sra
-wire [`ysyx_22040237_REG_WIDTH-1:0] sra_res;
-wire op_sra = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_SRA];
-assign sra_res = ($signed(op1_i)) >>> op2_i[5:0];
-//wire [`ysyx_22040237_REG_WIDTH-1:0] sra_shift_mask = 64'b1 >> op2_i[5:0];
-//assign sra_res = srl_res | (~sra_shift_mask);
-
-//word sra op
-wire [`ysyx_22040237_REG_WIDTH-1:0] wop_sra_res;
-wire [31:0] sraw_res = ($signed(op1_i[31:0])) >>> op2_i[5:0];
-assign wop_sra_res = { {32{sraw_res[31]}}, sraw_res[31:0] };
 
 //xor
 wire [`ysyx_22040237_REG_WIDTH-1:0] xor_res;
@@ -163,9 +162,7 @@ wire op_lui = alu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_ALU_LUI];
 
 assign lui_res = op2_i;
 
-
-
-//**************bjp req***************//
+//-----------------------bjp req------------------------//
 assign pc_jump_flag_o = op_jal | op_jalr | beq_res | bne_res | blt_res | bge_res | bltu_res | bgeu_res;
 assign pc_jump_addr_o = op1_jp_i + op2_jp_s_i;
 
@@ -209,7 +206,7 @@ wire op_bgeu = bjp_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_BJP_BGEU];
 wire bgeu_res = op_bgeu & bgeu_cmp;
 
 
-//ls req
+//--------------------ls req--------------------//
 
 assign ls_info_bus_o = { ls_dw, ls_word, ls_db, ls_byte, ls_usign, op_store, op_load };
 assign rs2_store_o = op_store ? op2_jp_s_i : 'b0;
@@ -223,22 +220,53 @@ wire ls_word = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_WORD];
 wire ls_dw = ls_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_LS_DW];
 
 
-//alu result
+//--------------------mdu req-------------------//
+wire mdu_wop = exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_WOP];
 
-assign alu_res_o =( ( {64{op_add_sub & !wop}}   & add_sub_res )    |
-                    ( {64{op_add_sub &  wop}}   & wop_add_sub_res) |
-                    ( {64{op_sll     & !wop}}   & sll_res     )    |
-                    ( {64{op_sll     &  wop}}   & wop_sll_res )    |
+//mul
+wire op_mul = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MUL] && !mdu_wop;
+wire [`ysyx_22040237_REG_WIDTH-1:0]mul_res;
+assign mul_res = op1 * op2;
+
+
+//mulh
+wire op_mulh = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MULH] && !mdu_wop;
+
+//mulhsu
+wire op_mulhsu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MULHSU] && !mdu_wop;
+
+//mulhu
+wire op_mulhu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MULHU] && !mdu_wop;
+
+//div
+wire op_div = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIV] && !mdu_wop;
+
+//divu
+wire op_divu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIVU] && !mdu_wop;
+
+//rem
+wire op_rem = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_REM] && !mdu_wop;
+
+//remu
+wire op_remu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_REMU] && !mdu_wop;
+
+//--------------------alu result-------------------//
+
+assign alu_res_o =( ( {64{op_add_sub & !alu_wop}}   & add_sub_res )    |
+                    ( {64{op_add_sub &  alu_wop}}   & wop_add_sub_res) |
+                    ( {64{op_sll     & !alu_wop}}   & sll_res     )    |
+                    ( {64{op_sll     &  alu_wop}}   & wop_sll_res )    |
                     ( {64{op_slt}}              & slt_res     )    |
                     ( {64{op_sltu}}             & sltu_res    )    |
                     ( {64{op_xor}}              & xor_res     )    |
-                    ( {64{op_srl     & !wop}}   & srl_res     )    |
-                    ( {64{op_srl     &  wop}}   & wop_srl_res )    |
-                    ( {64{op_sra     & !wop}}   & sra_res     )    |
-                    ( {64{op_sra     &  wop}}   & wop_sra_res )    |
+                    ( {64{op_srl     & !alu_wop}}   & srl_res     )    |
+                    ( {64{op_srl     &  alu_wop}}   & wop_srl_res )    |
+                    ( {64{op_sra     & !alu_wop}}   & sra_res     )    |
+                    ( {64{op_sra     &  alu_wop}}   & wop_sra_res )    |
                     ( {64{op_or}}               & or_res      )    | 
                     ( {64{op_and}}              & and_res     )    |
                     ( {64{op_lui}}              & lui_res     )  
+                    ( {64{op_mul}}              & mul_res     )   
                   );
 
 assign rd_wr_en_o = rd_wr_en_i;

@@ -9,6 +9,8 @@
 `define ysyx_22040237_EXU_INFO_ALU 3'd0;
 `define ysyx_22040237_EXU_INFO_BJP 3'd1;
 `define ysyx_22040237_EXU_INFO_LS  3'd2;
+`define ysyx_22040237_EXU_INFO_MD  3'd3;
+
 
 //alu_info_bus has
 `define ysyx_22040237_EXU_INFO_ALU_ADD     3
@@ -44,6 +46,19 @@
 `define ysyx_22040237_EXU_INFO_LS_DB       7
 `define ysyx_22040237_EXU_INFO_LS_WORD     8
 `define ysyx_22040237_EXU_INFO_LS_DW       9
+
+//mdu_info_bus
+`define ysyx_22040237_EXU_INFO_MDU_WOP     3
+`define ysyx_22040237_EXU_INFO_MDU_MUL     4
+`define ysyx_22040237_EXU_INFO_MDU_MULH    5
+`define ysyx_22040237_EXU_INFO_MDU_MULHSU  6
+`define ysyx_22040237_EXU_INFO_MDU_MULHU   7
+`define ysyx_22040237_EXU_INFO_MDU_DIV     8
+`define ysyx_22040237_EXU_INFO_MDU_DIVU    9
+`define ysyx_22040237_EXU_INFO_MDU_REM     10
+`define ysyx_22040237_EXU_INFO_MDU_REMU    11
+
+
 
 
 

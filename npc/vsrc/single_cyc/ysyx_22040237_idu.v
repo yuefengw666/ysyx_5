@@ -98,6 +98,7 @@ wire funct3_0x6 = funct3 == 3'b110;
 wire funct3_0x7 = funct3 == 3'b111;
 
 wire funct7_0x00 = funct7 == 7'b000_0000;
+wire funct7_0x01 = funct7 == 7'b000_0001;
 wire funct7_0x20 = funct7 == 7'b010_0000;
 
 //sllw slliw srlw srliw sraw sraiw
@@ -114,12 +115,28 @@ wire srl  = rv64I_RM & funct3_0x5 & funct7_0x00;
 wire sra  = rv64I_RM & funct3_0x5 & funct7_0x20;
 wire or_  = rv64I_RM & funct3_0x6 & funct7_0x00;
 wire and_ = rv64I_RM & funct3_0x7 & funct7_0x00;
-//RV64IW R +++
+//RV64 M
+wire mul    = rv64I_RM & funct3_0x0 & funct7_0x01;
+wire mulh   = rv64I_RM & funct3_0x1 & funct7_0x01;
+wire mulhsu = rv64I_RM & funct3_0x2 & funct7_0x01;
+wire mulhu  = rv64I_RM & funct3_0x3 & funct7_0x01;
+wire div    = rv64I_RM & funct3_0x4 & funct7_0x01;
+wire divu   = rv64I_RM & funct3_0x5 & funct7_0x01;
+wire rem    = rv64I_RM & funct3_0x6 & funct7_0x01;
+wire remu   = rv64I_RM & funct3_0x7 & funct7_0x01;
+
+//RV64IW R
 wire addw = rv64IW_RM & funct3_0x0 & funct7_0x00;
 wire subw = rv64IW_RM & funct3_0x0 & funct7_0x20;
 wire sllw = rv64IW_RM & funct3_0x1 & funct7_0x00;
 wire srlw = rv64IW_RM & funct3_0x5 & funct7_0x00;
 wire sraw = rv64IW_RM & funct3_0x5 & funct7_0x20;
+//RV64W M
+wire mulw  = rv64IW_RM & funct3_0x0 & funct7_0x01;
+wire divw  = rv64IW_RM & funct3_0x4 & funct7_0x01;
+wire divuw = rv64IW_RM & funct3_0x5 & funct7_0x01;
+wire remw  = rv64IW_RM & funct3_0x6 & funct7_0x01;
+wire remuw = rv64IW_RM & funct3_0x7 & funct7_0x01;
 
 //RV64I I
 wire addi  = rv64I_I & funct3_0x0;
@@ -223,7 +240,8 @@ assign op2_jp_s_o = ( {64{op2_jp_imm_need}} & imm ) |
 
 //operation need alu
 
-wire alu_op = rv64I_RM | rv64I_I | auipc | lui | ebreak | rv64IW_RM | rv64IW_I;
+wire alu_op = ((rv64I_RM | rv64IW_RM) & !funct7_0x01) | 
+              rv64I_I | auipc | lui | ebreak | rv64IW_RM | rv64IW_I;
 wire alu_wop = rv64IW_RM | rv64IW_I;
 wire [15:0] alu_info_bus;
 
@@ -281,8 +299,25 @@ assign ls_info_bus[`ysyx_22040237_EXU_INFO_LS_DW] = ld | sd;
 assign ls_info_bus[15:10] = 'b0;
 
 
+//mdu_info_bus_o
+wire mdu_op = (rv64I_RM | rv64IW_RM |) & funct7_0x01;
+wire mdu_wop = rv64IW_RM;
+wire [15:0] mdu_info_bus;
+assign mdu_info_bus[2:0] = `ysyx_22040237_EXU_INFO_MDU;
+assign mdu_info_bus[`ysyx_22040237_EXU_INFO_MDU_WOP]    = mdu_op;
+assign mdu_info_bus[`ysyx_22040237_EXU_INFO_MDU_MUL]    = mul | mulw;
+assign mdu_info_bus[`ysyx_22040237_EXU_INFO_MDU_MULH]   = mulh;
+assign mdu_info_bus[`ysyx_22040237_EXU_INFO_MDU_MULHSU] = mulhsu;
+assign mdu_info_bus[`ysyx_22040237_EXU_INFO_MDU_MULHU]  = mulhu;
+assign mdu_info_bus[`ysyx_22040237_EXU_INFO_MDU_DIV]    = div | divw;
+assign mdu_info_bus[`ysyx_22040237_EXU_INFO_MDU_DIVU]   = divu | divuw;
+assign mdu_info_bus[`ysyx_22040237_EXU_INFO_MDU_REM]    = rem | remw;
+assign mdu_info_bus[`ysyx_22040237_EXU_INFO_MDU_REMU]   = remu | remuw;
+assign mdu_info_bus[15:12] = 'b0;
+
 assign exu_info_bus_o = ({16{alu_op}} & alu_info_bus) | 
                         ({16{bjp_op}} & bjp_info_bus) |
-                        ({16{ls_op}}  & ls_info_bus) ;
+                        ({16{ls_op}}  & ls_info_bus)  |
+                        ({16{mdu_op}} & mdu_info_bus) ;
 
 endmodule
