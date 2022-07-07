@@ -226,29 +226,29 @@ wire mdu_wop = exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_WOP];
 //mul
 wire op_mul = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MUL] && !mdu_wop;
 wire [`ysyx_22040237_REG_WIDTH-1:0]mul_res;
-assign mul_res = op1 * op2;
+assign mul_res = op1_i * op2_i;
 
 
 //mulh
-wire op_mulh = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MULH] && !mdu_wop;
+//wire op_mulh = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MULH] && !mdu_wop;
 
 //mulhsu
-wire op_mulhsu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MULHSU] && !mdu_wop;
+//wire op_mulhsu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MULHSU] && !mdu_wop;
 
 //mulhu
-wire op_mulhu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MULHU] && !mdu_wop;
+//wire op_mulhu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MULHU] && !mdu_wop;
 
 //div
-wire op_div = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIV] && !mdu_wop;
+//wire op_div = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIV] && !mdu_wop;
 
 //divu
-wire op_divu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIVU] && !mdu_wop;
+//wire op_divu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIVU] && !mdu_wop;
 
 //rem
-wire op_rem = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_REM] && !mdu_wop;
+//wire op_rem = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_REM] && !mdu_wop;
 
 //remu
-wire op_remu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_REMU] && !mdu_wop;
+//wire op_remu = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_REMU] && !mdu_wop;
 
 //--------------------alu result-------------------//
 
