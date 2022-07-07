@@ -277,32 +277,32 @@ assign remu_res = ($unsigned(op1_i)) % ($unsigned(op2_i));
 //mulw
 wire wop_mulw = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_MUL] && mdu_wop;
 wire [`ysyx_22040237_REG_WIDTH-1:0] mulw_res;
-wire [63:0] mulw_res_t = op1_i[31:0] * op2_i[31:0];
-assign mulw_res = { {31{mulw_res_t[31]}}, mulw_res_t[31:0]};
+wire [31:0] mulw_res_t = op1_i[31:0] * op2_i[31:0];
+assign mulw_res = { {32{mulw_res_t[31]}}, mulw_res_t[31:0]};
 
 //divw
 wire wop_divw = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIV] && mdu_wop;
 wire [`ysyx_22040237_REG_WIDTH-1:0] divw_res;
-wire [63:0] divw_res_t = op1_i[31:0] / op2_i[31:0];
-assign divw_res = { {31{divw_res_t[31]}}, divw_res_t[31:0]};
+wire [31:0] divw_res_t = op1_i[31:0] / op2_i[31:0];
+assign divw_res = { {32{divw_res_t[31]}}, divw_res_t[31:0]};
 
 //divuw
 wire wop_divuw = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_DIVU] && mdu_wop;
 wire [`ysyx_22040237_REG_WIDTH-1:0] divuw_res;
-wire [63:0] divuw_res_t = ($unsigned(op1_i)) / ($unsigned(op2_i));
-assign divuw_res = { {31{divuw_res_t[31]}}, divuw_res_t[31:0]};
+wire [31:0] divuw_res_t = ($unsigned(op1_i)) / ($unsigned(op2_i));
+assign divuw_res = { {32{divuw_res_t[31]}}, divuw_res_t[31:0]};
 
 //remw
 wire wop_remw = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_REM] && mdu_wop;
 wire [`ysyx_22040237_REG_WIDTH-1:0] remw_res;
-wire [63:0] remw_res_t = op1_i[31:0] % op2_i[31:0];
-assign remw_res = { {31{remw_res_t[31]}}, remw_res_t[31:0]};
+wire [31:0] remw_res_t = op1_i[31:0] % op2_i[31:0];
+assign remw_res = { {32{remw_res_t[31]}}, remw_res_t[31:0]};
 
 //remuw
 wire wop_remuw = mdu_req && exu_info_bus_i[`ysyx_22040237_EXU_INFO_MDU_REMU] && mdu_wop;
 wire [`ysyx_22040237_REG_WIDTH-1:0] remuw_res;
-wire [63:0] remuw_res_t = ($unsigned(op1_i)) % ($unsigned(op2_i));
-assign remuw_res = { {31{remuw_res_t[31]}}, remuw_res_t[31:0]};
+wire [31:0] remuw_res_t = ($unsigned(op1_i)) % ($unsigned(op2_i));
+assign remuw_res = { {32{remuw_res_t[31]}}, remuw_res_t[31:0]};
 
 
 //--------------------alu result-------------------//
