@@ -33,7 +33,7 @@ assign mem_wmask_o = ( {8{ls_byte}} & 8'b0000_0001) |
                    ( {8{ls_dw}}   & 8'b1111_1111) ;
 assign mem_wdata_o = rs2_store_i;
 
-//load
+//load decode
 wire ls_load  = ls_info_bus_i[0];
 wire ls_store = ls_info_bus_i[1];
 wire ls_usign = ls_info_bus_i[2];
