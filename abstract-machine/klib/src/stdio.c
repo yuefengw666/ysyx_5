@@ -10,17 +10,24 @@ int long2a(char *out, int *pn, size_t size, long num);
 int str2a(char *out, int *pn, size_t size, const char *str);
 int vsnprintf(char *out, size_t size, const char *fmt, va_list ap);
 
+
 int printf(const char *fmt, ...) {
-  panic("Not implemented");
+  char out[4096];
+  
+  va_list ap;
+  va_start(ap,fmt);
+  int n = vsprintf(out, fmt, ap);
+  va_end(ap);
+
+  putstr(out);
+  return n;
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-  //panic("Not implemented");
   return vsnprintf(out, -1, fmt, ap);
 }
 
 int sprintf(char *out, const char *fmt, ...) {
-  //panic("Not implemented");
   va_list ap;
   va_start(ap,fmt);
 
@@ -30,7 +37,6 @@ int sprintf(char *out, const char *fmt, ...) {
 }
 
 int snprintf(char *out, size_t size, const char *fmt, ...) {
-  //panic("Not implemented");
   va_list ap;
   va_start(ap,fmt);
   int n = vsnprintf(out, size, fmt, ap);
@@ -40,7 +46,6 @@ int snprintf(char *out, size_t size, const char *fmt, ...) {
 }
 
 int vsnprintf(char *out, size_t size, const char *fmt, va_list ap) {
-  //panic("Not implemented");
   int n=0;
 
   while (n < size - 1 && *fmt){
