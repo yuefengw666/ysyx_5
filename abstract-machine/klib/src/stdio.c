@@ -10,10 +10,8 @@ int long2a(char *out, int *pn, size_t size, long num);
 int str2a(char *out, int *pn, size_t size, const char *str);
 int vsnprintf(char *out, size_t size, const char *fmt, va_list ap);
 
-
+static char out[2048];
 int printf(const char *fmt, ...) {
-  char out[1024];
-  
   va_list ap;
   va_start(ap,fmt);
   int n = vsprintf(out, fmt, ap);
