@@ -12,7 +12,7 @@ int vsnprintf(char *out, size_t size, const char *fmt, va_list ap);
 
 
 int printf(const char *fmt, ...) {
-  char out[4096];
+  char out[1024];
   
   va_list ap;
   va_start(ap,fmt);
