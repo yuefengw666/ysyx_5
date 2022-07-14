@@ -132,6 +132,8 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000001 ????? ????? 111 ????? 01100 11", remu   , R, R(dest) = (unsigned)src1 % (unsigned)src2 );//?
   INSTPAT("0000001 ????? ????? 101 ????? 01100 11", divu   , R, R(dest) = (unsigned)src1 / (unsigned)src2 );//?
   
+  //timer
+  INSTPAT("0000001 ????? ????? 101 ????? 01110 11", divuw  , R, R(dest) = SEXT(BITS((unsigned)src1,31,0) / BITS((unsigned)src2,31,0),32) );
 
 
   /*--------------------------------------------------------------------------------------------*/
