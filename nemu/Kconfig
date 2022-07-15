@@ -162,7 +162,12 @@ config FTRACE
   bool "Enable function tracer"
   default y
 
-config WATCHPOINT
+config DTRACE
+  depends on TRACE
+  bool "Enable device tracer"
+  default y
+
+  config WATCHPOINT
   bool "Enable sdb watchpoint"
   default y
 
