@@ -41,7 +41,7 @@ word_t map_read(paddr_t addr, int len, IOMap *map) {
   assert(len >= 1 && len <= 8);
 #ifdef CONFIG_DTRACE
   printf("%s",ASNI_FMT("Dtrace-R -> ",ASNI_FG_CYAN));
-  printf("%s",map->name);
+  printf("%s\n",map->name);
 #endif
   check_bound(map, addr);
   paddr_t offset = addr - map->low;
@@ -54,7 +54,7 @@ void map_write(paddr_t addr, int len, word_t data, IOMap *map) {
   assert(len >= 1 && len <= 8);
 #ifdef CONFIG_DTRACE
   printf("%s",ASNI_FMT("Dtrace-W -> ",ASNI_FG_CYAN));
-  printf("%s",map->name);
+  printf("%s\n",map->name);
 #endif
   check_bound(map, addr);
   paddr_t offset = addr - map->low;
