@@ -21,7 +21,7 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
   *cfg = (AM_GPU_CONFIG_T) {
     .present = true, .has_accel = false,
     .width = w, .height = h,
-    .vmemsz = 0
+    .vmemsz = w * h * sizeof(uint32_t)
   };
 
 }
@@ -29,12 +29,20 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   int w = inw(VGACTL_ADDR + 2);
   uint32_t *p = ctl->pixels;
+  for(int j=0; j < ctl->h; j++){
+    for(int i=0; i < ctl->w; i++){
+      outl(FB_ADDR + (j+ctl->y)*4*w + (i+ctl->x)*4, *p); //
+      p++;
+    }
+  }
+  /*
   for(uint32_t i = ctl->y; i< ctl->y + ctl->h; i++){
       for(uint32_t j=ctl->x; j<ctl->x + ctl->w; j++){
         outl(FB_ADDR + i*4*w + j*4, *p);
         p++;
       }
   }
+  */
   if (ctl->sync) {
     outl(SYNC_ADDR, 1);
   }
