@@ -77,7 +77,7 @@ if( (waddr >= CONFIG_MBASE) && (waddr < CONFIG_MBASE + CONFIG_MSIZE) ){
       //char b[10];
       //snprintf(b, 1, "%lld", wdata);
       *uart_addr = wdata;
-      printf("%s", uart_addr);
+      printf("%c", uart_addr);
       return;
     }
   #endif
