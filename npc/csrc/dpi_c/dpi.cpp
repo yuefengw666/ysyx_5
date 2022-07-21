@@ -46,15 +46,17 @@ extern "C" void mem_read(long long raddr, long long *rdata){
 }
 
 extern "C" void mem_write(long long waddr, long long wdata, char wmask){
-  if( waddr < CONFIG_MBASE || waddr >= CONFIG_MBASE + CONFIG_MSIZE) {
+  /*if( waddr < CONFIG_MBASE || waddr >= CONFIG_MBASE + CONFIG_MSIZE) {
     printf("Write mem address = %llx is out of bound of mem.\n", waddr);
     return;
-  }
-  
-  #ifdef CONFIG_HAS_UART
-    if(waddr == SERIAL_ADDR) printf("%llx,1111111111111111111", wdata);
+  }*/
+    //printf("real mem_wr_data:%016lx\n",(*(uint64_t *)(pmem + waddr - CONFIG_MBASE)));
+  #ifdef CONFIG_MTRACE
+    printf("%s",ASNI_FMT("Mtrace-s -> ",ASNI_FG_CYAN));
+    printf("waddr:%016llx, wdata:%016llx, wlen_byte:%u \n",waddr,wdata,wlen_byte);
   #endif
 
+if(waddr<CONFIG_MBASE || waddr >= CONFIG_MBASE + CONFIG_MSIZE){
   uint8_t *mem_wr_pt = npc_guest_mem(waddr);
   int wlen_byte = 0;
   for(int i=0; i<8; i++){
@@ -66,11 +68,22 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
       wlen_byte++;
     }
   }
+  return;
+}
+
+  #ifdef CONFIG_HAS_UART
+    if(waddr == SERIAL_ADDR) { 
+      printf("%llx,1111111111111111111", wdata);
+      return;
+    }
+  #endif
+  /*
   //printf("real mem_wr_data:%016lx\n",(*(uint64_t *)(pmem + waddr - CONFIG_MBASE)));
   #ifdef CONFIG_MTRACE
     printf("%s",ASNI_FMT("Mtrace-s -> ",ASNI_FG_CYAN));
     printf("waddr:%016llx, wdata:%016llx, wlen_byte:%u \n",waddr,wdata,wlen_byte);
   #endif
-  
-  return;
+  */
+    printf("Write mem address = %llx is out of bound of mem.\n", waddr);
+    return;
 }
