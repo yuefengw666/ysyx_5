@@ -19,7 +19,9 @@ static const char mainargs[] = MAINARGS;
 #define SERIAL_ADDR        (DEVICE_BASE + 0x000003f8)
 
 void putch(char ch) {
+  printf("111");
   outb(SERIAL_ADDR, ch);
+  printf("222");
 }
 
 void halt(int code) {
