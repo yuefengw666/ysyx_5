@@ -75,7 +75,7 @@ if( (waddr >= CONFIG_MBASE) && (waddr < CONFIG_MBASE + CONFIG_MSIZE) ){
     if(waddr == SERIAL_ADDR) {
       void *caddr;
       *(uint8_t *)caddr = wdata;
-      printf("%c", *caddr);
+      printf("%c", caddr[0]);
       return;
     }
   #endif
