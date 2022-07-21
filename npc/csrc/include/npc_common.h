@@ -2,12 +2,13 @@
 #define __NPC_COMMON_H__
 
 #include <stdio.h>
-#include <iostream>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <macro.h>
+#include <iostream>
 #include <cstring>
 #include <cassert>
-#include <macro.h>
 
 //CONFIG
 #define CONFIG_VCD 0
@@ -28,5 +29,14 @@
 typedef uint64_t word_t;
 typedef word_t vaddr_t;
 typedef uint32_t paddr_t;
+
+typedef "0x%016lx" FMT_WORD;
+typedef "0x%08x" FMT_PADDR;
+typedef uint16_t ioaddr_t;
+
+
+#define CONFIG_TARGET_AM 1
+#define CONFIG_SERIAL_MMIO 0xa00003f8
+#define CONFIG_RTC_MMIO 0xa0000048
 
 #endif
