@@ -14,7 +14,7 @@
 #define CONFIG_VCD 0
 //#define CONFIG_SDB 0
 //#define CONFIG_WATCHPOINT 0
-#define CONFIG_DIFFTEST 0
+//#define CONFIG_DIFFTEST 0
 //#define CONFIG_MTRACE   0
 
 #define CONFIG_ITRACE 0
@@ -32,10 +32,8 @@ typedef uint32_t paddr_t;
 
 typedef "0x%016lx" FMT_WORD;
 typedef "0x%08x" FMT_PADDR;
-typedef uint16_t ioaddr_t;
 
 
-#define CONFIG_TARGET_AM 1
 #define CONFIG_SERIAL_MMIO 0xa00003f8
 #define CONFIG_RTC_MMIO 0xa0000048
 
