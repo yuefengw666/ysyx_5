@@ -30,10 +30,6 @@ typedef uint64_t word_t;
 typedef word_t vaddr_t;
 typedef uint32_t paddr_t;
 
-typedef "0x%016lx" FMT_WORD;
-typedef "0x%08x" FMT_PADDR;
-
-
 #define CONFIG_SERIAL_MMIO 0xa00003f8
 #define CONFIG_RTC_MMIO 0xa0000048
 
