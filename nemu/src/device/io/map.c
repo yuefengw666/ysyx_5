@@ -58,8 +58,8 @@ void map_write(paddr_t addr, int len, word_t data, IOMap *map) {
 #endif
   check_bound(map, addr);
   paddr_t offset = addr - map->low;
-  printf("111\n");
   host_write(map->space + offset, len, data);
-  printf("222\n");
+  printf("111\n");
   invoke_callback(map->callback, offset, len, true);
+  printf("222\n");
 }
