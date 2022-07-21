@@ -10,9 +10,7 @@ static uint8_t *serial_base = NULL;
 
 
 static void serial_putc(char ch) {
-  printf("111\n");
   MUXDEF(CONFIG_TARGET_AM, putch(ch), putc(ch, stderr));
-  printf("222\n");
 }
 
 static void serial_io_handler(uint32_t offset, int len, bool is_write) {
