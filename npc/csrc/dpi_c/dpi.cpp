@@ -73,7 +73,7 @@ if( (waddr >= CONFIG_MBASE) && (waddr < CONFIG_MBASE + CONFIG_MSIZE) ){
 
   #ifdef CONFIG_HAS_UART
     if(waddr == SERIAL_ADDR) { 
-      printf("%llx,", wdata);
+      printf("%s,", wdata);
       return;
     }
   #endif
