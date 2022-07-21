@@ -52,7 +52,7 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
   }
   
   #ifdef CONFIG_HAS_UART
-    if(waddr == SERIAL_ADDR) printf("%llx", wdata);
+    if(waddr == SERIAL_ADDR) printf("%llx,1111111111111111111", wdata);
   #endif
 
   uint8_t *mem_wr_pt = npc_guest_mem(waddr);
