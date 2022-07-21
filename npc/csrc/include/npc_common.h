@@ -33,8 +33,8 @@ typedef uint32_t paddr_t;
 #define CONFIG_HAS_UART     1
 #define CONFIG_HAS_TIMER    1
 
-#define DEVICE_BASE 0x80000000
-#define SERIAL_ADDR        (DEVICE_BASE + 0x800003f8)
-#define RTC_PORT           (DEVICE_BASE + 0x80000048)
+#define DEVICE_BASE 0xa0000000
+#define SERIAL_ADDR        (DEVICE_BASE + 0x000003f8)
+#define RTC_PORT           (DEVICE_BASE + 0x00000048)
 
 #endif

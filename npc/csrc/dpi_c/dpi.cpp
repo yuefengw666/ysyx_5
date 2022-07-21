@@ -56,7 +56,7 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
     printf("waddr:%016llx, wdata:%016llx, wlen_byte:%u \n",waddr,wdata,wlen_byte);
   #endif
 
-if(waddr<CONFIG_MBASE || waddr >= CONFIG_MBASE + CONFIG_MSIZE){
+if( (waddr >= CONFIG_MBASE) && (waddr < CONFIG_MBASE + CONFIG_MSIZE){
   uint8_t *mem_wr_pt = npc_guest_mem(waddr);
   int wlen_byte = 0;
   for(int i=0; i<8; i++){
