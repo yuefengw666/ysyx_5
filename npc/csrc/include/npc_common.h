@@ -30,7 +30,11 @@ typedef uint64_t word_t;
 typedef word_t vaddr_t;
 typedef uint32_t paddr_t;
 
-#define CONFIG_SERIAL_MMIO 0xa00003f8
-#define CONFIG_RTC_MMIO 0xa0000048
+#define CONFIG_HAS_UART     1
+#define CONFIG_HAS_TIMER    1
+
+#define DEVICE_BASE 0xa0000000
+#define SERIAL_ADDR        (DEVICE_BASE + 0xa00003f8)
+#define RTC_PORT           (DEVICE_BASE + 0xa0000048)
 
 #endif

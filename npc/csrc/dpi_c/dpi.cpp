@@ -50,7 +50,10 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
     printf("Write mem address = %llx is out of bound of mem.\n", waddr);
     return;
   }
-  
+  #ifdef CONFIG_HAS_UART
+    if(waddr == SERIAL_ADDR) printf("%llx", wdata);
+  #endif
+
   uint8_t *mem_wr_pt = npc_guest_mem(waddr);
   int wlen_byte = 0;
   for(int i=0; i<8; i++){
