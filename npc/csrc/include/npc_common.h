@@ -14,7 +14,7 @@
 #define CONFIG_VCD 0
 //#define CONFIG_SDB 0
 //#define CONFIG_WATCHPOINT 0
-#define CONFIG_DIFFTEST 0
+//#define CONFIG_DIFFTEST 0
 //#define CONFIG_MTRACE   0
 
 #define CONFIG_ITRACE 0
@@ -33,8 +33,8 @@ typedef uint32_t paddr_t;
 #define CONFIG_HAS_UART     1
 #define CONFIG_HAS_TIMER    1
 
-#define DEVICE_BASE 0xa0000000
-#define SERIAL_ADDR        (DEVICE_BASE + 0xa00003f8)
-#define RTC_PORT           (DEVICE_BASE + 0xa0000048)
+#define DEVICE_BASE 0x80000000
+#define SERIAL_ADDR        (DEVICE_BASE + 0x800003f8)
+#define RTC_PORT           (DEVICE_BASE + 0x80000048)
 
 #endif
