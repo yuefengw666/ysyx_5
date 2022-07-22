@@ -1,7 +1,7 @@
 #include <npc_common.h>
 
 #ifdef CONFIG_HAS_TIMER
-    #include <sys/time.h>
+    //#include <sys/time.h>
     #include <time.h>
 
 static_assert(CLOCKS_PER_SEC == 1000000, "CLOCKS_PER_SEC != 1000000");
