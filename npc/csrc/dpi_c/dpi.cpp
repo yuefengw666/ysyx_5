@@ -48,7 +48,7 @@ extern "C" void mem_read(long long raddr, long long *rdata){
   #ifdef CONFIG_HAS_TIMER
     if(raddr == (CONFIG_RTC_MMIO + 4) || raddr == CONFIG_RTC_MMIO){
       *rdata = get_time();
-      printf("npc get time:%lx\n",*rdata);
+      //printf("npc get time:%lx\n",*rdata);
       return;
     }
   #endif
