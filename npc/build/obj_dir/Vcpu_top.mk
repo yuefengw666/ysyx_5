@@ -72,6 +72,7 @@ VM_USER_CLASSES = \
 	single_core_tb \
 	disasm \
 	log \
+	timer \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
@@ -119,6 +120,8 @@ single_core_tb.o: /home/yfwu/ysyx-workbench/npc/csrc/single_core_tb.cpp
 disasm.o: /home/yfwu/ysyx-workbench/npc/csrc/utils/disasm.cc
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 log.o: /home/yfwu/ysyx-workbench/npc/csrc/utils/log.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+timer.o: /home/yfwu/ysyx-workbench/npc/csrc/utils/timer.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
