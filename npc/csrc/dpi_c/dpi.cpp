@@ -30,7 +30,7 @@ void invalid_inst_o(){
   set_npc_state(NPC_ABORT, -1);
 }
 
-static uint8_t serial_base[4];
+static uint8_t serial_base[2];
 
 extern "C" void mem_read(long long raddr, long long *rdata){
   if( raddr < CONFIG_MBASE || raddr >= CONFIG_MBASE + CONFIG_MSIZE) {
@@ -76,8 +76,6 @@ if( (waddr >= CONFIG_MBASE) && (waddr < CONFIG_MBASE + CONFIG_MSIZE) ){
   #ifdef CONFIG_HAS_UART
     if(waddr == SERIAL_ADDR) {
       *serial_base = wdata;
-      //char b[4];
-      //snprintf(b, 4, "%lld", wdata);
       printf("%s", serial_base);
       return;
     }
