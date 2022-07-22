@@ -78,7 +78,7 @@ if( (waddr >= CONFIG_MBASE) && (waddr < CONFIG_MBASE + CONFIG_MSIZE) ){
       *serial_base = wdata;
       //char b[4];
       //snprintf(b, 4, "%lld", wdata);
-      printf("%s\n", serial_base[0]);
+      printf("%s\n", serial_base);
       return;
     }
   #endif
