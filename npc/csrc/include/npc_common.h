@@ -11,10 +11,10 @@
 #include <cassert>
 
 //CONFIG
-#define CONFIG_VCD 0
+//#define CONFIG_VCD 0
 //#define CONFIG_SDB 0
 //#define CONFIG_WATCHPOINT 0
-//#define CONFIG_DIFFTEST 0
+#define CONFIG_DIFFTEST 0
 //#define CONFIG_MTRACE   0
 
 #define CONFIG_ITRACE 0
