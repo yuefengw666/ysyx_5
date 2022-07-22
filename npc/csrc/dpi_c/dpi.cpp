@@ -46,7 +46,7 @@ extern "C" void mem_read(long long raddr, long long *rdata){
     return;
   }
   #ifdef CONFIG_HAS_TIMER
-    if(raddr == (CONFIG_RTC_MMIO + 4) || raddr == CONFIG_RTC_MMIO){
+    if(raddr == (CONFIG_RTC_MMIO + 4)){
       *rdata = get_time();
       return;
     }
