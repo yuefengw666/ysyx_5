@@ -4,8 +4,8 @@
     #include <sys/time.h>
     #include <time.h>
 
-static_assert(CLOCKS_PER_SEC == 1000000, "CLOCKS_PER_SEC != 1000000");
-static_assert(sizeof(clock_t) == 8, "sizeof(clock_t) != 8");
+//static_assert(CLOCKS_PER_SEC == 1000000, "CLOCKS_PER_SEC != 1000000");
+//static_assert(sizeof(clock_t) == 8, "sizeof(clock_t) != 8");
 
 static uint64_t boot_time = 0;
 
