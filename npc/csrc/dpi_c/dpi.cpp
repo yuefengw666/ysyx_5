@@ -30,6 +30,8 @@ void invalid_inst_o(){
   set_npc_state(NPC_ABORT, -1);
 }
 
+static uint8_t *serial_base = NULL;
+
 extern "C" void mem_read(long long raddr, long long *rdata){
   if( raddr < CONFIG_MBASE || raddr >= CONFIG_MBASE + CONFIG_MSIZE) {
     printf("Read mem address = %llx is out of bound of mem.\n", raddr);
@@ -73,11 +75,10 @@ if( (waddr >= CONFIG_MBASE) && (waddr < CONFIG_MBASE + CONFIG_MSIZE) ){
 
   #ifdef CONFIG_HAS_UART
     if(waddr == SERIAL_ADDR) {
-      uint8_t *serial_base = NULL;
-      serial_base = wdata;
+      *serial_base = wdata;
       //char b[4];
       //snprintf(b, 4, "%lld", wdata);
-      printf("%c\n", serial_base);
+      printf("%s\n", serial_base[0]);
       return;
     }
   #endif
