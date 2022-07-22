@@ -30,7 +30,7 @@ void invalid_inst_o(){
   set_npc_state(NPC_ABORT, -1);
 }
 
-static uint8_t serial_base[2];
+static uint8_t serial_base[1];
 
 extern "C" void mem_read(long long raddr, long long *rdata){
   if( raddr < CONFIG_MBASE || raddr >= CONFIG_MBASE + CONFIG_MSIZE) {
