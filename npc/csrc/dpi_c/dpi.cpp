@@ -51,7 +51,7 @@ extern "C" void mem_read(long long raddr, long long *rdata){
       //printf("npc get time:%lx\n",*rdata);
       return;
     }
-    else(raddr == CONFIG_RTC_MMIO) return;
+    else if (raddr == CONFIG_RTC_MMIO) return;
   #endif
 
   printf("-->Read mem address = %llx is out of bound of mem.\n", raddr);
