@@ -30,7 +30,7 @@ void invalid_inst_o(){
   set_npc_state(NPC_ABORT, -1);
 }
 
-static uint8_t serial_base[1];
+static uint8_t serial_base[8];
 
 extern "C" void mem_read(long long raddr, long long *rdata){
   if( raddr < CONFIG_MBASE || raddr >= CONFIG_MBASE + CONFIG_MSIZE) {
@@ -48,30 +48,25 @@ extern "C" void mem_read(long long raddr, long long *rdata){
 }
 
 extern "C" void mem_write(long long waddr, long long wdata, char wmask){
-  /*if( waddr < CONFIG_MBASE || waddr >= CONFIG_MBASE + CONFIG_MSIZE) {
-    printf("Write mem address = %llx is out of bound of mem.\n", waddr);
-    return;
-  }*/
-    //printf("real mem_wr_data:%016lx\n",(*(uint64_t *)(pmem + waddr - CONFIG_MBASE)));
   #ifdef CONFIG_MTRACE
     printf("%s",ASNI_FMT("Mtrace-s -> ",ASNI_FG_CYAN));
     printf("waddr:%016llx, wdata:%016llx, wlen_byte:%u \n",waddr,wdata,wlen_byte);
   #endif
 
-if( (waddr >= CONFIG_MBASE) && (waddr < CONFIG_MBASE + CONFIG_MSIZE) ){
-  uint8_t *mem_wr_pt = npc_guest_mem(waddr);
-  int wlen_byte = 0;
-  for(int i=0; i<8; i++){
-    if( wmask & 1) {
-      *mem_wr_pt = (wdata >> (8*i)) & 0xFF;
-      wmask = wmask >>1;//wmask >>=1;
-      //wdata_sr = wdata_sr >> 8;//wdata >>=8;
-      mem_wr_pt++;
-      wlen_byte++;
+  if( (waddr >= CONFIG_MBASE) && (waddr < CONFIG_MBASE + CONFIG_MSIZE) ){
+    uint8_t *mem_wr_pt = npc_guest_mem(waddr);
+    int wlen_byte = 0;
+    for(int i=0; i<8; i++){
+      if( wmask & 1) {
+        *mem_wr_pt = (wdata >> (8*i)) & 0xFF;
+        wmask = wmask >>1;//wmask >>=1;
+        //wdata_sr = wdata_sr >> 8;//wdata >>=8;
+        mem_wr_pt++;
+        wlen_byte++;
+      }
     }
+    return;
   }
-  return;
-}
 
   #ifdef CONFIG_HAS_UART
     if(waddr == SERIAL_ADDR) {
@@ -80,13 +75,7 @@ if( (waddr >= CONFIG_MBASE) && (waddr < CONFIG_MBASE + CONFIG_MSIZE) ){
       return;
     }
   #endif
-  /*
-  //printf("real mem_wr_data:%016lx\n",(*(uint64_t *)(pmem + waddr - CONFIG_MBASE)));
-  #ifdef CONFIG_MTRACE
-    printf("%s",ASNI_FMT("Mtrace-s -> ",ASNI_FG_CYAN));
-    printf("waddr:%016llx, wdata:%016llx, wlen_byte:%u \n",waddr,wdata,wlen_byte);
-  #endif
-  */
-    printf("Write mem address = %llx is out of bound of mem.\n", waddr);
-    return;
+  
+  printf("Write mem address = %llx is out of bound of mem.\n", waddr);
+  return;
 }
