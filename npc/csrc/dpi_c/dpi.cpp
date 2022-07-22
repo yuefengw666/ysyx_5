@@ -51,7 +51,7 @@ extern "C" void mem_read(long long raddr, long long *rdata){
     }
   #endif
 
-  printf("Read mem address = %llx is out of bound of mem.\n", raddr);
+  printf("-->Read mem address = %llx is out of bound of mem.\n", raddr);
   return;
 }
 
