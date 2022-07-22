@@ -75,7 +75,7 @@ if( (waddr >= CONFIG_MBASE) && (waddr < CONFIG_MBASE + CONFIG_MSIZE) ){
     if(waddr == SERIAL_ADDR) {
       char b[100];
       snprintf(b, 4, "%lld", wdata);
-      printf("%s\n", b);
+      printf("%c\n", b);
       return;
     }
   #endif
