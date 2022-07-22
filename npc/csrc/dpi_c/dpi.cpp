@@ -30,20 +30,28 @@ void invalid_inst_o(){
   set_npc_state(NPC_ABORT, -1);
 }
 
+
+uint64_t get_time();
 static uint8_t serial_base[8];
+//static uint32_t rtc_port_base[8];
 
 extern "C" void mem_read(long long raddr, long long *rdata){
-  if( raddr < CONFIG_MBASE || raddr >= CONFIG_MBASE + CONFIG_MSIZE) {
-    printf("Read mem address = %llx is out of bound of mem.\n", raddr);
-    return;
-  }
-  *rdata = *(long long *)npc_guest_mem(raddr);
-  
   #ifdef CONFIG_MTRACE
     printf("%s",ASNI_FMT("Mtrace-l -> ",ASNI_FG_CYAN));
     printf("raddr:%016llx, rdata:%016llx,\n",raddr,(*rdata));
   #endif
   
+  if( raddr >= CONFIG_MBASE && raddr < CONFIG_MBASE + CONFIG_MSIZE) {
+    *rdata = *(long long *)npc_guest_mem(raddr);
+    return;
+  }
+  #ifdef CONFIG_HAS_TIMER
+    if(raddr == CONFIG_RTC_MMIO){
+      *rdata = get_time();
+    }
+  #endif
+
+  printf("Read mem address = %llx is out of bound of mem.\n", raddr);
   return;
 }
 
@@ -69,7 +77,7 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask){
   }
 
   #ifdef CONFIG_HAS_UART
-    if(waddr == SERIAL_ADDR) {
+    if(waddr == CONFIG_SERIAL_MMIO) {
       *serial_base = wdata;
       printf("%s", serial_base);
       return;
